@@ -46,7 +46,7 @@ sed -r $TMP \
     -e '1,/Explanation:/ {/Credit/ !d; s#</b>.*##; s/.*<b> *//;}' \
     -e '/<script.*>/,$ d' \
     -e 's#</?[^>]*># #g' |
-sed -e '3,$ {/^ *$/ d}' | fmt > $APOD_DESCR
+sed -re '3,$ {/^ *$/ d; s/^ +//;}' | fmt > $APOD_DESCR
 
 # Extract picture link
 LINK=${APOD_HOST}/$(sed $TMP -r -e '/<IMG/ {s/.*<a href="(image[^"]*)".*/\1/; p}; d')
