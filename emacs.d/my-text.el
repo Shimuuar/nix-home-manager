@@ -59,8 +59,8 @@
 (add-hook 'latex-mode-hook  'my-tex-hooks)
 (add-hook 'text-mode-hook   'my-text-hooks)
 
-
 ; orphography check
-(setq ispell-dictionary "russian")
+(setq         ispell-dictionary "ru")
+(setq-default ispell-program-name "aspell")
 
 (provide 'my-text)
