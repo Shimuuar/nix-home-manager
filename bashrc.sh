@@ -100,7 +100,7 @@ function svn-gdiff() {
     svn diff $@ | kompare -o -
 }
 function hg-diff() {
-    hg diff $@ | colodiff 
+    hg diff $@ | colordiff 
 }
 function hg-gdiff() {
     hg diff $@ | kompare -o -
