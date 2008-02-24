@@ -5,7 +5,7 @@
 
 
 ; Font face
-(set-face-font 'default "9x15")
+(set-face-font 'default "-xos4-terminus-bold-r-normal--20-200-72-72-c-100-iso10646-1")
 
 ; No startup message
 (setq inhibit-startup-message t)
