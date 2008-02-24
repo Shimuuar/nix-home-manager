@@ -75,8 +75,19 @@
       ("def" "#define"   nil 0)
       )))
 
+(define-skeleton my-skel-python-import-all
+  "Import all clause"
+  "Import from: "
+  "from " str " import *" _ "")
+
 (defun my-python-hooks ()
-  (setq tab-width 4))
+  (define-abbrev-table 'python-mode-abbrev-table
+    '(
+      ("imp"   "import" nil 0)
+      ("impa"  ""       my-skel-python-import-all 0)
+      ))
+  (setq tab-width 4)
+  (abbrev-mode t))
 
 ;; =========================================================
 ;; Set hooks 
