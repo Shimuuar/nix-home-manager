@@ -9,7 +9,9 @@
 (defun my-insert-guard(title)
   "Insert C/C++ header guards quickly"
   (interactive "sType guard name ")
-  (insert "#ifndef " title "\n#define " title "\n\n#endif /* " title " */\n" ))
+  (insert "#ifndef " title 
+          "\n#define " title 
+          "\n\n#endif /* " title " */\n" ))
 
 (defun my-indent-buffer()
   "indent whole buffer"
@@ -23,6 +25,11 @@
   (interactive)
   (indent-according-to-mode)
   (next-line))
+
+(defun my-match-paren (arg)
+  (interactive "p")
+  (cond ((looking-at "\(")   (forward-list  1))
+        ((looking-back "\)") (backward-list 1))))
 ;;; =================
 
 ; turn on syna
