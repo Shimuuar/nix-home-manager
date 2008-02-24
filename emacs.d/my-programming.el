@@ -48,40 +48,53 @@
 ;; Define hooks 
 ;; =========================================================
 
-(defun my-programming-hooks() 
-  "Hooks common for all programming languages"
-  ; Make RET more indent friendlier
+(defun my-ret-hook() 
   (local-set-key (kbd "RET") 'newline-and-indent)
   )
 
-(defun my-c-hooks () 
-  (my-programming-hooks)
-  )
-
-(defun my-c++-hooks () 
-  (my-programming-hooks)
-  )
+(defun my-c-abbrevs() 
+  "Abbreviation table for C/C++"
+  (define-abbrev-table 'c-mode-abbrev-table 
+    '( 
+      ; Control structures
+      ("sw"   "switch"   nil 0)
+      ("ca"   "case"     nil 0)
+      ("br"   "break"    nil 0)
+      ("wh"   "while"    nil 0)
+      ("ret"  "return"   nil 0)
+      ("cont" "continue" nil 0)
+      ; Classes
+      ("pub"  "public"   nil 0)
+      ("priv" "private"  nil 0)
+      ; Types and modifiers 
+      ("co" "const"      nil 0)
+      ("vo" "void"       nil 0)
+      ("bo" "bool"       nil 0)
+      ; Preprocessor directives 
+      ("inc" "#include"  nil 0)
+      ("def" "#define"   nil 0)
+      )))
 
 (defun my-python-hooks ()
-  (my-programming-hooks)
-  (setq tab-width 4)
-  )
-
-(defun my-bash-hooks ()
-  (my-programming-hooks)
-  )
-
-(defun my-lisp-hooks () 
-  (my-programming-hooks)
-  )
+  (setq tab-width 4))
 
 ;; =========================================================
 ;; Set hooks 
-(add-hook 'c-mode      'my-c-hooks)
-(add-hook 'c++-mode    'my-c++-hooks)
-(add-hook 'python-mode 'my-python-hooks)
-(add-hook 'sh-mode     'my-bash-hooks)
-(add-hook 'lisp-mode   'my-lisp-hooks)
-
+;; =========================================================
+; C hooks 
+(add-hook 'c-mode-hook          'my-ret-hook)
+(add-hook 'c-mode-hook          'my-c-abbrevs)
+; C++ hooks 
+(add-hook 'c++-mode-hook        'my-ret-hook)
+(add-hook 'c++-mode-hook        'my-c-abbrevs)
+; Python hooks 
+(add-hook 'python-mode-hook     'my-python-hooks)
+(add-hook 'python-mode-hook     'my-python-hooks)
+; Shell hooks 
+(add-hook 'sh-mode-hook         'my-ret-hook)
+; Lisp hooks 
+(add-hook 'lisp-mode-hook       'my-ret-hook)
+(add-hook 'emacs-lisp-mode-hook 'my-ret-hook)
+;; =================
 
 (provide 'my-programming)
