@@ -3,11 +3,27 @@
 ;;; Programming enhancement
 ;;;
 
+;; =========================================================
+;; Useful functions 
+;; =========================================================
 (defun my-insert-guard(title)
   "Insert C/C++ header guards quickly"
   (interactive "sType guard name ")
   (insert "#ifndef " title "\n#define " title "\n\n#endif /* " title " */\n" ))
 
+(defun my-indent-buffer()
+  "indent whole buffer"
+  (interactive)
+  (delete-trailing-whitespace)
+  (indent-region (point-min) (point-max) nil)
+  (untabify (point-min) (point-max)))
+
+(defun my-indent-line()
+  "indent line and move to next"
+  (interactive)
+  (indent-according-to-mode)
+  (next-line))
+;;; =================
 
 ; turn on syna
 (global-font-lock-mode t)

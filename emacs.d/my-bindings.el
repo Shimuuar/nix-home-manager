@@ -30,8 +30,7 @@
 (global-set-key "\C-x\C-k" 'kill-region)
 
 ; Autoidentation of source code 
-(global-set-key [\C-tab]
-               '(lambda () (interactive) (c-indent-line) (next-line)))
+(global-set-key [\C-tab] 'my-indent-line)
 
 
 (provide 'my-bindings)
