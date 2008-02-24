@@ -39,14 +39,42 @@
 
 ;; ========================================================
 ;; Define hooks 
-;; Hooks
+;; =========================================================
+
+(defun my-programming-hooks() 
+  "Hooks common for all programming languages"
+  ; Make RET more indent friendlier
+  (local-set-key (kbd "RET") 'newline-and-indent)
+  )
+
+(defun my-c-hooks () 
+  (my-programming-hooks)
+  )
+
+(defun my-c++-hooks () 
+  (my-programming-hooks)
+  )
+
 (defun my-python-hooks ()
+  (my-programming-hooks)
   (setq tab-width 4)
+  )
+
+(defun my-bash-hooks ()
+  (my-programming-hooks)
+  )
+
+(defun my-lisp-hooks () 
+  (my-programming-hooks)
   )
 
 ;; =========================================================
 ;; Set hooks 
+(add-hook 'c-mode      'my-c-hooks)
+(add-hook 'c++-mode    'my-c++-hooks)
 (add-hook 'python-mode 'my-python-hooks)
+(add-hook 'sh-mode     'my-bash-hooks)
+(add-hook 'lisp-mode   'my-lisp-hooks)
 
 
 (provide 'my-programming)
