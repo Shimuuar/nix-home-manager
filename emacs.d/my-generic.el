@@ -35,6 +35,8 @@
 ; Visible mark
 (setq transient-mark-mode t)
 
+; replace yes/no question with y/n
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;;============================================================
 ;; iswitchb
