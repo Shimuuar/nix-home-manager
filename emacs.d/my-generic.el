@@ -16,6 +16,7 @@
 (setq delete-old-versions t)
 ;;=================
 
+
 ;; =========================================================
 ;; Automode list
 ;; =========================================================
@@ -24,19 +25,17 @@
 ;; ===========================
 
 
+;; =========================================================
+;; Scrolling 
+;; =========================================================
 ; Support for mouse wheel 
 (mouse-wheel-mode t)
-
 ; my favourite scrolling
 (setq scroll-conservatively 50)
 (setq scroll-preserve-screen-position t)
 (setq scroll-margin 10)
+;; =================
 
-; Visible mark
-(setq transient-mark-mode t)
-
-; replace yes/no question with y/n
-(fset 'yes-or-no-p 'y-or-n-p)
 
 ;;============================================================
 ;; iswitchb
@@ -47,8 +46,18 @@
 (add-to-list 'iswitchb-buffer-ignore "*Messages*")
 (add-to-list 'iswitchb-buffer-ignore "*Buffer")
 (add-to-list 'iswitchb-buffer-ignore "*Completions")
-(add-to-list 'iswitchb-buffer-ignore "*scratch*")
+(add-to-list 'iswitchb-buffer-ignore "*Help")
 ;; =================
+
+
+
+; Visible mark
+(setq transient-mark-mode t)
+; replace yes/no question with y/n
+(fset 'yes-or-no-p 'y-or-n-p)
+
+; Disable abbreviation saving
+(setq save-abbrevs nil)
 
 ; Start emacs server
 (server-start)
