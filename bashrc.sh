@@ -76,6 +76,9 @@ alias apt-search='apt-cache search'
 alias apt-show='aptitude show'
 alias aptitude-up='sudo aptitude update && sudo aptitude'
 
+# emacs alias (while debian cannot fix emacs22 thing a have to fix it myself)
+alias emacs=emacs22
+
 # Calculate things ([p]rint)
 function p() {
     echo $@ | bc -l 
@@ -110,6 +113,14 @@ function hg-gdiff() {
 export LD_LIBRARY_PATH="$HOME/lib"
 export PYTHONPATH="$HOME/lib/python2.4/site-packages"
 
+
+## ---------------------------------------------------------
+## Different startup checks 
+## ---------------------------------------------------------
+if which emacs &> dev/null; then
+    echo 'PLEASE NOTE!'
+    echo 'Debian fixed at last emacs22 symlink'
+fi
 
 ## ---------------------------------------------------------
 ## Fortunes (pleasant reading)
