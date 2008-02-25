@@ -33,17 +33,27 @@
         ((looking-back "\)") (backward-list 1))))
 ;; =================
 
-; turn on syna
+
+;; ===============================================
+;; Syntax highlighting
+;; ===============================================
+; turn on syntax highlighting
 (global-font-lock-mode t)
 ; Highlight parensthesis
 (show-paren-mode t) 
 ; Highlight whole expression if it's not fully visible
 (setq show-paren-style 'mixed) 
+;; =================
 
-; Indentation
+
+;; ===============================================
+;; Indentation
+;; ===============================================
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 (setq c-default-style "bsd" c-basic-offset 4)
+;; =================
+
 
 ;; ========================================================
 ;; Define hooks 
@@ -57,9 +67,6 @@
   (setq tab-width 4)
   (abbrev-mode t))
 
-;; =========================================================
-;; Set hooks 
-;; =========================================================
 ; C hooks 
 (add-hook 'c-mode-hook          'my-ret-hook)
 ; C++ hooks 
