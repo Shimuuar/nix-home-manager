@@ -117,7 +117,7 @@ export PYTHONPATH="$HOME/lib/python2.4/site-packages"
 ## ---------------------------------------------------------
 ## Different startup checks 
 ## ---------------------------------------------------------
-if which emacs &> dev/null; then
+if which emacs &> /dev/null; then
     echo 'PLEASE NOTE!'
     echo 'Debian fixed at last emacs22 symlink'
 fi
