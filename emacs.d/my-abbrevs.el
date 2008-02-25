@@ -51,4 +51,4 @@
     ))
 ;; =================
 
-(provide 'my-abbervs)
+(provide 'my-abbrevs)
