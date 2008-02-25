@@ -64,8 +64,12 @@
   )
 
 (defun my-python-hooks ()
-  (setq tab-width 4)
-  (abbrev-mode t))
+  (setq tab-width 4) ; Override tab width
+  (abbrev-mode t)    ; Set abberviation mode
+  ; Insert shebang into empty files
+  (if (= (- (point-min) (point-max)) 0)
+      (insert "#!/usr/bin/python\n\"\"\"\n\"\"\""))
+  )
 
 ; C hooks 
 (add-hook 'c-mode-hook          'my-ret-hook)
