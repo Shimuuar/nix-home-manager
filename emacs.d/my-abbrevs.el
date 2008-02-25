@@ -48,6 +48,8 @@
     ("imp"   "import" nil 0)
     ("impa"  ""       my-skel-python-import-all 0)
     ("ra"    ""       my-skel-python-range      0)
+    ; Return
+    ("ret"   "return" nil 0)
     ))
 ;; =================
 
