@@ -20,8 +20,12 @@
 ;; =========================================================
 ;; Automode list
 ;; =========================================================
+; scons files
 (setq auto-mode-alist (cons '("SConstruct" . python-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("SConscript" . python-mode) auto-mode-alist))
+; ReST mode
+(setq auto-mode-alist (cons '("\\.rst$"  . rst-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.rest$" . rst-mode) auto-mode-alist))
 ;; ===========================
 
 
