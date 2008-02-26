@@ -29,8 +29,8 @@
 (defun my-match-paren (arg)
   "Jump to matching parenthesis"
   (interactive "p")
-  (cond ((looking-at "\(")   (forward-list  1))
-        ((looking-back "\)") (backward-list 1))))
+  (cond ((looking-at "[\({]")   (forward-list  1))
+        ((looking-back "[\)}]") (backward-list 1))))
 ;; =================
 
 
