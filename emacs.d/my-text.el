@@ -54,15 +54,14 @@
   ; switch TeX quotes
   (local-set-key "\C-cq" 'my-switch-tex-quotes)
   ; TeX template 
-  (my-insert-if-empty
-      "\\documentclass[a4paper]{article}\n"
-      "\n"
-      "\\usepackage[russian]{babel}\n"
-      "\\usepackage[utf8]{inputenc}\n"
-      "\\usepackage{epsfig}\n"
-      "\n"
-      "\\begin{document}\n"
-      "\\end{document}\n")
+  (my-insert-if-empty "\\documentclass[a4paper]{article}\n"
+                      "\n"
+                      "\\usepackage[russian]{babel}\n"
+                      "\\usepackage[utf8]{inputenc}\n"
+                      "\\usepackage{epsfig}\n"
+                      "\n"
+                      "\\begin{document}\n"
+                      "\\end{document}\n")
   )
 
 (add-hook 'latex-mode-hook 'my-base-text-hooks)
