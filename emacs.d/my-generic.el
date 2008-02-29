@@ -54,17 +54,32 @@
 ;; =================
 
 
-
+;; =========================================================
+;; Miscelanneous
+;; =========================================================
 ; Visible mark
 (setq transient-mark-mode t)
 ; replace yes/no question with y/n
 (fset 'yes-or-no-p 'y-or-n-p)
-
 ; Disable abbreviation saving
 (setq save-abbrevs nil)
+;; =================
 
-; Start emacs server
+
+;; =========================================================
+;; Start emacs server
+;; =========================================================
 (server-start)
+;; =================
+
+
+;; =========================================================
+;; Useful functions
+;; =========================================================
+(defun my-insert-if-empty(&rest msg)
+  (if (= (- (point-min) (point-max)) 0)
+      (mapcar 'insert msg)))
+;; =================
 
 
 (provide 'my-generic)
