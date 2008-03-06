@@ -151,6 +151,8 @@ export PYTHONPATH="$HOME/lib/python2.4/site-packages"
 ## ---------------------------------------------------------
 ## Fortunes (pleasant reading)
 ## ---------------------------------------------------------
-echo ; echo 
-fortune
-echo ; echo 
+if which fortune &> /dev/null; then 
+    echo ; echo 
+    fortune
+    echo ; echo 
+fi
