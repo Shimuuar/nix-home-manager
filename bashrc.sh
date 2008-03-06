@@ -97,7 +97,12 @@ alias apt-show='aptitude show'
 alias aptitude-up='sudo aptitude update && sudo aptitude'
 
 # emacs alias (while debian cannot fix emacs22 thing a have to fix it myself)
-alias emacs=emacs22
+if ! which emacs &> /dev/null; then 
+    alias emacs=emacs22
+else
+    echo 'PLEASE NOTE!'
+    echo 'Debian fixed at last emacs22 symlink'
+fi
 ##-----------------
 
 
@@ -135,14 +140,6 @@ function hg-gdiff() {
 }
 ## -----------------
 
-
-## ---------------------------------------------------------
-## Different startup checks 
-## ---------------------------------------------------------
-if which emacs &> /dev/null; then
-    echo 'PLEASE NOTE!'
-    echo 'Debian fixed at last emacs22 symlink'
-fi
 
 ## ---------------------------------------------------------
 ## Evironment variables
