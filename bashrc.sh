@@ -131,18 +131,23 @@ function nline() {
     sed -e "$1 !d" $2
 }
 
-# VCS shorcuts and goodies
-function svn-diff() {
+## VCS shorcuts and goodies
+# Subversion 
+function svn-diff() {  # Colored diff 
     svn diff $@ | colordiff
 }
-function svn-gdiff() {
+function svn-gdiff() { # view diff in kompare
     svn diff $@ | kompare -o -
 }
-function hg-diff() {
+# Mercurial
+function hg-diff() {   # Colored diff 
     hg diff $@ | colordiff 
 }
-function hg-gdiff() {
+function hg-gdiff() {  # view diff in kompare
     hg diff $@ | kompare -o -
+}
+function hg-prune() {  # Remove all files not under version control
+    hg st | egrep '^\? ' | cut -c 3- | xargs -d "\n" rm -rfv
 }
 ## -----------------
 
