@@ -36,6 +36,12 @@ export HISTIGNORE=ls:[fb]g
 ## ---------------------------------------------------------
 ## Fancy prompt
 ## ---------------------------------------------------------
+if [ -f ~/.bash.vars ]; then
+    source ~/.bash.vars
+else
+    MY_NAME=$(whoami)
+fi
+
 function truncate_pwd
 {
     ## Truncate $PWD to 20 last letters if too long 
@@ -49,7 +55,7 @@ function truncate_pwd
 PROMPT_COMMAND=truncate_pwd
 case "$TERM" in
     xterm*)
-        PS1="\[\033[33m\][Складной:\${?}]\${newPWD}\\[\033[00m\] $ " ;;
+        PS1="\[\033[33m\][${MY_NAME}:\${?}]\${newPWD}\\[\033[00m\] \$ " ;;
     *)
         PS1="[\u@\h]:\${newPWD}\\$ " ;;
 esac
