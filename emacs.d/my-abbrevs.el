@@ -54,6 +54,9 @@
     ; Casts
     ("rcast" ""       my-skel-reintepret-cast 0)
     ("scast" ""       my-skel-static-cast 0)
+    ; STL
+    ("cout"  "std::cout" nil 0)
+    ("cerr"  "std::cerr" nil 0)
     ))
 ;; =================
 
