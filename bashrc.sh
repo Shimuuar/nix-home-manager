@@ -80,6 +80,9 @@ alias l='ls -1'
 # rm safety belt 
 alias rm='rm -i'
 
+# Be-e-e-e-ep
+alias beep='echo -e "\a"'
+
 # cat text in windows encoding
 alias catwin='iconv -f cp1251 -t utf8'
 alias catkoi='iconv -f koi8-r -t utf8'
