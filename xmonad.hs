@@ -82,7 +82,17 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
- 
+    ++
+    -- 
+    -- MPD keybindings 
+    --
+    [ ((modMask, xK_Page_Down ), spawn "mpc next")
+    , ((modMask, xK_Page_Up   ), spawn "mpc prev")
+    , ((modMask, xK_End       ), spawn "mpc toggle")
+    , ((modMask, xK_Home      ), spawn "mpc stop")
+    , ((modMask, xK_Insert    ), spawn "mpc play")
+    ]
+
  
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
