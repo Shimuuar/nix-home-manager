@@ -54,7 +54,7 @@ function truncate_pwd
 
 PROMPT_COMMAND=truncate_pwd
 case "$TERM" in
-    xterm*)
+    xterm*|rxvt*)
         PS1="\[\033[33m\][${MY_NAME}:\${?}]\${newPWD}\\[\033[00m\] \$ " ;;
     *)
         PS1="[\u@\h]:\${newPWD}\\$ " ;;
