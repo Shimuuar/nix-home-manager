@@ -1,12 +1,12 @@
 
-! urxvt settings 
-urxvt*perl-ext:default,tabbed 
-urxvt*tabbed.tabbar-bg: 0
+!! urxvt settings 
+! Tabs settings 
+URxvt*perl-ext:default,tabbed 
+URxvt*tabbed.tabbar-bg: 0
 URxvt*tabbed.tabbar-fg: 2
 URxvt.tabbed.tab-bg: 0
 URxvt.tabbed.tab-fg: 3
- 
-urxvt*font: -xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*
-urxvt*background: black
-urxvt*foreground: #33FF66
-
+! Visual appearance 
+URxvt*font: -xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*
+URxvt*background: black
+URxvt*foreground: #33FF66
