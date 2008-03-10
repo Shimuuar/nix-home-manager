@@ -140,10 +140,6 @@ myManageHook = composeAll
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
  
--- Whether focus follows the mouse pointer.
-myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
- 
 ------------------------------------------------------------------------
 -- Status bars and logging
  
@@ -168,9 +164,8 @@ defaults = defaultConfig {
       -- simple stuff
         terminal           = "urxvt",
         modMask            = mod4Mask,
-        focusFollowsMouse  = myFocusFollowsMouse,
-        borderWidth        = 2,
---        modMask            = mod4Mask,
+        focusFollowsMouse  = True,
+        borderWidth        = 1,
         workspaces         = ["1","2","3","4","5","6","7","8","9"],
         normalBorderColor  = "#dddddd",
         focusedBorderColor = "#ff0000",
