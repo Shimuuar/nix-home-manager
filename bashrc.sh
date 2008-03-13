@@ -96,9 +96,10 @@ alias dpkgg="dpkg -l | grep -i"
 
 # Process structure 
 alias psme="ps -u $(whoami) --forest" 
-
 # Disk usage 
 alias dum='du --max-depth=1'
+# Shorthand for jobs 
+alias j=jobs
 
 # apt-aliases
 alias apt-search='apt-cache search'
