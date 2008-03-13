@@ -60,6 +60,12 @@
                       "\\usepackage[utf8]{inputenc}\n"
                       "\\usepackage{epsfig}\n"
                       "\n"
+                      "% margins\n"
+                      "%\\oddsidemargin=\n"
+                      "%\\textwidth=\n"
+                      "%\\topmargin=\n"
+                      "%\\textheight=\n"
+                      "\n"
                       "\\begin{document}\n"
                       "\\end{document}\n")
   )
