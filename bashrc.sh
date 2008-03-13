@@ -100,6 +100,8 @@ alias psme="ps -u $(whoami) --forest"
 alias dum='du --max-depth=1'
 # Shorthand for jobs 
 alias j=jobs
+# Shorthand for wc -l
+alias wcl='wc -l'
 
 # apt-aliases
 alias apt-search='apt-cache search'
