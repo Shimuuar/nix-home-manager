@@ -150,7 +150,9 @@ function hg-gdiff() {  # view diff in kompare
     hg diff $@ | kompare -o -
 }
 function hg-prune() {  # Remove all files not under version control
-    hg st | egrep '^\? ' | cut -c 3- | xargs -d "\n" rm -rfv
+    # Needed to convert to absolute filenames 
+    local root=$(hg root | sed 's,/,\\/,g')
+    hg st -u -n | sed "s/^/$root\//" | xargs -d "\n" rm -rfv
 }
 ## -----------------
 
