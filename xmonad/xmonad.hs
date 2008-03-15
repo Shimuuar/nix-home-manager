@@ -83,7 +83,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ++
     -- 
     -- MPD keybindings 
-    --
     [ ((modMask, xK_Page_Down ), spawn "mpc next")
     , ((modMask, xK_Page_Up   ), spawn "mpc prev")
     , ((modMask, xK_End       ), spawn "mpc toggle")
@@ -93,12 +92,13 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ++
     --
     -- App shorcuts
-    --
     [ ((modMask .|. mod1Mask, xK_e  ), spawn "emacs22")
     , ((modMask .|. mod1Mask, xK_i  ), spawn "iceweasel")
     , ((modMask .|. mod1Mask, xK_k  ), spawn "konqueror")
     ]
-
+    ++
+    [ ((modMask .|. mod1Mask, xK_a ), spawn "apod_show_descritption.sh")
+    ]
 
  
 ------------------------------------------------------------------------
