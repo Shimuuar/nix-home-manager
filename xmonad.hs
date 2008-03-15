@@ -22,44 +22,42 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
     -- launch dmenu
     , ((modMask,               xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
-    -- launch gmrun
-    , ((modMask .|. shiftMask, xK_p     ), spawn "gmrun")
     -- close focused window 
     , ((modMask .|. shiftMask, xK_c     ), kill)
+
      -- Rotate through the available layout algorithms
     , ((modMask,               xK_space ), sendMessage NextLayout)
     --  Reset the layouts on the current workspace to default
     , ((modMask .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
     -- Resize viewed windows to the correct size
     , ((modMask,               xK_n     ), refresh)
-    -- Move focus to the next window
+
+    -- Move focus to the next/prev window
     , ((modMask,               xK_Tab   ), windows W.focusDown)
-    -- Move focus to the next window
+    , ((modMask,               xK_Left  ), windows W.focusDown)      
+    , ((modMask,               xK_Right ), windows W.focusUp  )      
     , ((modMask,               xK_j     ), windows W.focusDown)
-    -- Move focus to the previous window
     , ((modMask,               xK_k     ), windows W.focusUp  )
     -- Move focus to the master window
     , ((modMask,               xK_m     ), windows W.focusMaster  )
     -- Swap the focused window and the master window
     , ((modMask,               xK_Return), windows W.swapMaster)
-    -- Swap the focused window with the next window
+    -- Swap the focused window with the next/prev window
     , ((modMask .|. shiftMask, xK_j     ), windows W.swapDown  )
-    -- Swap the focused window with the previous window
     , ((modMask .|. shiftMask, xK_k     ), windows W.swapUp    )
-    -- Shrink the master area
+    -- Shrink/expand the master area
     , ((modMask,               xK_h     ), sendMessage Shrink)
-    -- Expand the master area
     , ((modMask,               xK_l     ), sendMessage Expand)
     -- Push window back into tiling
     , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
-    -- Increment the number of windows in the master area
+    -- Inc/dec the number of windows in the master area
     , ((modMask              , xK_comma ), sendMessage (IncMasterN 1))
-    -- Deincrement the number of windows in the master area
     , ((modMask              , xK_period), sendMessage (IncMasterN (-1)))
     -- toggle the status bar gap
     , ((modMask              , xK_b     ),
           modifyGap (\i n -> let x = (XMonad.defaultGaps conf ++ repeat (0,0,0,0)) !! i
                              in if n == x then (0,0,0,0) else x))
+
     -- Quit xmonad
     , ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     -- Restart xmonad
@@ -92,6 +90,15 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask, xK_Home      ), spawn "mpc stop")
     , ((modMask, xK_Insert    ), spawn "mpc play")
     ]
+    ++
+    --
+    -- App shorcuts
+    --
+    [ ((modMask .|. mod1Mask, xK_e  ), spawn "emacs22")
+    , ((modMask .|. mod1Mask, xK_i  ), spawn "iceweasel")
+    , ((modMask .|. mod1Mask, xK_k  ), spawn "konqueror")
+    ]
+
 
  
 ------------------------------------------------------------------------
