@@ -10,6 +10,8 @@
 
 # Directory where APOD files lie 
 APOD_DIR=${HOME}/.share/apod
+# Link from which wallpaper was downloaded
+APOD_LINK=${APOD_DIR}/link
 # Wallpaper 
 APOD_PAPER=${APOD_DIR}/wallpaper.jpg
 # Description
@@ -43,22 +45,24 @@ if [ "$DO_DOWNLOAD" = "yes" ]; then
         -e '/<center>/,$ d' |
     tr "\n" ' ' |
     sed -r \
-        -e 's,< */a *>,,g' \
-        -e 's/<a[^>]*>//g' \
+        -e 's/<\/?a[^>]*>//g' \
         -e 's/ + / /g' \
         -e 's/^ *//' > $APOD_DESCR
     echo >> $APOD_DESCR
 
     # Extract and download wallpaper    
-    ( echo -n http://antwrp.gsfc.nasa.gov/ 
+    LINK=$( echo -n http://antwrp.gsfc.nasa.gov/
         sed $TMP -r \
             -e '1,/<IMG SRC=/ !d' \
             -e '/<h1>/,$ !d' \
             -e '/<a.*image\// !d' \
-            -e 's/.*href="(.*)".*/\1/'  ) |
-    wget -i - -O - |
-      convert - -resize 1024x768 $APOD_PAPER
-    
+            -e 's/.*href="(.*)".*/\1/' )
+
+    # Download picture if needed 
+    if [ ! -f $APOD_LINK ] || [ "$(cat $APOD_LINK)" != $LINK ]; then
+        echo $LINK > $APOD_LINK
+        wget $LINK -O - | convert - -resize 1024x768 $APOD_PAPER
+    fi
     rm -rf $TMP
 fi
 
