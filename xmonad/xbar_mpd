@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# xbar_mpd (c) 2008 Alexey Khudyakov <alexey skladnoy {at} gmail com>
+
+while [ 1 ]; do
+    mpc --format '%artist% - %title%' | \
+        sed -r -e '1,2 !d' -e 's#.*([0-9]+:[0-9]+/[0-9]+:[0-9]+).*#[\1]#' | \
+        xargs echo
+    sleep 1
+done | \
+    dzen2 -w 512

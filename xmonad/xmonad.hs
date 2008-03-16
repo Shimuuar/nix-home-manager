@@ -83,11 +83,12 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ++
     -- 
     -- MPD keybindings 
-    [ ((modMask, xK_Page_Down ), spawn "mpc next")
-    , ((modMask, xK_Page_Up   ), spawn "mpc prev")
-    , ((modMask, xK_End       ), spawn "mpc toggle")
-    , ((modMask, xK_Home      ), spawn "mpc stop")
-    , ((modMask, xK_Insert    ), spawn "mpc play")
+    [ ((modMask,               xK_Page_Down ), spawn "mpc next")
+    , ((modMask,               xK_Page_Up   ), spawn "mpc prev")
+    , ((modMask,               xK_End       ), spawn "mpc toggle")
+    , ((modMask,               xK_Home      ), spawn "mpc stop")
+    , ((modMask,               xK_Insert    ), spawn "mpc play")
+    , ((modMask .|. shiftMask, xK_Delete    ), spawn "mpc delete 0")
     ]
     ++
     --
@@ -186,7 +187,7 @@ defaults = defaultConfig {
         workspaces         = ["1","2","3","4","5","6","7","8","9"],
         normalBorderColor  = "#dddddd",
         focusedBorderColor = "#ff0000",
-        defaultGaps        = [(0,0,0,0)],
+        defaultGaps        = [(18,0,0,0)],
  
       -- key bindings
         keys               = myKeys,
