@@ -1,0 +1,16 @@
+#!/usr/bin/awk -f
+
+NR == 1 { artist = $0; }
+NR == 2 { time   = $3; }
+NR == 3 { playing = 1; }
+
+END {
+    if( length(artist) > 60 ) {
+        artist = substr(artist, 0, 57) "...";
+    }
+    if( playing == 1 ) {
+        printf("%s [%s]\n", artist, time);
+    } else {
+        print "* Остановлено *";
+    }
+}
