@@ -65,7 +65,7 @@ esac
 ## Navigation and file operations
 ## ---------------------------------------------------------
 # Set pager I like most ;-)
-export PAGER='less'
+export PAGER='less -R'
 alias mo=$PAGER
 
 # ls coloring & aliases 
