@@ -24,14 +24,16 @@ if [ ! -d $APOD_DIR ]; then
 fi
 
 ## If wallpaper is not created today - set download flag
-if [ ! -f $APOD_PAPER ]; then
+if [ "$1" = force ]; then
+    DO_DOWNLOAD=yes
+elif [ ! -f $APOD_PAPER ]; then
     DO_DOWNLOAD=yes
 elif [  $(date +%Y-%m-%d) != $(stat --format="%y" $APOD_PAPER | cut -c 1-10) ]; then
     DO_DOWNLOAD=yes
 fi
 
 ## If not downloaded - download
-if [ "x$DO_DOWNLOAD" != "x" ]; then
+if [ "$DO_DOWNLOAD" = "yes" ]; then
     TMP=$(mktemp)
     wget http://antwrp.gsfc.nasa.gov/apod/ -O $TMP
 
