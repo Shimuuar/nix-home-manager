@@ -6,24 +6,39 @@
 BEGIN { 
   BG="#666"; 
   FG="#fea"; 
+  MG="#f44";
   WIDTH=30; 
   HEIGHT=10; 
 }
  
-/MemTotal/  {t=$2}; 
-/MemFree/   {f=$2}; 
-/SwapTotal/ {st=$2}; 
-/SwapFree/  {sf=$2}; 
+/^MemTotal/  {t=$2}; 
+/^MemFree/   {f=$2}; 
+/^Buffers/   {b=$2};
+/^Cached/    {c=$2};
+/^SwapTotal/ {st=$2}; 
+/^SwapFree/  {sf=$2}; 
+
+function print_rect(color, width) {
+    printf("^fg(%s)^r(%dx%d)", color, width, HEIGHT)
+}
 
 END { 
-  mw=int(WIDTH*(t-f)/t); 
-  sw=int(WIDTH*(st-sf)/st); 
+    # Width of cache/buffers bar   
+    cw=int(WIDTH*(c+b)/t);
+    # Width used memory bar 
+    mw=int(WIDTH*(t-f-c-b)/t); 
 
-  printf("Mem: ^ib(1)^fg(%s)^r(%dx%d)^fg(%s)^r(%dx%d)"              \
-         "^fg(%s)^r(4x%d)^fg(%s)^r(%dx%d)^fg(%s)^r(%dx%d)^ib(0)^fg()\n", 
-         BG, mw,       HEIGHT, 
-         FG, WIDTH-mw, HEIGHT, 
-         "black",      HEIGHT, 
-         BG, sw,       HEIGHT,
-         FG, WIDTH-sw, HEIGHT); 
+    # Width of swap bar 
+    sw=int(WIDTH*(st-sf)/st); 
+ 
+    printf("Mem: ^ib(1)");
+    print_rect(BG, mw);
+    print_rect(FG, cw);
+    print_rect(MG, WIDTH-mw-cw);
+
+    print_rect("black", 4);
+
+    print_rect(FG, sw);
+    print_rect(BG, WIDTH-sw);
+    printf("^ib(0)^fg()\n");
 }
