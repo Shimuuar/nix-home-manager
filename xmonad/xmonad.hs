@@ -88,7 +88,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_End       ), spawn "mpc toggle")
     , ((modMask,               xK_Home      ), spawn "mpc stop")
     , ((modMask,               xK_Insert    ), spawn "mpc play")
-    , ((modMask .|. shiftMask, xK_Delete    ), spawn "mpc delete 0")
+    , ((modMask .|. shiftMask, xK_Delete    ), spawn "mpc del 0")
     ]
     ++
     --
@@ -156,7 +156,9 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , resource  =? "kdesktop"       --> doIgnore 
+    , resource  =? "stalonetray"    --> doIgnore
+    ]
  
 ------------------------------------------------------------------------
 -- Status bars and logging

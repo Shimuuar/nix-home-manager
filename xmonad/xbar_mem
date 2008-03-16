@@ -1,0 +1,29 @@
+#!/usr/bin/awk -f
+
+# Copied from http://braindump.dk/tech/category/xmonad/
+# and modified by me.
+
+BEGIN { 
+  BG="#666"; 
+  FG="#fea"; 
+  WIDTH=30; 
+  HEIGHT=10; 
+}
+ 
+/MemTotal/  {t=$2}; 
+/MemFree/   {f=$2}; 
+/SwapTotal/ {st=$2}; 
+/SwapFree/  {sf=$2}; 
+
+END { 
+  mw=int(WIDTH*(t-f)/t); 
+  sw=int(WIDTH*(st-sf)/st); 
+
+  printf("Mem: ^ib(1)^fg(%s)^r(%dx%d)^fg(%s)^r(%dx%d)"              \
+         "^fg(%s)^r(4x%d)^fg(%s)^r(%dx%d)^fg(%s)^r(%dx%d)^ib(0)^fg()\n", 
+         BG, mw,       HEIGHT, 
+         FG, WIDTH-mw, HEIGHT, 
+         "black",      HEIGHT, 
+         BG, sw,       HEIGHT,
+         FG, WIDTH-sw, HEIGHT); 
+}

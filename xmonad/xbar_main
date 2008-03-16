@@ -1,8 +1,0 @@
-#!/bin/sh
-
-# xbar_main (c) 2008 Alexey Khudyakov <alexey skladnoy {at} gmail com>
-
-while [ 1 ]; do
-    date '+%H:%M [%d %b %Y]'
-    sleep 60
-done | dzen2 -w 512 -x 512 -ta r
