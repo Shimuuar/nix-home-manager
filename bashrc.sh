@@ -81,7 +81,7 @@ alias l='ls -1'
 alias rm='rm -i'
 
 # Be-e-e-e-ep
-alias beep='echo -e "\a"'
+alias beep='echo -en "\a"'
 
 # cat text in windows encoding
 alias catwin='iconv -f cp1251 -t utf8'
