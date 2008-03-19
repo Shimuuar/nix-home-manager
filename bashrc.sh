@@ -131,8 +131,7 @@ function p() {
 
 # Get word number 
 function word() {
-    for i in $@; do local promt+='$'$i', '; done
-    awk '{print '${promt:0:${#promt}-2}'}'
+    awk "{ print $(echo $@ | sed -re 's/[0-9]+/$&/g; s/[0-9] /&,/g') }"
 }
 
 # Gen n'th line from file 
