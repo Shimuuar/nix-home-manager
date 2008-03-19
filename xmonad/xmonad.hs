@@ -13,7 +13,8 @@ import System.Exit
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
  
- 
+import XMonad.Hooks.DynamicLog
+
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
@@ -83,12 +84,12 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ++
     -- 
     -- MPD keybindings 
-    [ ((modMask,               xK_Page_Down ), spawn "mpc next")
-    , ((modMask,               xK_Page_Up   ), spawn "mpc prev")
-    , ((modMask,               xK_End       ), spawn "mpc toggle")
-    , ((modMask,               xK_Home      ), spawn "mpc stop")
-    , ((modMask,               xK_Insert    ), spawn "mpc play")
-    , ((modMask .|. shiftMask, xK_Delete    ), spawn "mpc del 0")
+    [ ((modMask,               xK_Page_Down ), spawn "mpc next > /dev/null")
+    , ((modMask,               xK_Page_Up   ), spawn "mpc prev > /dev/null")
+    , ((modMask,               xK_End       ), spawn "mpc toggle > /dev/null")
+    , ((modMask,               xK_Home      ), spawn "mpc stop > /dev/null")
+    , ((modMask,               xK_Insert    ), spawn "mpc play > /dev/null")
+    , ((modMask .|. shiftMask, xK_Delete    ), spawn "mpc del 0 > /dev/null")
     ]
     ++
     --
@@ -163,15 +164,34 @@ myManageHook = composeAll
 ------------------------------------------------------------------------
 -- Status bars and logging
  
--- Perform an arbitrary action on each internal state change or X event.
--- See the 'DynamicLog' extension for examples.
---
--- To emulate dwm's status bar
---
--- > logHook = dynamicLogDzen
---
-myLogHook = return ()
- 
+myLogHook = dynamicLogWithPP $ PP { 
+              ppCurrent         = wrap "  [" "]"
+            , ppVisible         = wrap "<" ">"
+            , ppHidden          = const ""
+            , ppHiddenNoWindows = const ""
+            , ppUrgent          = id
+            , ppSep             = " "
+            , ppWsSep           = " "
+            , ppTitle           = escape
+            , ppLayout          = wrap "| " " |"
+            , ppOrder           = id
+            , ppOutput          = putStrLn
+            }
+    where
+      escape = concatMap (\x -> if x == '^' then "^^" else [x])
+      
+{-
+      ppLayout   = dzenColor "black" "#cccccc" .
+                   (\ x -> case x of
+                             "TilePrime Horizontal" ->
+                                 " ^i(/home/emertens/images/tile_horz.xpm) "
+                             "TilePrime Vertical"   ->
+                                 " ^i(/home/emertens/images/tile_vert.xpm) "
+                             "Hinted Full"          ->
+                                 " ^i(/home/emertens/images/fullscreen.xpm) "
+                             _                      -> pad x
+                   )
+-}
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -186,10 +206,10 @@ defaults = defaultConfig {
         modMask            = mod4Mask,
         focusFollowsMouse  = True,
         borderWidth        = 1,
-        workspaces         = ["1","2","3","4","5","6","7","8","9"],
+        workspaces         = ["work.1","work.2","3","4","5","6","7","8","9"],
         normalBorderColor  = "#dddddd",
         focusedBorderColor = "#ff0000",
-        defaultGaps        = [(18,0,0,0)],
+        defaultGaps        = [(36,0,0,0)],
  
       -- key bindings
         keys               = myKeys,
