@@ -1,17 +1,33 @@
 #!/bin/sh
 
 # Read resources
-xrdb .XResourses
+xrdb ~/.Xresources
 
-# Download wallpaper from APOD
+# Create pipe for xmonad
+PIPE=~/.share/xmonad-pipe
+rm -f $PIPE
+mkfifo -m 600 $PIPE
+[ -p $PIPE ] || exit
+
+## Download wallpaper from APOD
+xsetroot -solid black
 apod_get_wallpaper.sh &
 
-# Run bars
-xbar | dzen2 -ta r  -w 896  -x 128 &
-stalonetray -bg '#000' --icon-size 18 --geometry 128x18+0+0 &
+## Launch kdeinit
+kdeinit 
 
-# Launch kdeinit
-kdeinit
+## Run bars
+# Main bar 
+xbar | dzen2 -ta r  -w 880  -x 126 &
+# System tray
+stalonetray -bg '#000' --icon-size 18 --geometry 144x18+0+0 &
+# WM state bar 
+dzen2 -ta c -y 18 < $PIPE &
 
 # Run window manager 
-/usr/bin/xmonad
+/usr/bin/xmonad > $PIPE 
+
+# Cleanup
+pkill -HUP -P $$ 
+
+wait
