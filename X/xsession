@@ -24,10 +24,16 @@ stalonetray -bg '#000' --icon-size 18 --geometry 144x18+0+0 &
 # WM state bar 
 dzen2 -ta c -y 18 < $PIPE &
 
+## Autorun
+AUTORUN=~/.etc/autorun
+[ -f $AUTORUN ] && sleep 3 ; source $AUTORUN
+
 # Run window manager 
 /usr/bin/xmonad > $PIPE 
 
 # Cleanup
-pkill -HUP -P $$ 
 
+# send SIGHUP to all children
+pkill -HUP -P $$ 
+# Wait for everyone to terminate
 wait
