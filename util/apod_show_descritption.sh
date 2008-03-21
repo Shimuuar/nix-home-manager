@@ -33,7 +33,7 @@ if [ -f $APOD_DESCR ]; then
 
     fmt -w 85 $APOD_DESCR | 
     sed -e '3,$ s/^/^p(10)/' | 
-    dzen2 -p 60 -l $N_LINES \
+    dzen2 -p -l $N_LINES \
         -w 640 -x 192 -y 200 -bg '#444' \
         -e 'onstart=uncollapse;button1=exit:0' 
 fi
