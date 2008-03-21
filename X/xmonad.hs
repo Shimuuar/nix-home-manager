@@ -90,6 +90,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_Home      ), spawn "mpc stop > /dev/null")
     , ((modMask,               xK_Insert    ), spawn "mpc play > /dev/null")
     , ((modMask .|. shiftMask, xK_Delete    ), spawn "mpc del 0 > /dev/null")
+    , ((modMask .|. shiftMask, xK_Page_Down ), spawn "show_mpc_playlist")
+    , ((modMask .|. shiftMask .|. mod1Mask, xK_Delete), spawn "mpc clear > /dev/null")      
     ]
     ++
     --
@@ -99,7 +101,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. mod1Mask, xK_k  ), spawn "konqueror")
     ]
     ++
+    --
+    -- Useful actions 
     [ ((modMask .|. mod1Mask, xK_a ), spawn "apod_show_descritption.sh")
+    , ((modMask,              xK_d ), spawn "look_dictionary")
     ]
 
  
