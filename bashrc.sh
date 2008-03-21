@@ -108,7 +108,7 @@ alias ?='man'
 # apt-aliases
 alias apt-search='apt-cache search'
 alias apt-show='aptitude show'
-alias apt-source='apt get source'
+alias apt-source='apt-get source'
 alias aptitude-up='sudo aptitude update && sudo aptitude'
 
 # emacs alias (while debian cannot fix emacs22 thing a have to fix it myself)
