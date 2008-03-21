@@ -1,0 +1,9 @@
+#!/bin/sh
+
+LOOKUP=$(sselp)
+
+(echo "$LOOKUP"; echo; dict "$LOOKUP" 2>&1 ) |
+dzen2 -l 30 -p -y 37 \
+    -e 'onstart=uncollapse,scrollhome,grabkeys;'\
+'button1=exit;button4=scrollup;button5=scrolldown;'\
+'key_Page_Down=scrolldown:8;key_Page_Up=scrollup:8;key_q=exit'
