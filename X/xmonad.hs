@@ -9,7 +9,7 @@
  
 import XMonad
 import System.Exit
- 
+
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
  
@@ -159,6 +159,9 @@ myManageHook = composeAll
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore 
     , resource  =? "stalonetray"    --> doIgnore
+    -- Place some applications to particular desktops
+    , className =? "Akregator"      --> doF (W.shift "collect")
+    , className =? "psi"            --> doF (W.shift "IM")
     ]
  
 ------------------------------------------------------------------------
@@ -206,7 +209,7 @@ defaults = defaultConfig {
         modMask            = mod4Mask,
         focusFollowsMouse  = True,
         borderWidth        = 1,
-        workspaces         = ["work.1","work.2","3","4","5","6","7","8","9"],
+        workspaces         = ["work.1","work.2","3","4","5","6","fox","collect","IM"],
         normalBorderColor  = "#dddddd",
         focusedBorderColor = "#ff0000",
         defaultGaps        = [(36,0,0,0)],
