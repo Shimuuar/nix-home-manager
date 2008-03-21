@@ -17,12 +17,13 @@ apod_get_wallpaper.sh &
 kdeinit 
 
 ## Run bars
+DZEN_COLOR='-fg #8f8 -bg #000'
 # Main bar 
-xbar | dzen2 -ta r  -w 880  -x 126 &
+xbar | dzen2 $DZEN_COLOR -ta r  -w 880  -x 126 &
 # System tray
 stalonetray -bg '#000' --icon-size 18 --geometry 144x18+0+0 &
 # WM state bar 
-dzen2 -ta c -y 18 < $PIPE &
+dzen2 $DZEN_COLOR -ta c -y 18 < $PIPE &
 
 ## Autorun
 AUTORUN=~/.etc/autorun
