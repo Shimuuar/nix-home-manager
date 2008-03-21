@@ -45,7 +45,7 @@ wget -q ${APOD_HOST}/apod/ -O - | \
 sed -r $TMP \
     -e '1,/Explanation:/ {/Credit/ !d; s#</b>.*##; s/.*<b> *//;}' \
     -e '/<script.*>/,$ d' \
-    -e 's#</?[^>]*>##g' | 
+    -e 's#</?[^>]*># #g' |
 sed -e '3,$ {/^ *$/ d}' | fmt > $APOD_DESCR
 
 # Extract picture link
