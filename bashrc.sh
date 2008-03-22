@@ -139,6 +139,11 @@ function nline() {
     sed -e "$1 !d" $2
 }
 
+# View colored source code
+function vsrc() {
+    highlight $1 -A | $PAGER
+}
+
 ## VCS shorcuts and goodies
 # Subversion 
 function svn-diff() {  # Colored diff 
