@@ -31,9 +31,9 @@ APOD_DESCR=${APOD_DIR}/description  # Description
 if [ -f $APOD_DESCR ]; then
     N_LINES=$(wc -l < $APOD_DESCR)
 
-    fmt -w 85 $APOD_DESCR | 
+    fmt -w 80 $APOD_DESCR | 
     sed -e '3,$ s/^/^p(10)/' | 
-    dzen2 -p -l $N_LINES \
-        -w 640 -x 192 -y 200 -bg '#444' \
+    dzen2 -p -l $N_LINES $DZEN_COLOR $DZEN_FONT \
+        -w 700 -x 192 -y 200 \
         -e 'onstart=uncollapse;button1=exit:0' 
 fi
