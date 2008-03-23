@@ -74,12 +74,19 @@
   (hs-minor-mode t)
   (local-set-key (kbd "C-S-<left>") 'hs-hide-block)
   (local-set-key (kbd "C-S-<right>") 'hs-show-block)
+  (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
+  )
+
+(defun my-c-hooks ()
+  (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
   )
 
 ; C hooks 
 (add-hook 'c-mode-hook          'my-ret-hook)
+(add-hook 'c-mode-hook          'my-c-hooks)
 ; C++ hooks 
 (add-hook 'c++-mode-hook        'my-ret-hook)
+(add-hook 'c++-mode-hook        'my-c-hooks)
 ; Python hooks 
 (add-hook 'python-mode-hook     'my-ret-hook)
 (add-hook 'python-mode-hook     'my-python-hooks)
