@@ -69,6 +69,7 @@
   )
 
 (defun my-python-hooks ()
+  "Hooks specific to python"
   (setq tab-width 4) ; Override tab width
   (abbrev-mode t)    ; Set abberviation mode
   ; Insert shebang into empty files
@@ -82,17 +83,18 @@
   (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
   )
 
-(defun my-c-hooks ()
+(defun my-c-or-c++-hooks ()
+  "Hooks either for C or C++"
   (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
   (local-set-key (kbd "C-c C-v") 'my-comment-or-uncomment-line)
   )
 
 ; C hooks 
 (add-hook 'c-mode-hook          'my-ret-hook)
-(add-hook 'c-mode-hook          'my-c-hooks)
+(add-hook 'c-mode-hook          'my-c-or-c++-hooks)
 ; C++ hooks 
 (add-hook 'c++-mode-hook        'my-ret-hook)
-(add-hook 'c++-mode-hook        'my-c-hooks)
+(add-hook 'c++-mode-hook        'my-c-or-c++-hooks)
 ; Python hooks 
 (add-hook 'python-mode-hook     'my-ret-hook)
 (add-hook 'python-mode-hook     'my-python-hooks)
