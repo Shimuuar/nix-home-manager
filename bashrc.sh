@@ -94,6 +94,8 @@ alias envv="env | grep"
 alias pss="ps -ef | grep"
 alias dpkgg="dpkg -l | grep -i"
 
+# One of plot types I use very often
+alias hplot='plot -histeps'
 # Process structure 
 alias psme="ps -u $(whoami) --forest" 
 # Disk usage 
