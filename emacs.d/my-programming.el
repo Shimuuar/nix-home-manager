@@ -31,6 +31,11 @@
   (interactive "p")
   (cond ((looking-at "[\({\[]")   (forward-list  1))
         ((looking-back "[]\)}]") (backward-list 1))))
+
+(defun my-comment-or-uncomment-line ()
+  "Comment or uncomment line under cursor"
+  (interactive)
+  (comment-or-uncomment-region (point-at-bol) (point-at-eol)))
 ;; =================
 
 
@@ -79,6 +84,7 @@
 
 (defun my-c-hooks ()
   (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
+  (local-set-key (kbd "C-c C-v") 'my-comment-or-uncomment-line)
   )
 
 ; C hooks 
