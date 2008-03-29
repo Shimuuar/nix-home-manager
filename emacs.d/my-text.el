@@ -68,6 +68,11 @@
                       "\n"
                       "\\begin{document}\n"
                       "\\end{document}\n")
+  ; Switch dictionaries in buffer
+  (local-set-key (kbd "C-c C-a")
+                 '(lambda () (interactive)
+                    (ispell-change-dictionary (if (string= "ru" ispell-dictionary)
+                                                  "en" "ru"))))
   )
 
 (add-hook 'latex-mode-hook 'my-base-text-hooks)
