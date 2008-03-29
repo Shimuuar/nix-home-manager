@@ -8,6 +8,8 @@
 ## Don't put duplicate lines in the history and erase duplicate lines. 
 ## Ignore command which begins with space.
 export HISTCONTROL=ignoredups:erasedups:ingnorespace
+## Ignore particular commands
+export HISTIGNORE=ls:[fb]g
 
 ## check the window size after each command and, if necessary,
 ## update the values of LINES and COLUMNS.
@@ -125,8 +127,6 @@ fi
 ## ---------------------------------------------------------
 ## Fortunes (pleasant reading)
 ## ---------------------------------------------------------
-echo
-echo 
+echo ; echo 
 fortune
-echo
-echo 
+echo ; echo 
