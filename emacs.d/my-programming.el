@@ -70,6 +70,10 @@
   (my-insert-if-empty "#!/usr/bin/python\n"
                       "\"\"\"\n"
                       "\"\"\"\n")
+  ; Code folding for python with hs-minormode
+  (hs-minor-mode t)
+  (local-set-key (kbd "C-S-<left>") 'hs-hide-block)
+  (local-set-key (kbd "C-S-<right>") 'hs-show-block)
   )
 
 ; C hooks 
