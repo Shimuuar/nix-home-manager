@@ -68,6 +68,12 @@
   (local-set-key (kbd "RET") 'newline-and-indent)
   )
 
+(defun my-comment-hooks ()
+  "Hooks for commenting"
+  (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
+  (local-set-key (kbd "C-c C-v") 'my-comment-or-uncomment-line)
+  )
+
 (defun my-python-hooks ()
   "Hooks specific to python"
   (setq tab-width 4) ; Override tab width
@@ -81,12 +87,6 @@
   (local-set-key (kbd "C-S-<left>") 'hs-hide-block)
   (local-set-key (kbd "C-S-<right>") 'hs-show-block)
   (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
-  )
-
-(defun my-c-or-c++-hooks ()
-  "Hooks either for C or C++"
-  (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
-  (local-set-key (kbd "C-c C-v") 'my-comment-or-uncomment-line)
   )
 
 (defun my-c-hooks ()
@@ -105,11 +105,11 @@
 
 ; C hooks 
 (add-hook 'c-mode-hook          'my-ret-hook)
-(add-hook 'c-mode-hook          'my-c-or-c++-hooks)
+(add-hook 'c-mode-hook          'my-comment-hooks)
 (add-hook 'c-mode-hook          'my-c-hooks)
 ; C++ hooks 
 (add-hook 'c++-mode-hook        'my-ret-hook)
-(add-hook 'c++-mode-hook        'my-c-or-c++-hooks)
+(add-hook 'c++-mode-hook        'my-comment-hooks)
 ; Python hooks 
 (add-hook 'python-mode-hook     'my-ret-hook)
 (add-hook 'python-mode-hook     'my-python-hooks)
@@ -118,6 +118,8 @@
 ; Lisp hooks 
 (add-hook 'lisp-mode-hook       'my-ret-hook)
 (add-hook 'emacs-lisp-mode-hook 'my-ret-hook)
+; Haskell hooks
+(add-hook 'haskell-mode-hook    'my-comment-hooks)
 ;; =================
 
 (provide 'my-programming)
