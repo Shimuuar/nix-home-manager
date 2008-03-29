@@ -89,9 +89,24 @@
   (local-set-key (kbd "C-c C-v") 'my-comment-or-uncomment-line)
   )
 
+(defun my-c-hooks ()
+  (if (string-match "\.c$" (buffer-name))
+      (progn 
+        (my-insert-if-empty "\n"
+                            "int main(int argc, char** argv)\n"
+                            "{\n"
+                            "\n"
+                            "    return 0;\n"
+                            "}\n")
+        (previous-line 3)
+        ))
+  )
+    
+
 ; C hooks 
 (add-hook 'c-mode-hook          'my-ret-hook)
 (add-hook 'c-mode-hook          'my-c-or-c++-hooks)
+(add-hook 'c-mode-hook          'my-c-hooks)
 ; C++ hooks 
 (add-hook 'c++-mode-hook        'my-ret-hook)
 (add-hook 'c++-mode-hook        'my-c-or-c++-hooks)
