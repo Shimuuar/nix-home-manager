@@ -5,15 +5,24 @@
 ## If not running interactively, don't do anything:
 [ -z "$PS1" ] && return
 
-## Don't put duplicate lines in the history and erase duplicate lines. 
-## Ignore command which begins with space.
+## ---------------------------------------------------------
+## Shell options
+## ---------------------------------------------------------
+# check the window size after each command 
+shopt -s checkwinsize
+# Extendet globbing
+shopt -s extglob
+## -----------------
+
+
+## ---------------------------------------------------------
+## History control
+## ---------------------------------------------------------
+## Ignore and erase duplicate commands 
 export HISTCONTROL=ignoredups:erasedups:ingnorespace
 ## Ignore particular commands
 export HISTIGNORE=ls:[fb]g
-
-## check the window size after each command and, if necessary,
-## update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+## -----------------
 
 
 ## ---------------------------------------------------------
@@ -36,15 +45,16 @@ case "$TERM" in
     *)
         PS1="[\u@\h]:\${newPWD}\\$ " ;;
 esac
+## -----------------
 
-## =========================================================
+## ---------------------------------------------------------
 ## Navigation and file operations
-## =========================================================
+## ---------------------------------------------------------
 # Set pager I like most ;-)
 export PAGER='less'
 alias mo=$PAGER
 
-## ls coloring & aliases 
+# ls coloring & aliases 
 if [ "$TERM" != "dumb" ]; then
     eval "`dircolors -b`"
     alias ls='ls --color=auto'
@@ -60,7 +70,7 @@ alias rm='rm -i'
 alias catwin='iconv -f cp1251 -t utf8'
 alias catkoi='iconv -f koi8-r -t utf8'
 
-## nice grep coloring
+# nice grep coloring
 alias grep='grep --color'
 # grepisms
 alias envv="env | grep"
@@ -80,7 +90,12 @@ alias aptitude-up='sudo aptitude update && sudo aptitude'
 
 # emacs alias (while debian cannot fix emacs22 thing a have to fix it myself)
 alias emacs=emacs22
+##-----------------
 
+
+## ---------------------------------------------------------
+## Useful functions 
+## ---------------------------------------------------------
 # Calculate things ([p]rint)
 function p() {
     echo $@ | bc -l 
@@ -110,10 +125,7 @@ function hg-diff() {
 function hg-gdiff() {
     hg diff $@ | kompare -o -
 }
-
-
-export LD_LIBRARY_PATH="$HOME/lib"
-export PYTHONPATH="$HOME/lib/python2.4/site-packages"
+## -----------------
 
 
 ## ---------------------------------------------------------
@@ -123,6 +135,13 @@ if which emacs &> /dev/null; then
     echo 'PLEASE NOTE!'
     echo 'Debian fixed at last emacs22 symlink'
 fi
+
+## ---------------------------------------------------------
+## Evironment variables
+## ---------------------------------------------------------
+export LD_LIBRARY_PATH="$HOME/lib"
+export PYTHONPATH="$HOME/lib/python2.4/site-packages"
+## -----------------
 
 ## ---------------------------------------------------------
 ## Fortunes (pleasant reading)
