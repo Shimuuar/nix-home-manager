@@ -68,6 +68,13 @@
   (local-set-key (kbd "RET") 'newline-and-indent)
   )
 
+(defun my-folding-hook()
+  "Hook for code folding"
+  (hs-minor-mode t)
+  (local-set-key (kbd "C-S-<left>") 'hs-hide-block)
+  (local-set-key (kbd "C-S-<right>") 'hs-show-block)
+  )
+
 (defun my-comment-hooks ()
   "Hooks for commenting"
   (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
@@ -83,9 +90,6 @@
                       "\"\"\"\n"
                       "\"\"\"\n")
   ; Code folding for python with hs-minormode
-  (hs-minor-mode t)
-  (local-set-key (kbd "C-S-<left>") 'hs-hide-block)
-  (local-set-key (kbd "C-S-<right>") 'hs-show-block)
   (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
   )
 
@@ -106,12 +110,15 @@
 ; C hooks 
 (add-hook 'c-mode-hook          'my-ret-hook)
 (add-hook 'c-mode-hook          'my-comment-hooks)
+(add-hook 'c-mode-hook          'my-folding-hook)
 (add-hook 'c-mode-hook          'my-c-hooks)
 ; C++ hooks 
 (add-hook 'c++-mode-hook        'my-ret-hook)
 (add-hook 'c++-mode-hook        'my-comment-hooks)
+(add-hook 'c++-mode-hook        'my-folding-hook)
 ; Python hooks 
 (add-hook 'python-mode-hook     'my-ret-hook)
+(add-hook 'python-mode-hook     'my-folding-hook)
 (add-hook 'python-mode-hook     'my-python-hooks)
 ; Shell hooks 
 (add-hook 'sh-mode-hook         'my-ret-hook)
