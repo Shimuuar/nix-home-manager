@@ -54,9 +54,18 @@
 ;; ===============================================
 ;; Indentation
 ;; ===============================================
-(setq-default tab-width 4)
-(setq-default indent-tabs-mode nil)
-(setq c-default-style "bsd" c-basic-offset 4)
+(defconst my-c-style
+  '( "bsd"
+	(indent-tabs-mode . t)
+	(tab-width        . 4)
+	(c-basic-offset   . 4)
+	; Make public:/private: indented 
+    (c-offsets-alist  . ((inclass       . ++ )))
+	(c-echo-syntactic-information-p . t)
+	))
+
+(c-add-style "my-style" my-c-style)
+(setq c-default-style "my-style")
 ;; =================
 
 
