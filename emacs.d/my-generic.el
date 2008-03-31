@@ -50,7 +50,7 @@
 (add-to-list 'iswitchb-buffer-ignore "*Messages*")
 (add-to-list 'iswitchb-buffer-ignore "*Buffer")
 (add-to-list 'iswitchb-buffer-ignore "*Completions")
-(add-to-list 'iswitchb-buffer-ignore "*Help")
+(add-to-list 'iswitchb-buffer-ignore "*Apropos")
 (add-to-list 'iswitchb-buffer-ignore "*Warnings")
 (add-to-list 'iswitchb-buffer-ignore "*Quail")
 ;; =================
