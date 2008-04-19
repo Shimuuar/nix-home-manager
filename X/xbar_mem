@@ -1,16 +1,18 @@
-#!/usr/bin/awk -f
+#!/bin/sh
 
 # Copied from http://braindump.dk/tech/category/xmonad/
 # and modified by me.
 
-BEGIN { 
-  BG="#666"; 
-  FG="#fea"; 
-  MG="#f44";
-  WIDTH=30; 
-  HEIGHT=10; 
+
+AWKS='
+BEGIN {
+    WIDTH  = 40;
+    HEIGHT = 10;
+    FG = "white";
+    BG = "darkgrey";
+    MG = "#fea";
 }
- 
+
 /^MemTotal/  {t=$2}; 
 /^MemFree/   {f=$2}; 
 /^Buffers/   {b=$2};
@@ -22,23 +24,20 @@ function print_rect(color, width) {
     printf("^fg(%s)^r(%dx%d)", color, width, HEIGHT)
 }
 
-END { 
-    # Width of cache/buffers bar   
-    cw=int(WIDTH*(c+b)/t);
-    # Width used memory bar 
-    mw=int(WIDTH*(t-f-c-b)/t); 
-
-    # Width of swap bar 
-    sw=int(WIDTH*(st-sf)/st); 
- 
-    printf("Mem: ^ib(1)");
-    print_rect(BG, mw);
-    print_rect(FG, cw);
-    print_rect(MG, WIDTH-mw-cw);
+END {
+    printf("Mem:");
+    print_rect(FG,    WIDTH*(t-b-c-f)/t);
+    print_rect(MG,     WIDTH*(b+c)/t);
+    print_rect(BG, WIDTH*f/t);
 
     print_rect("black", 4);
 
-    print_rect(FG, sw);
-    print_rect(BG, WIDTH-sw);
-    printf("^ib(0)^fg()\n");
-}
+    print_rect(FG, WIDTH*(st-sf)/st);
+    print_rect(BG, WIDTH*sf/st);
+    printf("\n");
+}'
+
+while : ; do
+    awk "$AWKS" /proc/meminfo
+    sleep 5
+done

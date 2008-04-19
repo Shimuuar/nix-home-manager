@@ -10,3 +10,8 @@ URxvt.tabbed.tab-fg: 3
 URxvt*font: -xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*
 URxvt*background: black
 URxvt*foreground: #33FF66
+
+!! dzen2 resources
+dzen2.font: -xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*
+dzen2.foreground: yellow
+dzen2.background: black

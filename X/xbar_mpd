@@ -1,16 +1,58 @@
-#!/usr/bin/awk -f
+#!/usr/bin/python
+"""
+"""
 
-NR == 1 { artist = $0; }
-NR == 2 { time   = $3; }
-NR == 3 { playing = 1; }
+import mpdclient2
+import os
+import sys
+import time
 
-END {
-    if( length(artist) > 60 ) {
-        artist = substr(artist, 0, 57) "...";
-    }
-    if( playing == 1 ) {
-        printf("%s [%s]\n", artist, time);
-    } else {
-        print "* Остановлено *";
-    }
-}
+def icon_string(icon) :
+    return "^i(%s%s)" % (iconpath, icon)
+def rect_string(color, width, height = 12) :
+    return "^fg(%s)^r(%dx%d)^fg()" % (color, width, height)
+def time_string(time) :
+    return "%d:%02d" % (time / 60, time % 60)
+def iconbar(icons) :
+    return '^p(2)'.join( map(icon_string, icons) )
+            
+# Global variables
+iconpath = os.getenv("HOME") + "/.share/icons/sm4tik/"
+
+icon_list = { "play"   : "play.xbm",
+              "pause"  : "pause.xbm",
+              "stop"   : "stop.xbm",
+              "repeat" : 'ac.xbm',
+              "random" : 'fs_02.xbm',
+              }
+
+# Connect and get data
+c = mpdclient2.connect()
+while 1 :
+    st  = c.status()
+    cur = c.currentsong()
+
+    # List of icons
+    icons = [ icon_list[st.state] ]
+    if st.repeat == '1' :
+        icons.append( icon_list['repeat'] )
+    if st.random == '1' :
+        icons.append( icon_list['random'] )
+    icons = iconbar(icons)
+    # Time 
+    if st.state != "stop" :
+        elapsed,total = map(int, st.time.split(':'))
+        t = "[%s/%s]" % (time_string(elapsed), time_string(total))
+    else :
+        t = ""
+    # Song title 
+    if int(st.playlistlength) > 0 :
+        artist = cur.get('artist','')
+        title  = cur.get('title','')        
+        song = "%s - %s" % (artist, title) 
+    else :
+        song = "* * *"
+    
+    print ' '.join([icons, t, song])
+    sys.stdout.flush()
+    time.sleep(1)

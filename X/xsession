@@ -17,14 +17,17 @@ apod_get_wallpaper.sh &
 kdeinit 
 
 ## Run bars
-export DZEN_COLOR='-fg #8f8 -bg #000'
-export DZEN_FONT='-fn -xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*'
-# Main bar 
-xbar | dzen2 $DZEN_COLOR $DZEN_FONT -ta r  -w 880  -x 126 &
 # System tray
-stalonetray -bg '#000' --icon-size 18 --geometry 144x18+0+0 &
+stalonetray -bg '#000' --icon-size 18 --geometry 144x18+0+0 -e ''&
+# MPD status bar
+xbar_mpd | dzen2 -ta l -w 566 -x 144 -e '' &
+# Memory meter
+xbar_mem | dzen2 -w 144 -x 710 -e '' &
+# dzen clock
+dzen_clock | dzen2 -x $((1024-170)) -w 170 \
+    -e 'button1=exec:dzen_cal 760 0 264' &
 # WM state bar 
-dzen2 $DZEN_COLOR $DZEN_FONT -ta c -y 18 < $PIPE &
+dzen2 $DZEN_COLOR $DZEN_FONT -ta c -y 18 -e '' < $PIPE &
 
 ## Autorun
 AUTORUN=~/.etc/autorun
@@ -33,8 +36,8 @@ AUTORUN=~/.etc/autorun
 # Run window manager 
 /usr/bin/xmonad > $PIPE 
 
-# Cleanup
 
+## Cleanup
 # send SIGHUP to all children
 pkill -HUP -P $$ 
 # Wait for everyone to terminate
