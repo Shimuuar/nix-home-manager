@@ -4,6 +4,8 @@
 
 ## If not running interactively, don't do anything:
 [ -z "$PS1" ] && return
+## Use custom settings (this file is intended for use on multiple boxes)
+[ -f ~/.bash.vars ] && source ~/.bash.vars
 
 ## ---------------------------------------------------------
 ## Shell options
@@ -36,11 +38,8 @@ export HISTIGNORE=ls:[fb]g
 ## ---------------------------------------------------------
 ## Fancy prompt
 ## ---------------------------------------------------------
-if [ -f ~/.bash.vars ]; then
-    source ~/.bash.vars
-else
-    MY_NAME=$(whoami)
-fi
+MY_NAME=${MY_NAME-$(whoami)}
+
 
 function truncate_pwd
 {
@@ -55,7 +54,7 @@ function truncate_pwd
 PROMPT_COMMAND=truncate_pwd
 case "$TERM" in
     xterm*|rxvt*)
-        PS1="\[\033[33m\][${MY_NAME}:\${?}]\${newPWD}\\[\033[00m\] \$ " ;;
+        PS1="\[\033[43m\]\[\033[30m\][${MY_NAME}:\${?}]\${newPWD}\\[\033[00m\] \$ " ;;
     *)
         PS1="[\u@\h]:\${newPWD}\\$ " ;;
 esac
