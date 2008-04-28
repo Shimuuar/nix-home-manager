@@ -1,3 +1,9 @@
+!! Emacs settings (FIXME: does not work for now)
+emacs*font:   -xos4-terminus-bold-r-normal--20-200-72-72-c-100-iso10646-1
+emacs22*font: -xos4-terminus-bold-r-normal--20-200-72-72-c-100-iso10646-1
+
+
+*font: -xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*
 
 !! urxvt settings 
 ! Tabs settings 
@@ -15,3 +21,8 @@ URxvt*foreground: #33FF66
 dzen2.font: -xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*
 dzen2.foreground: yellow
 dzen2.background: black
+
+!! Xmessage setting 
+!xmessage*font:
+xmessage*foreground: yellow
+xmessage*background: black

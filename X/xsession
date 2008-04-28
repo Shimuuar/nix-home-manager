@@ -18,7 +18,7 @@ kdeinit
 
 ## Run bars
 # System tray
-stalonetray -bg '#000' --icon-size 18 --geometry 144x18+0+0 -e ''&
+stalonetray -bg '#000' --icon-size 18 --geometry 144x18+0+0 &
 # MPD status bar
 xbar_mpd | dzen2 -ta l -w 566 -x 144 -e '' &
 # Memory meter
