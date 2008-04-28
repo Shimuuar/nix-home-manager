@@ -119,6 +119,7 @@ else
     echo 'PLEASE NOTE!'
     echo 'Debian fixed at last emacs22 symlink'
 fi
+alias cemacs="emacs -nw"
 ##-----------------
 
 
