@@ -82,9 +82,13 @@ alias rm='rm -i'
 # Be-e-e-e-ep
 alias beep='echo -en "\a"'
 
-# cat text in windows encoding
+# cat text in different encodings
 alias catwin='iconv -f cp1251 -t utf8'
 alias catkoi='iconv -f koi8-r -t utf8'
+alias catdos='iconv -f cp866 -t utf8'
+alias catlatin1='iconv -f latin1 -t utf8'
+# Convert from DOS to unix line breaks
+alias dos2unix='tr -d "\r"'
 
 # nice grep coloring
 alias grep='grep --color'
