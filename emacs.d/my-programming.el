@@ -60,9 +60,10 @@
 	(tab-width        . 4)
 	(c-basic-offset   . 4)
 	; Make public:/private: indented 
-    (c-offsets-alist  . ((inclass       . ++ )))
-	(c-echo-syntactic-information-p . t)
-	))
+;	(c-offsets-alist  . ((inclass       . ++ )))
+ 	(c-echo-syntactic-information-p . t)
+ 	)
+  )
 
 (c-add-style "my-style" my-c-style)
 (setq c-default-style "my-style")
@@ -72,9 +73,13 @@
 ;; ========================================================
 ;; Define hooks 
 ;; =========================================================
-(defun my-ret-hook()
-  "Make new lines indented"
+
+(defun my-programming-hook()
+  "Common programming hooks"
+  ; Make new lines indented
   (local-set-key (kbd "RET") 'newline-and-indent)
+  ; Insert tab
+  (local-set-key [\C-\S-iso-lefttab] (lambda() (interactive) (insert "	")))
   )
 
 (defun my-folding-hook()
@@ -117,23 +122,24 @@
     
 
 ; C hooks 
-(add-hook 'c-mode-hook          'my-ret-hook)
+(add-hook 'c-mode-hook          'my-programming-hook)
 (add-hook 'c-mode-hook          'my-comment-hooks)
 (add-hook 'c-mode-hook          'my-folding-hook)
 (add-hook 'c-mode-hook          'my-c-hooks)
 ; C++ hooks 
-(add-hook 'c++-mode-hook        'my-ret-hook)
+(add-hook 'c++-mode-hook        'my-programming-hook)
 (add-hook 'c++-mode-hook        'my-comment-hooks)
 (add-hook 'c++-mode-hook        'my-folding-hook)
+(add-hook 'c++-mode-hook        'my-c-hooks)
 ; Python hooks 
-(add-hook 'python-mode-hook     'my-ret-hook)
+(add-hook 'python-mode-hook     'my-programming-hook)
 (add-hook 'python-mode-hook     'my-folding-hook)
 (add-hook 'python-mode-hook     'my-python-hooks)
 ; Shell hooks 
-(add-hook 'sh-mode-hook         'my-ret-hook)
+(add-hook 'sh-mode-hook         'my-programming-hook)
 ; Lisp hooks 
-(add-hook 'lisp-mode-hook       'my-ret-hook)
-(add-hook 'emacs-lisp-mode-hook 'my-ret-hook)
+(add-hook 'lisp-mode-hook       'my-programming-hook)
+(add-hook 'emacs-lisp-mode-hook 'my-programming-hook)
 ; Haskell hooks
 (add-hook 'haskell-mode-hook    'my-comment-hooks)
 ;; =================
