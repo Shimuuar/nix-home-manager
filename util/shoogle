@@ -1,0 +1,92 @@
+#!/usr/bin/python
+"""
+"""
+
+import re
+import os
+import sys
+import optparse
+from ConfigParser import SafeConfigParser, Error as ConfigError
+
+class GoogleException(Exception) :
+    pass
+
+def fail(msg) :
+    "Print error message and exit with exit status 1"
+    print>>sys.stderr, '%s: %s' %(sys.argv[0],msg)
+    sys.exit(1)
+
+def read_config() :
+    """
+    Read configuration file and return ConfigParser object
+    """
+    CONFIG=os.path.expanduser('~/.etc/googlerc')
+    cfg = SafeConfigParser( {
+            'browser'     : 'x-www-browser',
+            'consbrowser' : 'elinks',
+            'opts'        : '',
+            'consopts'    : '',
+            } )
+    if os.path.isfile(CONFIG) : cfg.read(CONFIG)
+    return cfg
+
+
+def parse_args() :
+    """
+    Parse command line parameters using optparse module. 
+    """
+    def wiki_store(opt, optname, value, parser) :
+        parser.values.lang   = value
+        parser.values.engine = 'wikipedia'
+
+    parser = optparse.OptionParser()
+    parser.add_option('-g','--google', dest = 'engine', default = 'google',
+                      action  = 'store_const', const = 'google',
+                      help    = 'Search in google')
+    parser.add_option('-y','--yandex', dest = 'engine', 
+                      action  = 'store_const', const = 'yandex',
+                      help    = 'Search in yandex')
+    parser.add_option('-w','--wiki', dest = 'lang', type = 'string', 
+                      action = 'callback', callback = wiki_store,
+                      help   = 'Search in Wikipedia')
+    parser.add_option('-o','--opts', type = 'string', 
+                      action = 'append',
+                      help   = 'options to be passed to browser. Can be specified multiple times')
+    return parser.parse_args()
+
+def main() :
+    """
+    """
+    cfg       = read_config()
+    opts,args = parse_args()
+    if len(args) == 0 :
+        raise GoogleException('No search query given')
+    # Build query
+    query = { 'google'    : 'http://www.google.com/search?q=%(query)s',
+              'yandex'    : 'http://www.yandex.ru/yandsearch?text=%(query)s',
+              'wikipedia' :
+                  'http://%(lang)s.wikipedia.org/wiki/Special:Search?search=%(query)s&go=Go',
+              }[opts.engine]    
+    query = query % {'query' : ' '.join(args),
+                     'lang'  : opts.lang }
+
+    # Get brow
+    if os.getenv('DISPLAY') is not None :
+        browser = cfg.get('main', 'browser')
+        cl_opts = cfg.get('main', 'opts').split()
+    else :
+        browser = cfg.get('main', 'consbrowser')
+        cl_opts = cfg.get('main', 'consopts').split()
+    if opts.opts is not None :
+        cl_opts = opts.opts
+
+    os.execvp(browser, [browser] + cl_opts + [query])
+
+
+
+try :
+    main()
+except GoogleException, e:
+    fail(e.message)
+except ConfigError, e:
+    fail(e.message)

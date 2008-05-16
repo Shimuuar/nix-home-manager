@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Print message to stderr and exit
+function fail { echo $@ >&2; exit 1; }
+
+# Check number of konquerors running. If more than one - fail.
+# As cannot choose
+[ $(dcop | grep konqueror -c) == '1' ] || fail "More than one konqueror opened"
+
+# Open link in new tab 
+dcop $(dcop | grep konqueror) konqueror-mainwindow#1 newTab $1
