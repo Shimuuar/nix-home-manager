@@ -109,6 +109,8 @@ alias j=jobs
 alias wcl='wc -l'
 # Man shorthand
 alias ?='man'
+# Make with include path
+alias maki='make -I ~/.share/make'
 
 # apt-aliases
 alias apt-search='apt-cache search'
