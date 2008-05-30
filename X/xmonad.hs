@@ -6,21 +6,23 @@
 --
 -- Normally, you'd only override those defaults you care about.
 --
- 
-import XMonad
-import XMonad.Util.Run
-import XMonad.Util.WorkspaceCompare
-import XMonad.Util.Loggers
 
 import System.Exit
 import System.IO
 import qualified System.IO.UTF8
+import qualified Data.Map as M
 
+
+import XMonad
 import qualified XMonad.StackSet as W
-import qualified Data.Map        as M
- 
+
 import XMonad.Hooks.DynamicLog
 
+import XMonad.Util.Run
+import XMonad.Util.WorkspaceCompare
+import XMonad.Util.Loggers
+
+ 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
