@@ -8,7 +8,13 @@
 --
  
 import XMonad
+import XMonad.Util.Run
+import XMonad.Util.WorkspaceCompare
+import XMonad.Util.Loggers
+
 import System.Exit
+import System.IO
+import qualified System.IO.UTF8
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -165,29 +171,35 @@ myManageHook = composeAll
     , resource  =? "kdesktop"       --> doIgnore 
     , resource  =? "stalonetray"    --> doIgnore
     -- Place some applications to particular desktops
-    , className =? "Akregator"      --> doF (W.shift "collect")
+    , className =? "Akregator"      --> doF (W.shift "RSS")
     , className =? "psi"            --> doF (W.shift "IM")
+    , className =? "Sonata"         --> doF (W.shift "Музыка")
+    , className =? "KTorrent"       --> doF (W.shift "Торрент")
+    , className =? "firefox-bin"    --> doF (W.shift "fox")
     ]
  
 ------------------------------------------------------------------------
 -- Status bars and logging
- 
-myLogHook = dynamicLogWithPP $ PP { 
-              ppCurrent         = wrap "  [" "]"
-            , ppVisible         = wrap "<" ">"
-            , ppHidden          = const ""
-            , ppHiddenNoWindows = const ""
-            , ppUrgent          = id
-            , ppSep             = " "
-            , ppWsSep           = " "
-            , ppTitle           = escape
-            , ppLayout          = wrap "| " " |"
-            , ppOrder           = id
-            , ppOutput          = putStrLn
-            }
+-- 
+myLogHook h = defaultPP { 
+                ppCurrent         = wrap "  [" "]"
+              , ppVisible         = wrap "<" ">"
+              , ppHidden          = const ""
+              , ppHiddenNoWindows = const ""
+              , ppUrgent          = id
+              , ppSep             = " "
+              , ppWsSep           = " "
+              , ppTitle           = dzenEscape
+              , ppLayout          = wrap "| " " |"
+              , ppOrder           = id
+              , ppOutput          = System.IO.UTF8.hPutStrLn h
+              }
     where
       escape = concatMap (\x -> if x == '^' then "^^" else [x])
-      
+{-
+              , ppSort            = getSortByIndex
+              , ppExtras          = [date]
+-}      
 {-
       ppLayout   = dzenColor "black" "#cccccc" .
                    (\ x -> case x of
@@ -202,29 +214,28 @@ myLogHook = dynamicLogWithPP $ PP {
 -}
 
 ------------------------------------------------------------------------
--- Now run xmonad with all the defaults we set up.
--- 
--- Run xmonad with the settings you specify.
---
-main = xmonad defaults
+-- Run xmonad
+main = do 
+  dzenh <- spawnPipe "dzen2 -ta c -y 18 -e"
+  xmonad $ myConfig dzenh
 
-defaults = defaultConfig {
+myConfig h = defaultConfig {
       -- simple stuff
-        terminal           = "urxvt",
-        modMask            = mod4Mask,
-        focusFollowsMouse  = True,
-        borderWidth        = 1,
-        workspaces         = ["work.1","work.2","3","4","5","6","fox","collect","IM"],
-        normalBorderColor  = "#dddddd",
-        focusedBorderColor = "#ff0000",
-        defaultGaps        = [(36,0,0,0)],
- 
+      terminal           = "urxvt",
+      modMask            = mod4Mask,
+      focusFollowsMouse  = True,
+      borderWidth        = 1,
+      workspaces         = ["Работа.1","Работа.2","WWW","Музыка","5","Торрент","fox","RSS","IM"],
+      normalBorderColor  = "#dddddd",
+      focusedBorderColor = "#ff0000",
+      defaultGaps        = [(36,0,0,0)],
+      
       -- key bindings
-        keys               = myKeys,
-        mouseBindings      = myMouseBindings,
- 
+      keys               = myKeys,
+      mouseBindings      = myMouseBindings,
+      
       -- hooks, layouts
-        layoutHook         = myLayout,
-        manageHook         = myManageHook,
-        logHook            = myLogHook
-    }
+      layoutHook         = myLayout,
+      manageHook         = myManageHook,
+      logHook            = dynamicLogWithPP $ myLogHook h
+             }
