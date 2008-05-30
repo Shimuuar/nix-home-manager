@@ -48,9 +48,6 @@
 ; Hooks for LaTeX
 (defun my-tex-hooks()
   (my-base-text-hooks)
-  ; Function to insert TeX solid space '~' which is inaccessible in russian layout.
-  (local-set-key "\C-c " 
-                 '(lambda () (interactive) (insert "~")) )
   ; switch TeX quotes
   (local-set-key "\C-cq" 'my-switch-tex-quotes)
   ; TeX template 

@@ -6,6 +6,9 @@
 
 ; Font face
 ;(set-face-font 'default "-xos4-terminus-bold-r-normal--20-200-72-72-c-100-iso10646-1")
+;(set-face-font 'variable-pitch "-*-helvetica-*-*-*-*-18-*-*-*-*-*-iso10646-*")
+
+; default "-xos4-terminus-bold-r-normal--20-200-72-72-c-100-iso10646-1")
 
 ; No startup message
 (setq inhibit-startup-message t)
