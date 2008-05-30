@@ -21,7 +21,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Util.Run
 import XMonad.Util.WorkspaceCompare
 import XMonad.Util.Loggers
-
+import XMonad.Util.Scratchpad
  
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -98,6 +98,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask.|.mod1Mask, xK_e  ), spawn "emacs22")
     , ((modMask.|.mod1Mask, xK_i  ), spawn "iceweasel")
     , ((modMask.|.mod1Mask, xK_k  ), spawn "konqueror")
+    , ((modMask,            xK_s  ), spawn "xterm -title scratchpad")
     ]
     ++
     -- Useful actions 
@@ -156,7 +157,7 @@ myLayout = tiled ||| Mirror tiled ||| Full
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = composeAll
+myManageHook = scratchpadManageHookDefault <+> composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
@@ -168,7 +169,9 @@ myManageHook = composeAll
     , className =? "Sonata"         --> doF (W.shift "Музыка")
     , className =? "KTorrent"       --> doF (W.shift "Торрент")
     , className =? "firefox-bin"    --> doF (W.shift "fox")
-    ]
+    --
+    , scratchpadManageHookDefault
+    ] 
  
 ------------------------------------------------------------------------
 -- Status bars and logging
