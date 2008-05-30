@@ -26,6 +26,8 @@
 ; ReST mode
 (setq auto-mode-alist (cons '("\\.rst$"  . rst-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.rest$" . rst-mode) auto-mode-alist))
+; Markdown mode
+(setq auto-mode-alist (cons '("\\.mark$" . markdown-mode) auto-mode-alist))
 ;; ===========================
 
 
