@@ -38,9 +38,6 @@ export HISTIGNORE=ls:[fb]g
 ## ---------------------------------------------------------
 ## Fancy prompt
 ## ---------------------------------------------------------
-MY_NAME=${MY_NAME-$(whoami)}
-
-
 function truncate_pwd
 {
     ## Truncate $PWD to 20 last letters if too long 
@@ -51,6 +48,7 @@ function truncate_pwd
     fi
 }
 
+MY_NAME=${MY_NAME-$(whoami)}
 PROMPT_COMMAND=truncate_pwd
 case "$TERM" in
     xterm*|rxvt*)
