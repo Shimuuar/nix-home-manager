@@ -28,91 +28,81 @@ import XMonad.Util.Loggers
 --
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- launch a terminal
-    [ ((modMask .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+    [ ((modMask.|.shiftMask, xK_Return), spawn $ XMonad.terminal conf)
     -- launch dmenu
-    , ((modMask,               xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+    , ((modMask,             xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
     -- close focused window 
-    , ((modMask .|. shiftMask, xK_c     ), kill)
-
-     -- Rotate through the available layout algorithms
-    , ((modMask,               xK_space ), sendMessage NextLayout)
+    , ((modMask.|.shiftMask, xK_c     ), kill)
+    -- Rotate through the available layout algorithms
+    , ((modMask,             xK_space ), sendMessage NextLayout)
     --  Reset the layouts on the current workspace to default
-    , ((modMask .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
+    , ((modMask.|.shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
     -- Resize viewed windows to the correct size
-    , ((modMask,               xK_n     ), refresh)
-
+    , ((modMask,             xK_n     ), refresh)
     -- Move focus to the next/prev window
-    , ((modMask,               xK_Tab   ), windows W.focusDown)
-    , ((modMask,               xK_Left  ), windows W.focusDown)      
-    , ((modMask,               xK_Right ), windows W.focusUp  )      
-    , ((modMask,               xK_j     ), windows W.focusDown)
-    , ((modMask,               xK_k     ), windows W.focusUp  )
+    , ((modMask,             xK_Tab   ), windows W.focusDown)
+    , ((modMask,             xK_Left  ), windows W.focusDown)      
+    , ((modMask,             xK_Right ), windows W.focusUp  )      
+    , ((modMask,             xK_j     ), windows W.focusDown)
+    , ((modMask,             xK_k     ), windows W.focusUp  )
     -- Move focus to the master window
-    , ((modMask,               xK_m     ), windows W.focusMaster  )
+    , ((modMask,             xK_m     ), windows W.focusMaster  )
     -- Swap the focused window and the master window
-    , ((modMask,               xK_Return), windows W.swapMaster)
+    , ((modMask,             xK_Return), windows W.swapMaster)
     -- Swap the focused window with the next/prev window
-    , ((modMask .|. shiftMask, xK_j     ), windows W.swapDown  )
-    , ((modMask .|. shiftMask, xK_k     ), windows W.swapUp    )
+    , ((modMask.|.shiftMask, xK_j     ), windows W.swapDown  )
+    , ((modMask.|.shiftMask, xK_k     ), windows W.swapUp    )
     -- Shrink/expand the master area
-    , ((modMask,               xK_h     ), sendMessage Shrink)
-    , ((modMask,               xK_l     ), sendMessage Expand)
+    , ((modMask,             xK_h     ), sendMessage Shrink)
+    , ((modMask,             xK_l     ), sendMessage Expand)
     -- Push window back into tiling
-    , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
+    , ((modMask,             xK_t     ), withFocused $ windows . W.sink)
     -- Inc/dec the number of windows in the master area
-    , ((modMask              , xK_comma ), sendMessage (IncMasterN 1))
-    , ((modMask              , xK_period), sendMessage (IncMasterN (-1)))
+    , ((modMask,             xK_comma ), sendMessage (IncMasterN 1))
+    , ((modMask,             xK_period), sendMessage (IncMasterN (-1)))
     -- toggle the status bar gap
-    , ((modMask              , xK_b     ),
+    , ((modMask,             xK_b     ),
           modifyGap (\i n -> let x = (XMonad.defaultGaps conf ++ repeat (0,0,0,0)) !! i
                              in if n == x then (0,0,0,0) else x))
-
     -- Quit xmonad
-    , ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+    , ((modMask.|.shiftMask, xK_q     ), io (exitWith ExitSuccess))
     -- Restart xmonad
-    , ((modMask              , xK_q     ),
+    , ((modMask,             xK_q     ),
           broadcastMessage ReleaseResources >> restart "xmonad" True)
     ]
     ++
-    --
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
-    --
     [((m .|. modMask, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
-    --
     -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
-    --
     [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     ++
-    -- 
     -- MPD keybindings 
-    [ ((modMask,               xK_Page_Down ), spawn "mpc next > /dev/null")
-    , ((modMask,               xK_Page_Up   ), spawn "mpc prev > /dev/null")
-    , ((modMask,               xK_End       ), spawn "mpc toggle > /dev/null")
-    , ((modMask,               xK_Home      ), spawn "mpc stop > /dev/null")
-    , ((modMask,               xK_Insert    ), spawn "mpc play > /dev/null")
-    , ((modMask .|. shiftMask, xK_Delete    ), spawn "mpc del 0 > /dev/null")
-    , ((modMask .|. shiftMask, xK_Page_Down ), spawn "show_mpc_playlist")
-    , ((modMask .|. shiftMask .|. mod1Mask, xK_Delete), spawn "mpc clear > /dev/null")      
+    [ ((modMask,             xK_Page_Down ), spawn "mpc next > /dev/null")
+    , ((modMask,             xK_Page_Up   ), spawn "mpc prev > /dev/null")
+    , ((modMask,             xK_End       ), spawn "mpc toggle > /dev/null")
+    , ((modMask,             xK_Home      ), spawn "mpc stop > /dev/null")
+    , ((modMask,             xK_Insert    ), spawn "mpc play > /dev/null")
+    , ((modMask.|.shiftMask, xK_Delete    ), spawn "mpc del 0 > /dev/null")
+    , ((modMask.|.shiftMask, xK_Page_Down ), spawn "show_mpc_playlist")
+    , ((modMask.|.shiftMask.|.mod1Mask, xK_Delete), spawn "mpc clear > /dev/null")      
     ]
     ++
-    --
     -- App shorcuts
-    [ ((modMask .|. mod1Mask, xK_e  ), spawn "emacs22")
-    , ((modMask .|. mod1Mask, xK_i  ), spawn "iceweasel")
-    , ((modMask .|. mod1Mask, xK_k  ), spawn "konqueror")
+    [ ((modMask.|.mod1Mask, xK_e  ), spawn "emacs22")
+    , ((modMask.|.mod1Mask, xK_i  ), spawn "iceweasel")
+    , ((modMask.|.mod1Mask, xK_k  ), spawn "konqueror")
     ]
     ++
-    --
     -- Useful actions 
-    [ ((modMask .|. mod1Mask, xK_a ), spawn "apod_show_descritption.sh")
-    , ((modMask,              xK_d ), spawn "look_dictionary")
+    [ ((modMask.|.mod1Mask, xK_a ), spawn "apod_show_descritption.sh")
+    , ((modMask,            xK_d ), spawn "look_dictionary")
     ]
 
  
