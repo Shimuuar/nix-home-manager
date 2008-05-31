@@ -11,12 +11,15 @@ import System.Exit
 import System.IO
 import qualified System.IO.UTF8
 import qualified Data.Map as M
-
+import Data.Ratio ((%))
 
 import XMonad
 import qualified XMonad.StackSet as W
 
 import XMonad.Hooks.DynamicLog
+
+import qualified XMonad.Layout.IM as IM
+import XMonad.Layout.PerWorkspace
 
 import XMonad.Util.Run
 import XMonad.Util.WorkspaceCompare
@@ -131,16 +134,17 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = tiled ||| Mirror tiled ||| Full
-  where
-     -- default tiling algorithm partitions the screen into two panes
-     tiled   = Tall nmaster delta ratio
-     -- The default number of windows in the master pane
-     nmaster = 1
-     -- Default proportion of screen occupied by master pane
-     ratio   = 1/2
-     -- Percent of screen to increment by when resizing panes
-     delta   = 3/100
+myLayout = onWorkspace "IM" (IM.IM (1%5) (IM.Resource "main")) $
+           tiled ||| Mirror tiled ||| Full
+    where
+      -- default tiling algorithm partitions the screen into two panes
+      tiled   = Tall nmaster delta ratio
+      -- The default number of windows in the master pane
+      nmaster = 1
+      -- Default proportion of screen occupied by master pane
+      ratio   = 1/2
+      -- Percent of screen to increment by when resizing panes
+      delta   = 3/100
  
 ------------------------------------------------------------------------
 -- Window rules:
@@ -168,7 +172,7 @@ myManageHook = scratchpadManageHookDefault <+> composeAll
     , className =? "psi"            --> doF (W.shift "IM")
     , className =? "Sonata"         --> doF (W.shift "Музыка")
     , className =? "KTorrent"       --> doF (W.shift "Торрент")
-    , className =? "firefox-bin"    --> doF (W.shift "fox")
+    , className =? "Firefox-bin"    --> doF (W.shift "fox")
     --
     , scratchpadManageHookDefault
     ] 
