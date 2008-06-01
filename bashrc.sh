@@ -89,6 +89,7 @@ alias catdos='iconv -f cp866 -t utf8'
 alias catlatin1='iconv -f latin1 -t utf8'
 # Convert from DOS to unix line breaks
 alias dos2unix='tr -d "\r"'
+alias space2_='rename -v "s/ /_/g"'
 
 # nice grep coloring
 alias grep='grep --color'
