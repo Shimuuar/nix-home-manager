@@ -101,6 +101,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask.|.mod1Mask, xK_e  ), spawn "emacs22")
     , ((modMask.|.mod1Mask, xK_i  ), spawn "iceweasel")
     , ((modMask.|.mod1Mask, xK_k  ), spawn "konqueror")
+    , ((modMask.|.mod1Mask, xK_w  ), spawn "kdesu wireshark")
     , ((modMask,            xK_s  ), spawn "xterm -title scratchpad")
     ]
     ++
