@@ -1,7 +1,11 @@
 #!/bin/sh
 
-LOOKUP=$(sselp)
+function fail() { echo $@ >&2; exit 1; }
 
-(echo "$LOOKUP"; echo; dict "$LOOKUP" 2>&1 ) |
-dzen2 -l 30 -p -y 37 $DZEN_COLOR $DZEN_FONT \
-    -e 'onstart=uncollapse,scrollhome;button1=exit;button4=scrollup;button5=scrolldown;'
+# Chec
+[ $(sselp | wc -l) = '1'   ] || fail "look_dictionary: Multiline selection"
+[ $(sselp | wc -m) -lt 128 ] || fail "look_dictionary: Too long selection"
+
+# Print result to stdout
+sselp
+dict $(sselp) 2>&1
