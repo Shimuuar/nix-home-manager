@@ -1,0 +1,6 @@
+#!/bin/sh
+ 
+# less-like functionality with dzen.
+
+dzen2 -l 30 -p -y 54 \
+    -e 'onstart=uncollapse,scrollhome;button3=exit;button4=scrollup;button5=scrolldown;'
