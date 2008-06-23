@@ -158,6 +158,14 @@ function mkcd() {
     mkdir "$1" && cd "$1"
 }
 
+# Repeat (shorthand for for loop) With explicit variables and implicit
+function rep() {
+    while read i; do eval "$@"; done
+}
+function irep() {
+    while read i; do eval "$@" "$i"; done
+}
+    
 ## VCS shorcuts and goodies
 # Subversion 
 function svn-diff() {  # Colored diff 
