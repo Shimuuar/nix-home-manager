@@ -145,12 +145,17 @@ function word() {
 
 # Gen n'th line from file 
 function nline() {
-    sed -e "$1 !d" $2
+    sed -e "$1 !d" "$2"
 }
 
 # View colored source code
 function vsrc() {
-    highlight $1 -A | $PAGER
+    highlight "$1" -A | $PAGER
+}
+
+# make dir and cd to it
+function mkcd() {
+    mkdir "$1" && cd "$1"
 }
 
 ## VCS shorcuts and goodies
