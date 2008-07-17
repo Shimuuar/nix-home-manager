@@ -150,7 +150,7 @@ function nline() {
 
 # View colored source code
 function vsrc() {
-    highlight "$1" -A | $PAGER
+    highlight "$@" -A | $PAGER
 }
 
 # make dir and cd to it
@@ -158,10 +158,7 @@ function mkcd() {
     mkdir "$1" && cd "$1"
 }
 
-# Repeat (shorthand for for loop) With explicit variables and implicit
-function rep() {
-    while read i; do eval "$@"; done
-}
+# Repeat (shorthand for for loop) With implicit variables 
 function irep() {
     while read i; do eval "$@" "$i"; done
 }
@@ -193,7 +190,6 @@ function hg-prune() {  # Remove all files not under version control
 ## Evironment variables
 ## ---------------------------------------------------------
 export LD_LIBRARY_PATH="$HOME/lib"
-export PYTHONPATH="$HOME/lib/python2.4/site-packages"
 ## -----------------
 
 ## ---------------------------------------------------------
