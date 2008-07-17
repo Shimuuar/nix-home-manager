@@ -166,17 +166,20 @@ function irep() {
 ## VCS shorcuts and goodies
 # Subversion 
 function svn-diff() {  # Colored diff 
-    svn diff $@ | colordiff
+    svn diff "$@" | colordiff
 }
 function svn-gdiff() { # view diff in kompare
-    svn diff $@ | kompare -o -
+    svn diff "$@" | kompare -o -
 }
 # Mercurial
 function hg-diff() {   # Colored diff 
-    hg diff $@ | colordiff 
+    hg diff "$@" | colordiff 
 }
 function hg-gdiff() {  # view diff in kompare
-    hg diff $@ | kompare -o -
+    hg diff "$@" | kompare -o -
+}
+function hg-qdiff() {  # colored diff for queues
+    hg qdiff "$@" | colordiff
 }
 function hg-prune() {  # Remove all files not under version control
     # Needed to convert to absolute filenames 
