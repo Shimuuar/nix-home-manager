@@ -122,10 +122,10 @@
     
 
 ; C hooks 
+(add-hook 'c-mode-hook          'my-c-hooks)
 (add-hook 'c-mode-hook          'my-programming-hook)
 (add-hook 'c-mode-hook          'my-comment-hooks)
 (add-hook 'c-mode-hook          'my-folding-hook)
-(add-hook 'c-mode-hook          'my-c-hooks)
 ; C++ hooks 
 (add-hook 'c++-mode-hook        'my-programming-hook)
 (add-hook 'c++-mode-hook        'my-comment-hooks)
