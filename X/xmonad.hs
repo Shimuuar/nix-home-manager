@@ -172,52 +172,34 @@ myManageHook = scratchpadManageHookDefault <+> composeAll
     -- Place some applications to particular desktops
     , className =? "Akregator"      --> doF (W.shift "RSS")
     , className =? "psi"            --> doF (W.shift "IM")
-    , className =? "Sonata"         --> doF (W.shift "Музыка")
-    , className =? "Ktorrent"       --> doF (W.shift "Торрент")
-    , className =? "Iceweasel"      --> doF (W.shift "fox")
+    , className =? "Sonata"         --> doF (W.shift "Муз")
+    , className =? "Ktorrent"       --> doF (W.shift "Торр")
+    , className =? "Iceweasel"      --> doF (W.shift "Fox")
     --
     , scratchpadManageHookDefault
     ] 
  
 ------------------------------------------------------------------------
 -- Status bars and logging
--- 
 myLogHook h = defaultPP { 
-                ppCurrent         = wrap "  [" "]"
+                ppCurrent         = wrap " ^bg(blue)^fg(#eee)" "^fg()^bg()"
               , ppVisible         = wrap "<" ">"
-              , ppHidden          = const ""
-              , ppHiddenNoWindows = const ""
-              , ppUrgent          = id
-              , ppSep             = " "
-              , ppWsSep           = " "
+              , ppHidden          = wrap " " ""
+              , ppHiddenNoWindows = wrap " " ""
+              , ppUrgent          = wrap "@" "@"
+              , ppSep             = " | "
+              , ppWsSep           = ""
               , ppTitle           = dzenEscape
-              , ppLayout          = wrap "| " " |"
-              , ppOrder           = id
               , ppOutput          = System.IO.UTF8.hPutStrLn h
               }
     where
       escape = concatMap (\x -> if x == '^' then "^^" else [x])
-{-
-              , ppSort            = getSortByIndex
-              , ppExtras          = [date]
--}      
-{-
-      ppLayout   = dzenColor "black" "#cccccc" .
-                   (\ x -> case x of
-                             "TilePrime Horizontal" ->
-                                 " ^i(/home/emertens/images/tile_horz.xpm) "
-                             "TilePrime Vertical"   ->
-                                 " ^i(/home/emertens/images/tile_vert.xpm) "
-                             "Hinted Full"          ->
-                                 " ^i(/home/emertens/images/fullscreen.xpm) "
-                             _                      -> pad x
-                   )
--}
+
 
 ------------------------------------------------------------------------
 -- Run xmonad
 main = do 
-  dzenh <- spawnPipe "dzen2 -ta c -y 18 -e"
+  dzenh <- spawnPipe "dzen2 -ta l -y 18 -e ''"
   xmonad $ myConfig dzenh
 
 myConfig h = defaultConfig {
@@ -226,7 +208,7 @@ myConfig h = defaultConfig {
       modMask            = mod4Mask,
       focusFollowsMouse  = True,
       borderWidth        = 1,
-      workspaces         = ["Работа.1","Работа.2","WWW","Музыка","5","Торрент","fox","RSS","IM"],
+      workspaces         = ["1","2","WWW","Муз","Mail","Торр","Fox","RSS","IM","--"],
       normalBorderColor  = "#dddddd",
       focusedBorderColor = "#ff0000",
       defaultGaps        = [(36,0,0,0)],
@@ -239,4 +221,4 @@ myConfig h = defaultConfig {
       layoutHook         = myLayout,
       manageHook         = myManageHook,
       logHook            = dynamicLogWithPP $ myLogHook h
-             }
+      }
