@@ -173,8 +173,8 @@ myManageHook = scratchpadManageHookDefault <+> composeAll
     , className =? "Akregator"      --> doF (W.shift "RSS")
     , className =? "psi"            --> doF (W.shift "IM")
     , className =? "Sonata"         --> doF (W.shift "Музыка")
-    , className =? "KTorrent"       --> doF (W.shift "Торрент")
-    , className =? "Firefox-bin"    --> doF (W.shift "fox")
+    , className =? "Ktorrent"       --> doF (W.shift "Торрент")
+    , className =? "Iceweasel"      --> doF (W.shift "fox")
     --
     , scratchpadManageHookDefault
     ] 
