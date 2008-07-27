@@ -30,7 +30,7 @@ END {
     print_rect(MG,     WIDTH*(b+c)/t);
     print_rect(BG, WIDTH*f/t);
 
-    print_rect("black", 4);
+    print_rect("#eee", 4);
 
     print_rect(FG, WIDTH*(st-sf)/st);
     print_rect(BG, WIDTH*sf/st);
