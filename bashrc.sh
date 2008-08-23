@@ -190,12 +190,6 @@ function hg-prune() {  # Remove all files not under version control
 
 
 ## ---------------------------------------------------------
-## Evironment variables
-## ---------------------------------------------------------
-export LD_LIBRARY_PATH="$HOME/lib"
-## -----------------
-
-## ---------------------------------------------------------
 ## Fortunes (pleasant reading)
 ## ---------------------------------------------------------
 if which fortune &> /dev/null; then 
