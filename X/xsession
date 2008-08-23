@@ -57,6 +57,6 @@ wait $XMONAD_PID
 # send SIGHUP to all children
 pkill -HUP -P $$
 # Stop music
-mpc stop 
+mpc pause
 # Wait for everyone to terminate
 wait
