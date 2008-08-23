@@ -13,6 +13,33 @@
           "\n#define " title 
           "\n\n#endif /* " title " */\n" ))
 
+(defun my-insert-c-template(foo)
+  "Insert C program template"
+  (interactive "i")
+  (insert "\n"
+	  "#include <stdlib.h>\n"
+	  "#include <stdio.h>\n"
+	  "\n"
+	  "\n"
+	  "int main(int argc, char** argv)\n"
+	  "{\n"
+	  "\n"
+	  "    return 0;\n"
+	  "}\n"))
+
+(defun my-insert-c++-template(foo)
+  "Insert C program template"
+  (interactive "i")
+  (insert "\n"
+	  "#include <iostream>\n"
+	  "\n"
+	  "\n"
+	  "int main(int argc, char** argv)\n"
+	  "{\n"
+	  "\n"
+	  "    return 0;\n"
+	  "}\n"))
+
 (defun my-indent-buffer()
   "indent whole buffer"
   (interactive)
@@ -36,6 +63,16 @@
   "Comment or uncomment line under cursor"
   (interactive)
   (comment-or-uncomment-region (point-at-bol) (point-at-eol)))
+
+(defun my-show-tab
+  "Display tab width"
+  (interactive) 
+  (princ (format "Tab width: %i" tab-width)))
+
+(defun my-settab(wid)
+  "Set tab width"
+  (interactive "nType tab width ")
+  (setq tab-width wid))
 ;; =================
 
 
@@ -74,7 +111,7 @@
 ;; Define hooks 
 ;; =========================================================
 
-(defun my-programming-hook()
+(defun my-programming-hooks()
   "Common programming hooks"
   ; Make new lines indented
   (local-set-key (kbd "RET") 'newline-and-indent)
@@ -82,7 +119,7 @@
   (local-set-key [\C-\S-iso-lefttab] (lambda() (interactive) (insert "	")))
   )
 
-(defun my-folding-hook()
+(defun my-folding-hooks()
   "Hook for code folding"
   (hs-minor-mode t)
   (local-set-key (kbd "C-S-<left>") 'hs-hide-block)
@@ -103,44 +140,36 @@
   (my-insert-if-empty "#!/usr/bin/python\n"
                       "\"\"\"\n"
                       "\"\"\"\n")
-  ; Code folding for python with hs-minormode
-  (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
   )
 
 (defun my-c-hooks ()
-  (if (string-match "\.c$" (buffer-name))
-      (progn 
-        (my-insert-if-empty "\n"
-                            "int main(int argc, char** argv)\n"
-                            "{\n"
-                            "\n"
-                            "    return 0;\n"
-                            "}\n")
-        (previous-line 3)
-        ))
   )
     
 
 ; C hooks 
-(add-hook 'c-mode-hook          'my-c-hooks)
-(add-hook 'c-mode-hook          'my-programming-hook)
+(add-hook 'c-mode-hook          'my-programming-hooks)
 (add-hook 'c-mode-hook          'my-comment-hooks)
-(add-hook 'c-mode-hook          'my-folding-hook)
+(add-hook 'c-mode-hook          'my-folding-hooks)
+(add-hook 'c-mode-hook          'my-c-hooks)
 ; C++ hooks 
-(add-hook 'c++-mode-hook        'my-programming-hook)
+(add-hook 'c++-mode-hook        'my-programming-hooks)
 (add-hook 'c++-mode-hook        'my-comment-hooks)
-(add-hook 'c++-mode-hook        'my-folding-hook)
+(add-hook 'c++-mode-hook        'my-folding-hooks)
 (add-hook 'c++-mode-hook        'my-c-hooks)
 ; Python hooks 
-(add-hook 'python-mode-hook     'my-programming-hook)
-(add-hook 'python-mode-hook     'my-folding-hook)
+(add-hook 'python-mode-hook     'my-programming-hooks)
+(add-hook 'python-mode-hook     'my-folding-hooks)
 (add-hook 'python-mode-hook     'my-python-hooks)
 ; Shell hooks 
-(add-hook 'sh-mode-hook         'my-programming-hook)
+(add-hook 'sh-mode-hook         'my-programming-hooks)
 ; Lisp hooks 
-(add-hook 'lisp-mode-hook       'my-programming-hook)
-(add-hook 'emacs-lisp-mode-hook 'my-programming-hook)
+(add-hook 'lisp-mode-hook       'my-programming-hooks)
+(add-hook 'lisp-mode-hook       'my-comment-hooks)
+; Elisp hooks
+(add-hook 'emacs-lisp-mode-hook 'my-programming-hooks)
+(add-hook 'emacs-lisp-mode-hook 'my-comment-hooks)
 ; Haskell hooks
+(add-hook 'haskell-mode-hook    'my-programming-hooks)
 (add-hook 'haskell-mode-hook    'my-comment-hooks)
 ;; =================
 
