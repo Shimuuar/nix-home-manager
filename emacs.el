@@ -11,6 +11,10 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal"))
 
+; Require local modification (if any)
+(require 'my-local "my-local.el" t)
+
+; Load files
 (require 'my-appearance)
 (require 'my-generic)
 (require 'my-text)
