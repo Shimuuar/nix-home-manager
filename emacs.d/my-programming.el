@@ -143,26 +143,26 @@
     
 
 ; C hooks 
-(add-hook 'c-mode-hook          'my-indent-hooks)
+(add-hook 'c-mode-hook          'my-indent-hook)
 (add-hook 'c-mode-hook          'my-comment-hooks)
 (add-hook 'c-mode-hook          'my-folding-hooks)
 (add-hook 'c-mode-hook          'my-c-hooks)
 ; C++ hooks 
-(add-hook 'c++-mode-hook        'my-indent-hooks)
+(add-hook 'c++-mode-hook        'my-indent-hook)
 (add-hook 'c++-mode-hook        'my-comment-hooks)
 (add-hook 'c++-mode-hook        'my-folding-hooks)
 (add-hook 'c++-mode-hook        'my-c-hooks)
 ; Python hooks 
-(add-hook 'python-mode-hook     'my-indent-hooks)
+(add-hook 'python-mode-hook     'my-indent-hook)
 (add-hook 'python-mode-hook     'my-folding-hooks)
 (add-hook 'python-mode-hook     'my-python-hooks)
 ; Shell hooks 
-(add-hook 'sh-mode-hook         'my-indent-hooks)
+(add-hook 'sh-mode-hook         'my-indent-hook)
 ; Lisp hooks 
-(add-hook 'lisp-mode-hook       'my-indent-hooks)
+(add-hook 'lisp-mode-hook       'my-indent-hook)
 (add-hook 'lisp-mode-hook       'my-comment-hooks)
 ; Elisp hooks
-(add-hook 'emacs-lisp-mode-hook 'my-indent-hooks)
+(add-hook 'emacs-lisp-mode-hook 'my-indent-hook)
 (add-hook 'emacs-lisp-mode-hook 'my-comment-hooks)
 ; Haskell hooks
 (add-hook 'haskell-mode-hook    'my-comment-hooks)
