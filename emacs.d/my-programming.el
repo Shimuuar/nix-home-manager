@@ -111,13 +111,9 @@
 ;; Define hooks 
 ;; =========================================================
 
-(defun my-programming-hooks()
-  "Common programming hooks"
-  ; Make new lines indented
-  (local-set-key (kbd "RET") 'newline-and-indent)
-  ; Insert tab
-  (local-set-key [\C-\S-iso-lefttab] (lambda() (interactive) (insert "	")))
-  )
+(defun my-indent-hook()
+  "Make new lines indented"
+  (local-set-key (kbd "RET") 'newline-and-indent))
 
 (defun my-folding-hooks()
   "Hook for code folding"
@@ -147,29 +143,28 @@
     
 
 ; C hooks 
-(add-hook 'c-mode-hook          'my-programming-hooks)
+(add-hook 'c-mode-hook          'my-indent-hooks)
 (add-hook 'c-mode-hook          'my-comment-hooks)
 (add-hook 'c-mode-hook          'my-folding-hooks)
 (add-hook 'c-mode-hook          'my-c-hooks)
 ; C++ hooks 
-(add-hook 'c++-mode-hook        'my-programming-hooks)
+(add-hook 'c++-mode-hook        'my-indent-hooks)
 (add-hook 'c++-mode-hook        'my-comment-hooks)
 (add-hook 'c++-mode-hook        'my-folding-hooks)
 (add-hook 'c++-mode-hook        'my-c-hooks)
 ; Python hooks 
-(add-hook 'python-mode-hook     'my-programming-hooks)
+(add-hook 'python-mode-hook     'my-indent-hooks)
 (add-hook 'python-mode-hook     'my-folding-hooks)
 (add-hook 'python-mode-hook     'my-python-hooks)
 ; Shell hooks 
-(add-hook 'sh-mode-hook         'my-programming-hooks)
+(add-hook 'sh-mode-hook         'my-indent-hooks)
 ; Lisp hooks 
-(add-hook 'lisp-mode-hook       'my-programming-hooks)
+(add-hook 'lisp-mode-hook       'my-indent-hooks)
 (add-hook 'lisp-mode-hook       'my-comment-hooks)
 ; Elisp hooks
-(add-hook 'emacs-lisp-mode-hook 'my-programming-hooks)
+(add-hook 'emacs-lisp-mode-hook 'my-indent-hooks)
 (add-hook 'emacs-lisp-mode-hook 'my-comment-hooks)
 ; Haskell hooks
-(add-hook 'haskell-mode-hook    'my-programming-hooks)
 (add-hook 'haskell-mode-hook    'my-comment-hooks)
 ;; =================
 
