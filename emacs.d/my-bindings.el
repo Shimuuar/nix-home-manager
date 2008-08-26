@@ -36,6 +36,8 @@
 (global-set-key [\C-tab] 'my-indent-line)
 ; Find matching paren
 (global-set-key (kbd "C-%") 'my-match-paren)
-
+; Insert tab
+(global-set-key [backtab]
+		(lambda() (interactive) (insert "	")))
 
 (provide 'my-bindings)
