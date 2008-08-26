@@ -5,7 +5,7 @@
 ## If not running interactively, don't do anything:
 [ -z "$PS1" ] && return
 ## Use custom settings (this file is intended for use on multiple boxes)
-[ -f ~/.bash.vars ] && source ~/.bash.vars
+[ -f ~/.bashrc.local ] && source ~/.bashrc.local
 
 ## ---------------------------------------------------------
 ## Shell options
