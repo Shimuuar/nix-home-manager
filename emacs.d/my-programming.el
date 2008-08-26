@@ -135,11 +135,9 @@
   ; Insert shebang into empty files
   (my-insert-if-empty "#!/usr/bin/python\n"
                       "\"\"\"\n"
-                      "\"\"\"\n")
-  )
+                      "\"\"\"\n"))
 
-(defun my-c-hooks ()
-  )
+(defun my-c-hooks ())
     
 
 ; C hooks 
@@ -158,6 +156,7 @@
 (add-hook 'python-mode-hook     'my-python-hooks)
 ; Shell hooks 
 (add-hook 'sh-mode-hook         'my-indent-hook)
+(add-hook 'sh-mode-hook         '(lambda () (my-insert-if-empty "#!/bin/sh\n\n")))
 ; Lisp hooks 
 (add-hook 'lisp-mode-hook       'my-indent-hook)
 (add-hook 'lisp-mode-hook       'my-comment-hooks)
