@@ -94,7 +94,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,             xK_Insert    ), spawn "mpc play > /dev/null")
     , ((modMask.|.shiftMask, xK_Delete    ), spawn "mpc del 0 > /dev/null")
     , ((modMask.|.shiftMask, xK_Page_Down ), spawn "show_mpc_playlist")
-    , ((modMask.|.shiftMask.|.mod1Mask, xK_Delete), spawn "mpc clear > /dev/null")      
+    , ((modMask.|.shiftMask.|.mod1Mask, xK_Delete), spawn "mpc clear > /dev/null")
+    -- XF86AudioLowerVolume
+    , ((0,                   0x1008ff11   ), spawn "mpc seek -10 > /dev/null")
+    -- XF86AudioRaiseVolume
+    , ((0,                   0x1008ff13   ), spawn "mpc seek +10 > /dev/null")
     ]
     ++
     -- App shorcuts
