@@ -170,6 +170,7 @@ myLayout = onWorkspace "IM" (IM.IM (1%5) (IM.Resource "main")) $
 myManageHook = scratchpadManageHookDefault <+> composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
+    , className =? "wesnoth"        --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore 
     , resource  =? "stalonetray"    --> doIgnore
