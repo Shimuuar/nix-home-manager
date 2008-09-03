@@ -106,7 +106,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask.|.mod1Mask, xK_i  ), spawn "iceweasel")
     , ((modMask.|.mod1Mask, xK_k  ), spawn "konqueror")
     , ((modMask.|.mod1Mask, xK_w  ), spawn "kdesu wireshark")
-    , ((modMask,            xK_s  ), spawn "xterm -title scratchpad -e 'screen -d -R'")
+    , ((modMask,            xK_s  ), spawn "xterm -title scratchpad -e 'screen -d -R scratch'")
     ]
     ++
     -- Useful actions 
@@ -181,7 +181,7 @@ myManageHook = composeAll
     , className =? "Ktorrent"       --> doF (W.shift "Торр")
     , className =? "Iceweasel"      --> doF (W.shift "Fox")
     --
-    , scratchpadManageHook $ W.RationalRect (1%8) (1%4) (6%8) (1%2)
+    , scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3)
     ] 
  
 ------------------------------------------------------------------------
