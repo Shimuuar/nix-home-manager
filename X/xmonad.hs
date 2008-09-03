@@ -106,7 +106,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask.|.mod1Mask, xK_i  ), spawn "iceweasel")
     , ((modMask.|.mod1Mask, xK_k  ), spawn "konqueror")
     , ((modMask.|.mod1Mask, xK_w  ), spawn "kdesu wireshark")
-    , ((modMask,            xK_s  ), spawn "xterm -title scratchpad")
+    , ((modMask,            xK_s  ), spawn "xterm -title scratchpad -e 'screen -d -R'")
     ]
     ++
     -- Useful actions 
@@ -167,7 +167,7 @@ myLayout = onWorkspace "IM" (IM.IM (1%5) (IM.Resource "main")) $
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = scratchpadManageHookDefault <+> composeAll
+myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , className =? "wesnoth"        --> doFloat
@@ -181,7 +181,7 @@ myManageHook = scratchpadManageHookDefault <+> composeAll
     , className =? "Ktorrent"       --> doF (W.shift "Торр")
     , className =? "Iceweasel"      --> doF (W.shift "Fox")
     --
-    , scratchpadManageHookDefault
+    , scratchpadManageHook $ W.RationalRect (1%8) (1%4) (6%8) (1%2)
     ] 
  
 ------------------------------------------------------------------------
