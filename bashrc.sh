@@ -136,11 +136,6 @@ function word() {
     awk "{ print $(echo $@ | sed -re 's/[0-9]+/$&/g; s/[0-9] /&,/g') }"
 }
 
-# Gen n'th line from file 
-function nline() {
-    sed -e "$1 !d" "$2"
-}
-
 # View colored source code
 function vsrc() {
     highlight "$@" -A | $PAGER
