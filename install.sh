@@ -11,7 +11,7 @@ function install_script()
     SRC=$(/bin/pwd)/"$1"
     TARGET="$2"
 
-    [ -L "$TARGET" -a "$(readlink -e "$TARGET")" = "$SRC" ] && \
+    [ -L "$TARGET" -a "$(readlink -f "$TARGET")" = "$SRC" ] && \
 	echo "\`$1' already installed" && return 0
     [ -e "$TARGET" ] && \
 	echo "Warning: \`$1 exists. Remove it to install." && return 1
