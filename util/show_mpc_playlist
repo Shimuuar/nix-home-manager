@@ -1,6 +1,0 @@
-#!/bin/sh
-
-(echo MPC playlist; mpc playlist) | 
-dzen2 -l 30 -p -y 37 $DZEN_COLOR $DZEN_FONT \
-    -e 'onstart=uncollapse,scrollhome;button1=exit;button4=scrollup;button5=scrolldown;'
-
