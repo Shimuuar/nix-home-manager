@@ -4,9 +4,9 @@ X=${1-0}
 Y=${2-0}
 WID=${3-400}
 
-TODAY=$(date +'%d')
-MONTH=$(date +'%m')
-YEAR=$(date +'%Y')
+TODAY=$(date +'%_d')
+MONTH=$(date +'%_m')
+YEAR=$(date  +'%Y')
 
 function cal_highlight()
 {
