@@ -130,9 +130,10 @@
 
 (defun my-python-hooks ()
   "Hooks specific to python"
-  (setq tab-width 4) ; Override tab width
-  (abbrev-mode t)    ; Set abberviation mode
-  ; Insert shebang into empty files
+  (setq tab-width 4)			; Override tab width
+  (setq indent-tabs-mode nil)		; Use spaces for indent
+  (abbrev-mode t)			; Set abberviation mode
+  ;; Insert shebang into empty files
   (my-insert-if-empty "#!/usr/bin/python\n"
                       "\"\"\"\n"
                       "\"\"\"\n"))
@@ -140,30 +141,30 @@
 (defun my-c-hooks ())
     
 
-; C hooks 
+;; C hooks 
 (add-hook 'c-mode-hook          'my-indent-hook)
 (add-hook 'c-mode-hook          'my-comment-hooks)
 (add-hook 'c-mode-hook          'my-folding-hooks)
 (add-hook 'c-mode-hook          'my-c-hooks)
-; C++ hooks 
+;; C++ hooks 
 (add-hook 'c++-mode-hook        'my-indent-hook)
 (add-hook 'c++-mode-hook        'my-comment-hooks)
 (add-hook 'c++-mode-hook        'my-folding-hooks)
 (add-hook 'c++-mode-hook        'my-c-hooks)
-; Python hooks 
+;; Python hooks 
 (add-hook 'python-mode-hook     'my-indent-hook)
 (add-hook 'python-mode-hook     'my-folding-hooks)
 (add-hook 'python-mode-hook     'my-python-hooks)
-; Shell hooks 
+;; Shell hooks 
 (add-hook 'sh-mode-hook         'my-indent-hook)
 (add-hook 'sh-mode-hook         '(lambda () (my-insert-if-empty "#!/bin/sh\n\n")))
-; Lisp hooks 
+;; Lisp hooks 
 (add-hook 'lisp-mode-hook       'my-indent-hook)
 (add-hook 'lisp-mode-hook       'my-comment-hooks)
-; Elisp hooks
+;; Elisp hooks
 (add-hook 'emacs-lisp-mode-hook 'my-indent-hook)
 (add-hook 'emacs-lisp-mode-hook 'my-comment-hooks)
-; Haskell hooks
+;; Haskell hooks
 (add-hook 'haskell-mode-hook    'my-comment-hooks)
 ;; =================
 
