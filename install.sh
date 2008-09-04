@@ -29,6 +29,12 @@ function install()
 		install_script emacs.el ~/.emacs
 		install_script emacs.d  ~/.emacs.d/lisp-personal
 		;;
+	    xmonad)
+		mkdir -p ~/.xmonad
+		install_script X/xmonad.hs   ~/.xmonad/xmonad.hs
+		install_script X/xsession    ~/.xsession
+		install_script X/Xresources  ~/.Xresources
+		;;
 	    *) echo Unknown directive "$1";;
 	esac
 	shift
