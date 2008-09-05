@@ -109,7 +109,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ]
     ++
     -- Useful actions 
-    [ ((modMask.|.mod1Mask, xK_a  ), spawn "apod_show_descritption.sh")
+    [ ((modMask.|.mod1Mask, xK_a  ), 
+       spawn "fmt ~/.local/share/apod/description | dzen_less")
     , ((modMask,            xK_d  ), spawn "look_dictionary | dzen_less")
     , ((modMask,            xK_z  ), spawn "cat ~/.xsession-errors | dzen_less -e")
     ]

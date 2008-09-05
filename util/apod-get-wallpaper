@@ -1,0 +1,78 @@
+#!/usr/bin/python
+
+# apod-get-wallpaper (c) 2008 Alexey Khudyakov <alexey skladnoy {at} gmail com>
+
+# Permission is hereby granted, free of charge, to any person
+# obtaining a copy of this software and associated documentation files
+# (the "Software"), to deal in the Software without restriction,
+# including without limitation the rights to use, copy, modify, merge,
+# publish, distribute, sublicense, and/or sell copies of the Software,
+# and to permit persons to whom the Software is furnished to do so,
+# subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
+"""
+"""
+import sys
+import re
+import urllib
+from os      import system, environ
+from os.path import expanduser
+from BeautifulSoup import BeautifulSoup, NavigableString
+
+## ================================================================ ##
+# Global setting
+APOD      = 'http://antwrp.gsfc.nasa.gov/apod/'
+DATA_HOME = environ.get('XDG_DATA_HOME', expanduser('~/.local/share'))
+## ================================================================ ##
+
+def fmt(lines) :
+    "Nicely format lines"
+    return re.sub('^\s+', '',
+                  re.sub(' +',' ', ''.
+                         join(lines).replace("\n", " ")))
+
+## ================================================================ ##
+# Load APOD
+soup = BeautifulSoup( urllib.urlopen(APOD).read() )
+
+# Get picture hyperlink
+p =  soup.body.findAll('p')
+picture = APOD + p[1].a['href']
+# Get title info
+title_data = soup.body.findAll('center')[1].findAll(text=True)
+title      = title_data[1]
+copyright  = fmt( title_data[2:] )
+# Get exlanation
+explanation = fmt( p[2].findAll(text=True) )
+
+## ================================================================ ##
+# Create dir
+if system('mkdir -p "%s/apod"' % DATA_HOME) :
+    print>>sys.stderr, 'apod-get-wallpaper: cannot create directory'
+    exit(1)
+# Download picture
+if system('wget -q "%(link)s" -O - | '
+          'convert - -resize $(xrandr | awk %(awk)s) "%(target)s"' %
+          { 'link'   : picture,
+            'awk'    : "'/\*/ {print $1}'",
+            'target' : DATA_HOME+'/apod/wallpaper', }) :
+    print>>sys.stderr, 'apod-get-wallpaper: cannot download image'
+    exit(1)
+# Write description
+f = open(DATA_HOME+'/apod/description','w')
+print>>f, title
+print>>f, copyright
+print>>f
+print>>f, explanation
+f.close()

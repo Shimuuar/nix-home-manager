@@ -14,7 +14,8 @@ export GTK_IM_MODULE=xim                   # Ugly hack for GTK
 ## Download wallpaper from APOD
 ## ================================================================
 xsetroot -solid black
-apod_get_wallpaper.sh &
+(apod-get-wallpaper &&
+    display -backdrop -window root ~/.local/share/apod/wallpaper )&
 
 
 ## ================================================================
