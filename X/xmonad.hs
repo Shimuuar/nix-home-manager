@@ -98,6 +98,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0,                   0x1008ff11   ), spawn "mpc seek -10 > /dev/null")
     -- XF86AudioRaiseVolume
     , ((0,                   0x1008ff13   ), spawn "mpc seek +10 > /dev/null")
+    -- XF86AudioPrev
+    , ((0,                   0x1008ff16   ), spawn "mpc repeat > /dev/null")
+    -- XF86Music
+    , ((0,                   0x1008ff92   ), spawn "mpc random  > /dev/null")
+    , ((controlMask,         0x1008ff92   ), spawn "mpc shuffle > /dev/null")
     ]
     ++
     -- App shorcuts
@@ -179,7 +184,7 @@ myManageHook = composeAll
     , className =? "psi"            --> doF (W.shift "IM")
     , className =? "Sonata"         --> doF (W.shift "Муз")
     , className =? "Ktorrent"       --> doF (W.shift "Торр")
-    , className =? "Iceweasel"      --> doF (W.shift "Fox")
+    , className =? "Iceweasel"      --> doF (W.shift "WWW")
     --
     , scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3)
     ] 
@@ -213,7 +218,7 @@ myConfig h = defaultConfig {
       modMask            = mod4Mask,
       focusFollowsMouse  = True,
       borderWidth        = 1,
-      workspaces         = ["1","2","WWW","Муз","Mail","Торр","Fox","RSS","IM","--"],
+      workspaces         = ["1","2","WWW","Муз","Mail","Торр","7","RSS","IM","--"],
       normalBorderColor  = "#dddddd",
       focusedBorderColor = "#ff0000",
       defaultGaps        = [(36,0,0,0)],

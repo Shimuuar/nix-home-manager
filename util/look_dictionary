@@ -2,7 +2,7 @@
 
 function fail() { echo $@ >&2; exit 1; }
 
-# Chec
+# Check
 [ $(sselp | wc -l) = '1'   ] || fail "look_dictionary: Multiline selection"
 [ $(sselp | wc -m) -lt 128 ] || fail "look_dictionary: Too long selection"
 
