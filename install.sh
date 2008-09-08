@@ -12,7 +12,7 @@ function install_script()
     TARGET="$2"
 
     [ -L "$TARGET" -a "$(readlink -f "$TARGET")" = "$SRC" ] && \
-	echo "\`$1' already installed" && return 0
+	echo "\`$TARGET' already installed" && return 0
     [ -e "$TARGET" ] && \
 	echo "Warning: \`$1 exists. Remove it to install." && return 1
     ln -s "$SRC" "$TARGET"
@@ -22,8 +22,10 @@ function install()
 {
     while [ ! -z "$1" ]; do
 	case "$1" in
-	    bash)   install_script bashrc.sh ~/.bashrc   ;;
-	    screen) install_script screenrc  ~/.screenrc ;;
+	    all)          install bash screen emacs            ;;
+	    bash-profile) install_script bashrc.sh ~/.profile  ;;
+	    bash)         install_script bashrc.sh ~/.bashrc   ;;
+	    screen)       install_script screenrc  ~/.screenrc ;;
 	    emacs)
 		mkdir -p ~/.emacs.d/lisp
 		install_script emacs.el ~/.emacs
@@ -50,7 +52,13 @@ function install()
 
 
 if [ ${#@} == 0 ]; then
-    install emacs bash screen
+    echo "Type install [command]"
+    echo "    all          - install bash & emacs & screen"
+    echo "    bash         - install ~/.bashrc"
+    echo "    bash-profile - install ~/.profile"
+    echo "    emacs        - install emacs config"
+    echo "    screen       - install screen config"
+    echo "    xmonad       - install XMonad configuration"
 else
     install "$@"
 fi
