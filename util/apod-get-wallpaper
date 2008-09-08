@@ -27,7 +27,7 @@ import sys
 import re
 import urllib
 from os      import system, environ
-from os.path import expanduser
+from os.path import expanduser, isfile
 from BeautifulSoup import BeautifulSoup, NavigableString
 
 ## ================================================================ ##
@@ -61,18 +61,26 @@ explanation = fmt( p[2].findAll(text=True) )
 if system('mkdir -p "%s/apod"' % DATA_HOME) :
     print>>sys.stderr, 'apod-get-wallpaper: cannot create directory'
     exit(1)
-# Download picture
-if system('wget -q "%(link)s" -O - | '
-          'convert - -resize $(xrandr | awk %(awk)s) "%(target)s"' %
-          { 'link'   : picture,
-            'awk'    : "'/\*/ {print $1}'",
-            'target' : DATA_HOME+'/apod/wallpaper', }) :
-    print>>sys.stderr, 'apod-get-wallpaper: cannot download image'
-    exit(1)
-# Write description
-f = open(DATA_HOME+'/apod/description','w')
-print>>f, title
-print>>f, copyright
-print>>f
-print>>f, explanation
-f.close()
+# Write link
+linkfile = DATA_HOME+'/link'
+if not isfile(linkfile) or open(linkfile).read().strip() != picture :
+    # Download picture
+    if system('wget -q "%(link)s" -O - | '
+              'convert - -resize $(xrandr | awk %(awk)s) "%(target)s"' %
+              { 'link'   : picture,
+                'awk'    : "'/\*/ {print $1}'",
+                'target' : DATA_HOME+'/apod/wallpaper', }) :
+        print>>sys.stderr, 'apod-get-wallpaper: cannot download image'
+        exit(1)
+    # Write link file
+    f = open(linkfile, 'w')
+    print>>f, picture
+    f.close()
+    
+    # Write description
+    f = open(DATA_HOME+'/apod/description','w')
+    print>>f, title
+    print>>f, copyright
+    print>>f
+    print>>f, explanation
+    f.close()
