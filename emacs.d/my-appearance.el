@@ -5,7 +5,8 @@
 
 
 ;; Font faces
-(set-face-foreground font-lock-comment-face "red3")
+(if (intern-soft "font-lock-comment-face")
+    (set-face-foreground (symbol-value (intern-soft "font-lock-comment-face")) "red3"))
 
 ; No startup message
 (setq inhibit-startup-message t)

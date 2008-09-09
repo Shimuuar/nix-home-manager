@@ -15,9 +15,10 @@
 (require 'my-local "my-local.el" t)
 
 ; Load files
-(require 'my-appearance)
 (require 'my-generic)
 (require 'my-text)
 (require 'my-programming)
 (require 'my-abbrevs)
+
 (require 'my-bindings)
+(require 'my-appearance)
