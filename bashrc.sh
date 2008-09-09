@@ -172,7 +172,7 @@ function hg-qdiff() {  # colored diff for queues
 function hg-prune() {  # Remove all files not under version control
     # Needed to convert to absolute filenames 
     local root=$(hg root | sed 's,/,\\/,g')
-    hg st -u -n | sed "s/^/$root\//" | xargs -d "\n" rm -rfv
+    hg st -u -n | sed "s/^/$root\//" | while read q; do rm -rfv $q; done
 }
 ## -----------------
 
