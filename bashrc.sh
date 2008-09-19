@@ -72,9 +72,10 @@ if [ "$TERM" != "dumb" ]; then
     eval "`dircolors -b`"
     alias ls='ls --color=auto'
 fi
+alias l='ls -1'
 alias ll='ls -lF'
 alias la='ls -A'
-alias l='ls -1'
+alias lla='ls -lA'
 
 # rm safety belt 
 alias rm='rm -i'
