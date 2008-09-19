@@ -11,3 +11,6 @@ escape ^]]
 
 # Show captions
 caption always
+
+# Allow multiple attach
+multiuser on
