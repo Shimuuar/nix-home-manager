@@ -127,52 +127,36 @@ alias cemacs="emacs -nw"
 ## Useful functions 
 ## ---------------------------------------------------------
 # Calculate things ([p]rint)
-function p() {
-    echo $@ | bc -l 
-}
-
+function p() {  echo $@ | bc -l;  }
 # Get word number 
-function word() {
-    awk "{ print $(echo $@ | sed -re 's/[0-9]+/$&/g; s/[0-9] /&,/g') }"
-}
-
+function word() {  awk "{ print $(echo $@ | sed -re 's/[0-9]+/$&/g; s/[0-9] /&,/g') }";  }
 # View colored source code
-function vsrc() {
-    highlight "$@" -A | $PAGER
-}
-
+function vsrc() {  highlight "$@" -A | $PAGER;  }
 # make dir and cd to it
-function mkcd() {
-    mkdir "$1" && cd "$1"
-}
-
+function mkcd() {  mkdir "$1" && cd "$1";  }
 # Repeat (shorthand for for loop) With implicit variables 
-function irep() {
-    while read i; do eval "$@" "$i"; done
-}
-    
+function irep() {  while read i; do eval "$@" "$i"; done;  }
 ## VCS shorcuts and goodies
-# Subversion 
-function svn-diff() {  # Colored diff 
-    svn diff "$@" | colordiff
-}
-function svn-gdiff() { # view diff in kompare
-    svn diff "$@" | kompare -o -
-}
-# Mercurial
-function hg-diff() {   # Colored diff 
-    hg diff "$@" | colordiff 
-}
-function hg-gdiff() {  # view diff in kompare
-    hg diff "$@" | kompare -o -
-}
-function hg-qdiff() {  # colored diff for queues
-    hg qdiff "$@" | colordiff
-}
+# Subversion
+function svn-diff()  {  svn diff "$@" | colordiff;    } # Colored diff
+function svn-gdiff() {  svn diff "$@" | kompare -o -; } # Diff in kompare
+# Mercurial  
+function hg-diff()  {  hg diff "$@" | colordiff;    } # Colored diff 
+function hg-gdiff() {  hg diff "$@" | kompare -o -; } # View diff in kompare
+function hg-qdiff() {  hg qdiff "$@" | colordiff;   } # Colored diff for queues
 function hg-prune() {  # Remove all files not under version control
     # Needed to convert to absolute filenames 
     local root=$(hg root | sed 's,/,\\/,g')
     hg st -u -n | sed "s/^/$root\//" | while read q; do rm -rfv $q; done
+}
+# Download and unzip books from librusec
+function librusecget() {
+    hrefgrep "$1" | grep /download | \
+	while read URL; do
+	    local TMP=$(mktemp)
+	    wget  "$URL" -O "$TMP" && unzip "$TMP" 
+	    rm -rf "$TMP"
+    done;
 }
 ## -----------------
 
