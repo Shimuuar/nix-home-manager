@@ -110,7 +110,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask.|.mod1Mask, xK_i  ), spawn "iceweasel")
     , ((modMask.|.mod1Mask, xK_k  ), spawn "konqueror")
     , ((modMask.|.mod1Mask, xK_w  ), spawn "kdesu wireshark")
-    , ((modMask,            xK_s  ), spawn "xterm -title scratchpad -e 'screen -d -R scratch'")
+    , ((modMask,            xK_s  ), spawn "urxvt -title scratchpad -e sh -c 'screen -d -R scratch'")
     ]
     ++
     -- Useful actions 
