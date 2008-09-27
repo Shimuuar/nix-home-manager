@@ -172,20 +172,25 @@ myLayout = onWorkspace "IM" (IM.IM (1%5) (IM.Resource "main")) $
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
-    , className =? "wesnoth"        --> doFloat
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore 
-    , resource  =? "stalonetray"    --> doIgnore
+
+-- Make list of hooks out of list of strings 
+makeHooks :: Query String -> [String] -> ManageHook -> [ManageHook]
+makeHooks query strings hook = [query =? name --> hook | name <- strings]
+
+myManageHook = composeAll $ 
+    -- Floating windows 
+    makeHooks className ["MPlayer", "XDosEmu", "feh", "Gimp", "wesnoth"] doFloat 
+    ++ -- Ignored windows 
+    makeHooks resource ["desktop_window", "kdesktop", "stalonetray"] doIgnore
+    ++ 
+    [
     -- Place some applications to particular desktops
     , className =? "Akregator"      --> doF (W.shift "RSS")
     , className =? "psi"            --> doF (W.shift "IM")
     , className =? "Sonata"         --> doF (W.shift "Муз")
     , className =? "Ktorrent"       --> doF (W.shift "Торр")
     , className =? "Iceweasel"      --> doF (W.shift "WWW")
-    --
+    -- Scratchpad hook
     , scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3)
     ] 
  
