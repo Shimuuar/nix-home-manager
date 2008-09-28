@@ -25,54 +25,19 @@ import XMonad.Util.Run
 import XMonad.Util.WorkspaceCompare
 import XMonad.Util.Loggers
 import XMonad.Util.Scratchpad
- 
+import XMonad.Util.EZConfig
+
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
-myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
-    -- launch a terminal
-    [ ((modMask.|.shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-    -- launch dmenu
-    , ((modMask,             xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
-    -- close focused window 
-    , ((modMask.|.shiftMask, xK_c     ), kill)
-    -- Rotate through the available layout algorithms
-    , ((modMask,             xK_space ), sendMessage NextLayout)
-    --  Reset the layouts on the current workspace to default
-    , ((modMask.|.shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-    -- Resize viewed windows to the correct size
-    , ((modMask,             xK_n     ), refresh)
-    -- Move focus to the next/prev window
-    , ((modMask,             xK_Tab   ), windows W.focusDown)
-    , ((modMask,             xK_Left  ), windows W.focusDown)      
-    , ((modMask,             xK_Right ), windows W.focusUp  )      
-    , ((modMask,             xK_j     ), windows W.focusDown)
-    , ((modMask,             xK_k     ), windows W.focusUp  )
-    -- Move focus to the master window
-    , ((modMask,             xK_m     ), windows W.focusMaster  )
-    -- Swap the focused window and the master window
-    , ((modMask,             xK_Return), windows W.swapMaster)
-    -- Swap the focused window with the next/prev window
-    , ((modMask.|.shiftMask, xK_j     ), windows W.swapDown  )
-    , ((modMask.|.shiftMask, xK_k     ), windows W.swapUp    )
-    -- Shrink/expand the master area
-    , ((modMask,             xK_h     ), sendMessage Shrink)
-    , ((modMask,             xK_l     ), sendMessage Expand)
-    -- Push window back into tiling
-    , ((modMask,             xK_t     ), withFocused $ windows . W.sink)
-    -- Inc/dec the number of windows in the master area
-    , ((modMask,             xK_comma ), sendMessage (IncMasterN 1))
-    , ((modMask,             xK_period), sendMessage (IncMasterN (-1)))
+myKeys conf@(XConfig {XMonad.modMask = modMask}) = 
+    M.union 
+         ( M.fromList $ [
     -- toggle the status bar gap
-    , ((modMask,             xK_b     ),
-          modifyGap (\i n -> let x = (XMonad.defaultGaps conf ++ repeat (0,0,0,0)) !! i
-                             in if n == x then (0,0,0,0) else x))
-    -- Quit xmonad
-    , ((modMask.|.shiftMask, xK_q     ), io (exitWith ExitSuccess))
-    -- Restart xmonad
-    , ((modMask,             xK_q     ),
-          broadcastMessage ReleaseResources >> restart "xmonad" True)
-    ]
+    ((modMask,             xK_b     ),
+     modifyGap (\i n -> let x = (XMonad.defaultGaps conf ++ repeat (0,0,0,0)) !! i
+                        in if n == x then (0,0,0,0) else x))
+           ]
     ++
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
@@ -86,16 +51,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     ++
-    -- MPD keybindings 
-    [ ((modMask,             xK_Page_Down ), spawn "mpc next > /dev/null")
-    , ((modMask,             xK_Page_Up   ), spawn "mpc prev > /dev/null")
-    , ((modMask,             xK_End       ), spawn "mpc toggle > /dev/null")
-    , ((modMask,             xK_Home      ), spawn "mpc stop > /dev/null")
-    , ((modMask,             xK_Insert    ), spawn "mpc play > /dev/null")
-    , ((modMask.|.shiftMask, xK_Delete    ), spawn "mpc del 0 > /dev/null")
-    , ((modMask.|.shiftMask.|.mod1Mask, xK_Delete), spawn "mpc clear > /dev/null")
+    -- MPD additional keybindings 
     -- XF86AudioLowerVolume
-    , ((0,                   0x1008ff11   ), spawn "mpc seek -10 > /dev/null")
+    [ ((0,                   0x1008ff11   ), spawn "mpc seek -10 > /dev/null")
     -- XF86AudioRaiseVolume
     , ((0,                   0x1008ff13   ), spawn "mpc seek +10 > /dev/null")
     -- XF86AudioPrev
@@ -103,23 +61,69 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- XF86Music
     , ((0,                   0x1008ff92   ), spawn "mpc random  > /dev/null")
     , ((controlMask,         0x1008ff92   ), spawn "mpc shuffle > /dev/null")
-    ]
-    ++
-    -- App shorcuts
-    [ ((modMask.|.mod1Mask, xK_e  ), spawn "emacs22")
-    , ((modMask.|.mod1Mask, xK_i  ), spawn "iceweasel")
-    , ((modMask.|.mod1Mask, xK_k  ), spawn "konqueror")
-    , ((modMask.|.mod1Mask, xK_w  ), spawn "kdesu wireshark")
-    , ((modMask,            xK_s  ), spawn "urxvt -title scratchpad -e sh -c 'screen -d -R scratch'")
-    ]
-    ++
-    -- Useful actions 
-    [ ((modMask.|.mod1Mask, xK_a  ), 
-       spawn "fmt ~/.local/share/apod/description | dzen_less")
-    , ((modMask,            xK_d  ), spawn "look_dictionary | dzen_less")
-    , ((modMask,            xK_z  ), spawn "cat ~/.xsession-errors | dzen_less -e")
-    ]
+    ] ) 
 
+    ( mkKeymap conf 
+    [ -- Quit XMonad
+      ("M-S-q"       , io (exitWith ExitSuccess))
+    -- Restart XMonad
+    , ("M-q"         , broadcastMessage ReleaseResources >> restart "xmonad" True)
+    -- Run termnal emulator 
+    , ("M-S-<Return>", spawn $ XMonad.terminal conf)
+    -- Run menu
+    , ("M-p"         , spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+    -- Close focused window 
+    , ("M-S-c"       , kill)
+    -- Rotate through the available layout algorithms
+    , ("M-<Space>"   , sendMessage NextLayout)
+    -- Reset the layouts on the current workspace to default
+    , ("M-S-<Space>" , setLayout $ XMonad.layoutHook conf)
+    -- Resize viewed windows to the correct size 
+    , ("M-n"         , refresh)
+    -- Move focus to the next/prev window
+    , ("M-<Tab>"     , windows W.focusDown)
+    , ("M-<Left>"    , windows W.focusDown)
+    , ("M-j"         , windows W.focusDown)
+    , ("M-<Right>"   , windows W.focusUp)
+    , ("M-k"         , windows W.focusUp)
+    -- Move focus to the master window
+    , ("M-m"         , windows W.focusMaster)
+    -- Swap the focused window and the master window
+    , ("M-<Return>"  , windows W.swapMaster)
+    -- Swap the focused window with the next/prev window
+    , ("M-S-j"       , windows W.swapDown)
+    , ("M-S-k"       , windows W.swapUp)
+    -- Shrink/expand the master area
+    , ("M-h"         , sendMessage Shrink)
+    , ("M-l"         , sendMessage Expand)
+    -- Push window back into tiling
+    , ("M-t"         , withFocused $ windows . W.sink)
+    -- Inc/dec the number of windows in the master area
+    , ("M-,"          , sendMessage (IncMasterN 1))
+    , ("M-."          , sendMessage (IncMasterN (-1)))
+
+    -- MPD keybindings 
+    , ("M-<Page_Down>"   , spawn "mpc next   > /dev/null")
+    , ("M-<Page_Up>"     , spawn "mpc prev   > /dev/null")
+    , ("M-<End>"         , spawn "mpc toggle > /dev/null")
+    , ("M-<Home>"        , spawn "mpc stop   > /dev/null")
+    , ("M-<Insert>"      , spawn "mpc play   > /dev/null")
+    , ("M-S-<Delete>"    , spawn "mpc del 0  > /dev/null")
+    , ("M-M1-S-<Delete>" , spawn "mpc clear  > /dev/null")
+
+    -- Applications shortcuts
+    , ("M-M1-e"  , spawn "emacs22")
+    , ("M-M1-i"  , spawn "iceweasel")
+    , ("M-M1-k"  , spawn "konqueror")
+    , ("M-M1-w"  , spawn "kdesu wireshark")
+    , ("M-s"     , spawn "urxvt -title scratchpad -e sh -c 'screen -d -R scratch'")
+
+    -- Useful action 
+    , ("M-M1-a" , spawn "fmt ~/.local/share/apod/description | dzen_less")
+    , ("M-d"    , spawn "look_dictionary | dzen_less")
+    , ("M-z"    , spawn "dzen_less -e < ~/.xsession-errors")
+    ]
+  )
  
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
@@ -183,9 +187,7 @@ myManageHook = composeAll $
     ++ -- Ignored windows 
     makeHooks resource ["desktop_window", "kdesktop", "stalonetray"] doIgnore
     ++ 
-    [
-    -- Place some applications to particular desktops
-    , className =? "Akregator"      --> doF (W.shift "RSS")
+    [ className =? "Akregator"      --> doF (W.shift "RSS")
     , className =? "psi"            --> doF (W.shift "IM")
     , className =? "Sonata"         --> doF (W.shift "Муз")
     , className =? "Ktorrent"       --> doF (W.shift "Торр")
