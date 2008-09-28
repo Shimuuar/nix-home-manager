@@ -20,6 +20,7 @@ import XMonad.Hooks.DynamicLog
 
 import qualified XMonad.Layout.IM as IM
 import XMonad.Layout.PerWorkspace
+import XMonad.Layout.Gaps
 
 import XMonad.Util.Run
 import XMonad.Util.WorkspaceCompare
@@ -30,15 +31,8 @@ import XMonad.Util.EZConfig
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
-myKeys conf@(XConfig {XMonad.modMask = modMask}) = 
-    M.union 
-         ( M.fromList $ [
-    -- toggle the status bar gap
-    ((modMask,             xK_b     ),
-     modifyGap (\i n -> let x = (XMonad.defaultGaps conf ++ repeat (0,0,0,0)) !! i
-                        in if n == x then (0,0,0,0) else x))
-           ]
-    ++
+myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.union 
+    ( M.fromList $ 
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
     [((m .|. modMask, k), windows $ f i)
@@ -116,7 +110,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
     , ("M-M1-i"  , spawn "iceweasel")
     , ("M-M1-k"  , spawn "konqueror")
     , ("M-M1-w"  , spawn "kdesu wireshark")
-    , ("M-s"     , spawn "urxvt -title scratchpad -e sh -c 'screen -d -R scratch'")
+    , ("M-s"     , spawn "urxvt -name scratchpad -e sh -c 'screen -d -R scratch'")
 
     -- Useful action 
     , ("M-M1-a" , spawn "fmt ~/.local/share/apod/description | dzen_less")
@@ -149,7 +143,8 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = onWorkspace "IM" (IM.IM (1%5) (IM.Resource "main")) $
+myLayout = gaps [(U,18*2)] $
+           onWorkspace "IM" (IM.IM (1%5) (IM.Resource "main")) $
            tiled ||| Mirror tiled ||| Full
     where
       -- default tiling algorithm partitions the screen into two panes
@@ -228,7 +223,6 @@ myConfig h = defaultConfig {
       workspaces         = ["1","2","WWW","Муз","Mail","Торр","7","RSS","IM","--"],
       normalBorderColor  = "#dddddd",
       focusedBorderColor = "#ff0000",
-      defaultGaps        = [(36,0,0,0)],
       
       -- key bindings
       keys               = myKeys,
