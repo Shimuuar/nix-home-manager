@@ -17,6 +17,7 @@ import XMonad
 import qualified XMonad.StackSet as W
 
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageHelpers
 
 import qualified XMonad.Layout.IM as IM
 import XMonad.Layout.PerWorkspace
@@ -24,8 +25,6 @@ import XMonad.Layout.Gaps
 import XMonad.Layout.NoBorders
 
 import XMonad.Util.Run
-import XMonad.Util.WorkspaceCompare
-import XMonad.Util.Loggers
 import XMonad.Util.Scratchpad
 import XMonad.Util.EZConfig
 
@@ -164,17 +163,14 @@ myLayout = smartBorders $
 -- particular program, or have a client always appear on a particular
 -- workspace.
 --
--- To find the property name associated with a program, use
--- > xprop | grep WM_CLASS
--- and click on the client you're interested in.
---
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-
 myManageHook = composeAll $ concat [
     -- Floating windows 
-    [ className =? c --> doFloat | c <- ["MPlayer", "XDosEmu", "feh", "Gimp", "wesnoth"]],
+    [ className =? c --> doFloat       | c <- ["Gimp"]],
+    [ className =? c --> doCenterFloat | c <- ["XDosEmu", "feh"]],
+    [ className =? c --> doFullFloat   | c <- ["wesnoth", "MPlayer"]],
     -- Ignored windows 
     [ resource =? c --> doIgnore | c <- ["desktop_window", "kdesktop", "stalonetray"]],
     -- Other hooks 
