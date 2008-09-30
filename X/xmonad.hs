@@ -21,6 +21,7 @@ import XMonad.Hooks.DynamicLog
 import qualified XMonad.Layout.IM as IM
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Gaps
+import XMonad.Layout.NoBorders
 
 import XMonad.Util.Run
 import XMonad.Util.WorkspaceCompare
@@ -141,10 +142,8 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- restarting (with 'mod-q') to reset your layout state to the new
 -- defaults, as xmonad preserves your old layout settings by default.
 --
--- The available layouts.  Note that each layout is separated by |||,
--- which denotes layout choice.
---
-myLayout = gaps [(U,18*2)] $
+myLayout = smartBorders $
+           gaps [(U,18*2)] $
            onWorkspace "IM" (IM.IM (1%5) (IM.Resource "main")) $
            tiled ||| Mirror tiled ||| Full
     where
