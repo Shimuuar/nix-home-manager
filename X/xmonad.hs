@@ -172,16 +172,12 @@ myLayout = smartBorders $
 -- 'className' and 'resource' are used below.
 --
 
--- Make list of hooks out of list of strings 
-makeHooks :: Query String -> [String] -> ManageHook -> [ManageHook]
-makeHooks query strings hook = [query =? name --> hook | name <- strings]
-
-myManageHook = composeAll $ 
+myManageHook = composeAll $ concat [
     -- Floating windows 
-    makeHooks className ["MPlayer", "XDosEmu", "feh", "Gimp", "wesnoth"] doFloat 
-    ++ -- Ignored windows 
-    makeHooks resource ["desktop_window", "kdesktop", "stalonetray"] doIgnore
-    ++ 
+    [ className =? c --> doFloat | c <- ["MPlayer", "XDosEmu", "feh", "Gimp", "wesnoth"]],
+    -- Ignored windows 
+    [ resource =? c --> doIgnore | c <- ["desktop_window", "kdesktop", "stalonetray"]],
+    -- Other hooks 
     [ className =? "Akregator"      --> doF (W.shift "RSS")
     , className =? "psi"            --> doF (W.shift "IM")
     , className =? "Sonata"         --> doF (W.shift "Муз")
@@ -189,7 +185,7 @@ myManageHook = composeAll $
     , className =? "Iceweasel"      --> doF (W.shift "WWW")
     -- Scratchpad hook
     , scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3)
-    ] 
+    ] ]
  
 ------------------------------------------------------------------------
 -- Status bars and logging
