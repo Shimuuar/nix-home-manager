@@ -138,19 +138,20 @@
                       "\"\"\"\n"
                       "\"\"\"\n"))
 
-(defun my-c-hooks ())
+(defun my-haskell-hooks ()
+  "Hooks specific to haskell"
+  (abbrev-mode t)
+  )
     
 
 ;; C hooks 
 (add-hook 'c-mode-hook          'my-indent-hook)
 (add-hook 'c-mode-hook          'my-comment-hooks)
 (add-hook 'c-mode-hook          'my-folding-hooks)
-(add-hook 'c-mode-hook          'my-c-hooks)
 ;; C++ hooks 
 (add-hook 'c++-mode-hook        'my-indent-hook)
 (add-hook 'c++-mode-hook        'my-comment-hooks)
 (add-hook 'c++-mode-hook        'my-folding-hooks)
-(add-hook 'c++-mode-hook        'my-c-hooks)
 ;; Python hooks 
 (add-hook 'python-mode-hook     'my-indent-hook)
 (add-hook 'python-mode-hook     'my-folding-hooks)
@@ -166,6 +167,7 @@
 (add-hook 'emacs-lisp-mode-hook 'my-comment-hooks)
 ;; Haskell hooks
 (add-hook 'haskell-mode-hook    'my-comment-hooks)
+(add-hook 'haskell-mode-hook    'my-haskell-hooks)
 ;; =================
 
 (provide 'my-programming)

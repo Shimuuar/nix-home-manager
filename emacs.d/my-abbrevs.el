@@ -93,4 +93,15 @@
     ))
 ;; =================
 
+;; =========================================================
+;; Haskell abbreviations
+;; =========================================================
+(define-abbrev-table 'haskell-mode-abbrev-table
+  '(
+    ; Import
+    ("imp"  "import"    nil 0)
+    ("ret"  "return"    nil 0)
+    ("qua"  "qualified" nil 0)
+    ))
+
 (provide 'my-abbrevs)
