@@ -16,6 +16,8 @@ import Data.Ratio ((%))
 import XMonad
 import qualified XMonad.StackSet as W
 
+import XMonad.Actions.SinkAll
+
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageHelpers
 
@@ -92,6 +94,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = let
     , ("M-l"         , sendMessage Expand)
     -- Push window back into tiling
     , ("M-t"         , withFocused $ windows . W.sink)
+    , ("M-<Down>"    , sinkAll)
     -- Inc/dec the number of windows in the master area
     , ("M-,"          , sendMessage (IncMasterN 1))
     , ("M-."          , sendMessage (IncMasterN (-1)))
