@@ -23,7 +23,7 @@ function cal_highlight()
     cal $MON $YR | cal_highlight
     
     # Current month
-    cal | cal_highlight | sed -e "s/$TODAY/^bg(white)^fg(black)&^fg()^bg()/"
+    cal | cal_highlight | sed -re "s/(^| )($TODAY)( | $)/\1^bg(white)^fg(black)\2^fg()^bg()\3/"
 
     # Next month 
     [ $MONTH -eq 12 ] && YR=$((YEAR + 1)) || YR=$YEAR
