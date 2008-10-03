@@ -130,13 +130,13 @@ alias cemacs="emacs -nw"
 # Calculate things ([p]rint)
 function p() {  echo $@ | bc -l;  }
 # Get word number 
-function word() {  awk "{ print $(echo $@ | sed -re 's/[0-9]+/$&/g; s/[0-9] /&,/g') }";  }
+function word() { awk "{ print $(echo $@ | sed -re 's/[0-9]+/$&/g; s/[0-9] /&,/g') }";  }
 # View colored source code
-function vsrc() {  highlight "$@" -A | $PAGER;  }
+function vsrc() { highlight "$@" -A | $PAGER;  }
 # make dir and cd to it
-function mkcd() {  mkdir "$1" && cd "$1";  }
+function mkcd() { mkdir -p "$1" && cd "$1";  }
 # Repeat (shorthand for for loop) With implicit variables 
-function irep() {  while read i; do eval "$@" "$i"; done;  }
+function irep() { while read i; do eval "$@" "$i"; done;  }
 ## VCS shorcuts and goodies
 # Subversion
 function svn-diff()  {  svn diff "$@" | colordiff;    } # Colored diff
