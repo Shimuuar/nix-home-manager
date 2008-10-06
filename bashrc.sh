@@ -1,3 +1,4 @@
+
 ## ~/.bashrc: executed by bash(1) for non-login shells.
 ## see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 ## for examples
@@ -79,9 +80,6 @@ alias lla='ls -lA'
 
 # rm safety belt 
 alias rm='rm -i'
-
-# Be-e-e-e-ep
-alias beep='echo -en "\a"'
 
 # cat text in different encodings
 alias catwin='iconv -f cp1251 -t utf8'
