@@ -14,3 +14,6 @@ caption always
 
 # Allow multiple attach
 multiuser on
+
+# Disable visaul bell 
+vbell off 
