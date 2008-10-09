@@ -9,7 +9,6 @@
 
 import System.Exit
 import System.IO
-import qualified System.IO.UTF8
 import qualified Data.Map as M
 import Data.Ratio ((%))
 
@@ -197,7 +196,7 @@ myLogHook h = defaultPP {
               , ppSep             = " | "
               , ppWsSep           = ""
               , ppTitle           = dzenEscape
-              , ppOutput          = System.IO.UTF8.hPutStrLn h
+              , ppOutput          = hPutStrLn h
               }
     where
       escape = concatMap (\x -> if x == '^' then "^^" else [x])
