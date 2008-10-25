@@ -111,13 +111,15 @@ alias wcl='wc -l'
 alias ?='man'
 # Make with include path
 alias maki='make -I ~/.share/make'
+# IPython with math functions
+alias mpython='ipython ~/.config/mpython.py'
 
 # apt-aliases
 alias apt-search='apt-cache search'
 alias apt-show='aptitude show'
 alias apt-source='apt-get source'
 alias aptitude-up='sudo aptitude update && sudo aptitude'
-
+# Console emacs
 alias cemacs="emacs -nw"
 ##-----------------
 
