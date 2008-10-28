@@ -22,10 +22,12 @@ function install()
 {
     while [ ! -z "$1" ]; do
 	case "$1" in
-	    all)          install bash screen emacs            ;;
+	    all)          install bash screen emacs mpython ;;
+	    
 	    bash-profile) install_script bashrc.sh ~/.profile  ;;
 	    bash)         install_script bashrc.sh ~/.bashrc   ;;
 	    screen)       install_script screenrc  ~/.screenrc ;;
+	    mpython)      install_script mpython.py ~/.config/mpython.py ;;
 	    emacs)
 		mkdir -p ~/.emacs.d/lisp
 		install_script emacs.el ~/.emacs
