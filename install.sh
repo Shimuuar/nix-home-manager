@@ -14,7 +14,7 @@ function install_script()
     [ -L "$TARGET" -a "$(readlink -f "$TARGET")" = "$SRC" ] && \
 	echo "\`$TARGET' already installed" && return 0
     [ -e "$TARGET" ] && \
-	echo "Warning: \`$1 exists. Remove it to install." && return 1
+	echo "Warning: \`$TARGET' exists. Remove it to install." && return 1
     ln -s "$SRC" "$TARGET"
 }
 
