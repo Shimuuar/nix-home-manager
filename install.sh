@@ -33,9 +33,10 @@ function install()
 		;;
 	    xmonad)
 		mkdir -p ~/.xmonad
-		install_script X/xmonad.hs   ~/.xmonad/xmonad.hs
-		install_script X/xsession    ~/.xsession
-		install_script X/Xresources  ~/.Xresources
+		install_script X/xmonad.hs    ~/.xmonad/xmonad.hs
+		install_script X/xsession     ~/.xsession
+		install_script X/Xresources   ~/.Xresources
+		install_script util/dzen_less ~/opt/bin/dzen_less 
 		;;
 	    *) echo Unknown directive "$1";;
 	esac
