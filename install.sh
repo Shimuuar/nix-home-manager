@@ -14,7 +14,7 @@ function install_script()
     [ -L "$TARGET" -a "$(readlink -f "$TARGET")" = "$SRC" ] && \
 	echo "\`$TARGET' already installed" && return 0
     [ -e "$TARGET" ] && \
-	echo "Warning: \`$1 exists. Remove it to install." && return 1
+	echo "Warning: \`$TARGET' exists. Remove it to install." && return 1
     ln -s "$SRC" "$TARGET"
 }
 
@@ -35,9 +35,11 @@ function install()
 		;;
 	    xmonad)
 		mkdir -p ~/.xmonad
-		install_script X/xmonad.hs   ~/.xmonad/xmonad.hs
-		install_script X/xsession    ~/.xsession
-		install_script X/Xresources  ~/.Xresources
+		install_script X/xmonad.hs    ~/.xmonad/xmonad.hs
+		install_script X/xsession     ~/.xsession
+		install_script X/Xresources   ~/.Xresources
+		install_script util/dzen_less ~/opt/bin/dzen_less
+		install_script util/apod-get-wallpaper ~/opt/bin/apod-get-wallpaper
 		;;
 	    *) echo Unknown directive "$1";;
 	esac

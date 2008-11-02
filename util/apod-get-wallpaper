@@ -62,7 +62,7 @@ if system('mkdir -p "%s/apod"' % DATA_HOME) :
     print>>sys.stderr, 'apod-get-wallpaper: cannot create directory'
     exit(1)
 # Write link
-linkfile = DATA_HOME+'/link'
+linkfile = DATA_HOME+'/apod/link'
 if not isfile(linkfile) or open(linkfile).read().strip() != picture :
     # Download picture
     if system('wget -q "%(link)s" -O - | '

@@ -108,11 +108,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = let
     , ("M-M1-S-<Delete>" , spawn "mpc clear  > /dev/null")
 
     -- Applications shortcuts
-    , ("M-M1-e"  , spawn "emacs22")
+    , ("M-M1-e"  , spawn "emacs")
     , ("M-M1-i"  , spawn "iceweasel")
     , ("M-M1-k"  , spawn "konqueror")
     , ("M-M1-w"  , spawn "kdesu wireshark")
-    , ("M-s"     , spawn "urxvt -name scratchpad -e sh -c 'screen -d -R scratch'")
+    , ("M-s"     , spawn "xterm -name scratchpad -e sh -c 'screen -d -R scratch'")
 
     -- Useful action 
     , ("M-M1-a" , spawn "fmt ~/.local/share/apod/description | dzen_less")
@@ -210,7 +210,7 @@ main = do
 
 myConfig h = defaultConfig {
       -- simple stuff
-      terminal           = "urxvt",
+      terminal           = "my-terminal",  -- Supposed to be symlink to actual terminal emulator
       modMask            = mod4Mask,
       focusFollowsMouse  = True,
       borderWidth        = 1,
