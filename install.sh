@@ -36,7 +36,8 @@ function install()
 		install_script X/xmonad.hs    ~/.xmonad/xmonad.hs
 		install_script X/xsession     ~/.xsession
 		install_script X/Xresources   ~/.Xresources
-		install_script util/dzen_less ~/opt/bin/dzen_less 
+		install_script util/dzen_less ~/opt/bin/dzen_less
+		install_script util/apod-get-wallpaper ~/opt/bin/apod-get-wallpaper
 		;;
 	    *) echo Unknown directive "$1";;
 	esac
