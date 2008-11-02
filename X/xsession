@@ -5,7 +5,7 @@
 ## ================================================================
 # Set xkb options
 setxkbmap \
-    -option -option "grp_led:scroll,grp:shifts_toggle,compose:menu" \
+    -option -option "grp_led:scroll,grp:shifts_toggle,compose:menu,ctrl:nocaps" \
     -model pc104 -layout us,ru -variant winkeys 
 export GTK_IM_MODULE=xim                   # Force GTK to accept Composed keys
 
