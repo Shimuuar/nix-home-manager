@@ -29,7 +29,19 @@ import XMonad.Util.Run
 import XMonad.Util.Scratchpad
 import XMonad.Util.EZConfig
 
+import XMonad.Prompt
 
+----------------------------------------------------------------
+
+-- | Data for XPrompt 
+data XPDict = XPDict
+instance XPrompt XPDict where
+    showXPrompt _ = "Look in dictionary: "
+
+-- | Escapes all shell metacharacters.
+shellEscape :: String -> String 
+shellEscape = concatMap (\x -> if x `elem` " ;$!@#%&|<>" then '\\':[x] else [x])
+ 
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -113,11 +125,14 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = let
     , ("M-M1-k"  , spawn "konqueror")
     , ("M-M1-w"  , spawn "kdesu wireshark")
     , ("M-s"     , spawn "xterm -name scratchpad -e sh -c 'screen -d -R scratch'")
-
     -- Useful action 
     , ("M-M1-a" , spawn "fmt ~/.local/share/apod/description | dzen_less")
     , ("M-d"    , spawn "look_dictionary | dzen_less")
+    , ("M-S-d"  , mkXPrompt XPDict myXPconfig (\x -> return []) 
+       ((\x -> spawn $ "(echo "++x++"; dict "++x++") | dzen_less") . shellEscape)
+      )
     , ("M-z"    , spawn "dzen_less -e < ~/.xsession-errors")
+    , ("M-i"    , spawn "iceweasel \"$(xsel)\"")
     ]
   )
   
@@ -201,6 +216,11 @@ myLogHook h = defaultPP {
     where
       escape = concatMap (\x -> if x == '^' then "^^" else [x])
 
+------------------------------------------------------------------------
+-- XPromt settings 
+myXPconfig = defaultXPConfig { 
+               font = "-xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*" 
+             }
 
 ------------------------------------------------------------------------
 -- Run xmonad
