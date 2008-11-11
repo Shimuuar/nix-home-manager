@@ -113,6 +113,8 @@ alias ?='man'
 alias maki='make -I ~/.share/make'
 # IPython with math functions
 alias mpython='ipython ~/.config/mpython.py'
+# Configure && build && install cabalized haskell package
+alias ghc-cbi='runghc Setup.*hs configure --user --prefix=$HOME/opt && runghc Setup.*hs build && runghc Setup.*hs install'
 
 # apt-aliases
 alias apt-search='apt-cache search'
