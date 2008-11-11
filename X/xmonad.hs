@@ -194,11 +194,11 @@ myManageHook = composeAll $ concat [
     [ className =? "Akregator"      --> doF (W.shift "RSS")
     , className =? "psi"            --> doF (W.shift "IM")
     , className =? "Sonata"         --> doF (W.shift "Муз")
-    , className =? "Ktorrent"       --> doF (W.shift "Торр")
-    , className =? "Iceweasel"      --> doF (W.shift "WWW")
+    , className =? "Ktorrent"       --> doF (W.shift "Торр") ],
+    [ className =? c --> (doF $ W.shift "WWW") | c <- ["Iceweasel", "Firefox-bin"]],
     -- Scratchpad hook
-    , scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3)
-    ] ]
+    [ scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3) ]
+    ]
  
 ------------------------------------------------------------------------
 -- Status bars and logging
