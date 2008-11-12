@@ -195,7 +195,7 @@ myManageHook = composeAll $ concat [
     , className =? "psi"            --> doF (W.shift "IM")
     , className =? "Sonata"         --> doF (W.shift "Муз")
     , className =? "Ktorrent"       --> doF (W.shift "Торр") ],
-    [ className =? c --> (doF $ W.shift "WWW") | c <- ["Iceweasel", "Firefox-bin"]],
+    [ className =? c --> (doF $ W.shift "WWW") | c <- ["Iceweasel", "Firefox-bin", "Firefox"]],
     -- Scratchpad hook
     [ scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3) ]
     ]
