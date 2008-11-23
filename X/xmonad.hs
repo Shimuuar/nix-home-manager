@@ -7,11 +7,15 @@
 -- Normally, you'd only override those defaults you care about.
 --
 
-import System.Exit
-import System.IO
+import Codec.Binary.UTF8.String
+
 import qualified Data.Map as M
 import Data.Ratio ((%))
 
+import System.Exit
+import System.IO
+
+-- XMonad part ----------------
 import XMonad
 import qualified XMonad.StackSet as W
 
@@ -36,12 +40,20 @@ import XMonad.Prompt
 -- | Data for XPrompt 
 data XPDict = XPDict
 instance XPrompt XPDict where
-    showXPrompt _ = "Look in dictionary: "
+    showXPrompt = const "Посмотреть слово: "
+-- | Look wod in dictionary 
+lookupDictionary :: XPConfig -> X ()
+lookupDictionary config = mkXPrompt XPDict config (return . const []) 
+    ((\x -> spawnU $ "(echo "++x++"; dict "++x++") | dzen_less") . shellEscape)
+
 
 -- | Escapes all shell metacharacters.
 shellEscape :: String -> String 
 shellEscape = concatMap (\x -> if x `elem` " ;$!@#%&|<>" then '\\':[x] else [x])
  
+-- | Unicode safe spawn 
+spawnU :: MonadIO m => String -> m ()
+spawnU = spawn . encodeString
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -128,9 +140,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = let
     -- Useful action 
     , ("M-M1-a" , spawn "fmt ~/.local/share/apod/description | dzen_less")
     , ("M-d"    , spawn "look_dictionary | dzen_less")
-    , ("M-S-d"  , mkXPrompt XPDict myXPconfig (\x -> return []) 
-       ((\x -> spawn $ "(echo "++x++"; dict "++x++") | dzen_less") . shellEscape)
-      )
+    , ("M-S-d"  , lookupDictionary myXPconfig )
     , ("M-z"    , spawn "dzen_less -e < ~/.xsession-errors")
     , ("M-i"    , spawn "iceweasel \"$(xsel)\"")
     ]
