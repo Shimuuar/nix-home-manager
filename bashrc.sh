@@ -135,8 +135,10 @@ function p() {  echo $@ | bc -l;  }
 function word() { awk "{ print $(echo $@ | sed -re 's/[0-9]+/$&/g; s/[0-9] /&,/g') }";  }
 # View colored source code
 function vsrc() { highlight "$@" -A | $PAGER;  }
-# make dir and cd to it
+# Make dir and cd to it
 function mkcd() { mkdir -p "$1" && cd "$1";  }
+# Unzip all zip files
+function unzipall() { for i in "$@"; do unzip "$i"; done; }
 # Repeat (shorthand for for loop) With implicit variables 
 function irep() { while read i; do eval "$@" "$i"; done;  }
 ## VCS shorcuts and goodies
