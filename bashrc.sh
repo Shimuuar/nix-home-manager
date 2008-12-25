@@ -3,6 +3,12 @@
 ## see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 ## for examples
 
+## ---------------------------------------------------------
+## Pathes
+## ---------------------------------------------------------
+export PATH=$PATH:$HOME/opt/bin
+## ----------------
+
 ## If not running interactively, don't do anything:
 [ -z "$PS1" ] && return
 ## Use custom settings (this file is intended for use on multiple boxes)
@@ -47,6 +53,7 @@ function truncate_pwd
     if [ ${#newPWD} -gt $pwdmaxlen ]; then
         newPWD=".+${newPWD: -$pwdmaxlen}"
     fi
+
 }
 
 MY_NAME=${MY_NAME-$(whoami)}
@@ -170,7 +177,5 @@ function librusecget() {
 ## Fortunes (pleasant reading)
 ## ---------------------------------------------------------
 if which fortune &> /dev/null; then 
-    echo ; echo 
-    fortune
-    echo ; echo 
+    echo ; echo ; fortune ; echo ; echo 
 fi
