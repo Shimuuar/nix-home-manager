@@ -45,12 +45,9 @@
   (flyspell-mode t)
   )
 
-; Hooks for LaTeX
-(defun my-tex-hooks()
-  (my-base-text-hooks)
-  ; switch TeX quotes
-  (local-set-key "\C-cq" 'my-switch-tex-quotes)
-  ; TeX template 
+; TeX template
+(defun my-insert-tex-template()
+  (interactive)
   (my-insert-if-empty "\\documentclass[a4paper]{article}\n"
                       "\n"
                       "\\usepackage[russian]{babel}\n"
@@ -65,6 +62,13 @@
                       "\n"
                       "\\begin{document}\n"
                       "\\end{document}\n")
+  )
+
+; Hooks for LaTeX
+(defun my-tex-hooks()
+  (my-base-text-hooks)
+  ; switch TeX quotes
+  (local-set-key "\C-cq" 'my-switch-tex-quotes)
   ; Switch dictionaries in buffer
   (local-set-key (kbd "C-c C-a")
                  '(lambda () (interactive)
