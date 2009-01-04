@@ -170,6 +170,12 @@ function librusecget() {
 	    rm -rf "$TMP"
     done;
 }
+# Generate pdf from LaTeX file. DVI file and all auxillary TeX files are created in process.
+function tex2pdf() {
+    # LaTeX should be run twice for correct creation of ToC (if any)
+    latex "$1"; latex "$1";
+    dvips "${1%.tex}.dvi" -o - | ps2pdf - "${1%.tex}.pdf"
+}
 ## -----------------
 
 
