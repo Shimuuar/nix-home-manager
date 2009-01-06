@@ -176,6 +176,16 @@ function tex2pdf() {
     latex "$1"; latex "$1";
     dvips "${1%.tex}.dvi" -o - | ps2pdf - "${1%.tex}.pdf"
 }
+# Functionn to fetch and unpack gzipped tarball
+function gettar() {
+    cd $(wget "$1" -O - | tee $(expr match "$1" '.*/\([^/]*\)') | tar xzvf - | (head -1 ; cat > /dev/null))
+}
+# Function to fetch and unpack gzipped tarball (without leaving tarball behind)
+function gettarc() {
+    cd $(wget "$1" -O - | tar xzvf - | (head -1 ; cat > /dev/null))
+}
+#
+
 ## -----------------
 
 
