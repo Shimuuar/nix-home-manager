@@ -22,15 +22,36 @@
 <Multi_key> <quotedbl> <greater> 	: "”"   U201d # RIGHT DOUBLE QUOTATION MARK
 <Multi_key> <comma> <quotedbl>   	: "„"   U201e # DOUBLE LOW-9 QUOTATION MARK
 <Multi_key> <quotedbl> <comma>   	: "„"   U201e # DOUBLE LOW-9 QUOTATION MARK
-
 # Dashes
 <Multi_key> <minus> <period>            : "–"   U2013 # EN DASH
 <Multi_key> <minus> <minus>             : "—"   U2014 # EM DASH
-
 # Punctuation
 <Multi_key> <exclam> <exclam>    	: "¡"   exclamdown # INVERTED EXCLAMATION MARK
 <Multi_key> <question> <question> 	: "¿"   questiondown # INVERTED QUESTION MARK
-<Multi_key> <period> <period> <preiod>  : "…"   ellipsis
+# Spaces
+<Multi_key> <space> <space>      	: " "   nobreakspace # NO-BREAK SPACE
+<Multi_key> <space> <period>     	: " "   U2008 # PUNCTUATION SPACE
+# Miscelania 
+<Multi_key> <o> <c>              	: "©"   copyright # COPYRIGHT SIGN
+<Multi_key> <o> <r>              	: "®"   registered # REGISTERED SIGN
+<Multi_key> <t> <m>                     : "™"   U2122 # TRADE MARK SIGN
+<Multi_key> <s> <o>              	: "§"   section # SECTION SIGN
+<Multi_key> <o> <s>              	: "§"   section # SECTION SIGN
+
+
+################################################################
+## Special letters
+################################################################
+# Letters ###################
+# Letters Ѣѣ
+<Multi_key> <Cyrillic_hardsign>         : "ѣ" 
+<Multi_key> <Cyrillic_HARDSIGN>         : "Ѣ" 
+#<Multi_key>
+# Ligatures
+<Multi_key> <o> <e>              	: "œ"   oe # LATIN SMALL LIGATURE OE
+<Multi_key> <O> <E>              	: "Œ"   OE # LATIN CAPITAL LIGATURE OE
+<Multi_key> <a> <e>              	: "æ"   ae # LATIN SMALL LETTER AE
+<Multi_key> <A> <E>              	: "Æ"   AE # LATIN CAPITAL LETTER AE
 
 ################################################################
 ## Math symbols 
@@ -55,20 +76,20 @@
 <Multi_key> <equal> <greater> 		: "⇒"   U21D2 # RIGHTWARDS DOUBLE ARROW
 <Multi_key> <less> <greater> <equal> 	: "⇔"   U21D4 # LEFT RIGHT DOUBLE ARROW
 <Multi_key> <equal> <less> <greater> 	: "⇔"   U21D4 # LEFT RIGHT DOUBLE ARROW
+# Quantors
+<Multi_key> <0> <slash>                 : "∅" U2205 # empty set
+<Multi_key> <slash> <0>                 : "∅" U2205 # empty set
+<Multi_key> <A> <A>                     : "∀" U2200 # forall
+<Multi_key> <E> <E>                     : "∃" U2203 # there exists
 # Plus minus & other 
 <Multi_key> <plus> <minus>       	: "±"   plusminus # PLUS-MINUS SIGN
 <Multi_key> <minus> <plus>       	: "±"   plusminus # PLUS-MINUS SIGN
 <Multi_key> <period> <period>    	: "·"   periodcentered # MIDDLE DOT
 <Multi_key> <percent> <o>        	: "‰"   U2030     # PER MILLE SIGN
 <Multi_key> <o> <o>              	: "°"   degree    # DEGREE SIGN
-# Miscelania 
-<Multi_key> <o> <c>              	: "©"   copyright # COPYRIGHT SIGN
-<Multi_key> <o> <r>              	: "®"   registered # REGISTERED SIGN
-<Multi_key> <t> <m>                     : "™"   U2122 # TRADE MARK SIGN
+# Another keys
+<Multi_key> <8> <8> : "∞" U221E # infinity
 
-#
-<Multi_key> <s> <o>              	: "§"   section # SECTION SIGN
-<Multi_key> <o> <s>              	: "§"   section # SECTION SIGN
 
 ################################################################
 ## Greek alphabet
@@ -100,9 +121,6 @@
 
 ############################################################
 
-# Spaces
-#<Multi_key> <space> <space>      	: " "   nobreakspace # NO-BREAK SPACE
-#<Multi_key> <space> <period>     	: " "   U2008 # PUNCTUATION SPACE
 
 
 #<Multi_key> <period> <greater>   	: "›"   U203a # SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
@@ -116,10 +134,6 @@
 #<Multi_key> <minus> <D>          	: "Đ"   Dstroke # LATIN CAPITAL LETTER D WITH STROKE
 #<Multi_key> <s> <s>              	: "ß"   ssharp # LATIN SMALL LETTER SHARP S
 
-#<Multi_key> <o> <e>              	: "œ"   oe # LATIN SMALL LIGATURE OE
-#<Multi_key> <O> <E>              	: "Œ"   OE # LATIN CAPITAL LIGATURE OE
-#<Multi_key> <a> <e>              	: "æ"   ae # LATIN SMALL LETTER AE
-#<Multi_key> <A> <E>              	: "Æ"   AE # LATIN CAPITAL LETTER AE
 
 
 # Quotation marks
