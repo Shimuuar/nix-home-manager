@@ -21,12 +21,12 @@ import qualified XMonad.StackSet as W
 
 import XMonad.Actions.SinkAll
 
-import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.ManageDocks
 
 import qualified XMonad.Layout.IM as IM
 import XMonad.Layout.PerWorkspace
-import XMonad.Layout.Gaps
 import XMonad.Layout.NoBorders
 
 import XMonad.Util.Run
@@ -169,7 +169,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- defaults, as xmonad preserves your old layout settings by default.
 --
 myLayout = smartBorders $
-           gaps [(U,18*2)] $
+           ewmhDesktopsLayout $ avoidStruts $ 
            onWorkspace "IM" (IM.IM (1%5) (IM.Resource "main")) $
            tiled ||| Mirror tiled ||| Full
     where
@@ -184,7 +184,7 @@ myLayout = smartBorders $
  
 ------------------------------------------------------------------------
 -- Window rules:
- 
+-- 
 -- Execute arbitrary actions and WindowSet manipulations when managing
 -- a new window. You can use this to, for example, always float a
 -- particular program, or have a client always appear on a particular
@@ -199,32 +199,21 @@ myManageHook = composeAll $ concat [
     [ className =? c --> doCenterFloat | c <- ["XDosEmu", "feh"]],
     [ className =? c --> doFullFloat   | c <- ["wesnoth", "MPlayer"]],
     -- Ignored windows 
-    [ resource =? c --> doIgnore | c <- ["desktop_window", "kdesktop", "stalonetray"]],
+    [ resource =? c --> doIgnore       | c <- ["desktop_window", "kdesktop"]],
+    -- ignore Kicker and float kicker's calendar
+    [ (className =? "Kicker" <&&> title =? "kicker")   --> doIgnore 
+    , (className =? "Kicker" <&&> title =? "Calendar") --> doFloat ],
     -- Other hooks 
     [ className =? "Akregator"      --> doF (W.shift "RSS")
     , className =? "psi"            --> doF (W.shift "IM")
     , className =? "Sonata"         --> doF (W.shift "Муз")
     , className =? "Ktorrent"       --> doF (W.shift "Торр") ],
-    [ className =? c --> (doF $ W.shift "WWW") | c <- ["Iceweasel", "Firefox-bin", "Firefox"]],
+    [ className =? c --> (doF $ W.shift "WWW") 
+                | c <- ["Iceweasel", "Firefox-bin", "Firefox"]],
     -- Scratchpad hook
     [ scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3) ]
     ]
  
-------------------------------------------------------------------------
--- Status bars and logging
-myLogHook h = defaultPP { 
-                ppCurrent         = wrap " ^bg(blue)^fg(#eee)" "^fg()^bg()"
-              , ppVisible         = wrap "<" ">"
-              , ppHidden          = wrap " " ""
-              , ppHiddenNoWindows = wrap " " ""
-              , ppUrgent          = wrap "@" "@"
-              , ppSep             = " | "
-              , ppWsSep           = ""
-              , ppTitle           = dzenEscape
-              , ppOutput          = hPutStrLn h
-              }
-    where
-      escape = concatMap (\x -> if x == '^' then "^^" else [x])
 
 ------------------------------------------------------------------------
 -- XPromt settings 
@@ -232,13 +221,10 @@ myXPconfig = defaultXPConfig {
                font = "-xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*" 
              }
 
-------------------------------------------------------------------------
--- Run xmonad
-main = do 
-  dzenh <- spawnPipe "dzen2 -ta l -y 18 -e ''"
-  xmonad $ myConfig dzenh
 
-myConfig h = defaultConfig {
+----------------------------------------------------------------
+-- XMonad config
+myConfig = defaultConfig {
       -- simple stuff
       terminal           = "my-terminal",  -- Supposed to be symlink to actual terminal emulator
       modMask            = mod4Mask,
@@ -247,13 +233,16 @@ myConfig h = defaultConfig {
       workspaces         = ["1","2","WWW","Муз","Mail","Торр","7","RSS","IM","--"],
       normalBorderColor  = "#dddddd",
       focusedBorderColor = "#ff0000",
-      
       -- key bindings
       keys               = myKeys,
       mouseBindings      = myMouseBindings,
-      
       -- hooks, layouts
       layoutHook         = myLayout,
       manageHook         = myManageHook,
-      logHook            = dynamicLogWithPP $ myLogHook h
+      logHook            = ewmhDesktopsLogHook -- dynamicLogWithPP $ myLogHook h
       }
+
+
+------------------------------------------------------------------------
+-- Run xmonad
+main = xmonad myConfig
