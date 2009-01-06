@@ -1,4 +1,3 @@
-
 ## ~/.bashrc: executed by bash(1) for non-login shells.
 ## see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 ## for examples
@@ -120,8 +119,6 @@ alias ?='man'
 alias maki='make -I ~/.share/make'
 # IPython with math functions
 alias mpython='ipython ~/.config/mpython.py'
-# Configure && build && install cabalized haskell package
-alias ghc-cbi='runghc Setup.*hs configure --user --prefix=$HOME/opt && runghc Setup.*hs build && runghc Setup.*hs install'
 
 # apt-aliases
 alias apt-search='apt-cache search'
@@ -130,6 +127,13 @@ alias apt-source='apt-get source'
 alias aptitude-up='sudo aptitude update && sudo aptitude'
 # Console emacs
 alias cemacs="emacs -nw"
+
+# Configure/build/install haskell program
+alias ghc-c="runghc Setup.*hs configure --user --prefix=$HOME/opt/haskell"
+alias ghc-b="runghc Setup.*hs build"
+alias ghc-i="runghc Setup.*hs install"
+alias ghc-h="runghc Setup.*hs haddock"
+alias ghc-cbi="ghc-c && ghc-b && ghc-i"
 ##-----------------
 
 
@@ -184,8 +188,6 @@ function gettar() {
 function gettarc() {
     cd $(wget "$1" -O - | tar xzvf - | (head -1 ; cat > /dev/null))
 }
-#
-
 ## -----------------
 
 
