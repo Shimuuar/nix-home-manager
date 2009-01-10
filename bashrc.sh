@@ -1,3 +1,4 @@
+
 ## ~/.bashrc: executed by bash(1) for non-login shells.
 ## see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 ## for examples
@@ -5,7 +6,8 @@
 ## ---------------------------------------------------------
 ## Pathes
 ## ---------------------------------------------------------
-export PATH=$PATH:$HOME/opt/bin
+export PATH=$PATH:${HOME}/opt/bin
+export PYTHONPATH=${HOME}/opt/python/lib/python2.5/site-packages
 ## ----------------
 
 ## If not running interactively, don't do anything:
@@ -134,6 +136,9 @@ alias ghc-b="runghc Setup.*hs build"
 alias ghc-i="runghc Setup.*hs install"
 alias ghc-h="runghc Setup.*hs haddock"
 alias ghc-cbi="ghc-c && ghc-b && ghc-i"
+
+# Conpigure and build python packages
+alias python-setup="[ -f setup.py ] && python setup.py build && python setup.py install --prefix=${HOME}/opt/python"
 ##-----------------
 
 
