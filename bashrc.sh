@@ -7,7 +7,7 @@
 ## Pathes
 ## ---------------------------------------------------------
 export PATH=$PATH:${HOME}/opt/bin
-export PYTHONPATH=${HOME}/opt/python/lib/python2.5/site-packages
+export PYTHONPATH=${HOME}/opt/python/lib/python$(python -V 2>&1 | egrep -o '2\.[0-9]')/site-packages
 ## ----------------
 
 ## If not running interactively, don't do anything:
