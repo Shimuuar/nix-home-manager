@@ -27,7 +27,7 @@ function install()
 	    bash-profile) install_script bashrc.sh ~/.profile  ;;
 	    bash)         install_script bashrc.sh ~/.bashrc   ;;
 	    screen)       install_script screenrc  ~/.screenrc ;;
-	    mpython)      install_script mpython.py ~/.config/mpython.py ;;
+	    mpython)      mkdir -p ~/.config && install_script mpython.py ~/.config/mpython.py ;;
 	    emacs)
 		mkdir -p ~/.emacs.d/lisp
 		install_script emacs.el ~/.emacs
