@@ -193,6 +193,18 @@ function gettar() {
 function gettarc() {
     cd $(wget "$1" -O - | tar xzvf - | (head -1 ; cat > /dev/null))
 }
+# Download and unpack ZIP file
+function getzip() {
+    local name=$(expr match "$1" '.*/\([^/]*\)')
+    wget -q "$1" -O "$name"
+    unzip "$name"
+}
+# Download and unpack ZIP file without leaving it behind
+function getzipc() {
+    local TMP=$(mktemp)    || exit 1
+    wget -q "$1" -O "$TMP" || (rm -f "$TMP"; exit 1)
+    unzip "$TMP"           || (rm -f "$TMP"; exit 1)
+}
 ## -----------------
 
 
