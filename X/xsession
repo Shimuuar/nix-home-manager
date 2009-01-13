@@ -18,9 +18,9 @@ export GTK_IM_MODULE=xim                   # Force GTK to accept Composed keys
 ## ================================================================
 xsetroot -solid black
 WALLPAPER=${HOME}/.local/share/apod/wallpaper
-[ -f $WALLPAPER ] && display -backdrop -window root $WALLPAPER
+[ -f $WALLPAPER ] && display -backdrop -window root $WALLPAPER &
 # Try to download wallpaper
-ntm-wait && (apod-get-wallpaper ; display -backdrop -window root $WALLPAPER)
+ntm-wait && (apod-get-wallpaper ; display -backdrop -window root $WALLPAPER)&
 
 
 ## ================================================================
