@@ -24,6 +24,7 @@ def wait4nm(timeout) :
     nm = bus.get_object('org.freedesktop.NetworkManager', '/org/freedesktop/NetworkManager')
     while timeout > 0 :
         if nm.state() == NM_STATE_CONNECTED : return True
+        sleep(1)
         timeout -= 1
     return False
 
@@ -35,4 +36,5 @@ try :
         exit(1)
 except ValueError :
     usage()
-
+except KeyboardInterrupt :
+    pass
