@@ -134,6 +134,7 @@ alias cemacs="emacs -nw"
 alias ghc-c="runghc Setup.*hs configure --user --prefix=$HOME/opt/haskell"
 alias ghc-b="runghc Setup.*hs build"
 alias ghc-i="runghc Setup.*hs install"
+alias ghc-cl="runghc Setup.*hs clean"
 alias ghc-h="runghc Setup.*hs haddock"
 alias ghc-cbi="ghc-c && ghc-b && ghc-i"
 
