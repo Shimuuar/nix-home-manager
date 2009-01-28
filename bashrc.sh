@@ -173,12 +173,7 @@ function hg-prune() {  # Remove all files not under version control
 }
 # Download and unzip books from librusec
 function librusecget() {
-    hrefgrep "$1" | grep /download | \
-	while read URL; do
-	    local TMP=$(mktemp)
-	    wget  "$URL" -O "$TMP" && unzip "$TMP" 
-	    rm -rf "$TMP"
-    done;
+    hrefgrep "$1" | grep /download | while read URL; do getzipc "$URL"; done
 }
 # Generate pdf from LaTeX file. DVI file and all auxillary TeX files are created in process.
 function tex2pdf() {
