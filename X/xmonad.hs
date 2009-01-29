@@ -58,23 +58,9 @@ spawnU = spawn . encodeString
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
-myKeys conf@(XConfig {XMonad.modMask = modMask}) = let
-    upperKeys = ["1","2","3","4","5","6","7","8","9","0","-","="]
- in M.union 
-    ( M.fromList $ 
-    -- MPD additional keybindings 
-    -- XF86AudioLowerVolume
-    [ ((0,                   0x1008ff11   ), spawn "mpc seek -10 > /dev/null")
-    -- XF86AudioRaiseVolume
-    , ((0,                   0x1008ff13   ), spawn "mpc seek +10 > /dev/null")
-    -- XF86AudioPrev
-    , ((0,                   0x1008ff16   ), spawn "mpc repeat > /dev/null")
-    -- XF86Music
-    , ((0,                   0x1008ff92   ), spawn "mpc random  > /dev/null")
-    , ((controlMask,         0x1008ff92   ), spawn "mpc shuffle > /dev/null")
-    ] ) 
-
-    ( mkKeymap conf $
+myKeys conf@(XConfig {XMonad.modMask = modMask}) = 
+  let upperKeys = ["1","2","3","4","5","6","7","8","9","0","-","="]
+  in mkKeymap conf $
     -- Switch to workspace 
     [ ("M-"   ++ key, windows $ W.greedyView ws) |
       (key,ws) <- zip upperKeys (XMonad.workspaces conf) ]
@@ -144,7 +130,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = let
     , ("M-z"    , spawn "dzen_less -e < ~/.xsession-errors")
     , ("M-i"    , spawn "iceweasel \"$(xsel)\"")
     ]
-  )
   
  
 ------------------------------------------------------------------------
@@ -199,7 +184,8 @@ myManageHook = composeAll $ concat [
     [ className =? c --> doCenterFloat | c <- ["XDosEmu", "feh"]],
     [ className =? c --> doFullFloat   | c <- ["wesnoth", "MPlayer"]],
     -- Ignored windows 
-    [ resource =? c --> doIgnore       | c <- ["desktop_window", "kdesktop"]],
+    [ className =? c --> doIgnore       | c <- ["stalonetray", "trayer", "fbpanel", "xfce4-panel", "Xfce4-panel"]],
+    [ resource  =? c --> doIgnore       | c <- ["desktop_window", "kdesktop"]],
     -- ignore Kicker and float kicker's calendar
     [ (className =? "Kicker" <&&> title =? "kicker")   --> doIgnore 
     , (className =? "Kicker" <&&> title =? "Calendar") --> doFloat ],
