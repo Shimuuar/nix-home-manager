@@ -144,6 +144,10 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask, button3), (\w -> focus w >> mouseResizeWindow w))
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
+
+------------------------------------------------------------------------
+-- Events:
+myHandleEventHook = ewmhDesktopsEventHook
  
 ------------------------------------------------------------------------
 -- Layouts:
@@ -154,7 +158,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- defaults, as xmonad preserves your old layout settings by default.
 --
 myLayout = smartBorders $
-           ewmhDesktopsLayout $ avoidStruts $ 
+           avoidStruts  $ 
            onWorkspace "IM" (IM.IM (1%5) (IM.Resource "main")) $
            tiled ||| Mirror tiled ||| Full
     where
@@ -223,9 +227,10 @@ myConfig = defaultConfig {
       keys               = myKeys,
       mouseBindings      = myMouseBindings,
       -- hooks, layouts
+      handleEventHook    = myHandleEventHook,
       layoutHook         = myLayout,
       manageHook         = myManageHook,
-      logHook            = ewmhDesktopsLogHook -- dynamicLogWithPP $ myLogHook h
+      logHook            = ewmhDesktopsLogHook
       }
 
 
