@@ -19,7 +19,7 @@ import System.IO
 import XMonad
 import qualified XMonad.StackSet as W
 
-import XMonad.Actions.SinkAll
+import XMonad.Actions.Submap
 
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
@@ -58,19 +58,30 @@ spawnU = spawn . encodeString
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
-myKeys conf@(XConfig {XMonad.modMask = modMask}) = 
+myKeys conf = 
   let upperKeys = ["1","2","3","4","5","6","7","8","9","0","-","="]
+      -- Make pair of move/shift to workspace keybindings
+      makeShiftPair :: String -> (String, String) -> [(String, X())]
+      makeShiftPair p (k, name) = [ (p++k,       windows $ W.greedyView name)
+                                  , (p++"S-"++k, windows $ W.shift name) ]
   in mkKeymap conf $
-    -- Switch to workspace 
-    [ ("M-"   ++ key, windows $ W.greedyView ws) |
-      (key,ws) <- zip upperKeys (XMonad.workspaces conf) ]
-    ++ 
-    -- Move window to workspace
-    [ ("M-S-" ++ key, windows $ W.shift ws) |
-      (key,ws) <- zip upperKeys (XMonad.workspaces conf) ]
+    -- Move/switch to workspace
+    ((zip upperKeys $ take 10 $ XMonad.workspaces conf) >>= makeShiftPair "M-")
     ++
-    [ -- Quit XMonad
-      ("M-S-q"       , io (exitWith ExitSuccess))
+    -- More move/switch to workspace
+    [ ("M-w", windows $ W.greedyView "WWW")
+    , ("M-a", submap $ mkKeymap conf $ 
+            [ ("w", "WWW")
+            , ("r", "RSS")
+            , ("m", "Mail")
+            , ("i", "IM")
+            , ("t", "Torrent")
+            , ("a", "Audio")
+            , ("x", "Media")
+            ] >>= makeShiftPair ""
+      )
+    -- Quit XMonad
+    , ("M-S-q"       , io (exitWith ExitSuccess))
     -- Restart XMonad
     , ("M-q"         , broadcastMessage ReleaseResources >> restart "xmonad" True)
     -- Run termnal emulator 
@@ -103,7 +114,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
     , ("M-l"         , sendMessage Expand)
     -- Push window back into tiling
     , ("M-t"         , withFocused $ windows . W.sink)
-    , ("M-<Down>"    , sinkAll)
     -- Inc/dec the number of windows in the master area
     , ("M-,"          , sendMessage (IncMasterN 1))
     , ("M-."          , sendMessage (IncMasterN (-1)))
@@ -120,15 +130,16 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
     -- Applications shortcuts
     , ("M-M1-e"  , spawn "emacs")
     , ("M-M1-i"  , spawn "iceweasel")
+    , ("M-i"     , spawn "iceweasel \"$(xsel)\"")
     , ("M-M1-k"  , spawn "konqueror")
     , ("M-M1-w"  , spawn "kdesu wireshark")
-    , ("M-s"     , spawn "xterm -name scratchpad -e sh -c 'screen -d -R scratch'")
+    , ("M-s"     , scratchpadSpawnActionTerminal "xterm -name scratchpad -e sh -c 'screen -d -R scratch'")
     -- Useful action 
     , ("M-M1-a" , spawn "fmt ~/.local/share/apod/description | dzen_less")
     , ("M-d"    , spawn "look_dictionary | dzen_less")
     , ("M-S-d"  , lookupDictionary myXPconfig )
     , ("M-z"    , spawn "dzen_less -e < ~/.xsession-errors")
-    , ("M-i"    , spawn "iceweasel \"$(xsel)\"")
+
     ]
   
  
@@ -188,22 +199,22 @@ myManageHook = composeAll $ concat [
     [ className =? c --> doCenterFloat | c <- ["XDosEmu", "feh"]],
     [ className =? c --> doFullFloat   | c <- ["wesnoth", "MPlayer"]],
     -- Ignored windows 
-    [ className =? c --> doIgnore       | c <- ["stalonetray", "trayer", "fbpanel", "xfce4-panel", "Xfce4-panel"]],
-    [ resource  =? c --> doIgnore       | c <- ["desktop_window", "kdesktop"]],
-    -- ignore Kicker and float kicker's calendar
-    [ (className =? "Kicker" <&&> title =? "kicker")   --> doIgnore 
-    , (className =? "Kicker" <&&> title =? "Calendar") --> doFloat ],
-    -- Other hooks 
-    [ className =? "Akregator"      --> doF (W.shift "RSS")
-    , className =? "psi"            --> doF (W.shift "IM")
-    , className =? "Sonata"         --> doF (W.shift "Муз")
-    , className =? "Ktorrent"       --> doF (W.shift "Торр") ],
-    [ className =? c --> (doF $ W.shift "WWW") 
-                | c <- ["Iceweasel", "Firefox-bin", "Firefox"]],
+    [ className =? c --> doIgnore      | c <- ["stalonetray", "trayer", "fbpanel", "xfce4-panel", "Xfce4-panel"]],
+    [ resource  =? c --> doIgnore      | c <- ["desktop_window", "kdesktop"]],
+    -- Windows placement hooks
+    shiftBy className "WWW"     ["Iceweasel", "Firefox-bin", "Firefox"],
+    shiftBy className "RSS"     ["Akregator"],
+    shiftBy className "IM"      ["psi"],
+    shiftBy className "Mail"    ["kmail", "Kmail"],
+    shiftBy className "Torrent" ["Ktorrent"],
+    shiftBy className "Audio"   ["sonata", "Sonata"],
     -- Scratchpad hook
     [ scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3) ]
     ]
- 
+    where 
+      -- Shift windows according to criteria
+      shiftBy :: Query String -> String -> [String] -> [ManageHook]
+      shiftBy query tgt names = [ query =? c --> doF (W.shift tgt) | c <- names ]
 
 ------------------------------------------------------------------------
 -- XPromt settings 
@@ -220,7 +231,8 @@ myConfig = defaultConfig {
       modMask            = mod4Mask,
       focusFollowsMouse  = True,
       borderWidth        = 1,
-      workspaces         = ["1","2","WWW","Муз","Mail","Торр","7","RSS","IM","--"],
+      workspaces         = (map show [1..10]) ++ 
+                           ["WWW","RSS","Mail","IM","Torrent","Audio","Media"],
       normalBorderColor  = "#dddddd",
       focusedBorderColor = "#ff0000",
       -- key bindings
@@ -230,7 +242,7 @@ myConfig = defaultConfig {
       handleEventHook    = myHandleEventHook,
       layoutHook         = myLayout,
       manageHook         = myManageHook,
-      logHook            = ewmhDesktopsLogHook
+      logHook            = ewmhDesktopsLogHookCustom (take 10)
       }
 
 
