@@ -124,9 +124,10 @@ myKeys conf =
     , ("M-<End>"         , spawn "mpc toggle > /dev/null")
     , ("M-<Home>"        , spawn "mpc stop   > /dev/null")
     , ("M-<Insert>"      , spawn "mpc play   > /dev/null")
-    , ("M-S-<Delete>"    , spawn "mpc del 0  > /dev/null")
-    , ("M-M1-S-<Delete>" , spawn "mpc clear  > /dev/null")
-
+    , ("M-<Delete>"      , submap $ mkKeymap conf $
+            [ ("<Delete>"    , spawn "mpc del 0  > /dev/null")
+            , ("S-<Delete>"  , spawn "mpc clear  > /dev/null") ]
+       )
     -- Applications shortcuts
     , ("M-M1-e"  , spawn "emacs")
     , ("M-M1-i"  , spawn "iceweasel")
@@ -202,12 +203,13 @@ myManageHook = composeAll $ concat [
     [ className =? c --> doIgnore      | c <- ["stalonetray", "trayer", "fbpanel", "xfce4-panel", "Xfce4-panel"]],
     [ resource  =? c --> doIgnore      | c <- ["desktop_window", "kdesktop"]],
     -- Windows placement hooks
+    [ className =? "MPlayer" --> doF (W.greedyView "Media" . W.shift "Media") ],
     shiftBy className "WWW"     ["Iceweasel", "Firefox-bin", "Firefox"],
     shiftBy className "RSS"     ["Akregator"],
     shiftBy className "IM"      ["psi"],
-    shiftBy className "Mail"    ["kmail", "Kmail"],
+    shiftBy className "Mail"    ["Kmail"],
     shiftBy className "Torrent" ["Ktorrent"],
-    shiftBy className "Audio"   ["sonata", "Sonata"],
+    shiftBy className "Audio"   ["Sonata"],
     -- Scratchpad hook
     [ scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3) ]
     ]
