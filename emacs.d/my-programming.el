@@ -64,15 +64,15 @@
   (interactive)
   (comment-or-uncomment-region (point-at-bol) (point-at-eol)))
 
-(defun my-show-tab
-  "Display tab width"
-  (interactive) 
-  (princ (format "Tab width: %i" tab-width)))
-
 (defun my-settab(wid)
   "Set tab width"
   (interactive "nType tab width ")
   (setq tab-width wid))
+
+(defun my-indent-tabs()
+  "Indent with tabs" (interactive) (setq c-default-style "bsd-tab"))
+(defun my-indent-ws()
+  "Indent with tabs" (interactive) (setq c-default-style "bsd-ws"))
 ;; =================
 
 
@@ -91,19 +91,26 @@
 ;; ===============================================
 ;; Indentation
 ;; ===============================================
-(defconst my-c-style
+(defconst my-c-tab-style
   '( "bsd"
 	(indent-tabs-mode . t)
 	(tab-width        . 4)
 	(c-basic-offset   . 4)
-	; Make public:/private: indented 
-;	(c-offsets-alist  . ((inclass       . ++ )))
+ 	(c-echo-syntactic-information-p . t)
+ 	)
+  )
+(defconst my-c-ws-style
+  '( "bsd"
+	(indent-tabs-mode . nil)
+	(tab-width        . 4)
+	(c-basic-offset   . 4)
  	(c-echo-syntactic-information-p . t)
  	)
   )
 
-(c-add-style "my-style" my-c-style)
-(setq c-default-style "my-style")
+(c-add-style "bsd-tab" my-c-tab-style)
+(c-add-style "bsd-ws"  my-c-ws-style)
+(setq c-default-style "bsd-tab")
 ;; =================
 
 
