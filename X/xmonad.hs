@@ -134,7 +134,7 @@ myKeys conf =
     , ("M-i"     , spawn "iceweasel \"$(xsel)\"")
     , ("M-M1-k"  , spawn "konqueror")
     , ("M-M1-w"  , spawn "kdesu wireshark")
-    , ("M-s"     , scratchpadSpawnActionTerminal "xterm -name scratchpad -e sh -c 'screen -d -R scratch'")
+    , ("M-s"     , scratchpadSpawnActionCustom "xterm -name scratchpad -e sh -c 'screen -d -R scratch'")
     -- Useful action 
     , ("M-M1-a" , spawn "fmt ~/.local/share/apod/description | dzen_less")
     , ("M-d"    , spawn "look_dictionary | dzen_less")
