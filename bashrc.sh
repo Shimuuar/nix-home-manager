@@ -131,12 +131,11 @@ alias aptitude-up='sudo aptitude update && sudo aptitude'
 alias cemacs="emacs -nw"
 
 # Configure/build/install haskell program
-alias ghc-prepare="[ -x ./Setup ] || ghc --make Setup"
-alias ghc-c="(ghc-prepare) && ./Setup configure --user --prefix=$HOME/opt/haskell"
-alias ghc-b="(ghc-prepare) && ./Setup build"
-alias ghc-i="(ghc-prepare) && ./Setup install"
-alias ghc-cl="([ -x ./Setup ] && ./Setup clean) ; rm -rf ./Setup"
-alias ghc-h="(ghc-prepare) && ./Setup haddock"
+alias ghc-c="runghc Setup configure --user --prefix=$HOME/opt/haskell"
+alias ghc-b="runghc Setup build"
+alias ghc-i="runghc Setup install"
+alias ghc-cl="runghc Setup clean"
+alias ghc-h="runghc Setup haddock"
 alias ghc-cbi="ghc-c && ghc-b && ghc-i"
 alias ghc-bi="ghc-b && ghc-i"
 # Configure and build python packages
