@@ -96,12 +96,26 @@
 ;; =========================================================
 ;; Haskell abbreviations
 ;; =========================================================
+(define-skeleton my-skel-haskell-SCC
+  "Skeleton for haskell SCC pragma"
+  "SCC name: "
+  "{-# SCC \"" str "\" #-}" _
+  )
+(define-skeleton my-skel-haskell-LANG
+  "Skeleton for haskell LANGUAGE pragma"
+  ""
+  "{-# LANGUAGE " _ " #-}" 
+  )
 (define-abbrev-table 'haskell-mode-abbrev-table
   '(
     ; Import
     ("imp"  "import"    nil 0)
-    ("ret"  "return"    nil 0)
     ("qua"  "qualified" nil 0)
+    ; Shorhands
+    ("ret"  "return"    nil 0)
+    ("pr"   "print"     nil 0)
+    ("pscc"  ""         my-skel-haskell-SCC  0)
+    ("plang" ""         my-skel-haskell-LANG 0)
     ))
 
 (provide 'my-abbrevs)
