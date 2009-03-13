@@ -138,6 +138,10 @@ alias ghc-cl="runghc Setup clean"
 alias ghc-h="runghc Setup haddock"
 alias ghc-cbi="ghc-c && ghc-b && ghc-i"
 alias ghc-bi="ghc-b && ghc-i"
+function ghc-make() {
+    ghc --make "$@"
+    rm -rf *.o *.hi
+}
 # Configure and build python packages
 alias python-setup="[ -f setup.py ] && python setup.py build && python setup.py install --prefix=${HOME}/opt/python"
 ##-----------------
