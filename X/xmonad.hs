@@ -196,27 +196,33 @@ myLayout = smartBorders $
 --
 myManageHook = composeAll $ concat [
     -- Floating windows 
-    [ className =? c --> doFloat       | c <- ["Gimp"]],
-    [ className =? c --> doCenterFloat | c <- ["XDosEmu", "feh"]],
-    [ className =? c --> doFullFloat   | c <- ["wesnoth", "MPlayer"]],
+    map (className ?-> doFloat)       ["Gimp"],
+    map (className ?-> doCenterFloat) ["XDosEmu", "feh"],
+    -- Media windows
+    map (className ?-> doMedia)       ["MPlayer", "wesnoth"],
     -- Ignored windows 
-    [ className =? c --> doIgnore      | c <- ["stalonetray", "trayer", "fbpanel", "xfce4-panel", "Xfce4-panel"]],
-    [ resource  =? c --> doIgnore      | c <- ["desktop_window", "kdesktop"]],
+    map (className ?-> doIgnore)      ["stalonetray", "trayer", "fbpanel", "xfce4-panel", "Xfce4-panel"],
+    map (resource  ?-> doIgnore)      ["desktop_window", "kdesktop"],
     -- Windows placement hooks
-    [ className =? "MPlayer" --> doF (W.greedyView "Media" . W.shift "Media") ],
-    shiftBy className "WWW"     ["Iceweasel", "Firefox-bin", "Firefox"],
-    shiftBy className "RSS"     ["Akregator"],
-    shiftBy className "IM"      ["psi"],
-    shiftBy className "Mail"    ["Kmail"],
-    shiftBy className "Torrent" ["Ktorrent"],
-    shiftBy className "Audio"   ["Sonata"],
+    map (className ?->> "WWW")        ["Iceweasel", "Firefox-bin", "Firefox"],
+    map (className ?->> "RSS")        ["Akregator"],
+    map (className ?->> "IM")         ["psi"],
+    map (className ?->> "Mail")       ["Kmail"],
+    map (className ?->> "Torrent")    ["Ktorrent"],
+    map (className ?->> "Audio")      ["Sonata"],
     -- Scratchpad hook
     [ scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3) ]
     ]
     where 
-      -- Shift windows according to criteria
-      shiftBy :: Query String -> String -> [String] -> [ManageHook]
-      shiftBy query tgt names = [ query =? c --> doF (W.shift tgt) | c <- names ]
+      -- Apply manage hook
+      (?->) :: Query String -> ManageHook -> String -> ManageHook
+      q ?-> hook  =  \name -> q =? name --> hook
+      -- Shift window to workspace
+      (?->>) :: Query String -> String -> String -> ManageHook
+      q ?->> tgt = q ?-> doF (W.shift tgt)
+      -- Hook for multimedia related windows
+      doMedia :: ManageHook
+      doMedia = doF (W.greedyView "Media" . W.shift "Media") <+> doFullFloat
 
 ------------------------------------------------------------------------
 -- XPromt settings 
