@@ -70,9 +70,9 @@
   (setq tab-width wid))
 
 (defun my-indent-tabs()
-  "Indent with tabs" (interactive) (setq c-default-style "bsd-tab"))
+  "Indent with tabs" (interactive) (setq indent-tabs-mode t))
 (defun my-indent-ws()
-  "Indent with tabs" (interactive) (setq c-default-style "bsd-ws"))
+  "Indent with tabs" (interactive) (setq indent-tabs-mode nil))
 ;; =================
 
 
@@ -110,7 +110,7 @@
 
 (c-add-style "bsd-tab" my-c-tab-style)
 (c-add-style "bsd-ws"  my-c-ws-style)
-(setq c-default-style "bsd-tab")
+(setq c-default-style "bsd-ws")
 ;; =================
 
 
