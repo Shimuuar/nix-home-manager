@@ -1,11 +1,3 @@
---
--- xmonad example config file.
---
--- A template showing all available configuration hooks,
--- and how to override the defaults in your own xmonad.hs conf file.
---
--- Normally, you'd only override those defaults you care about.
---
 
 import Codec.Binary.UTF8.String
 
@@ -218,7 +210,7 @@ myManageHook = composeAll $ concat [
     where 
       -- Apply manage hook
       (?->) :: Query String -> ManageHook -> String -> ManageHook
-      q ?-> hook  =  \name -> q =? name --> hook
+      (?->) q hook name = q =? name --> hook
       -- Shift window to workspace
       (?->>) :: Query String -> String -> String -> ManageHook
       q ?->> tgt = q ?-> doF (W.shift tgt)
