@@ -96,6 +96,8 @@ myKeys conf =
     , ("M-S-<Space>" , setLayout $ XMonad.layoutHook conf)
     -- Resize viewed windows to the correct size 
     , ("M-n"         , refresh)
+    -- Toggle struts on/off
+    , ("M-b"         , sendMessage ToggleStruts)
     -- Move focus to the next/prev window
     , ("M-<Tab>"     , windows W.focusDown)
     , ("M-<Left>"    , windows W.focusDown)
