@@ -6,7 +6,7 @@
 ## ---------------------------------------------------------
 ## Pathes
 ## ---------------------------------------------------------
-export PATH=$PATH:${HOME}/opt/bin
+export PATH=$PATH:${HOME}/opt/bin:${HOME}/.cabal/bin
 export PYTHONPATH=${HOME}/opt/python/lib/python$(python -V 2>&1 | egrep -o '2\.[0-9]')/site-packages
 ## ----------------
 
