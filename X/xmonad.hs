@@ -70,6 +70,7 @@ myKeys conf =
             , ("t", "Torrent")
             , ("a", "Audio")
             , ("x", "Media")
+            , ("g", "Gimp")
             ] >>= makeShiftPair ""
       )
     -- Quit XMonad
@@ -234,7 +235,7 @@ myConfig = defaultConfig {
       focusFollowsMouse  = True,
       borderWidth        = 1,
       workspaces         = (map show [1..10]) ++ 
-                           ["WWW","RSS","Mail","IM","Torrent","Audio","Media"],
+                           ["WWW","RSS","Mail","IM","Torrent","Audio","Media","Gimp"],
       normalBorderColor  = "#dddddd",
       focusedBorderColor = "#ff0000",
       -- key bindings
