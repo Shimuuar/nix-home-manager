@@ -20,6 +20,7 @@ import XMonad.Hooks.ManageDocks
 import qualified XMonad.Layout.IM as IM
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Reflect
 
 import XMonad.Util.Run
 import XMonad.Util.Scratchpad
@@ -166,13 +167,18 @@ myHandleEventHook = ewmhDesktopsEventHook
 --
 myLayout = smartBorders $
            avoidStruts  $ 
-           onWorkspace "IM" (IM.IM (1%5) (IM.Resource "main")) $
-           tiled ||| Mirror tiled ||| Full
+           onWorkspace "IM" (IM.withIM (1%5) (IM.Resource "main") defaultLayout) $
+           onWorkspace "Gimp" gimp $ 
+           defaultLayout
     where
-      tiled   = Tall nmaster delta ratio
-      nmaster = 1       -- The default number of windows in the master pane
-      ratio   = 1/2     -- Default proportion of screen occupied by master pane
-      delta   = 3/100   -- Percent of screen to increment by when resizing panes
+      -- Default layout
+      defaultLayout = tiled ||| Mirror tiled ||| Full
+      -- Simple tiled layout 
+      tiled   = Tall 1 (1/2) (3/100)
+      -- Layout for GIMP
+      gimp = IM.withIM (1%5) (IM.Role "gimp-toolbox") $ reflectHoriz $ 
+             IM.withIM (1%5) (IM.Role "gimp-dock") (Full ||| tiled)
+
  
 ------------------------------------------------------------------------
 -- Window rules:
@@ -185,9 +191,10 @@ myLayout = smartBorders $
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = composeAll $ concat [
+myManageHook = composeAll $ concat [  
+    -- Float dialogs
+    [isDialog --> doFloat],
     -- Floating windows 
-    map (className ?-> doFloat)       ["Gimp"],
     map (className ?-> doCenterFloat) ["XDosEmu", "feh"],
     -- Media windows
     map (className ?-> doMedia)       ["MPlayer", "wesnoth"],
@@ -199,8 +206,9 @@ myManageHook = composeAll $ concat [
     map (className ?->> "RSS")        ["Akregator"],
     map (className ?->> "IM")         ["psi"],
     map (className ?->> "Mail")       ["Kmail"],
-    map (className ?->> "Torrent")    ["Ktorrent"],
+    map (className ?->> "Torrent")    ["Ktorrent","Deluge"],
     map (className ?->> "Audio")      ["Sonata"],
+    map (className ?->> "Gimp")       ["Gimp"],
     -- Scratchpad hook
     [ scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3) ]
     ]
