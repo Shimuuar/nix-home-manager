@@ -8,7 +8,7 @@ FIFO="$TEMP/fifo"
 mkfifo "$FIFO" || (rm -rf "$TEMP"; fail "Cannot create FIFO") 
 
 if ! tty -s ; then 
-    xterm -name 'terminal-float' -e sh -c "cat '$FIFO' | less" &
+    xterm -geom 120x40 -name 'terminal-float' -e sh -c "cat '$FIFO' | less" &
     cat > "$FIFO" 
 fi
 
