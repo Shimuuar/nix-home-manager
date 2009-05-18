@@ -132,11 +132,10 @@ myKeys conf =
     , ("M-M1-w"  , spawn "kdesu wireshark")
     , ("M-s"     , scratchpadSpawnActionCustom "xterm -name scratchpad -e sh -c 'screen -d -R scratch'")
     -- Useful action 
-    , ("M-M1-a" , spawn "fmt ~/.local/share/apod/description | dzen_less")
-    , ("M-d"    , spawn "look_dictionary | dzen_less")
-    , ("M-S-d"  , lookupDictionary myXPconfig )
-    , ("M-z"    , spawn "dzen_less -e < ~/.xsession-errors")
-
+    , ("M-x"     , submap $ mkKeymap conf $ 
+          [ ("z"   , spawn "xterm-less < ~/.xsession-errors")
+          , ("S-z" , spawn "tail -f ~/.xsession-errors | xterm-less")
+          ] )
     ]
   
  
@@ -195,6 +194,7 @@ myManageHook = composeAll $ concat [
     -- Float dialogs
     [isDialog --> doFloat],
     -- Floating windows 
+    map (resource  ?-> doCenterFloat) ["terminal-float"],
     map (className ?-> doCenterFloat) ["XDosEmu", "feh"],
     -- Media windows
     map (className ?-> doMedia)       ["MPlayer", "wesnoth"],
