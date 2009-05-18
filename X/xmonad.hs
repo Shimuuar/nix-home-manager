@@ -193,32 +193,38 @@ myLayout = smartBorders $
 myManageHook = composeAll $ concat [  
     -- Float dialogs
     [isDialog --> doFloat],
-    -- Floating windows 
-    map (resource  ?-> doCenterFloat) ["terminal-float"],
-    map (className ?-> doCenterFloat) ["XDosEmu", "feh"],
-    -- Media windows
-    map (className ?-> doMedia)       ["MPlayer", "wesnoth"],
     -- Ignored windows 
-    map (className ?-> doIgnore)      ["stalonetray", "trayer", "fbpanel", "xfce4-panel", "Xfce4-panel"],
-    map (resource  ?-> doIgnore)      ["desktop_window", "kdesktop"],
+    hookList doIgnore [ (className, "stalonetray")
+                      , (className, "trayer")
+                      , (className, "fbpanel")
+                      , (className, "xfce4-panel")
+                      , (className, "Xfce4-Panel") ],
+    -- Floating windows 
+    hookList doCenterFloat [ (className, "XDosEmu")
+                           , (className, "feh")
+                           , (resource,  "terminal-float") ],
+    hookList doMedia [ (className, "MPlayer")
+                     , (className, "wesnoth") ],
     -- Windows placement hooks
-    map (className ?->> "WWW")        ["Iceweasel", "Firefox-bin", "Firefox"],
-    map (className ?->> "RSS")        ["Akregator"],
-    map (className ?->> "IM")         ["psi"],
-    map (className ?->> "Mail")       ["Kmail"],
-    map (className ?->> "Torrent")    ["Ktorrent","Deluge"],
-    map (className ?->> "Audio")      ["Sonata"],
-    map (className ?->> "Gimp")       ["Gimp"],
+    hookList (doWorkspace "WWW")     [ (className, "Iceweasel")
+                                     , (className, "Firefox-bin")
+                                     , (className, "Firefox") ],
+    hookList (doWorkspace "RSS")     [ (className, "Akregator") ],
+    hookList (doWorkspace "IM")      [ (className, "psi") ],
+    hookList (doWorkspace "Mail")    [ (className, "Kmail") ],
+    hookList (doWorkspace "Torrent") [ (className, "Ktorrent")
+                                     , (className, "Deluge") ],
+    hookList (doWorkspace "Audio")   [ (className, "Sonata") ],
+    hookList (doWorkspace "Gimp")    [ (className, "Gimp") ],
     -- Scratchpad hook
     [ scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3) ]
     ]
-    where 
-      -- Apply manage hook
-      (?->) :: Query String -> ManageHook -> String -> ManageHook
-      (?->) q hook name = q =? name --> hook
-      -- Shift window to workspace
-      (?->>) :: Query String -> String -> String -> ManageHook
-      q ?->> tgt = q ?-> doF (W.shift tgt)
+    where
+      hookList :: Eq a => ManageHook -> [(Query a, a)] -> [ManageHook]
+      hookList hook = map $ (--> hook) . uncurry (=?)
+      -- Move window to workspace
+      doWorkspace :: String -> ManageHook 
+      doWorkspace = doF . W.shift
       -- Hook for multimedia related windows
       doMedia :: ManageHook
       doMedia = doF (W.greedyView "Media" . W.shift "Media") <+> doFullFloat
