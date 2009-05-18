@@ -174,7 +174,7 @@ myLayout = smartBorders $
       -- Default layout
       defaultLayout = tiled ||| Mirror tiled ||| Full
       -- Simple tiled layout 
-      tiled   = Tall 1 (1/2) (3/100)
+      tiled   = Tall 1 (1/50) (1/2)
       -- Layout for GIMP
       gimp = IM.withIM (1%5) (IM.Role "gimp-toolbox") $ reflectHoriz $ 
              IM.withIM (1%5) (IM.Role "gimp-dock") (Full ||| tiled)
