@@ -135,6 +135,8 @@ myKeys conf =
     , ("M-x"     , submap $ mkKeymap conf $ 
           [ ("z"   , spawn "xterm-less < ~/.xsession-errors")
           , ("S-z" , spawn "tail -f ~/.xsession-errors | xterm-less")
+          , ("a"   , spawn  "fmt ~/.local/share/apod/description | xterm-less")
+          , ("S-a" , spawnU "apod-get-wallpaper && notify-send 'APOD загружен' || notify-send 'Ошибка [APOD]'")
           ] )
     ]
   
