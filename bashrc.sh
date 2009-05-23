@@ -119,6 +119,7 @@ alias wcl='wc -l'
 alias ?='man'
 # Make with include path
 alias maki='make -I ~/.share/make'
+function make-notify () { make "$@" && notify-send "Make done" || notify-send "Make failed"; }
 # IPython with math functions
 alias mpython='ipython ~/.config/mpython.py'
 
