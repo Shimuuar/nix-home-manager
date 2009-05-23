@@ -175,6 +175,12 @@ function hg-prune() {  # Remove all files not under version control
     local root=$(hg root | sed 's,/,\\/,g')
     hg st -u -n | sed "s/^/$root\//" | while read q; do rm -rfv $q; done
 }
+function hg-qexport { # export top pathc in mercurial queue
+    local name=$(hg qtop) || return 1
+    hg export $(name) > "/tmp/${name}.patch" \
+	&& echo "$name exported" \
+	|| echo "Could not export $name"
+}
 # Download and unzip books from librusec
 function librusecget() {
     hrefgrep "$1" | grep /download | while read URL; do getzipc "$URL"; done
