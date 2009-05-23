@@ -177,7 +177,7 @@ function hg-prune() {  # Remove all files not under version control
 }
 function hg-qexport { # export top pathc in mercurial queue
     local name=$(hg qtop) || return 1
-    hg export $(name) > "/tmp/${name}.patch" \
+    hg export "$name" > "/tmp/${name}.patch" \
 	&& echo "$name exported" \
 	|| echo "Could not export $name"
 }
