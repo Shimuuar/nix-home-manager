@@ -121,9 +121,13 @@ myKeys conf =
     , ("M-<Home>"        , spawn "mpc stop   > /dev/null")
     , ("M-<Insert>"      , spawn "mpc play   > /dev/null")
     , ("M-<Delete>"      , submap $ mkKeymap conf $
-            [ ("<Delete>"    , spawn "mpc del 0  > /dev/null")
-            , ("S-<Delete>"  , spawn "mpc clear  > /dev/null") ]
-       )
+            [ ("<Delete>"    , spawn "mpc del 0   > /dev/null")
+            , ("S-<Delete>"  , spawn "mpc clear   > /dev/null")
+            , ("r"           , spawn "mpc repeat  > /dev/null")
+            , ("x"           , spawn "mpc random  > /dev/null")
+            , ("S-x"         , spawn "mpc shuffle > /dev/null") 
+            , ("1"           , spawn "mpc single  > /dev/null")
+            ] )
     -- Applications shortcuts
     , ("M-M1-e"  , spawn "emacs")
     , ("M-M1-i"  , spawn "iceweasel")
