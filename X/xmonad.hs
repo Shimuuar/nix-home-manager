@@ -141,6 +141,7 @@ myKeys conf =
           , ("S-z" , spawn "tail -f ~/.xsession-errors | xterm-less")
           , ("a"   , spawn  "fmt ~/.local/share/apod/description | xterm-less")
           , ("S-a" , spawnU "apod-get-wallpaper && notify-send 'APOD загружен' || notify-send 'Ошибка [APOD]'")
+          , ("p"   , spawn "xprop | grep -v WM_ICON | xterm-less")
           ] )
     ]
   
