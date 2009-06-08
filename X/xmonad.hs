@@ -17,10 +17,14 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageDocks
 
-import qualified XMonad.Layout.IM as IM
+import XMonad.Layout.IM (withIM)
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Reflect
+import XMonad.Layout.ComboP
+import XMonad.Layout.TwoPane
+import XMonad.Layout.Accordion
+import XMonad.Layout.Tabbed
 
 import XMonad.Util.Run
 import XMonad.Util.Scratchpad
@@ -173,7 +177,7 @@ myHandleEventHook = ewmhDesktopsEventHook
 --
 myLayout = smartBorders $
            avoidStruts  $ 
-           onWorkspace "IM" (IM.withIM (1%5) (IM.Resource "main") defaultLayout) $
+           onWorkspace "IM" (withIM (1%5) (Resource "main") defaultLayout) $
            onWorkspace "Gimp" gimp $ 
            defaultLayout
     where
@@ -182,9 +186,9 @@ myLayout = smartBorders $
       -- Simple tiled layout 
       tiled   = Tall 1 (1/50) (1/2)
       -- Layout for GIMP
-      gimp = IM.withIM (1%5) (IM.Role "gimp-toolbox") $ reflectHoriz $ 
-             IM.withIM (1%5) (IM.Role "gimp-dock") (Full ||| tiled)
-
+      gimp = withIM (0.18) (Role "gimp-toolbox") $
+                combineTwoP (reflectHoriz $ TwoPane 0.2 0.2) 
+                            (simpleTabbed) (defaultLayout) (Role "gimp-dock")
  
 ------------------------------------------------------------------------
 -- Window rules:
