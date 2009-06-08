@@ -172,9 +172,10 @@ function hg-diff()  {  hg diff "$@" | colordiff;    } # Colored diff
 function hg-gdiff() {  hg diff "$@" | kompare -o -; } # View diff in kompare
 function hg-qdiff() {  hg qdiff "$@" | colordiff;   } # Colored diff for queues
 function hg-prune() {  # Remove all files not under version control
-    # Needed to convert to absolute filenames 
-    local root=$(hg root | sed 's,/,\\/,g')
-    hg st -u -n | sed "s/^/$root\//" | while read q; do rm -rfv $q; done
+    hg st -un | sed "s:^:$(hg root)/:" | while read q; do rm -rfv "$q"; done
+}
+function hg-clean() { # Remove *.{orig,rej} files
+    hg st -un | sed "s:^:$(hg root)/:" | egrep '\.(rej|orig)$' | while read q; do rm -rfv "$q"; done
 }
 function hg-qexport { # export top pathc in mercurial queue
     local name=$(hg qtop) || return 1
