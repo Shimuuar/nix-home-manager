@@ -183,6 +183,8 @@ function hg-qexport { # export top pathc in mercurial queue
 	&& echo "$name exported" \
 	|| echo "Could not export $name"
 }
+# GIT
+function git-diff { git diff "$@" | colordiff; } # Colored diff
 # Download and unzip books from librusec
 function librusecget() {
     hrefgrep "$1" | grep /download | while read URL; do getzipc "$URL"; done
