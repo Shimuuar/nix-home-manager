@@ -139,6 +139,7 @@ myKeys conf =
     , ("M-M1-k"  , spawn "konqueror")
     , ("M-M1-w"  , spawn "kdesu wireshark")
     , ("M-s"     , scratchpadSpawnActionCustom "xterm -name scratchpad -e sh -c 'screen -d -R scratch'")
+    , ("<Print>" , spawn "ksnapshot")
     -- Useful action 
     , ("M-x"     , submap $ mkKeymap conf $ 
           [ ("z"   , spawn "xterm-less < ~/.xsession-errors")
