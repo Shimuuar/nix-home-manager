@@ -32,11 +32,11 @@
 <Multi_key> <space> <space>      	: " "   nobreakspace # NO-BREAK SPACE
 <Multi_key> <space> <period>     	: " "   U2008 # PUNCTUATION SPACE
 # Miscelania 
-<Multi_key> <o> <c>              	: "©"   copyright # COPYRIGHT SIGN
+<Multi_key> <o> <c>              	: "©"   copyright  # COPYRIGHT SIGN
 <Multi_key> <o> <r>              	: "®"   registered # REGISTERED SIGN
-<Multi_key> <t> <m>                     : "™"   U2122 # TRADE MARK SIGN
-<Multi_key> <s> <o>              	: "§"   section # SECTION SIGN
-<Multi_key> <o> <s>              	: "§"   section # SECTION SIGN
+<Multi_key> <t> <m>                     : "™"   U2122      # TRADE MARK SIGN
+<Multi_key> <s> <o>              	: "§"   section    # SECTION SIGN
+<Multi_key> <o> <s>              	: "§"   section    # SECTION SIGN
 
 
 ################################################################
@@ -44,9 +44,8 @@
 ################################################################
 # Letters ###################
 # Letters Ѣѣ
-<Multi_key> <Cyrillic_hardsign>         : "ѣ" 
-<Multi_key> <Cyrillic_HARDSIGN>         : "Ѣ" 
-#<Multi_key>
+<Multi_key> <Cyrillic_hardsign>         : "ѣ" U0463 # CYRILLIC SMALL LETTER YAT
+<Multi_key> <Cyrillic_HARDSIGN>         : "Ѣ" U0462 # CYRILLIC CAPITAL LETTER YAT
 # Ligatures
 <Multi_key> <o> <e>              	: "œ"   oe # LATIN SMALL LIGATURE OE
 <Multi_key> <O> <E>              	: "Œ"   OE # LATIN CAPITAL LIGATURE OE
@@ -120,9 +119,14 @@
 <Multi_key> <slash> <w>                 : "ω"   
 
 ############################################################
+# European language
+
+<Multi_key> <s> <s>              	: "ß"   ssharp # LATIN SMALL LETTER SHARP S
+<Multi_key> <comma> <c>          	: "ç"   ccedilla # LATIN SMALL LETTER C WITH CEDILLA
+<Multi_key> <comma> <C>          	: "Ç"   Ccedilla # LATIN CAPITAL LETTER C WITH CEDILLA
 
 
-
+################################################################
 #<Multi_key> <period> <greater>   	: "›"   U203a # SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
 #<Multi_key> <period> <less>      	: "‹"   U2039 # SINGLE LEFT-POINTING ANGLE QUOTATION MARK
 
@@ -132,8 +136,6 @@
 
 #<Multi_key> <minus> <d>          	: "đ"   dstroke # LATIN SMALL LETTER D WITH STROKE
 #<Multi_key> <minus> <D>          	: "Đ"   Dstroke # LATIN CAPITAL LETTER D WITH STROKE
-#<Multi_key> <s> <s>              	: "ß"   ssharp # LATIN SMALL LETTER SHARP S
-
 
 
 # Quotation marks
@@ -196,7 +198,6 @@
 # <Multi_key> <asciitilde> <A>     	: "Ã"   Atilde # LATIN CAPITAL LETTER A WITH TILDE
 # <Multi_key> <quotedbl> <A>       	: "Ä"   Adiaeresis # LATIN CAPITAL LETTER A WITH DIAERESIS
 # <Multi_key> <o> <A>              	: "Å"   Aring # LATIN CAPITAL LETTER A WITH RING ABOVE
-# <Multi_key> <comma> <C>          	: "Ç"   Ccedilla # LATIN CAPITAL LETTER C WITH CEDILLA
 # <Multi_key> <grave> <E>          	: "È"   Egrave # LATIN CAPITAL LETTER E WITH GRAVE
 # <Multi_key> <acute> <E>          	: "É"   Eacute # LATIN CAPITAL LETTER E WITH ACUTE
 # <Multi_key> <apostrophe> <E>     	: "É"   Eacute # LATIN CAPITAL LETTER E WITH ACUTE
@@ -233,7 +234,6 @@
 # <Multi_key> <asciitilde> <a>     	: "ã"   atilde # LATIN SMALL LETTER A WITH TILDE
 # <Multi_key> <quotedbl> <a>       	: "ä"   adiaeresis # LATIN SMALL LETTER A WITH DIAERESIS
 # <Multi_key> <o> <a>              	: "å"   aring # LATIN SMALL LETTER A WITH RING ABOVE
-# <Multi_key> <comma> <c>          	: "ç"   ccedilla # LATIN SMALL LETTER C WITH CEDILLA
 # <Multi_key> <grave> <e>          	: "è"   egrave # LATIN SMALL LETTER E WITH GRAVE
 # <Multi_key> <acute> <e>          	: "é"   eacute # LATIN SMALL LETTER E WITH ACUTE
 # <Multi_key> <apostrophe> <e>     	: "é"   eacute # LATIN SMALL LETTER E WITH ACUTE
