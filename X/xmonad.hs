@@ -25,6 +25,7 @@ import XMonad.Layout.ComboP
 import XMonad.Layout.TwoPane
 import XMonad.Layout.Accordion
 import XMonad.Layout.Tabbed
+import XMonad.Layout.Grid 
 
 import XMonad.Util.Run
 import XMonad.Util.Scratchpad
@@ -178,7 +179,7 @@ myHandleEventHook = ewmhDesktopsEventHook
 --
 myLayout = smartBorders $
            avoidStruts  $ 
-           onWorkspace "IM" (withIM (1%5) (Resource "main") defaultLayout) $
+           onWorkspace "IM" (withIM (1%5) (Resource "main") Grid) $
            onWorkspace "Gimp" gimp $ 
            defaultLayout
     where
