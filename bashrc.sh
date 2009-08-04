@@ -48,6 +48,11 @@ export HISTIGNORE=ls:[fb]g
 ## ---------------------------------------------------------
 function truncate_pwd
 {
+    if [ "$?" = 0 ]; then
+	PS1_COL=42
+    else
+	PS1_COL=41
+    fi
     ## Truncate $PWD to 20 last letters if too long 
     newPWD="${PWD/#$HOME/~}"
     local pwdmaxlen=20
@@ -60,9 +65,9 @@ MY_NAME=${MY_NAME-$(whoami)}
 PROMPT_COMMAND=truncate_pwd
 case "$TERM" in
     xterm*|rxvt*)
-        PS1="\[\033[43m\]\[\033[30m\][${MY_NAME}:\${?}]\${newPWD}\\[\033[00m\] \$ " ;;
+        PS1="\[\033[\${PS1_COL}m\]\[\033[30m\][${MY_NAME}:\${?}]\${newPWD}\\[\033[00m\] \$ " ;;
     screen*)
-        PS1="\[\033[43m\]\[\033[30m\]@{${MY_NAME}:\${?}}\${newPWD}\\[\033[00m\] \$ " ;;
+        PS1="\[\033[\${PS1_COL}m\]\[\033[30m\]@{${MY_NAME}:\${?}}\${newPWD}\\[\033[00m\] \$ " ;;
     *)
         PS1="[\u@\h]:\${newPWD}\\$ " ;;
 esac
