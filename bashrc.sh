@@ -122,7 +122,7 @@ alias wcl='wc -l'
 # Man shorthand
 alias ?='man'
 # Make with include path
-alias maki='make -I ~/.share/make'
+alias maki='make -I ~/.local/share/make'
 function make-notify () { make "$@" && notify-send "Make done" || notify-send "Make failed"; }
 # IPython with math functions
 alias mpython='ipython ~/.config/mpython.py'
@@ -187,8 +187,7 @@ function hg-qexport { # export top pathc in mercurial queue
 	&& echo "$name exported" \
 	|| echo "Could not export $name"
 }
-# GIT
-function git-diff { git diff "$@" | colordiff; } # Colored diff
+
 # Download and unzip books from librusec
 function librusecget() {
     hrefgrep "$1" | grep /download | while read URL; do getzipc "$URL"; done
