@@ -14,10 +14,10 @@ export GTK_IM_MODULE=xim                   # Force GTK to accept Composed keys
 
 
 ## ================================================================
-## Run gpg-agent
+## Run session programs
 ## ================================================================
 eval $(gpg-agent --daemon)
-
+mpdscribble --conf ~/.mpdscribble/mpdscribble
 
 ## ================================================================
 ## APOD wallpaper
