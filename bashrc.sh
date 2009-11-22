@@ -20,7 +20,7 @@ export PYTHONPATH=${HOME}/opt/python/lib/python$(python -V 2>&1 | egrep -o '2\.[
 ## ---------------------------------------------------------
 # check the window size after each command 
 shopt -s checkwinsize
-# Extendet globbing
+# Extended globbing
 shopt -s extglob
 ## -----------------
 
@@ -100,6 +100,7 @@ alias catdos='iconv -f cp866 -t utf8'
 alias catlatin1='iconv -f latin1 -t utf8'
 # Convert from DOS to unix line breaks
 alias dos2unix='tr -d "\r"'
+# Remove spaces from file names (Requires sane rename)
 alias space2_='rename -v "s/ *- */-/g; s/ /_/g; s/_-_/-/g"'
 
 # nice grep coloring
@@ -123,6 +124,7 @@ alias wcl='wc -l'
 alias ?='man'
 # Make with include path
 alias maki='make -I ~/.local/share/make'
+# Make which shows notification on completion
 function make-notify () { make "$@" && notify-send "Make done" || notify-send "Make failed"; }
 # IPython with math functions
 alias mpython='ipython ~/.config/mpython.py'
@@ -143,10 +145,6 @@ alias ghc-cl="runghc Setup clean"
 alias ghc-h="runghc Setup haddock"
 alias ghc-cbi="ghc-c && ghc-b && ghc-i"
 alias ghc-bi="ghc-b && ghc-i"
-function ghc-make() {
-    ghc --make "$@"
-    rm -rf *.o *.hi
-}
 # Configure and build python packages
 alias python-setup="[ -f setup.py ] && python setup.py build && python setup.py install --prefix=${HOME}/opt/python"
 ##-----------------
@@ -155,7 +153,7 @@ alias python-setup="[ -f setup.py ] && python setup.py build && python setup.py 
 ## ---------------------------------------------------------
 ## Useful functions 
 ## ---------------------------------------------------------
-# Calculate things ([p]rint)
+# Calculate things ([p]rint) (borrowed from GDB)
 function p() {  echo $@ | bc -l;  }
 # Get word number 
 function word() { awk "{ print $(echo $@ | sed -re 's/[0-9]+/$&/g; s/[0-9] /&,/g') }";  }
@@ -165,8 +163,6 @@ function vsrc() { highlight "$@" -A | $PAGER;  }
 function mkcd() { mkdir -p "$1" && cd "$1";  }
 # Unzip all zip files
 function unzipall() { for i in "$@"; do unzip "$i"; done; }
-# Repeat (shorthand for for loop) With implicit variables 
-function irep() { while read i; do eval "$@" "$i"; done;  }
 ## VCS shorcuts and goodies
 # Subversion
 function svn-diff()  {  svn diff "$@" | colordiff;    } # Colored diff
