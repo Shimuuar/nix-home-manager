@@ -148,6 +148,7 @@ myKeys conf =
           , ("a"   , spawn  "fmt ~/.local/share/apod/description | xterm-less")
           , ("S-a" , spawnU "apod-get-wallpaper && notify-send 'APOD загружен' || notify-send 'Ошибка [APOD]'")
           , ("p"   , spawn "xprop | grep -v WM_ICON | xterm-less")
+          , ("l"   , spawn "xlock")
           ] )
     ]
   
@@ -165,9 +166,6 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
 
-------------------------------------------------------------------------
--- Events:
-myHandleEventHook = ewmhDesktopsEventHook
  
 ------------------------------------------------------------------------
 -- Layouts:
@@ -265,7 +263,8 @@ myConfig = defaultConfig {
       keys               = myKeys,
       mouseBindings      = myMouseBindings,
       -- hooks, layouts
-      handleEventHook    = myHandleEventHook,
+      startupHook        = ewmhDesktopsStartup,
+      handleEventHook    = ewmhDesktopsEventHook,
       layoutHook         = myLayout,
       manageHook         = myManageHook,
       logHook            = ewmhDesktopsLogHookCustom (take 10)
