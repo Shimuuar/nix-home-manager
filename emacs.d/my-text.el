@@ -48,21 +48,21 @@
 ; TeX template
 (defun my-insert-tex-template()
   (interactive)
-  (my-insert-if-empty "\\documentclass[a4paper]{article}\n"
-                      "\n"
-                      "\\usepackage[russian]{babel}\n"
-                      "\\usepackage[utf8]{inputenc}\n"
-                      "\\usepackage{epsfig}\n"
-                      "\n"
-                      "% margins\n"
-                      "%\\oddsidemargin=\n"
-                      "%\\textwidth=\n"
-                      "%\\topmargin=\n"
-                      "%\\textheight=\n"
-                      "\n"
-                      "\\begin{document}\n"
-                      "\\end{document}\n")
-  )
+  (my-insert-if-empty
+"\\documentclass[a4paper]{article}
+
+\\usepackage[russian]{babel}
+\\usepackage[utf8]{inputenc}
+
+% margins
+%\\oddsidemargin=
+%\\textwidth=
+%\\topmargin=
+%\\textheight=
+
+\\begin{document}
+\\end{document}
+"))
 
 ; Hooks for LaTeX
 (defun my-tex-hooks()

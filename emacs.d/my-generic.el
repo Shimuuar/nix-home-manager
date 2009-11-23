@@ -49,12 +49,9 @@
 (require 'iswitchb)  
 (iswitchb-mode 1)
 ; Ignores
-(add-to-list 'iswitchb-buffer-ignore "*Messages*")
-(add-to-list 'iswitchb-buffer-ignore "*Buffer")
-(add-to-list 'iswitchb-buffer-ignore "*Completions")
-(add-to-list 'iswitchb-buffer-ignore "*Apropos")
-(add-to-list 'iswitchb-buffer-ignore "*Warnings")
-(add-to-list 'iswitchb-buffer-ignore "*Quail")
+(mapcar (lambda (buf) (add-to-list 'iswitchb-buffer-ignore buf))
+	'("*Messages*"  "*Buffer"    "*Completions"
+	  "*Apropos"    "*Warnings"  "*Quail"))
 ;; =================
 
 
@@ -81,7 +78,7 @@
 ;; Useful functions
 ;; =========================================================
 (defun my-insert-if-empty(&rest msg)
-  (if (= (- (point-min) (point-max)) 0)
+  (if (= 0 (- (point-min) (point-max)))
       (mapcar 'insert msg)))
 ;; =================
 

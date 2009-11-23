@@ -112,8 +112,10 @@
     ("imp"  "import"    nil 0)
     ("qua"  "qualified" nil 0)
     ; Shorhands
-    ("ret"  "return"    nil 0)
-    ("pr"   "print"     nil 0)
+    ("ret"  "return"       nil 0)
+    ("pr"   "print"        nil 0)
+    ("fi"   "fromIntegral" nil 0)
+    ; Pragmas
     ("pscc"  ""         my-skel-haskell-SCC  0)
     ("plang" ""         my-skel-haskell-LANG 0)
     ))

@@ -8,7 +8,7 @@
 ;; =========================================================
 (defun my-insert-guard(title)
   "Insert C/C++ header guards quickly"
-  (interactive "sType guard name ")
+  (interactive "sType guard name: ")
   (insert "#ifndef " title 
           "\n#define " title 
           "\n\n#endif /* " title " */\n" ))
@@ -16,29 +16,31 @@
 (defun my-insert-c-template(foo)
   "Insert C program template"
   (interactive "i")
-  (insert "\n"
-	  "#include <stdlib.h>\n"
-	  "#include <stdio.h>\n"
-	  "\n"
-	  "\n"
-	  "int main(int argc, char** argv)\n"
-	  "{\n"
-	  "\n"
-	  "    return 0;\n"
-	  "}\n"))
+  (insert
+"
+#include <stdlib.h>
+#include <stdio.h>
+
+
+int main(int argc, char** argv)
+{
+    return 0;
+}
+"))
 
 (defun my-insert-c++-template(foo)
   "Insert C program template"
   (interactive "i")
-  (insert "\n"
-	  "#include <iostream>\n"
-	  "\n"
-	  "\n"
-	  "int main(int argc, char** argv)\n"
-	  "{\n"
-	  "\n"
-	  "    return 0;\n"
-	  "}\n"))
+  (insert
+"
+#include <iostream>
+
+
+int main(int argc, char** argv)
+{
+    return 0;
+}
+"))
 
 (defun my-indent-buffer()
   "indent whole buffer"
