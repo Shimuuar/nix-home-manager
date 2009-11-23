@@ -2,8 +2,8 @@
 #
 # Script to install configs using symlinks
 
-function fail() { echo "$@" >&2; exit 1; }
-function bad_place() { fail "Must be launched in config directory"; }
+function fail()         { echo "$@" >&2; exit 1; }
+function bad_place()    { fail "Must be launched in config directory"; }
 function config_exist() { fail "Config already exists"; }
 
 function install_script()
