@@ -155,8 +155,6 @@ alias python-setup="[ -f setup.py ] && python setup.py build && python setup.py 
 ## ---------------------------------------------------------
 # Calculate things ([p]rint) (borrowed from GDB)
 function p() {  echo $@ | bc -l;  }
-# Get word number 
-function word() { awk "{ print $(echo $@ | sed -re 's/[0-9]+/$&/g; s/[0-9] /&,/g') }";  }
 # View colored source code
 function vsrc() { highlight "$@" -A | $PAGER;  }
 # Make dir and cd to it
