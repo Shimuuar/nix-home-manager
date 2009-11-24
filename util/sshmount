@@ -1,0 +1,49 @@
+#!/usr/bin/python
+"""
+"""
+
+import ConfigParser
+import re
+import sys
+import os
+from os.path import expanduser
+import subprocess
+
+def checkMtab(mtabs, host) :
+    for x in mtabs :
+        if re.match('^'+host+' ', x) is not None : return True        
+    return False
+
+################################################################
+hosts = {}
+# Read configuration file
+config = ConfigParser.ConfigParser()
+config.read(
+    expanduser( os.getenv("XDG_CONFIG","~/.config") + "/sshfsmount.conf" ))
+# Parse sections
+hosts = dict([ (section, dict(config.items(section))) for section in config.sections()])
+# Check config validity
+for key in hosts.keys() :
+    if not hosts[key].has_key('fs') :
+        print>>sys.stderr, "No mountpoint in config file"
+        sys.exit(1)
+    hosts[key]['fs']    = expanduser( hosts[key]['fs'] )
+    hosts[key]['flags'] = hosts[key].get('flags','').split()
+
+# Check if filesistem mounted
+mtab = [x.strip() for x in open('/etc/mtab').readlines()]
+
+# Run zenity
+hostlist = [ ('[+] ' if checkMtab(mtab, x) else '[ ] ') + x for x in hosts.keys() ]
+zenity   = subprocess.Popen(['zenity','--list','--column','Remote host'] + hostlist,
+                            stdout = subprocess.PIPE)
+hostname,_ = zenity.communicate()
+if( hostname == '' ) :
+    sys.exit(0)
+hostname   = hostname[4:].strip()
+
+# Mount of umount filesystem
+if checkMtab(mtab, hostname) :
+    subprocess.Popen(['fusermount','-u',hosts[hostname]['fs']])
+else :
+    subprocess.Popen(['sshfs', hostname, hosts[hostname]['fs']] + hosts[hostname]['flags'])
