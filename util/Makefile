@@ -5,7 +5,7 @@ PREFIX=${HOME}/opt/bin
 
 # Executables
 EXE = word
-SCRIPTS = look_dictionary konqueror-newtab xterm-less
+SCRIPTS = look_dictionary konqueror-newtab xterm-less sshmount
 
 .PHONY: all clean install
 all : ${EXE}
