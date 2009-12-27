@@ -1,5 +1,5 @@
 !! Global settings
-*font: -xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*
+*font: -xos4-terminus-medium-r-normal-*-16-*-*-*-*-*-iso10646-*
 
 !! urxvt settings 
 ! Tabs settings 
@@ -9,7 +9,7 @@ URxvt*tabbed.tabbar-fg: 2
 URxvt.tabbed.tab-bg: 0
 URxvt.tabbed.tab-fg: 3
 ! Visual appearance 
-URxvt*font: -xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*
+URxvt*font: -xos4-terminus-medium-r-normal-*-16-*-*-*-*-*-iso10646-*
 URxvt*background: black
 URxvt*foreground: #33FF66
 
