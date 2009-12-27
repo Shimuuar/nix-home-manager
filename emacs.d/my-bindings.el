@@ -33,7 +33,7 @@
 ;; Programming and identation 
 ;; =========================================================
 ; Autoidentation of source code 
-(global-set-key [\C-tab] 'my-indent-line)
+(global-set-key (kbd "C-<tab>") 'my-indent-line)
 ; Find matching paren
 (global-set-key (kbd "C-%") 'my-match-paren)
 
