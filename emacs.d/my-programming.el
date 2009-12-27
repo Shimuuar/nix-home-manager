@@ -119,6 +119,13 @@ int main(int argc, char** argv)
 ;; ========================================================
 ;; Define hooks 
 ;; =========================================================
+(defun my-c-indent-hook()
+  "Allow to change indentation "
+  (local-set-key (kbd "C-c C-<tab>") (lambda () (interactive)
+				       (c-set-style "bsd-tab")))
+  (local-set-key (kbd "C-c C-SPC")   (lambda () (interactive) 
+				       (c-set-style "bsd-ws")))
+  )
 
 (defun my-indent-hook()
   "Make new lines indented"
@@ -152,13 +159,14 @@ int main(int argc, char** argv)
   (abbrev-mode t)
   )
     
-
-;; C hooks 
+;; C hooks
 (add-hook 'c-mode-hook          'my-indent-hook)
+(add-hook 'c-mode-hook          'my-c-indent-hook)
 (add-hook 'c-mode-hook          'my-comment-hooks)
 (add-hook 'c-mode-hook          'my-folding-hooks)
 ;; C++ hooks 
 (add-hook 'c++-mode-hook        'my-indent-hook)
+(add-hook 'c++-mode-hook        'my-c-indent-hook)
 (add-hook 'c++-mode-hook        'my-comment-hooks)
 (add-hook 'c++-mode-hook        'my-folding-hooks)
 ;; Python hooks 
