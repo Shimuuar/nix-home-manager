@@ -71,10 +71,6 @@ int main(int argc, char** argv)
   (interactive "nType tab width ")
   (setq tab-width wid))
 
-(defun my-indent-tabs()
-  "Indent with tabs" (interactive) (setq indent-tabs-mode t))
-(defun my-indent-ws()
-  "Indent with tabs" (interactive) (setq indent-tabs-mode nil))
 ;; =================
 
 

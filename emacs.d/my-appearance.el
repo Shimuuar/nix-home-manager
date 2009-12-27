@@ -52,7 +52,8 @@
 	   (which-func-mode ("" which-func-format #("--" 0 2 (help-echo "mouse-1: select (drag to resize), mouse-2 = C-x 1, mouse-3 = C-x 0"))))
 	   (global-mode-string
 	    (#("--" 0 2 (help-echo "mouse-1: select (drag to resize), mouse-2 = C-x 1, mouse-3 = C-x 0")) global-mode-string))
-	   "--[" (if indent-tabs-mode "tabs" "ws")
+	   "--["
+	   (:eval (if indent-tabs-mode "tabs" "ws"))
 	   (:eval (format " Tab:%i" tab-width))
 	   "]"
 	   #("-%-" 0 3 (help-echo "mouse-1: select (drag to resize), mouse-2 = C-x 1, mouse-3 = C-x 0")))
