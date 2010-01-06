@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -g -O2 -std=c99
 PREFIX=${HOME}/opt/bin
 
 # Executables
-EXE = word
+EXE = word mdo
 SCRIPTS = look_dictionary konqueror-newtab xterm-less sshmount
 
 .PHONY: all clean install
@@ -16,4 +16,6 @@ install: all
 	for i in ${SCRIPTS}; do ln -sf ${PWD}/$$i ${PREFIX}/$$i; done
 
 word: word.c
+	${CC} ${CFLAGS} -o $@ $<
+mdo: mdo.c
 	${CC} ${CFLAGS} -o $@ $<

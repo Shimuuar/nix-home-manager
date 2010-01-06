@@ -156,31 +156,19 @@ int main(int argc, char** argv)
   )
     
 ;; C hooks
-(add-hook 'c-mode-hook          'my-indent-hook)
-(add-hook 'c-mode-hook          'my-c-indent-hook)
-(add-hook 'c-mode-hook          'my-comment-hooks)
-(add-hook 'c-mode-hook          'my-folding-hooks)
+(add-hook-list 'c-mode-hook          '(my-indent-hook my-c-indent-hook my-comment-hooks my-folding-hooks))
 ;; C++ hooks 
-(add-hook 'c++-mode-hook        'my-indent-hook)
-(add-hook 'c++-mode-hook        'my-c-indent-hook)
-(add-hook 'c++-mode-hook        'my-comment-hooks)
-(add-hook 'c++-mode-hook        'my-folding-hooks)
+(add-hook-list 'c++-mode-hook        '(my-indent-hook my-c-indent-hook my-comment-hooks my-folding-hooks))
 ;; Python hooks 
-(add-hook 'python-mode-hook     'my-indent-hook)
-(add-hook 'python-mode-hook     'my-folding-hooks)
-(add-hook 'python-mode-hook     'my-python-hooks)
+(add-hook-list 'python-mode-hook     '(my-indent-hook my-folding-hooks my-python-hooks))
 ;; Shell hooks 
-(add-hook 'sh-mode-hook         'my-indent-hook)
-(add-hook 'sh-mode-hook         '(lambda () (my-insert-if-empty "#!/bin/sh\n\n")))
-;; Lisp hooks 
-(add-hook 'lisp-mode-hook       'my-indent-hook)
-(add-hook 'lisp-mode-hook       'my-comment-hooks)
+(add-hook-list 'sh-mode-hook         '(my-indent-hook (lambda () (my-insert-if-empty "#!/bin/sh\n\n"))))
+;; Lisp hooks
+(add-hook-list 'lisp-mode-hook       '(my-indent-hook my-comment-hooks))
 ;; Elisp hooks
-(add-hook 'emacs-lisp-mode-hook 'my-indent-hook)
-(add-hook 'emacs-lisp-mode-hook 'my-comment-hooks)
+(add-hook-list 'emacs-lisp-mode-hook '(my-indent-hook my-comment-hooks))
 ;; Haskell hooks
-(add-hook 'haskell-mode-hook    'my-comment-hooks)
-(add-hook 'haskell-mode-hook    'my-haskell-hooks)
+(add-hook-list 'haskell-mode-hook    '(my-comment-hooks my-haskell-hooks))
 ;; =================
 
 (provide 'my-programming)

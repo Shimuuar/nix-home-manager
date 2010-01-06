@@ -12,6 +12,14 @@ export GTK_IM_MODULE=xim                   # Force GTK to accept Composed keys
 [ -f ~/.Xresources ] && xrdb ~/.Xresources # Read resources
 [ -f ~/.Xmodmap    ] && xmodmap ~/.Xmodmap # read modmaps
 
+## ================================================================
+## Try to activate uim
+## ================================================================
+if which uim-xim > /dev/null && which uim-toolbar-gtk-systray > /dev/null; then
+    export XMODIFIERS=@im=uim
+    uim-xim &
+    uim-toolbar-gtk-systray &
+fi
 
 ## ================================================================
 ## Run session programs

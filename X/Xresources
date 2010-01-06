@@ -9,7 +9,6 @@ URxvt*tabbed.tabbar-fg: 2
 URxvt.tabbed.tab-bg: 0
 URxvt.tabbed.tab-fg: 3
 ! Visual appearance 
-URxvt*font: -xos4-terminus-medium-r-normal-*-16-*-*-*-*-*-iso10646-*
 URxvt*background: black
 URxvt*foreground: #33FF66
 
@@ -20,3 +19,6 @@ dzen2.background: #eee
 !! Xmessage setting 
 xmessage*foreground: black
 xmessage*background: #eee
+
+!! Emacs setting
+emacs.background: black 

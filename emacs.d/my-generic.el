@@ -81,6 +81,10 @@
 (defun my-insert-if-empty(&rest msg)
   (if (= 0 (- (point-min) (point-max)))
       (mapcar 'insert msg)))
+
+(defun add-hook-list (hook hooks-list)
+  "Add list of hooks"
+  (mapcar (lambda (one-hook) (add-hook hook one-hook)) hooks-list))
 ;; =================
 
 
