@@ -6,6 +6,12 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
+void usage(void)
+{
+    printf("Usage: mdo command [before] -- commands -- [after]\n");
+    exit(1);
+}
+
 int main(int argc, char** argv)
 {
     int start, end, len, i, status;
@@ -14,6 +20,8 @@ int main(int argc, char** argv)
     /* Find both "--" */
     for(start = 1;         start < argc && strcmp(argv[start],"--"); start++);
     for(end   = start + 1; end   < argc && strcmp(argv[end],  "--"); end++);
+    if( start == 1 )
+        usage();
     /* Calculate length of command */
     len = start + (argc - end) + 2;
     command = (char**)malloc( len * sizeof(char*) );
