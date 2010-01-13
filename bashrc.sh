@@ -159,8 +159,6 @@ function p() {  echo $@ | bc -l;  }
 function vsrc() { highlight "$@" -A | $PAGER;  }
 # Make dir and cd to it
 function mkcd() { mkdir -p "$1" && cd "$1";  }
-# Unzip all zip files
-function unzipall() { for i in "$@"; do unzip "$i"; done; }
 ## VCS shorcuts and goodies
 # Subversion
 function svn-diff()  {  svn diff "$@" | colordiff;    } # Colored diff
@@ -181,11 +179,9 @@ function hg-qexport { # export top pathc in mercurial queue
 	&& echo "$name exported" \
 	|| echo "Could not export $name"
 }
+# Darcs
+function darcs-diff() { darcs diff -u "$@" | colordiff }
 
-# Download and unzip books from librusec
-function librusecget() {
-    hrefgrep "$1" | grep /download | while read URL; do getzipc "$URL"; done
-}
 # Generate pdf from LaTeX file. DVI file and all auxillary TeX files are created in process.
 function tex2pdf() {
     # LaTeX should be run twice for correct creation of ToC (if any)
