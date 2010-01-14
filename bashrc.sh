@@ -77,8 +77,8 @@ esac
 ## Navigation and file operations
 ## ---------------------------------------------------------
 # Set pager I like most ;-)
-export PAGER='less -R'
-alias mo=$PAGER
+export PAGER=less
+alias mo="less -R"
 
 # ls coloring & aliases 
 if [ "$TERM" != "dumb" ]; then
@@ -156,17 +156,17 @@ alias python-setup="[ -f setup.py ] && python setup.py build && python setup.py 
 # Calculate things ([p]rint) (borrowed from GDB)
 function p() {  echo $@ | bc -l;  }
 # View colored source code
-function vsrc() { highlight "$@" -A | $PAGER;  }
+function vsrc() { highlight "$@" -A | $MYPAGER;  }
 # Make dir and cd to it
 function mkcd() { mkdir -p "$1" && cd "$1";  }
 ## VCS shorcuts and goodies
 # Subversion
-function svn-diff()  {  svn diff "$@" | colordiff;    } # Colored diff
-function svn-gdiff() {  svn diff "$@" | kompare -o -; } # Diff in kompare
+function svn-diff()  {  svn diff "$@" | colordiff | tryless; } # Colored diff
+function svn-gdiff() {  svn diff "$@" | kompare -o -; }        # Diff in kompare
 # Mercurial  
-function hg-diff()  {  hg diff "$@" | colordiff;    } # Colored diff 
+function hg-diff()  {  hg diff "$@" | colordiff | tryless; } # Colored diff 
 function hg-gdiff() {  hg diff "$@" | kompare -o -; } # View diff in kompare
-function hg-qdiff() {  hg qdiff "$@" | colordiff;   } # Colored diff for queues
+function hg-qdiff() {  hg qdiff "$@" | colordiff | tryless; } # Colored diff for queues
 function hg-prune() {  # Remove all files not under version control
     hg st -un | sed "s:^:$(hg root)/:" | while read q; do rm -rfv "$q"; done
 }
@@ -180,7 +180,7 @@ function hg-qexport { # export top pathc in mercurial queue
 	|| echo "Could not export $name"
 }
 # Darcs
-function darcs-diff() { darcs diff -u "$@" | colordiff }
+function darcs-diff() { darcs diff -u "$@" | colordiff | tryless; }
 
 # Generate pdf from LaTeX file. DVI file and all auxillary TeX files are created in process.
 function tex2pdf() {
