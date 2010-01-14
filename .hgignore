@@ -1,3 +1,5 @@
 syntax:glob
 *.o
 util/word
+util/mdo
+util/tryless
