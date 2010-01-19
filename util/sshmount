@@ -44,6 +44,6 @@ hostname   = hostname[4:].strip()
 
 # Mount of umount filesystem
 if checkMtab(mtab, hostname) :
-    subprocess.Popen(['fusermount','-u',hosts[hostname]['fs']])
+    os.execvp('fusermount', ['fusermount', '-u', hosts[hostname]['fs']])
 else :
-    subprocess.Popen(['sshfs', hostname, hosts[hostname]['fs']] + hosts[hostname]['flags'])
+    os.execvp('sshfs', ['sshfs', hostname, hosts[hostname]['fs']] + hosts[hostname]['flags'])
