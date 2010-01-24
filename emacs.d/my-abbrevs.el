@@ -123,6 +123,7 @@
 		     "TypeFamilies"              "TemplateHaskell"
 		     "TypeOperators"             "TypeSynonymInstances"
 		     "UndecidableInstances"      "ViewPatterns"
+		     "QuasyQuotes"
 		     ))
   " #-}" 
   )
