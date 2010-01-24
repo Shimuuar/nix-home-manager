@@ -137,6 +137,10 @@ alias aptitude-up='sudo aptitude update && sudo aptitude'
 # Console emacs
 alias cemacs="emacs -nw"
 
+# LaTeX aliases. It shoud die on errors and do not bug me
+alias  latex='latex  < /dev/null'
+alias pdftex='pdftex < /dev/null'
+
 # Configure/build/install haskell program
 alias ghc-c="runghc Setup configure --user --prefix=$HOME/opt/haskell"
 alias ghc-b="runghc Setup build"
