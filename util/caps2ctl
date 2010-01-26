@@ -1,0 +1,8 @@
+#!/bin/sh
+# Add the 3 lines below to Convert caps-lock into Control
+
+if [ "x$DISPLAY" != 'x' ]; then
+    xmodmap -e 'remove Lock      = Caps_Lock'
+    xmodmap -e 'keysym Caps_Lock = Control_L'
+    xmodmap -e 'add    Control   = Control_L'
+fi
