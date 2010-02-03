@@ -69,7 +69,12 @@ def umountAll(hosts, mtab) :
     for h in hosts.keys() :
         if h in mtab :
             system('fusermount','-u', hosts[h]['fs'])
-        
+
+def listMounted(hosts, mtab) :
+    "List all mounted fs"
+    for h in hosts.keys() :
+        if h in mtab :
+            print hosts[h]['fs']
 ################################################################
 
 hosts = readConfig() # Get config
@@ -80,5 +85,7 @@ if   a == [] :
     interactive(hosts, mtab)
 elif a == ['-u'] :
     umountAll(hosts, mtab)
+elif a == ['-l'] :
+    listMounted(hosts, mtab)
 else :
     help()
