@@ -3,9 +3,6 @@
 ;;; Main emacs configuration file 
 ;;;
 
-;; Enable a backtrace when problems occur
-;; (setq debug-on-error t)
-
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
