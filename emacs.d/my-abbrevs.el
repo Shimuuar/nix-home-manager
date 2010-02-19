@@ -158,6 +158,8 @@
 		     "qualified Data.Map as Map"
 		     "qualified Data.IntMap as IntMap"
 		     "qualified Data.Set as Set"
+		     "qualified Data.ByteString"
+		     "qualified Data.ByteString.Lazy"
 		     )))
 
 
