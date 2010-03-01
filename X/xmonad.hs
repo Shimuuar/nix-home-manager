@@ -1,4 +1,5 @@
 
+
 import Codec.Binary.UTF8.String
 
 import qualified Data.Map as M
@@ -208,6 +209,7 @@ myManageHook = composeAll $ concat [
     hookList doIgnore [ (className, "stalonetray")
                       , (className, "trayer")
                       , (className, "fbpanel")
+                      , (className, "Plasma")
                       , (className, "xfce4-panel")
                       , (className, "Xfce4-Panel") ],
     -- Floating windows 
