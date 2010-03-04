@@ -210,6 +210,7 @@ myManageHook = composeAll $ concat [
                       , (className, "trayer")
                       , (className, "fbpanel")
                       , (className, "Plasma")
+                      , (className, "Plasma-desktop")
                       , (className, "xfce4-panel")
                       , (className, "Xfce4-Panel") ],
     -- Floating windows 

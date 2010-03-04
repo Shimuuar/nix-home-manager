@@ -8,7 +8,7 @@
 
 void usage(void)
 {
-    printf("Usage: mdo command [before] -- commands -- [after]\n");
+    printf("Usage: mdo command -- [arguments] -- [after]\n");
     exit(1);
 }
 
@@ -26,7 +26,6 @@ int main(int argc, char** argv)
     len = start + (argc - end) + 2;
     command = (char**)malloc( len * sizeof(char*) );
     /* Write command */
-    command[0] = argv[1];            /* Name of program */
     for(i = 1; i < start; i++)       /* Arguments before "--" */
         command[i] = argv[i];
     for(i = 1; i < argc - end; i++ ) /* Arguments after "--" */
@@ -40,7 +39,7 @@ int main(int argc, char** argv)
             exit(1);
         case 0:                 /* Child */
             command[start] = argv[i];
-            execvp(command[1], command);
+            execvp(command[1], command+1);
             perror("mdo");
             exit(1);
         default:                /* Parent */
