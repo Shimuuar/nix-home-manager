@@ -59,12 +59,15 @@
 <Multi_key> <1> <4>              	: "¼"   onequarter # VULGAR FRACTION ONE QUARTER
 <Multi_key> <1> <2>              	: "½"   onehalf # VULGAR FRACTION ONE HALF
 <Multi_key> <3> <4>              	: "¾"   threequarters # VULGAR FRACTION THREE QUARTERS
+<Multi_key> <asciicircum> <0>    	: "⁰"   
 <Multi_key> <asciicircum> <1>    	: "¹"   onesuperior # SUPERSCRIPT ONE
 <Multi_key> <asciicircum> <KP_1> 	: "¹"   onesuperior # SUPERSCRIPT ONE
 <Multi_key> <asciicircum> <2>    	: "²"   twosuperior # SUPERSCRIPT TWO
 <Multi_key> <asciicircum> <KP_2> 	: "²"   twosuperior # SUPERSCRIPT TWO
 <Multi_key> <asciicircum> <3>    	: "³"   threesuperior # SUPERSCRIPT THREE
 <Multi_key> <asciicircum> <KP_3> 	: "³"   threesuperior # SUPERSCRIPT THREE
+<Multi_key> <asciicircum> <plus>    	: "⁺"   
+<Multi_key> <asciicircum> <minus>    	: "⁻"   
 # Logical relations
 <Multi_key> <comma> <minus>      	: "¬"   notsign # NOT SIGN
 <Multi_key> <minus> <comma>      	: "¬"   notsign # NOT SIGN
@@ -75,6 +78,8 @@
 <Multi_key> <equal> <greater> 		: "⇒"   U21D2 # RIGHTWARDS DOUBLE ARROW
 <Multi_key> <less> <greater> <equal> 	: "⇔"   U21D4 # LEFT RIGHT DOUBLE ARROW
 <Multi_key> <equal> <less> <greater> 	: "⇔"   U21D4 # LEFT RIGHT DOUBLE ARROW
+<Multi_key> <minus> <greater>           : "→"
+<Multi_key> <less> <minus>              : "←"
 # Quantors
 <Multi_key> <0> <slash>                 : "∅" U2205 # empty set
 <Multi_key> <slash> <0>                 : "∅" U2205 # empty set
@@ -97,29 +102,53 @@
 ## Greek alphabet
 ################################################################
 <Multi_key> <slash> <a>			: "α"   
+<Multi_key> <slash> <A>			: "Α"   
 <Multi_key> <slash> <b>			: "β"   
+<Multi_key> <slash> <B>			: "Β"   
 <Multi_key> <slash> <g>			: "γ"   
+<Multi_key> <slash> <G>			: "Γ"   
 <Multi_key> <slash> <d>			: "δ"   
+<Multi_key> <slash> <D>			: "Δ"   
 <Multi_key> <slash> <e>			: "ε"   
+<Multi_key> <slash> <E>			: "Ε"   
 <Multi_key> <slash> <z>                 : "ζ"   
+<Multi_key> <slash> <Z>                 : "Ζ"   
 <Multi_key> <slash> <n>                 : "η"   
+<Multi_key> <slash> <N>                 : "Η"   
 <Multi_key> <slash> <c>                 : "θ"   
+<Multi_key> <slash> <C>                 : "Θ"   
 <Multi_key> <slash> <i>                 : "ι"   
+<Multi_key> <slash> <I>                 : "Ι"   
 <Multi_key> <slash> <k>                 : "κ"   
+<Multi_key> <slash> <K>                 : "Κ"   
 <Multi_key> <slash> <l>                 : "λ"   
+<Multi_key> <slash> <L>                 : "Λ"   
 <Multi_key> <slash> <m>                 : "μ"   
+<Multi_key> <slash> <M>                 : "Μ"   
 <Multi_key> <slash> <v>                 : "ν"   
+<Multi_key> <slash> <V>                 : "Ν"   
 <Multi_key> <slash> <x>                 : "ξ"   
+<Multi_key> <slash> <X>                 : "Ξ"   
 <Multi_key> <slash> <o>                 : "ο"   
+<Multi_key> <slash> <O>                 : "Ο"   
 <Multi_key> <slash> <p>                 : "π"   
+<Multi_key> <slash> <P>                 : "Π"   
 <Multi_key> <slash> <r>                 : "ρ"   
+<Multi_key> <slash> <R>                 : "Ρ"   
 <Multi_key> <slash> <s>                 : "σ"   
+<Multi_key> <slash> <S>                 : "Σ"   
 <Multi_key> <slash> <t>                 : "τ"   
+<Multi_key> <slash> <T>                 : "Τ"   
 <Multi_key> <slash> <u>                 : "υ"   
+<Multi_key> <slash> <U>                 : "Υ"   
 <Multi_key> <slash> <q>                 : "φ"   
+<Multi_key> <slash> <Q>                 : "Φ"   
 <Multi_key> <slash> <h>                 : "χ"   
+<Multi_key> <slash> <H>                 : "Χ"   
 <Multi_key> <slash> <y>                 : "ψ"   
+<Multi_key> <slash> <Y>                 : "Ψ"   
 <Multi_key> <slash> <w>                 : "ω"   
+<Multi_key> <slash> <W>                 : "Ω"   
 
 ############################################################
 # European language
