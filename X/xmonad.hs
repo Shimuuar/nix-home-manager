@@ -6,7 +6,6 @@ import qualified Data.Map as M
 import Data.Ratio            ((%))
 
 import System.Exit
-import System.IO
 
 -- XMonad part ----------------
 import XMonad
@@ -25,11 +24,9 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.Reflect
 import XMonad.Layout.ComboP
 import XMonad.Layout.TwoPane
-import XMonad.Layout.Accordion
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Grid 
 
-import XMonad.Util.Run
 import XMonad.Util.Scratchpad
 import XMonad.Util.EZConfig
 
