@@ -3,7 +3,7 @@
 import Codec.Binary.UTF8.String
 
 import qualified Data.Map as M
-import Data.Ratio ((%))
+import Data.Ratio            ((%))
 
 import System.Exit
 import System.IO
@@ -13,6 +13,7 @@ import XMonad
 import qualified XMonad.StackSet as W
 
 import XMonad.Actions.Submap
+import XMonad.Actions.Search
 
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
@@ -53,6 +54,14 @@ shellEscape = concatMap (\x -> if x `elem` " ;$!@#%&|<>" then '\\':[x] else [x])
 -- | Unicode safe spawn 
 spawnU :: MonadIO m => String -> m ()
 spawnU = spawn . encodeString
+
+wikipediaLang' :: String -> SearchEngine 
+wikipediaLang' lang = searchEngine (lang++".wiki") ("https://secure.wikimedia.org/wikipedia/"++lang++"/wiki/Special:Search?go=Go&search=")
+
+mySearch (key , engine) = [ (key      , promptSearchBrowser defaultXPConfig browser engine)
+                          , ("M-"++key, selectSearchBrowser browser engine)
+                          ]
+    where browser = "iceweasel"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -142,12 +151,17 @@ myKeys conf =
     , ("M-M1-w"  , spawn "kdesu wireshark")
     , ("M-s"     , scratchpadSpawnActionCustom "xterm -name scratchpad -e sh -c 'screen -d -R scratch'")
     , ("<Print>" , spawn "ksnapshot")
+    -- Search
+    , ("M-g"     , submap $ mkKeymap conf $ concatMap mySearch
+          [ ("g" , google )
+          , ("h" , hoogle )
+          , ("w" , wikipedia )
+          , ("r" , wikipediaLang' "ru")
+          ] )
     -- Useful action 
     , ("M-x"     , submap $ mkKeymap conf $ 
           [ ("z"   , spawn "xterm-less < ~/.xsession-errors")
           , ("S-z" , spawn "tail -f ~/.xsession-errors | xterm-less")
-          , ("a"   , spawn  "fmt ~/.local/share/apod/description | xterm-less")
-          , ("S-a" , spawnU "apod-get-wallpaper && notify-send 'APOD загружен' || notify-send 'Ошибка [APOD]'")
           , ("p"   , spawn "xprop | grep -v WM_ICON | xterm-less")
           , ("l"   , spawn "xlock")
           ] )
