@@ -55,8 +55,8 @@ spawnU = spawn . encodeString
 wikipediaLang' :: String -> SearchEngine 
 wikipediaLang' lang = searchEngine (lang++".wiki") ("https://secure.wikimedia.org/wikipedia/"++lang++"/wiki/Special:Search?go=Go&search=")
 
-mySearch (key , engine) = [ (key      , promptSearchBrowser defaultXPConfig browser engine)
-                          , ("M-"++key, selectSearchBrowser browser engine)
+mySearch (key , engine) = [ (key      , promptSearchBrowser myXPConfig browser engine)
+                          , ("M-"++key, selectSearchBrowser            browser engine)
                           ]
     where browser = "iceweasel"
 
@@ -78,7 +78,7 @@ myKeys conf =
     , ("M-a", submap $ mkKeymap conf $ 
             [ ("w", "WWW")
             , ("r", "RSS")
-            , ("m", "Mail")
+            , ("m", "Почта")
             , ("i", "IM")
             , ("t", "Torrent")
             , ("a", "Audio")
@@ -151,6 +151,8 @@ myKeys conf =
     -- Search
     , ("M-g"     , submap $ mkKeymap conf $ concatMap mySearch
           [ ("g" , google )
+          , ("s" , scholar)
+          , ("y" , youtube)
           , ("h" , hoogle )
           , ("w" , wikipedia )
           , ("r" , wikipediaLang' "ru")
@@ -256,7 +258,7 @@ myManageHook = composeAll $ concat [
 
 ------------------------------------------------------------------------
 -- XPromt settings 
-myXPconfig = defaultXPConfig { 
+myXPConfig = defaultXPConfig {
                font = "-xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*" 
              }
 
@@ -270,7 +272,7 @@ myConfig = defaultConfig {
       focusFollowsMouse  = True,
       borderWidth        = 1,
       workspaces         = (map show [1..10]) ++ 
-                           ["WWW","RSS","Mail","IM","Torrent","Audio","Media","Gimp"],
+                           ["WWW","RSS","Почта","IM","Torrent","Audio","Media","Gimp"],
       normalBorderColor  = "#dddddd",
       focusedBorderColor = "#ff0000",
       -- key bindings
