@@ -150,12 +150,14 @@ myKeys conf =
     , ("<Print>" , spawn "ksnapshot")
     -- Search
     , ("M-g"     , submap $ mkKeymap conf $ concatMap mySearch
-          [ ("g" , google )
-          , ("s" , scholar)
-          , ("y" , youtube)
-          , ("h" , hoogle )
-          , ("w" , wikipedia )
-          , ("r" , wikipediaLang' "ru")
+          [ ("g"  , google )
+          , ("s"  , scholar)
+          , ("y"  , youtube)
+          , ("h"  , hoogle )
+          , ("w"  , wikipedia )
+          , ("r"  , wikipediaLang' "ru")
+          , ("S-h", hackage)
+          , ("u"  , searchEngine "Лурка" "http://lurkmore.ru/%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:Search?search=")
           ] )
     -- Useful action 
     , ("M-x"     , submap $ mkKeymap conf $ 
