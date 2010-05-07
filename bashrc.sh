@@ -185,6 +185,7 @@ function hg-qexport { # export top pathc in mercurial queue
 }
 # Darcs
 function darcs-diff() { darcs diff -u "$@" | colordiff | tryless; }
+function darcs-what() { yes n | darcs send -o /dev/null; }
 
 # Generate pdf from LaTeX file. DVI file and all auxillary TeX files are created in process.
 function tex2pdf() {
