@@ -43,7 +43,6 @@ lookupDictionary :: XPConfig -> X ()
 lookupDictionary config = mkXPrompt XPDict config (return . const []) 
     ((\x -> spawnU $ "(echo "++x++"; dict "++x++") | dzen_less") . shellEscape)
 
-
 -- | Escapes all shell metacharacters.
 shellEscape :: String -> String 
 shellEscape = concatMap (\x -> if x `elem` " ;$!@#%&|<>" then '\\':[x] else [x])
@@ -55,6 +54,7 @@ spawnU = spawn . encodeString
 wikipediaLang' :: String -> SearchEngine 
 wikipediaLang' lang = searchEngine (lang++".wiki") ("https://secure.wikimedia.org/wikipedia/"++lang++"/wiki/Special:Search?go=Go&search=")
 
+mySearch :: (String, SearchEngine) -> [(String, X ())]
 mySearch (key , engine) = [ (key      , promptSearchBrowser myXPConfig browser engine)
                           , ("M-"++key, selectSearchBrowser            browser engine)
                           ]
@@ -156,6 +156,7 @@ myKeys conf =
           , ("h"  , hoogle )
           , ("w"  , wikipedia )
           , ("r"  , wikipediaLang' "ru")
+          , ("i"  , isohunt)
           , ("S-h", hackage)
           , ("u"  , searchEngine "Лурка" "http://lurkmore.ru/%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:Search?search=")
           ] )
