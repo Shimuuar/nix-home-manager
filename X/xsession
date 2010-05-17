@@ -25,19 +25,13 @@ fi
 ## Run session programs
 ## ================================================================
 eval $(gpg-agent --daemon)
-mpdscribble --conf ~/.mpdscribble/mpdscribble
+which mpdscribble && mpdscribble --conf ~/.mpdscribble/mpdscribble
+
 
 ## ================================================================
 ## APOD wallpaper
 ## ================================================================
-#xsetroot -solid black
-#WALLPAPER=${HOME}/.local/share/apod/wallpaper
-#[ -f $WALLPAPER ] && display -backdrop -window root $WALLPAPER;
-#which inotifywait > /dev/null &&
-#  while inotifywait -e close_write $WALLPAPER ; do
-#      display -backdrop -window root $WALLPAPER;
-#      date > ~/q
-#  done &
+xsetroot -solid black
 
 
 ## ================================================================
