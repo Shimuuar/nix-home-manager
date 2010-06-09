@@ -239,7 +239,8 @@ myManageHook = composeAll $ concat [
     hookList (doWorkspace "WWW")     [ (className, "Iceweasel")
                                      , (className, "Firefox-bin")
                                      , (className, "Firefox") ],
-    hookList (doWorkspace "RSS")     [ (className, "Akregator") ],
+    hookList (doWorkspace "RSS")     [ (className, "Akregator")
+                                     , (className, "Liferea") ],
     hookList (doWorkspace "IM")      [ (className, "psi") ],
     hookList (doWorkspace "Mail")    [ (className, "Kmail") ],
     hookList (doWorkspace "Torrent") [ (className, "Ktorrent")
@@ -286,7 +287,7 @@ myConfig = defaultConfig {
       handleEventHook    = ewmhDesktopsEventHook,
       layoutHook         = myLayout,
       manageHook         = myManageHook,
-      logHook            = ewmhDesktopsLogHookCustom (take 10)
+      logHook            = ewmhDesktopsLogHookCustom (take 10 . scratchpadFilterOutWorkspace)
       }
 
 
