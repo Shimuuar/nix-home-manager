@@ -225,8 +225,9 @@ myManageHook = composeAll $ concat [
     hookList doIgnore [ (className, "stalonetray")
                       , (className, "trayer")
                       , (className, "fbpanel")
-                      , (className, "Plasma")
-                      , (className, "Plasma-desktop")
+                      , (title,     "plasma-desktop")
+                      -- , (className, "Plasma")
+                      -- , (className, "Plasma-desktop")
                       , (className, "xfce4-panel")
                       , (className, "Xfce4-Panel") ],
     -- Floating windows 
