@@ -7,16 +7,24 @@
 ## ---------------------------------------------------------
 ## Pathes
 ## ---------------------------------------------------------
-# Prepend path to $PATH envvar if it's not there already
-function prepend_to_PATH() {
-    if echo $PATH | tr : '\n' | grep -qE "^$1$"; then
+# Prepend path to envvar if it's not there already
+function prepend_to() {
+    local name="$1"
+    local var=$(eval echo \$"{$1}")
+    if [ x${var} = 'x' ]; then
+	# Envvar is empty export it
+	eval export $name="$2"
+    elif echo $var | tr : '\n' | grep -qE "^$2$"; then
+	# It's already there
 	:
     else
-	export PATH="$1":"$PATH"
+	# Let's prepend it
+	eval export $name="$2":$var
     fi
 }
-prepend_to_PATH ${HOME}/opt/bin
-prepend_to_PATH ${HOME}/.cabal/bin
+
+prepend_to PATH ${HOME}/opt/bin
+prepend_to PATH ${HOME}/.cabal/bin
 export PYTHONPATH=${HOME}/opt/python/lib$(getconf LONG_BIT | sed 's/32//')/python$(python -V 2>&1 | egrep -o '2\.[0-9]')/site-packages
 ## ----------------
 
@@ -132,8 +140,6 @@ alias j=jobs
 alias wcl='wc -l'
 # Man shorthand
 alias ?='man'
-# Make with include path
-alias maki='make -I ~/.local/share/make'
 # Make which shows notification on completion
 function make-notify () { make "$@" && notify-send "Make done" || notify-send "Make failed"; }
 # IPython with math functions
@@ -195,7 +201,7 @@ function hg-qexport { # export top pathc in mercurial queue
 }
 # Darcs
 function darcs-diff() { darcs diff -u "$@" | colordiff | tryless; }
-function darcs-what() { yes n | darcs send -o /dev/null; }
+function darcs-what() { yes y | darcs send -o /dev/null; }
 
 # Generate pdf from LaTeX file. DVI file and all auxillary TeX files are created in process.
 function tex2pdf() {
