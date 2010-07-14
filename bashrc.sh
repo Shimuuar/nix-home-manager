@@ -7,7 +7,16 @@
 ## ---------------------------------------------------------
 ## Pathes
 ## ---------------------------------------------------------
-export PATH=$PATH:${HOME}/opt/bin:${HOME}/.cabal/bin
+# Prepend path to $PATH envvar if it's not there already
+function prepend_to_PATH() {
+    if echo $PATH | tr : '\n' | grep -qE "^$1$"; then
+	:
+    else
+	export PATH="$1":"$PATH"
+    fi
+}
+prepend_to_PATH ${HOME}/opt/bin
+prepend_to_PATH ${HOME}/.cabal/bin
 export PYTHONPATH=${HOME}/opt/python/lib$(getconf LONG_BIT | sed 's/32//')/python$(python -V 2>&1 | egrep -o '2\.[0-9]')/site-packages
 ## ----------------
 
