@@ -1,4 +1,5 @@
 
+
 ## ~/.bashrc: executed by bash(1) for non-login shells.
 ## see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 ## for examples
@@ -160,7 +161,7 @@ alias python-setup="[ -f setup.py ] && python setup.py build && python setup.py 
 # Calculate things ([p]rint) (borrowed from GDB)
 function p() {  echo $@ | bc -l;  }
 # View colored source code
-function vsrc() { highlight "$@" -A | $MYPAGER;  }
+function vsrc() { highlight "$@" -A | less -R; }
 # Make dir and cd to it
 function mkcd() { mkdir -p "$1" && cd "$1";  }
 ## VCS shorcuts and goodies
