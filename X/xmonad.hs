@@ -226,14 +226,13 @@ myManageHook = composeAll $ concat [
                       , (className, "trayer")
                       , (className, "fbpanel")
                       , (title,     "plasma-desktop")
-                      -- , (className, "Plasma")
-                      -- , (className, "Plasma-desktop")
                       , (className, "xfce4-panel")
                       , (className, "Xfce4-Panel") ],
     -- Floating windows 
     hookList doCenterFloat [ (className, "XDosEmu")
                            , (className, "feh")
-                           , (resource,  "terminal-float") ],
+                           , (resource,  "terminal-float") 
+                           , (title,     "VLC (XVideo output)")],
     hookList doMedia [ (className, "MPlayer")
                      , (className, "wesnoth") ],
     -- Windows placement hooks
