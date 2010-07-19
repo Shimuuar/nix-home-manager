@@ -179,6 +179,8 @@ function p() {  echo $@ | bc -l;  }
 function vsrc() { highlight "$@" -A | less -R; }
 # Make dir and cd to it
 function mkcd() { mkdir -p "$1" && cd "$1";  }
+# Kill all processes owned by me
+function suicide() { kill $(ps -u $(whoami) | grep -Eo '^ *[0-9]+'); }
 ## VCS shorcuts and goodies
 # Subversion
 function svn-diff()  {  svn diff "$@" | colordiff | tryless; } # Colored diff
