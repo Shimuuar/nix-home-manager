@@ -114,7 +114,7 @@ alias dpkgg="dpkg -l | grep -i"
 alias hplot='gplot -histeps'
 # Process structure 
 alias psme="ps -u $(whoami) --forest"
-alias suicide="kill $(ps -u $(whoami) -o PID | grep -v PID)"
+suicide() { kill $(ps -u $(whoami) -o pid | grep -v PID); }
 # Disk usage 
 alias dum='du --max-depth=1'
 # Shorthand for jobs 
