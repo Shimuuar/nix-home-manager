@@ -131,7 +131,8 @@ alias dpkgg="dpkg -l | grep -i"
 # One of plot types I use very often
 alias hplot='gplot -histeps'
 # Process structure 
-alias psme="ps -u $(whoami) --forest" 
+alias psme="ps -u $(whoami) --forest"
+suicide() { kill $(ps -u $(whoami) -o pid | grep -v PID); }
 # Disk usage 
 alias dum='du --max-depth=1'
 # Shorthand for jobs 
