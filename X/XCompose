@@ -94,6 +94,9 @@
 <Multi_key> <minus> <colon>      	: "÷"   division # DIVISION SIGN
 <Multi_key> <percent> <o>        	: "‰"   U2030     # PER MILLE SIGN
 <Multi_key> <o> <o>              	: "°"   degree    # DEGREE SIGN
+# Various operators
+<Multi_key> <o> <plus>                  : "⨁"  U2A01  # N-ARY CIRCLED PLUS OPERATOR
+<Multi_key> <plus> <o>                  : "⨁"  U2A01  # N-ARY CIRCLED PLUS OPERATOR
 # Another keys
 <Multi_key> <8> <8>             	: "∞" U221E # infinity
 
