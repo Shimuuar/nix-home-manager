@@ -233,8 +233,9 @@ function getzipc() {
     unzip "$TMP"           || (rm -f "$TMP"; exit 1)
 }
 # Convert SVG to PDF and EPS
-function svg2pdf() { inkscape "$1" --export-text-to-path --export-pdf ${1%.svg}.pdf; }
-function svg2eps() { inkscape "$1" --export-text-to-path --export-eps ${1%.svg}.eps; }
+svg2pdf() { inkscape "$1" --export-text-to-path --export-area-drawing --export-pdf ${1%.svg}.pdf; }
+svg2eps() { inkscape "$1" --export-text-to-path --export-area-drawing --export-eps ${1%.svg}.eps; }
+svg2png() { inkscape "$1" --export-text-to-path --export-area-drawing --export-dpi=${2-90} --export-png ${1%.svg}.png; }
 ## -----------------
 
 
