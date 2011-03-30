@@ -69,6 +69,7 @@
 <Multi_key> <asciicircum> <plus>    	: "⁺"   
 <Multi_key> <asciicircum> <minus>    	: "⁻"   
 # Logical relations
+<Multi_key> <asciitilde> <asciitilde>   : "≈" U2248 # ALMOST EQUAL TO, TildeTilde
 <Multi_key> <comma> <minus>      	: "¬"   notsign # NOT SIGN
 <Multi_key> <minus> <comma>      	: "¬"   notsign # NOT SIGN
 <Multi_key> <equal> <slash>             : "≠"   U2260 # NOT EQUAL TO
