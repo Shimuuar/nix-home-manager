@@ -1,5 +1,14 @@
 !! Global settings
 *font: -xos4-terminus-medium-r-normal-*-16-*-*-*-*-*-iso10646-*
+*international: true
+
+.xmessage.form.okay.shapeStyle:		round
+.xmessage.form.okay.background:		#333333
+.xmessage.form.okay.foreground:		snow
+.xmessage.form.message.Scroll:		WhenNeeded
+.xmessage.message.font:			-xos4-terminus-medium-r-normal-*-20-*-*-*-*-*-iso10646-*
+.xmessage.form.background:		#333333
+.xmessage.defaultButton:		okay
 
 !! urxvt settings 
 ! Tabs settings 
