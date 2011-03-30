@@ -143,9 +143,7 @@ myKeys conf =
     -- Applications shortcuts
     , ("M-M1-e"  , spawn "emacs")
     , ("M-M1-i"  , spawn "firefox")
-    , ("M-i"     , spawn "firefox \"$(xsel)\"")
     , ("M-M1-k"  , spawn "konqueror")
-    , ("M-M1-w"  , spawn "kdesu wireshark")
     , ("M-s"     , scratchpadSpawnActionCustom "xterm -name scratchpad -e sh -c 'screen -d -R scratch'")
     , ("<Print>" , spawn "ksnapshot")
     -- Search
