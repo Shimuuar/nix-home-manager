@@ -89,6 +89,7 @@ int main(int argc, char** argv)
 ;; ===============================================
 ;; Indentation
 ;; ===============================================
+; Could be set with c-set-style
 (defconst my-c-tab-style
   '( "bsd"
 	(indent-tabs-mode . t)
