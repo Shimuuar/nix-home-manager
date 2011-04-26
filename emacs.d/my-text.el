@@ -48,7 +48,7 @@
 ; TeX template
 (defun my-insert-tex-template()
   (interactive)
-  (my-insert-if-empty
+  (insert
 "\\documentclass[a4paper]{article}
 
 \\usepackage[russian]{babel}
