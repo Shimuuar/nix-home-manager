@@ -128,8 +128,6 @@ alias envv="env | grep"
 alias pss="ps -ef | grep"
 alias dpkgg="dpkg -l | grep -i"
 
-# One of plot types I use very often
-alias hplot='gplot -histeps'
 # Process structure 
 alias psme="ps -u $(whoami) --forest"
 suicide() { kill $(ps -u $(whoami) -o pid | grep -v PID); }
@@ -139,8 +137,6 @@ alias dum='du --max-depth=1'
 alias j=jobs
 # Shorthand for wc -l
 alias wcl='wc -l'
-# Man shorthand
-alias ?='man'
 # Make which shows notification on completion
 function make-notify () { make "$@" && notify-send "Make done" || notify-send "Make failed"; }
 # IPython with math functions
