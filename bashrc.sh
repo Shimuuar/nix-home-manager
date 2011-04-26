@@ -158,14 +158,6 @@ alias cemacs="emacs -nw"
 alias  latex='latex  < /dev/null'
 alias pdftex='pdftex < /dev/null'
 
-# Configure/build/install haskell program
-alias ghc-c="runghc Setup configure --user --prefix=$HOME/opt/haskell"
-alias ghc-b="runghc Setup build"
-alias ghc-i="runghc Setup install"
-alias ghc-cl="runghc Setup clean"
-alias ghc-h="runghc Setup haddock"
-alias ghc-cbi="ghc-c && ghc-b && ghc-i"
-alias ghc-bi="ghc-b && ghc-i"
 # Configure and build python packages
 alias python-setup="[ -f setup.py ] && python setup.py build && python setup.py install --prefix=${HOME}/opt/python"
 ##-----------------
