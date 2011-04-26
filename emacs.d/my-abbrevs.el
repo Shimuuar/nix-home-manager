@@ -173,7 +173,7 @@
 		     "System.IO"
 		     "System.Process"
 		     "Text.Printf"
-		     ; Module which usually imported qualified
+		     ; Modules which usually imported qualified
 		     "qualified Data.Map as Map"
 		     "qualified Data.IntMap as IntMap"
 		     "qualified Data.Set as Set"
