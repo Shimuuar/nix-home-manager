@@ -155,8 +155,8 @@ alias aptitude-up='sudo aptitude update && sudo aptitude'
 alias cemacs="emacs -nw"
 
 # LaTeX aliases. It shoud die on errors and do not bug me
-alias  latex='latex  < /dev/null'
-alias pdftex='pdftex < /dev/null'
+alias    latex='latex    < /dev/null'
+alias pdflatex='pdflatex < /dev/null'
 
 # Configure and build python packages
 alias python-setup="[ -f setup.py ] && python setup.py build && python setup.py install --prefix=${HOME}/opt/python"
