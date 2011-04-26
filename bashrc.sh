@@ -184,7 +184,7 @@ function hg-prune() {  # Remove all files not under version control
 function hg-clean() { # Remove *.{orig,rej} files
     hg st -un | sed "s:^:$(hg root)/:" | egrep '\.(rej|orig)$' | while read q; do rm -rfv "$q"; done
 }
-function hg-qexport { # export top pathc in mercurial queue
+function hg-qexport { # export top patch in mercurial queue
     local name=$(hg qtop) || return 1
     hg export "$name" > "/tmp/${name}.patch" \
 	&& echo "$name exported" \
