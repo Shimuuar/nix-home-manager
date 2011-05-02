@@ -1,5 +1,3 @@
-
-
 import Codec.Binary.UTF8.String
 
 import qualified Data.Map as M
@@ -217,6 +215,7 @@ myLayout = smartBorders $
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
+myManageHook :: ManageHook
 myManageHook = composeAll $ concat [  
     -- Float dialogs
     [isDialog --> doFloat],
@@ -261,6 +260,7 @@ myManageHook = composeAll $ concat [
 
 ------------------------------------------------------------------------
 -- XPromt settings 
+myXPConfig :: XPConfig
 myXPConfig = defaultXPConfig {
                font = "-xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*" 
              , historySize = 20
@@ -293,4 +293,5 @@ myConfig = defaultConfig {
 
 ------------------------------------------------------------------------
 -- Run xmonad
+main :: IO ()
 main = xmonad myConfig
