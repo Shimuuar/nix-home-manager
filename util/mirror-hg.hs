@@ -67,6 +67,9 @@ inCd dir action = do
     const $ 
       setCurrentDirectory dir >> action
 
+-- | Essential bits of mercurial output 
+hgReport :: String -> IO ()
+hgReport = mapM_ putStrLn . filter (isPrefixOf "added ") . lines
 
 -- | Clone remote repo
 clone :: String                 -- ^ Host name
@@ -76,8 +79,7 @@ clone :: String                 -- ^ Host name
 clone host path dir = do
   putStrLn $ " * Clone: " ++ dir
   createDirectoryIfMissing True dir
-  mapM_ putStrLn . filter (isPrefixOf "added ") . lines =<<
-    readProcess "hg" ["clone", "ssh://"++host++"/"++path++"/"++dir, dir] ""
+  hgReport =<< readProcess "hg" ["clone", "ssh://"++host++"/"++path++"/"++dir, dir] ""
 
 -- | Update repository
 update :: String                 -- ^ Host name
@@ -86,8 +88,7 @@ update :: String                 -- ^ Host name
        -> IO ()
 update host path dir = do
   putStrLn $ " * Update: " ++ dir
-  mapM_ putStrLn . filter (isPrefixOf "added ") . lines =<< 
-    inCd dir (readProcess "hg" ["pull", "ssh://"++host++"/"++path++"/"++dir] "")
+  hgReport =<< inCd dir (readProcess "hg" ["pull", "ssh://"++host++"/"++path++"/"++dir] "")
 
 
 -- | Mirror repositories
