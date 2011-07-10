@@ -1,11 +1,13 @@
 # Compiler config
-CC     = gcc
-CFLAGS = -Wall -Wextra -g -O2 -std=c99
+CC       = gcc
+CFLAGS   = -Wall -Wextra -g -O2 -std=c99
+GHC      = ghc
+GHCFLAGS = -Wall -O2
 
 PREFIX =${HOME}/opt/bin
 
 # Executables
-EXE     = word mdo tryless
+EXE     = word mdo tryless mirror-hg
 SCRIPTS = caps2ctl
 
 .PHONY: all clean install
@@ -22,3 +24,5 @@ mdo: mdo.c
 	${CC} ${CFLAGS} -o $@ $<
 tryless: tryless.c
 	${CC} ${CFLAGS} -o $@ $<
+mirror-hg: mirror-hg.hs
+	${GHC} ${GHCFLAGS} -o $@ $<
