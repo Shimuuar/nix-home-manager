@@ -86,6 +86,8 @@
 <Multi_key> <slash> <0>                 : "∅" U2205 # empty set
 <Multi_key> <A> <A>                     : "∀" U2200 # forall
 <Multi_key> <E> <E>                     : "∃" U2203 # there exists
+<Multi_key> <bar> <underscore>          : "⊥" U22A5 # UP TACK (bottom)
+<Multi_key> <underscore> <bar>          : "⊥" U22A5 # UP TACK (bottom)
 # Plus minus & other 
 <Multi_key> <plus> <minus>       	: "±"   plusminus # PLUS-MINUS SIGN
 <Multi_key> <minus> <plus>       	: "±"   plusminus # PLUS-MINUS SIGN
