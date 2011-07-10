@@ -225,7 +225,9 @@ myManageHook = composeAll $ concat [
                       , (className, "fbpanel")
                       , (title,     "plasma-desktop")
                       , (className, "xfce4-panel")
-                      , (className, "Xfce4-Panel") ],
+                      , (className, "Xfce4-Panel") 
+                      , (className,  "Conky")
+                      ],
     -- Floating windows 
     hookList doCenterFloat [ (className, "XDosEmu")
                            , (className, "feh")
