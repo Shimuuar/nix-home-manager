@@ -5,7 +5,7 @@ PREFIX=${HOME}/opt/bin
 
 # Executables
 EXE = word mdo tryless
-SCRIPTS = xterm-less sshmount caps2ctl
+SCRIPTS = caps2ctl
 
 .PHONY: all clean install
 all : ${EXE}

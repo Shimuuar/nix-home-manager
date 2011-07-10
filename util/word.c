@@ -15,7 +15,11 @@ void failure(const char* msg)
 
 void help(void)
 {
-    fprintf(stderr, "USAGE help\n");
+    fprintf(stderr,
+            "USAGE: word {column numbers}\n"
+            "    Select columns from stdin\n"
+            "    Written in C as exersize\n"
+           );
     exit(1);
 }
 
