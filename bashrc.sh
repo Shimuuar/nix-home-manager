@@ -172,12 +172,12 @@ function mkcd() { mkdir -p "$1" && cd "$1";  }
 function suicide() { kill $(ps -u $(whoami) | grep -Eo '^ *[0-9]+'); }
 ## VCS shorcuts and goodies
 # Subversion
-function svn-diff()  {  svn diff "$@" | colordiff | tryless; } # Colored diff
+function svn-diff()  {  svn diff "$@" | colordiff | less -R --quit-if-one-screen; } # Colored diff
 function svn-gdiff() {  svn diff "$@" | kompare -o -; }        # Diff in kompare
 # Mercurial  
-function hg-diff()  {  hg diff "$@" | colordiff | tryless; } # Colored diff 
+function hg-diff()  {  hg diff "$@" | colordiff | less -R --quit-if-one-screenless; } # Colored diff 
 function hg-gdiff() {  hg diff "$@" | kompare -o -; } # View diff in kompare
-function hg-qdiff() {  hg qdiff "$@" | colordiff | tryless; } # Colored diff for queues
+function hg-qdiff() {  hg qdiff "$@" | colordiff | less -R --quit-if-one-screenless; } # Colored diff for queues
 function hg-prune() {  # Remove all files not under version control
     hg st -un | sed "s:^:$(hg root)/:" | while read q; do rm -rfv "$q"; done
 }
@@ -191,7 +191,7 @@ function hg-qexport { # export top patch in mercurial queue
 	|| echo "Could not export $name"
 }
 # Darcs
-function darcs-diff() { darcs diff -u "$@" | colordiff | tryless; }
+function darcs-diff() { darcs diff -u "$@" | colordiff | less -R --quit-if-one-screenless; }
 function darcs-what() { yes y | darcs send -o /dev/null; }
 
 # Generate pdf from LaTeX file. DVI file and all auxillary TeX files are created in process.
