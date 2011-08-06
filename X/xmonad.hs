@@ -231,7 +231,6 @@ myManageHook = composeAll $ concat [
                       , (className, "avant-window-navigator")                      
                       , (className, "tint2")
                       , (className, "Tint2")
-                      -- , (title    , "tint2")
                       ],
     -- Floating windows 
     hookList doCenterFloat [ (className, "XDosEmu")
@@ -247,7 +246,9 @@ myManageHook = composeAll $ concat [
     hookList (doWorkspace "RSS")     [ (className, "Akregator")
                                      , (className, "Liferea") ],
     hookList (doWorkspace "IM")      [ (className, "psi") ],
-    hookList (doWorkspace "Mail")    [ (className, "Kmail") ],
+    hookList (doWorkspace "Mail")    [ (className, "Kmail") 
+                                     , (className, "Icedove")
+                                     ],
     hookList (doWorkspace "Torrent") [ (className, "Ktorrent")
                                      , (className, "Deluge") ],
     hookList (doWorkspace "Audio")   [ (className, "Sonata") ],

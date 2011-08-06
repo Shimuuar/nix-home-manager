@@ -36,7 +36,7 @@ which mpdscribble && mpdscribble --conf ~/.mpdscribble/mpdscribble
 ## ================================================================
 ## Wallpaper
 ## ================================================================
-xsetroot -solid black
+feh --bg-center ~/.wallpaper
 
 
 ## ================================================================
