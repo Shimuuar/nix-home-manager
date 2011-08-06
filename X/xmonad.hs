@@ -226,7 +226,12 @@ myManageHook = composeAll $ concat [
                       , (title,     "plasma-desktop")
                       , (className, "xfce4-panel")
                       , (className, "Xfce4-Panel") 
-                      , (className,  "Conky")
+                      , (className, "Conky")
+                      , (className, "cairo-dock")
+                      , (className, "avant-window-navigator")                      
+                      , (className, "tint2")
+                      , (className, "Tint2")
+                      -- , (title    , "tint2")
                       ],
     -- Floating windows 
     hookList doCenterFloat [ (className, "XDosEmu")
@@ -289,7 +294,7 @@ myConfig = defaultConfig {
       handleEventHook    = ewmhDesktopsEventHook,
       layoutHook         = myLayout,
       manageHook         = myManageHook,
-      logHook            = ewmhDesktopsLogHookCustom (take 10 . scratchpadFilterOutWorkspace)
+      logHook            = ewmhDesktopsLogHookCustom (scratchpadFilterOutWorkspace)
       }
 
 
