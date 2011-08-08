@@ -224,8 +224,78 @@ function getzipc() {
 svg2pdf() { inkscape "$1" --export-text-to-path --export-area-drawing --export-pdf ${1%.svg}.pdf; }
 svg2eps() { inkscape "$1" --export-text-to-path --export-area-drawing --export-eps ${1%.svg}.eps; }
 svg2png() { inkscape "$1" --export-text-to-path --export-area-drawing --export-dpi=${2-90} --export-png ${1%.svg}.png; }
-## -----------------
+# Cabalize haskell project
+cabalize () {
+    # Project name
+    local name=$(pwd | sed -e 's@.*/@@')
+    # Cabal file
+    cat > "${name}.cabal" <<EOF
+Name:           ${name}
+Version:        0.1
+Cabal-Version:  >= 1.6
+License:        BSD3
+License-File:   LICENSE
+Author:         Aleksey Khudyakov <alexey.skladnoy@gmail.com>
+Maintainer:     Aleksey Khudyakov <alexey.skladnoy@gmail.com>
+Homepage:       http://bitbucket.org/Shimuuar/${name}
+Category:       Data
+Build-Type:     Simple
+Synopsis:       <<<SYNOPSIS>>>
+Description:
+  <<<DESCRIPTION>>>
 
+source-repository head
+  type:     hg
+  location: http://bitbucket.org/Shimuuar/${name}
+
+Library
+  Build-Depends:        base >=3 && <5
+  Exposed-modules:      
+EOF
+    # Setup
+    cat > Setup.hs <<EOF
+import Distribution.Simple
+main = defaultMain
+EOF
+    # BSD3 license
+    cat > LICENSE <<EOF
+Copyright (c) Aleksey Khudyakov
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+3. Neither the name of the author nor the names of his contributors
+   may be used to endorse or promote products derived from this software
+   without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE CONTRIBUTORS ``AS IS'' AND ANY EXPRESS
+OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED.  IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+EOF
+    # .hgignore if not present
+    [ -f .hgignore ] || cat > .hgignore <<EOF
+dist
+EOF
+}
+## -----------------
 
 ## ---------------------------------------------------------
 ## Fortunes (pleasant reading)
