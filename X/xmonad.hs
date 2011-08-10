@@ -27,6 +27,7 @@ import XMonad.Layout.Grid
 
 import XMonad.Util.Scratchpad
 import XMonad.Util.EZConfig
+import XMonad.Util.Run
 
 import XMonad.Prompt
 
@@ -36,6 +37,9 @@ import XMonad.Prompt
 spawnU :: MonadIO m => String -> m ()
 spawnU = spawn . encodeString
 
+run :: MonadIO m => String -> m ()
+run = safeSpawnProg
+  
 wikipediaLang' :: String -> SearchEngine 
 wikipediaLang' lang = searchEngine (lang++".wiki") ("https://secure.wikimedia.org/wikipedia/"++lang++"/wiki/Special:Search?go=Go&search=")
 
@@ -76,7 +80,7 @@ myKeys conf =
     -- Restart XMonad
     , ("M-q"         , broadcastMessage ReleaseResources >> restart "xmonad" True)
     -- Run termnal emulator 
-    , ("M-S-<Return>", spawn $ XMonad.terminal conf)
+    , ("M-S-<Return>", run $ XMonad.terminal conf)
     -- Run menu
     , ("M-p"         , spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
     -- Close focused window 
@@ -126,11 +130,11 @@ myKeys conf =
             , ("1"           , spawn "mpc single  > /dev/null")
             ] )
     -- Applications shortcuts
-    , ("M-M1-e"  , spawn "emacs")
-    , ("M-M1-i"  , spawn "firefox")
-    , ("M-M1-k"  , spawn "konqueror")
+    , ("M-M1-e"  , run "emacs")
+    , ("M-M1-i"  , run "firefox")
+    , ("M-M1-k"  , run "konqueror")
     , ("M-s"     , scratchpadSpawnActionCustom "xterm -name scratchpad -e sh -c 'screen -d -R scratch'")
-    , ("<Print>" , spawn "ksnapshot")
+    , ("<Print>" , run "ksnapshot")
     -- Search
     , ("M-g"     , submap $ mkKeymap conf $ concatMap mySearch
           [ ("g"  , google )
