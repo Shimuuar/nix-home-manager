@@ -32,19 +32,6 @@ import XMonad.Prompt
 
 ----------------------------------------------------------------
 
--- | Data for XPrompt 
-data XPDict = XPDict
-instance XPrompt XPDict where
-    showXPrompt = const "Посмотреть слово: "
--- | Look wod in dictionary 
-lookupDictionary :: XPConfig -> X ()
-lookupDictionary config = mkXPrompt XPDict config (return . const []) 
-    ((\x -> spawnU $ "(echo "++x++"; dict "++x++") | dzen_less") . shellEscape)
-
--- | Escapes all shell metacharacters.
-shellEscape :: String -> String 
-shellEscape = concatMap (\x -> if x `elem` " ;$!@#%&|<>" then '\\':[x] else [x])
- 
 -- | Unicode safe spawn 
 spawnU :: MonadIO m => String -> m ()
 spawnU = spawn . encodeString
