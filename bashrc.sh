@@ -194,6 +194,17 @@ function hg-qexport { # export top patch in mercurial queue
 function darcs-diff() { darcs diff -u "$@" | colordiff | less -R --quit-if-one-screenless; }
 function darcs-what() { yes y | darcs send -o /dev/null; }
 
+# Force removal of all packages
+ghc-pkg-forece-remove() {
+    ghc-pkg unregister "$1"
+    if [ $? != 0 ]; then
+	for i in $( ghc-pkg unregister "$1" 2>&1 | sed -e 's/.*://; s/(.*//'); do
+	    ghc-pkg unregister "$i"
+	done
+	ghc-pkg unregister "$1"
+    fi
+}
+
 # Generate pdf from LaTeX file. DVI file and all auxillary TeX files are created in process.
 function tex2pdf() {
     # LaTeX should be run twice for correct creation of ToC (if any)
