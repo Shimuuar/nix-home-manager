@@ -26,3 +26,5 @@ X :
 	[ -L ~/.Xresources       ] || ln -sf ${PWD}/X/Xresources    ~/.Xresources 
 	[ -L ~/.XCompose         ] || ln -sf ${PWD}/X/Xresources    ~/.XCompose
 	[ -L ~/.conkyrc          ] || ln -sf ${PWD}/X/conky/conkyrc ~/.conkyrc
+	mkdir -p ~/.config/tint2
+	[ -L ~/.config/tint2/tint2rc ] || ln -sf ${PWD}/X/tint2rc   ~/.config/tint2/tint2rc
