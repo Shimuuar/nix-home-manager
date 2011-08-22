@@ -7,7 +7,6 @@
 setxkbmap -model pc104 -layout us,ru -variant basic,winkeys 
 setxkbmap -option -option "grp_led:scroll,grp:shifts_toggle,compose:menu,ctrl:nocaps" 
 
-
 [ -f ~/.Xresources ] && xrdb ~/.Xresources # Read resources
 [ -f ~/.Xmodmap    ] && xmodmap ~/.Xmodmap # read modmaps
 
@@ -28,14 +27,16 @@ export GTK_IM_MODULE=xim
 ## ================================================================
 ## Run session programs
 ## ================================================================
+killall gpg-agent
 eval $(gpg-agent --daemon)
 which mpdscribble && mpdscribble --conf ~/.mpdscribble/mpdscribble
-
+which conky       && conky
+which tint2       && tint2 -c ~/.config/tint2/tint2rc
 
 ## ================================================================
 ## Wallpaper
 ## ================================================================
-feh --bg-center ~/.wallpaper
+[ -f ~/.wallpaper ] && feh --bg-center ~/.wallpaper
 
 
 ## ================================================================
