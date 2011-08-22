@@ -195,7 +195,7 @@ function darcs-diff() { darcs diff -u "$@" | colordiff | less -R --quit-if-one-s
 function darcs-what() { yes y | darcs send -o /dev/null; }
 
 # Force removal of all packages
-ghc-pkg-forece-remove() {
+ghc-pkg-force-remove() {
     ghc-pkg unregister "$1"
     if [ $? != 0 ]; then
 	for i in $( ghc-pkg unregister "$1" 2>&1 | sed -e 's/.*://; s/(.*//'); do
