@@ -79,7 +79,7 @@ function truncate_pwd
     fi
 }
 
-MY_NAME=${MY_NAME-$(whoami)}
+MY_NAME=${MY_NAME-$(hostname)}
 PROMPT_COMMAND=truncate_pwd
 case "$TERM" in
     xterm*|rxvt*)
