@@ -194,12 +194,6 @@ function hg-qexport { # export top patch in mercurial queue
 function darcs-diff() { darcs diff -u "$@" | colordiff | less -R --quit-if-one-screenless; }
 function darcs-what() { yes y | darcs send -o /dev/null; }
 
-# Generate pdf from LaTeX file. DVI file and all auxillary TeX files are created in process.
-function tex2pdf() {
-    # LaTeX should be run twice for correct creation of ToC (if any)
-    latex "$1"; latex "$1";
-    dvips "${1%.tex}.dvi" -o - | ps2pdf - "${1%.tex}.pdf"
-}
 # Functionn to fetch and unpack gzipped tarball
 function gettar() {
     cd $(wget "$1" -O - | tee $(expr match "$1" '.*/\([^/]*\)') | tar xzvf - | (head -1 ; cat > /dev/null))
