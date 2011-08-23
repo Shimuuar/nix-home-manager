@@ -1,5 +1,7 @@
 syntax:glob
 *.o
+*.hi
 util/word
 util/mdo
 util/tryless
+util/mirror-hg
