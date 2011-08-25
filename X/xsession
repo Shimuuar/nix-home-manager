@@ -57,7 +57,7 @@ AUTORUN=~/.config/autorun
 ## Cleanup
 ## ================================================================
 wait $XMONAD_PID		# wait for xmonad termination
-pkill -HUP -P $$		# send SIGHUP to all children
+pkill -TERM -P $$		# send SIGTERM to all children
 mpc pause			# Stop music
 wait				# Wait for everyone to terminate
 
