@@ -30,8 +30,8 @@ export GTK_IM_MODULE=xim
 killall gpg-agent
 eval $(gpg-agent --daemon)
 which mpdscribble && mpdscribble --conf ~/.mpdscribble/mpdscribble
-which conky       && conky                            &
-which tint2       && tint2 -c ~/.config/tint2/tint2rc &
+which conky       && exec conky                            &
+which tint2       && exec tint2 -c ~/.config/tint2/tint2rc &
 
 ## ================================================================
 ## Wallpaper
