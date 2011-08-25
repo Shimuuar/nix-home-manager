@@ -146,7 +146,9 @@ alias mpython='ipython ~/.config/mpython.py'
 alias apt-search='apt-cache search'
 alias apt-show='aptitude show'
 alias apt-source='apt-get source'
-alias aptitude-up='sudo aptitude update && sudo aptitude'
+alias yum-avail='yum list available | grep'
+alias yum-installed='yum list installed | grep'
+
 # Console emacs
 alias cemacs="emacs -nw"
 
