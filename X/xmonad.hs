@@ -274,7 +274,7 @@ myXPConfig = defaultXPConfig {
 -- XMonad config
 myConfig = defaultConfig {
       -- simple stuff
-      terminal           = "my-terminal",  -- Supposed to be symlink to actual terminal emulator
+      terminal           = "konsole",
       modMask            = mod4Mask,
       focusFollowsMouse  = True,
       borderWidth        = 1,
