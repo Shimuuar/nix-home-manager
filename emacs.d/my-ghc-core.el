@@ -31,52 +31,48 @@
 (require 'haskell-mode)
 (require 'haskell-font-lock)
 
-(defun ghc-core-clean-region (start end)
+(defun my-ghc-core-prune-regex (regex &optional nchar)
+  "Remove all strings matched by regex in current region
+   Optionally remove n characters after regexp."
+  (goto-char (point-min))
+  (while (search-forward-regexp regex nil t)
+    (progn (replace-match "" nil t)
+	   (if (and (integerp nchar) (> nchar 0))
+	       (delete-char nchar)
+	   ))
+    ))
+
+(defun my-ghc-core-flush-line-regex (regex)
+  "Remove line matched by regex"
+  (goto-char (point-min))
+  (while (flush-lines regex nil))
+  )
+
+(defun my-ghc-core-clean-region (start end)
   "Remove commonly ignored annotations and namespace
 prefixes in the given region."
   (interactive "r")
   (save-restriction 
     (narrow-to-region start end)
-    (goto-char (point-min))
-    (while (search-forward-regexp "GHC\.[^\.]*\." nil t)
-      (replace-match "" nil t))
-    (goto-char (point-min))
-    (while (flush-lines "^ *GblId *$" nil))
-    (goto-char (point-min))
-    (while (flush-lines "^ *LclId *$" nil))
-    (goto-char (point-min))
-    (while (flush-lines (concat "^ *\\[\\(?:Arity [0-9]+\\|NoCafRefs\\|"
-                                "Str: DmdType\\|Worker \\)"
-                                "\\([^]]*\\n?\\).*\\] *$") nil))
-    (goto-char (point-min))
-    (while (search-forward "Main." nil t) (replace-match "" nil t))))
+    ; GHC.Whatever prefixes
+    (my-ghc-core-prune-regex "GHC\.[A-Za-z]+\.")
+    ; Main module prefix
+    (my-ghc-core-prune-regex "Main\.")
+    ))
 
-(defun ghc-core-clean-buffer ()
+(defun my-ghc-core-clean-buffer ()
   "Remove commonly ignored annotations and namespace
 prefixes in the current buffer."
   (interactive)
-  (ghc-core-clean-region (point-min) (point-max)))
+  (my-ghc-core-clean-region (point-min) (point-max)))
 
 ;;;###autoload
-(defun ghc-core-create-core ()
-  "Compiled and load the current buffer as tidy core"
-  (interactive)
-  (save-buffer)
-  (let ((core-buffer (generate-new-buffer "ghc-core"))
-        (neh (lambda () (kill-buffer core-buffer))))
-    (add-hook 'next-error-hook neh)
-    (call-process "ghc" nil core-buffer nil "-c" "-ddump-simpl" "-O2" (buffer-file-name))
-    (display-buffer core-buffer)
-    (with-current-buffer core-buffer
-      (ghc-core-mode))
-    (remove-hook 'next-error-hook neh)))
+(add-to-list 'auto-mode-alist '("\\.hcr\\'" . my-ghc-core-mode))
 
 ;;;###autoload
-(add-to-list 'auto-mode-alist '("\\.hcr\\'" . ghc-core-mode))
-
-;;;###autoload
-(define-derived-mode ghc-core-mode haskell-mode "GHC-Core"
+(define-derived-mode my-ghc-core-mode haskell-mode "GHC-Core"
   "Major mode for GHC Core files.")
 
-(provide 'ghc-core)
-;;; ghc-core.el ends here
+(provide 'my-ghc-core)
+;;; my-ghc-core.el ends here
+

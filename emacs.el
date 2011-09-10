@@ -19,3 +19,4 @@
 
 (require 'my-bindings)
 (require 'my-appearance)
+(require 'my-ghc-core)
