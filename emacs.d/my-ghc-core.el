@@ -58,6 +58,8 @@ prefixes in the given region."
     (my-ghc-core-prune-regex "GHC\.[A-Za-z]+\.")
     ; Main module prefix
     (my-ghc-core-prune-regex "Main\.")
+    ; Junk in [] brackets
+    (my-ghc-core-prune-regex "^ *\\[[[:cntrl:][:ascii:]]+?\\] *$" 1)
     ))
 
 (defun my-ghc-core-clean-buffer ()
