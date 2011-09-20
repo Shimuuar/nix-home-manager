@@ -36,7 +36,20 @@ which tint2       && exec tint2 -c ~/.config/tint2/tint2rc &
 ## ================================================================
 ## Wallpaper
 ## ================================================================
-[ -f ~/.wallpaper ] && feh --bg-center ~/.wallpaper
+
+# Directory with wallpapers
+WALLPAPERDIR=~/.wallpaper.d/$(xrandr -q 2>&1 | sed -re '/\* *$/!d; s/^ +([0-9]+x[0-9]+).*/\1/')
+
+# Directory with wallpapers is nonempty. Display random image
+if [ -d "$WALLPAPERDIR" ] && [ ! -z "$(ls "$WALLPAPERDIR"/)" ]; then
+    feh --bg-center "$WALLPAPERDIR"/$(ls "$WALLPAPERDIR" | sort -R | head -1)
+# There is .wallpaper
+elif [ -f ~/.wallpaper ]; then
+    feh --bg-center ~/.wallpaper
+# Fill with some non-black color
+else
+    xsetroot -solid lightgreen
+fi
 
 
 ## ================================================================
