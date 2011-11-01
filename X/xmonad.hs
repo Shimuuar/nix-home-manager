@@ -82,7 +82,7 @@ myKeys conf =
     -- Run termnal emulator 
     , ("M-S-<Return>", run $ XMonad.terminal conf)
     -- Run menu
-    , ("M-p"         , spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+    , ("M-p"         , run "dmenu_run")
     -- Close focused window 
     , ("M-S-c"       , kill)
     -- Rotate through the available layout algorithms
