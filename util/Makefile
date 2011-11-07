@@ -15,6 +15,7 @@ all : ${EXE}
 clean:
 	rm -rf *.o ${EXE}
 install: all
+	mkdir -p ${PREFIX}
 	install ${EXE}     ${PREFIX}/
 	install ${SCRIPTS} ${PREFIX}/
 
