@@ -10,7 +10,8 @@ import XMonad
 import qualified XMonad.StackSet as W
 
 import XMonad.Actions.Submap
-import XMonad.Actions.Search
+import XMonad.Actions.Search (SearchEngine, searchEngine, promptSearchBrowser, selectSearchBrowser,
+                              google, youtube, isohunt, wikipedia, scholar, hoogle, hackage)
 
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
