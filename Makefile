@@ -4,6 +4,7 @@
 
 all     : install
 install : bash screen emacs X
+	mkdir -p ${HOME}/opt/bin
 	make -C util install
 ## ================================================================
 
