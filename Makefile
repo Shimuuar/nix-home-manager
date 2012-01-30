@@ -1,8 +1,10 @@
 
-.PHONY: all install \
+.PHONY: all install clean \
 	bash screen emacs X
 
 all     : install
+clean	:
+	make -C util clean
 install : bash screen emacs X
 	make -C util install
 ## ================================================================
