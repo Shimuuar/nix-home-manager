@@ -10,7 +10,8 @@ import XMonad
 import qualified XMonad.StackSet as W
 
 import XMonad.Actions.Submap
-import XMonad.Actions.Search
+import XMonad.Actions.Search (SearchEngine, searchEngine, promptSearchBrowser, selectSearchBrowser,
+                              google, youtube, isohunt, wikipedia, scholar, hoogle, hackage)
 
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
@@ -23,7 +24,7 @@ import XMonad.Layout.Reflect
 import XMonad.Layout.ComboP
 import XMonad.Layout.TwoPane
 import XMonad.Layout.Tabbed
-import XMonad.Layout.Grid 
+import XMonad.Layout.Grid
 
 import XMonad.Util.Scratchpad
 import XMonad.Util.EZConfig
@@ -33,14 +34,14 @@ import XMonad.Prompt
 
 ----------------------------------------------------------------
 
--- | Unicode safe spawn 
+-- | Unicode safe spawn
 spawnU :: MonadIO m => String -> m ()
 spawnU = spawn . encodeString
 
 run :: MonadIO m => String -> m ()
 run = safeSpawnProg
-  
-wikipediaLang' :: String -> SearchEngine 
+
+wikipediaLang' :: String -> SearchEngine
 wikipediaLang' lang = searchEngine (lang++".wiki") ("https://secure.wikimedia.org/wikipedia/"++lang++"/wiki/Special:Search?go=Go&search=")
 
 mySearch :: (String, SearchEngine) -> [(String, X ())]
@@ -52,7 +53,7 @@ mySearch (key , engine) = [ (key      , promptSearchBrowser myXPConfig browser e
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
-myKeys conf = 
+myKeys conf =
   let upperKeys = ["1","2","3","4","5","6","7","8","9","0","-","="]
       -- Make pair of move/shift to workspace keybindings
       makeShiftPair :: String -> (String, String) -> [(String, X())]
@@ -64,7 +65,7 @@ myKeys conf =
     ++
     -- More move/switch to workspace
     [ ("M-w", windows $ W.greedyView "WWW")
-    , ("M-a", submap $ mkKeymap conf $ 
+    , ("M-a", submap $ mkKeymap conf $
             [ ("w", "WWW")
             , ("r", "RSS")
             , ("m", "Почта")
@@ -79,17 +80,17 @@ myKeys conf =
     , ("M-S-q"       , io (exitWith ExitSuccess))
     -- Restart XMonad
     , ("M-q"         , broadcastMessage ReleaseResources >> restart "xmonad" True)
-    -- Run termnal emulator 
+    -- Run termnal emulator
     , ("M-S-<Return>", run $ XMonad.terminal conf)
     -- Run menu
     , ("M-p"         , run "dmenu_run")
-    -- Close focused window 
+    -- Close focused window
     , ("M-S-c"       , kill)
     -- Rotate through the available layout algorithms
     , ("M-<Space>"   , sendMessage NextLayout)
     -- Reset the layouts on the current workspace to default
     , ("M-S-<Space>" , setLayout $ XMonad.layoutHook conf)
-    -- Resize viewed windows to the correct size 
+    -- Resize viewed windows to the correct size
     , ("M-n"         , refresh)
     -- Toggle struts on/off
     , ("M-b"         , sendMessage ToggleStruts)
@@ -115,7 +116,7 @@ myKeys conf =
     , ("M-,"          , sendMessage (IncMasterN 1))
     , ("M-."          , sendMessage (IncMasterN (-1)))
 
-    -- MPD keybindings 
+    -- MPD keybindings
     , ("M-<Page_Down>"   , spawn "mpc next   > /dev/null")
     , ("M-<Page_Up>"     , spawn "mpc prev   > /dev/null")
     , ("M-<End>"         , spawn "mpc toggle > /dev/null")
@@ -126,7 +127,7 @@ myKeys conf =
             , ("S-<Delete>"  , spawn "mpc clear   > /dev/null")
             , ("r"           , spawn "mpc repeat  > /dev/null")
             , ("x"           , spawn "mpc random  > /dev/null")
-            , ("S-x"         , spawn "mpc shuffle > /dev/null") 
+            , ("S-x"         , spawn "mpc shuffle > /dev/null")
             , ("1"           , spawn "mpc single  > /dev/null")
             ] )
     -- Applications shortcuts
@@ -148,16 +149,16 @@ myKeys conf =
           , ("u"  , searchEngine "Лурка" "http://lurkmore.ru/%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:Search?search=")
           , ("a"  , searchEngine "Яндекс" "http://yandex.ru/yandsearch?text=")
           ] )
-    -- Useful action 
-    , ("M-x"     , submap $ mkKeymap conf $ 
+    -- Useful action
+    , ("M-x"     , submap $ mkKeymap conf $
           [ ("z"   , spawn "xterm-less < ~/.xsession-errors")
           , ("S-z" , spawn "tail -f ~/.xsession-errors | xterm-less")
           , ("p"   , spawn "xprop | grep -v WM_ICON | xterm-less")
           , ("l"   , spawn "xlock")
           ] )
     ]
-  
- 
+
+
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
@@ -171,33 +172,38 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
 
- 
+
 ------------------------------------------------------------------------
 -- Layouts:
- 
+
 -- You can specify and transform your layouts by modifying these values.
 -- If you change layout bindings be sure to use 'mod-shift-space' after
 -- restarting (with 'mod-q') to reset your layout state to the new
 -- defaults, as xmonad preserves your old layout settings by default.
 --
-myLayout = smartBorders $
-           avoidStruts  $ 
-           onWorkspace "IM" (withIM (1%5) (Resource "main") Grid) $
-           onWorkspace "Gimp" gimp $ 
-           defaultLayout
-    where
-      -- Default layout
-      defaultLayout = tiled ||| Mirror tiled ||| Full
-      -- Simple tiled layout 
-      tiled   = Tall 1 (1/50) (1/2)
-      -- Layout for GIMP
-      gimp = withIM (0.18) (Role "gimp-toolbox") $
-                combineTwoP (reflectHoriz $ TwoPane 0.2 0.2) 
-                            (simpleTabbed) (defaultLayout) (Role "gimp-dock")
- 
+myLayout = smartBorders
+         $ avoidStruts
+         $ onWorkspace "IM"   im
+         $ onWorkspace "Gimp" gimp
+         $ defaultLayout
+  where
+    -- Default layout
+    defaultLayout =  tiled
+                 ||| Mirror tiled
+                 ||| Full
+                 where tiled = Tall 1  0.02  0.50
+    -- IM layout
+    im = withIM 0.20 res Grid
+      where res =   Resource "main"       -- Psi
+               `Or` Role     "buddy_list" -- Pidgin
+    -- Layout for GIMP
+    gimp = withIM (0.18) (Role "gimp-toolbox") $
+              combineTwoP (reflectHoriz $ TwoPane 0.2 0.2)
+                          (simpleTabbed) (defaultLayout) (Role "gimp-dock")
+
 ------------------------------------------------------------------------
 -- Window rules:
--- 
+--
 -- Execute arbitrary actions and WindowSet manipulations when managing
 -- a new window. You can use this to, for example, always float a
 -- particular program, or have a client always appear on a particular
@@ -207,29 +213,29 @@ myLayout = smartBorders $
 -- 'className' and 'resource' are used below.
 --
 myManageHook :: ManageHook
-myManageHook = composeAll $ concat [  
+myManageHook = composeAll $ concat [
     -- Float dialogs
     [isDialog --> doFloat],
-    -- Ignored windows 
+    -- Ignored windows
     hookList doIgnore [ (className, "stalonetray")
                       , (className, "trayer")
                       , (className, "fbpanel")
                       , (title,     "plasma-desktop")
                       , (className, "xfce4-panel")
-                      , (className, "Xfce4-Panel") 
+                      , (className, "Xfce4-Panel")
                       , (className, "Conky")
                       , (className, "cairo-dock")
-                      , (className, "avant-window-navigator")                      
+                      , (className, "avant-window-navigator")
                       , (className, "tint2")
                       , (className, "Tint2")
                       , (className, "lxpanel")
                       , (className, "taffybar")
                       , (className, "Taffybar")
                       ],
-    -- Floating windows 
+    -- Floating windows
     hookList doCenterFloat [ (className, "XDosEmu")
                            , (className, "feh")
-                           , (resource,  "terminal-float") 
+                           , (resource,  "terminal-float")
                            , (title,     "VLC (XVideo output)")],
     hookList doMedia [ (className, "MPlayer")
                      , (className, "wesnoth") ],
@@ -239,8 +245,10 @@ myManageHook = composeAll $ concat [
                                      , (className, "Firefox") ],
     hookList (doWorkspace "RSS")     [ (className, "Akregator")
                                      , (className, "Liferea") ],
-    hookList (doWorkspace "IM")      [ (className, "psi") ],
-    hookList (doWorkspace "Почта")   [ (className, "Kmail") 
+    hookList (doWorkspace "IM")      [ (className, "psi")
+                                     , (className, "Pidgin")
+                                     ],
+    hookList (doWorkspace "Почта")   [ (className, "Kmail")
                                      , (className, "Mail")
                                      , (className, "Icedove")
                                      ],
@@ -255,17 +263,17 @@ myManageHook = composeAll $ concat [
       hookList :: Eq a => ManageHook -> [(Query a, a)] -> [ManageHook]
       hookList hook = map $ (--> hook) . uncurry (=?)
       -- Move window to workspace
-      doWorkspace :: String -> ManageHook 
+      doWorkspace :: String -> ManageHook
       doWorkspace = doF . W.shift
       -- Hook for multimedia related windows
       doMedia :: ManageHook
       doMedia = doF (W.greedyView "Media" . W.shift "Media") <+> doFullFloat
 
 ------------------------------------------------------------------------
--- XPromt settings 
+-- XPromt settings
 myXPConfig :: XPConfig
 myXPConfig = defaultXPConfig {
-               font = "-xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*" 
+               font = "-xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*"
              , historySize = 20
              }
 
@@ -278,7 +286,7 @@ myConfig = defaultConfig {
       modMask            = mod4Mask,
       focusFollowsMouse  = True,
       borderWidth        = 1,
-      workspaces         = (map show [1..10]) ++ 
+      workspaces         = (map show [1..10]) ++
                            ["WWW","RSS","Почта","IM","Torrent","Audio","Media","Gimp"],
       normalBorderColor  = "#dddddd",
       focusedBorderColor = "#ff0000",
