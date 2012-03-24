@@ -239,6 +239,10 @@ cabalize () {
     cat > "${name}.cabal" <<EOF
 Name:           ${name}
 Version:        0.1
+Synopsis:       <<<SYNOPSIS>>>
+Description:
+  <<<DESCRIPTION>>>
+
 Cabal-Version:  >= 1.6
 License:        BSD3
 License-File:   LICENSE
@@ -247,15 +251,13 @@ Maintainer:     Aleksey Khudyakov <alexey.skladnoy@gmail.com>
 Homepage:       http://bitbucket.org/Shimuuar/${name}
 Category:       Data
 Build-Type:     Simple
-Synopsis:       <<<SYNOPSIS>>>
-Description:
-  <<<DESCRIPTION>>>
 
 source-repository head
   type:     hg
   location: http://bitbucket.org/Shimuuar/${name}
 
 Library
+  Ghc-options:          -Wall
   Build-Depends:        base >=3 && <5
   Exposed-modules:      
 EOF
