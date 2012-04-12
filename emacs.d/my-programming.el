@@ -116,6 +116,12 @@ int main(int argc, char** argv)
 ;; ========================================================
 ;; Define hooks 
 ;; =========================================================
+(defun my-make-hook()
+  "Add quick binind for compile"
+  (local-set-key [f8] (lambda () (interactive)
+			(compile "make -k")))
+  )
+
 (defun my-c-indent-hook()
   "Allow to change indentation "
   (local-set-key (kbd "C-c C-<tab>") (lambda () (interactive)
@@ -131,7 +137,7 @@ int main(int argc, char** argv)
 (defun my-folding-hooks()
   "Hook for code folding"
   (hs-minor-mode t)
-  (local-set-key (kbd "C-S-<left>") 'hs-hide-block)
+  (local-set-key (kbd "C-S-<left>" ) 'hs-hide-block)
   (local-set-key (kbd "C-S-<right>") 'hs-show-block)
   )
 
@@ -154,12 +160,21 @@ int main(int argc, char** argv)
 (defun my-haskell-hooks ()
   "Hooks specific to haskell"
   (abbrev-mode t)
+  (turn-on-haskell-simple-indent)
   )
     
 ;; C hooks
-(add-hook-list 'c-mode-hook          '(my-indent-hook my-c-indent-hook my-comment-hooks my-folding-hooks))
+(add-hook-list 'c-mode-hook          '(my-indent-hook
+				       my-c-indent-hook
+				       my-make-hook
+				       my-comment-hooks
+				       my-folding-hooks))
 ;; C++ hooks 
-(add-hook-list 'c++-mode-hook        '(my-indent-hook my-c-indent-hook my-comment-hooks my-folding-hooks))
+(add-hook-list 'c++-mode-hook        '(my-indent-hook
+				       my-c-indent-hook
+				       my-make-hook
+				       my-comment-hooks
+				       my-folding-hooks))
 ;; Python hooks 
 (add-hook-list 'python-mode-hook     '(my-indent-hook my-folding-hooks my-python-hooks))
 ;; Shell hooks 
