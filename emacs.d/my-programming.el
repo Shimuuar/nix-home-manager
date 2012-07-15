@@ -149,8 +149,9 @@ int main(int argc, char** argv)
 
 (defun my-python-hooks ()
   "Hooks specific to python"
-  (setq tab-width 4)			; Override tab width
+  (setq tab-width        4  )		; Override tab width
   (setq indent-tabs-mode nil)		; Use spaces for indent
+  (setq python-indent    4  )		; Python indentation
   (abbrev-mode t)			; Set abberviation mode
   ;; Insert shebang into empty files
   (my-insert-if-empty "#!/usr/bin/python\n"
@@ -161,6 +162,7 @@ int main(int argc, char** argv)
   "Hooks specific to haskell"
   (abbrev-mode t)
   (turn-on-haskell-simple-indent)
+  (local-set-key (kbd "M-]") 'ghc-complete)
   )
     
 ;; C hooks
