@@ -206,7 +206,7 @@ ghc-pkg-force-remove() {
 	fi
 	# Happily remove everything
 	for i in $( ghc-pkg unregister "$1" 2>&1 | sed -e 's/.*would break the following packages://; s/(.*//'); do
-	    echo * Removing "$i"
+	    echo ' * Removing' "$i"
 	    ghc-pkg unregister "$i"
 	done
 	ghc-pkg unregister "$1"
