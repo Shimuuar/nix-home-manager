@@ -200,7 +200,13 @@ function darcs-what() { yes y | darcs send -o /dev/null; }
 ghc-pkg-force-remove() {
     ghc-pkg unregister "$1"
     if [ $? != 0 ]; then
-	for i in $( ghc-pkg unregister "$1" 2>&1 | sed -e 's/.*://; s/(.*//'); do
+	# Check that package is indeed here
+	if ghc-pkg unregister "$1" 2>&1 | grep -E '^ghc-pkg: cannot find package' > /dev/null; then
+	    return
+	fi
+	# Happily remove everything
+	for i in $( ghc-pkg unregister "$1" 2>&1 | sed -e 's/.*would break the following packages://; s/(.*//'); do
+	    echo * Removing "$i"
 	    ghc-pkg unregister "$i"
 	done
 	ghc-pkg unregister "$1"
