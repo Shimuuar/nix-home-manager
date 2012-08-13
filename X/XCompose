@@ -81,6 +81,7 @@
 <Multi_key> <equal> <less> <greater> 	: "⇔"   U21D4 # LEFT RIGHT DOUBLE ARROW
 <Multi_key> <minus> <greater>           : "→"
 <Multi_key> <less> <minus>              : "←"
+<Multi_key> <less> <greater> <minus>    : "↔"
 # Quantors
 <Multi_key> <0> <slash>                 : "∅" U2205 # empty set
 <Multi_key> <slash> <0>                 : "∅" U2205 # empty set
