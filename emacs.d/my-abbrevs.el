@@ -112,6 +112,7 @@
 		     "ConstraintKinds"
 		     "DeriveDataTypeable"
 		     "DeriveFunctor"
+		     "DeriveGeneric"
 		     "EmptyDataDecls"
 		     "ExistentialQuantification"
 		     "FlexibleContexts"

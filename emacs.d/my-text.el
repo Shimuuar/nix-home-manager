@@ -53,12 +53,9 @@
 
 \\usepackage[russian]{babel}
 \\usepackage[utf8]{inputenc}
-
-% margins
-%\\oddsidemargin=
-%\\textwidth=
-%\\topmargin=
-%\\textheight=
+\\usepackage{fullpage}
+\\usepackage{indentfirst}
+% \\usepackage{graphicx}
 
 \\begin{document}
 \\end{document}
