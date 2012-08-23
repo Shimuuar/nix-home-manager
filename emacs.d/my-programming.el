@@ -4,13 +4,13 @@
 ;;;
 
 ;; =========================================================
-;; Useful functions 
+;; Useful functions
 ;; =========================================================
 (defun my-insert-guard(title)
   "Insert C/C++ header guards quickly"
   (interactive "sType guard name: ")
-  (insert "#ifndef " title 
-          "\n#define " title 
+  (insert "#ifndef " title
+          "\n#define " title
           "\n\n#endif /* " title " */\n" ))
 
 (defun my-insert-c-template(foo)
@@ -71,7 +71,26 @@ int main(int argc, char** argv)
   (interactive "nType tab width ")
   (setq tab-width wid))
 
-;; =================
+(defun my-haskell-insert-inline ()
+  "Insert inline pragma. It inserts pragma in directly above the
+line. It consostent with "
+  (interactive)
+  ; Find out indentation and identifier name
+  (if (save-excursion
+	(move-beginning-of-line 1)
+	(looking-at "^\\([ \t]*\\)\\([a-zA-Z]+\\)")
+	)
+    (let ((spaces (buffer-substring (match-beginning 1) (match-end 1))) ; Indentation
+	  (ident  (buffer-substring (match-beginning 2) (match-end 2))) ; Binding name
+	  )
+      ; Insert pragma
+      (save-excursion
+	(move-beginning-of-line 1)
+	(insert (concat spaces "{-# INLINE " ident " #-}\n")))
+      )
+    (error "No identifier here!"))
+  )
+
 
 
 ;; ===============================================
@@ -80,9 +99,9 @@ int main(int argc, char** argv)
 ; turn on syntax highlighting
 (global-font-lock-mode t)
 ; Highlight parensthesis
-(show-paren-mode t) 
+(show-paren-mode t)
 ; Highlight whole expression if it's not fully visible
-(setq show-paren-style 'mixed) 
+(setq show-paren-style 'mixed)
 ;; =================
 
 
@@ -114,7 +133,7 @@ int main(int argc, char** argv)
 
 
 ;; ========================================================
-;; Define hooks 
+;; Define hooks
 ;; =========================================================
 (defun my-make-hook()
   "Add quick binind for compile"
@@ -126,7 +145,7 @@ int main(int argc, char** argv)
   "Allow to change indentation "
   (local-set-key (kbd "C-c C-<tab>") (lambda () (interactive)
 				       (c-set-style "bsd-tab")))
-  (local-set-key (kbd "C-c C-SPC")   (lambda () (interactive) 
+  (local-set-key (kbd "C-c C-SPC")   (lambda () (interactive)
 				       (c-set-style "bsd-ws")))
   )
 
@@ -158,28 +177,47 @@ int main(int argc, char** argv)
                       "\"\"\"\n"
                       "\"\"\"\n"))
 
+;; Haskell utils
+(require 'haskell-move-nested)
+(require 'haskell-navigate-imports)
+(require 'haskell-sort-imports)
 (defun my-haskell-hooks ()
   "Hooks specific to haskell"
   (abbrev-mode t)
   (turn-on-haskell-simple-indent)
-  (local-set-key (kbd "M-]") 'ghc-complete)
+  ;; Move nested blocks
+  (define-key haskell-mode-map (kbd "C-<left>")
+    (lambda ()
+      (interactive)
+      (haskell-move-nested -1)))
+  (define-key haskell-mode-map (kbd "C-<right>")
+    (lambda ()
+      (interactive)
+      (haskell-move-nested  1)))
+  ;; Navigate imports
+  (local-set-key (kbd "M-[") 'haskell-navigate-imports)
+  (local-set-key (kbd "M-]") 'haskell-navigate-imports-return)
+  ;; PRAGMAS
+  (local-set-key (kbd "C-c C-s") 'haskell-mode-insert-scc-at-point)
+  (local-set-key (kbd "C-c s"  ) 'haskell-mode-kill-scc-at-point)
+  (local-set-key (kbd "C-c i"  ) 'my-haskell-insert-inline)
   )
-    
+
 ;; C hooks
 (add-hook-list 'c-mode-hook          '(my-indent-hook
 				       my-c-indent-hook
 				       my-make-hook
 				       my-comment-hooks
 				       my-folding-hooks))
-;; C++ hooks 
+;; C++ hooks
 (add-hook-list 'c++-mode-hook        '(my-indent-hook
 				       my-c-indent-hook
 				       my-make-hook
 				       my-comment-hooks
 				       my-folding-hooks))
-;; Python hooks 
+;; Python hooks
 (add-hook-list 'python-mode-hook     '(my-indent-hook my-folding-hooks my-python-hooks))
-;; Shell hooks 
+;; Shell hooks
 (add-hook-list 'sh-mode-hook         '(my-indent-hook (lambda () (my-insert-if-empty "#!/bin/sh\n\n"))))
 ;; Lisp hooks
 (add-hook-list 'lisp-mode-hook       '(my-indent-hook my-comment-hooks))
