@@ -4,9 +4,11 @@
 ;;;
 
 ;; Load paths
-(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal"))
+(mapcar (lambda (path) (add-to-list 'load-path (expand-file-name path)))
+	(list "~/.emacs.d"
+	      "~/.emacs.d/lisp"
+	      "~/.emacs.d/lisp-personal"
+	      "~/.emacs.d/haskell-mode"))
 
 ; Require local modification (if any)
 (require 'my-local "my-local.el" t)
