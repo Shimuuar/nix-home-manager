@@ -101,7 +101,7 @@ line. It consostent with "
 (show-paren-mode t)
 ; Highlight whole expression if it's not fully visible
 (setq show-paren-style 'mixed)
-;; =================
+
 
 
 ;; ===============================================
@@ -128,7 +128,7 @@ line. It consostent with "
 (c-add-style "bsd-tab" my-c-tab-style)
 (c-add-style "bsd-ws"  my-c-ws-style)
 (setq c-default-style "bsd-ws")
-;; =================
+
 
 
 ;; ========================================================
@@ -202,6 +202,11 @@ line. It consostent with "
   (local-set-key (kbd "C-c i"  ) 'my-haskell-insert-inline)
   )
 
+
+
+;; ================================================================
+;; Set up hooks
+;; ================================================================
 ;; C hooks
 (add-hook-list 'c-mode-hook          '(my-indent-hook
 				       my-c-indent-hook
@@ -215,15 +220,21 @@ line. It consostent with "
 				       my-comment-hooks
 				       my-folding-hooks))
 ;; Python hooks
-(add-hook-list 'python-mode-hook     '(my-indent-hook my-folding-hooks my-python-hooks))
+(add-hook-list 'python-mode-hook     '(my-indent-hook
+				       my-folding-hooks
+				       my-python-hooks))
 ;; Shell hooks
-(add-hook-list 'sh-mode-hook         '(my-indent-hook (lambda () (my-insert-if-empty "#!/bin/sh\n\n"))))
+(add-hook-list 'sh-mode-hook         '(my-indent-hook
+				       (lambda () (my-insert-if-empty "#!/bin/sh\n\n"))))
 ;; Lisp hooks
-(add-hook-list 'lisp-mode-hook       '(my-indent-hook my-comment-hooks))
+(add-hook-list 'lisp-mode-hook       '(my-indent-hook
+				       my-comment-hooks))
 ;; Elisp hooks
-(add-hook-list 'emacs-lisp-mode-hook '(my-indent-hook my-comment-hooks))
+(add-hook-list 'emacs-lisp-mode-hook '(my-indent-hook
+				       my-comment-hooks))
 ;; Haskell hooks
-(add-hook-list 'haskell-mode-hook    '(my-comment-hooks my-haskell-hooks))
+(add-hook-list 'haskell-mode-hook    '(my-comment-hooks
+				       my-haskell-hooks))
 ;; =================
 
 (provide 'my-programming)
