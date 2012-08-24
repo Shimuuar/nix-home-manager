@@ -34,6 +34,13 @@
                  actual-encoding buffer-file-coding-system)
   (set-buffer-file-coding-system actual-encoding))
 
+(defun my-switch-dict ()
+  "Swtich between dictionaries"
+  (interactive)
+  (ispell-change-dictionary (if (string= "ru" ispell-dictionary)
+				"en" "ru")))
+
+
 
 ;; =========================================================
 ;; Hooks
@@ -43,6 +50,7 @@
   (auto-fill-mode  1 )
   (set-fill-column 80)
   (flyspell-mode   t )
+  (local-set-key (kbd "C-c C-a") 'my-switch-dict)
   )
 
 ; TeX template
@@ -64,13 +72,7 @@
 ; Hooks for LaTeX
 (defun my-tex-hooks()
   (my-base-text-hooks)
-  ; switch TeX quotes
-  (local-set-key "\C-cq" 'my-switch-tex-quotes)
-  ; Switch dictionaries in buffer
-  (local-set-key (kbd "C-c C-a")
-                 '(lambda () (interactive)
-                    (ispell-change-dictionary (if (string= "ru" ispell-dictionary)
-                                                  "en" "ru"))))
+  (local-set-key "\C-c q" 'my-switch-tex-quotes)
   )
 
 (add-hook 'latex-mode-hook (lambda ()
@@ -79,7 +81,7 @@
 (add-hook 'text-mode-hook  'my-base-text-hooks)
 
 ; orphography check
-(setq         ispell-dictionary   "ru")
+(setq         ispell-dictionary   "en"    )
 (setq-default ispell-program-name "aspell")
 
 (provide 'my-text)
