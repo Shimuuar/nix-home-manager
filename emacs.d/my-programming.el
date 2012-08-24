@@ -179,6 +179,7 @@ line. It consostent with "
 
 ;; Haskell utils
 (require 'haskell-mode)
+(require 'haskell-cabal)
 (require 'haskell-move-nested)
 (require 'haskell-navigate-imports)
 (require 'haskell-sort-imports)
