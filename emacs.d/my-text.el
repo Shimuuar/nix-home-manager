@@ -78,7 +78,7 @@
 (add-hook 'text-mode-hook  'my-base-text-hooks)
 
 ; orphography check
-(setq         ispell-dictionary "ru")
+(setq         ispell-dictionary   "ru")
 (setq-default ispell-program-name "aspell")
 
 (provide 'my-text)
