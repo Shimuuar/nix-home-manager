@@ -40,9 +40,9 @@
 ;; =========================================================
 ; Basic text hook
 (defun my-base-text-hooks()
-  (auto-fill-mode 1)
+  (auto-fill-mode  1 )
   (set-fill-column 80)
-  (flyspell-mode t)
+  (flyspell-mode   t )
   )
 
 ; TeX template
@@ -73,8 +73,9 @@
                                                   "en" "ru"))))
   )
 
-(add-hook 'latex-mode-hook 'my-base-text-hooks)
-(add-hook 'latex-mode-hook 'my-tex-hooks)
+(add-hook 'latex-mode-hook (lambda ()
+			     'my-base-text-hooks
+			     'my-tex-hooks))
 (add-hook 'text-mode-hook  'my-base-text-hooks)
 
 ; orphography check
