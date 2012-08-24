@@ -180,6 +180,7 @@ line. It consostent with "
 (require 'haskell-move-nested)
 (require 'haskell-navigate-imports)
 (require 'haskell-sort-imports)
+(autoload 'ghc-init "ghc" nil t)
 (defun my-haskell-hooks ()
   "Hooks specific to haskell"
   (abbrev-mode t)
@@ -200,6 +201,9 @@ line. It consostent with "
   (local-set-key (kbd "C-c C-s") 'haskell-mode-insert-scc-at-point)
   (local-set-key (kbd "C-c s"  ) 'haskell-mode-kill-scc-at-point)
   (local-set-key (kbd "C-c i"  ) 'my-haskell-insert-inline)
+  ;; ghc-mod
+  (ghc-init)
+  (flymake-mode)
   )
 
 
