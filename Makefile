@@ -1,6 +1,7 @@
 
-.PHONY: all install clean \
-	bash screen emacs X
+.PHONY: all install clean   \
+	bash screen emacs X \
+	up
 
 all     : install
 clean	:
@@ -17,10 +18,14 @@ bash:
 screen:
 	[ -L ~/.screenrc ] || ln -sf ${PWD}/screenrc  ~/.screenrc
 # Emacs
-emacs:
+emacs: ~/.emacs.d/haskell-mode
 	mkdir -p ~/.emacs.d/lisp
 	[ -L ~/.emacs                 ] || ln -sf ${PWD}/emacs.el ~/.emacs
 	[ -d ~/.emacs.d/lisp-personal ] || ln -sf ${PWD}/emacs.d  ~/.emacs.d/lisp-personal
+# Install haskell-mode
+~/.emacs.d/haskell-mode:
+	mkdir -p ~/.emacs.d
+	cd ~/.emacs.d && git clone https://github.com/haskell/haskell-mode
 # X
 X :
 	mkdir -p ~/.xmonad
