@@ -43,14 +43,13 @@ int main(int argc, char** argv)
 "))
 
 (defun my-indent-buffer()
-  "indent whole buffer"
+  "Indent whole buffer"
   (interactive)
   (delete-trailing-whitespace)
-  (indent-region (point-min) (point-max) nil)
-  (untabify (point-min) (point-max)))
+  (indent-region (point-min) (point-max) nil))
 
 (defun my-indent-line()
-  "indent line and move to next"
+  "Indent line and move to next"
   (interactive)
   (indent-according-to-mode)
   (next-line))
