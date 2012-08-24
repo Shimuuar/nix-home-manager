@@ -75,10 +75,9 @@
   (local-set-key "\C-c q" 'my-switch-tex-quotes)
   )
 
-(add-hook 'latex-mode-hook (lambda ()
-			     'my-base-text-hooks
-			     'my-tex-hooks))
-(add-hook 'text-mode-hook  'my-base-text-hooks)
+(add-hook-list 'latex-mode-hook '(my-base-text-hooks
+				  my-tex-hooks))
+(add-hook      'text-mode-hook  'my-base-text-hooks)
 
 ; orphography check
 (setq         ispell-dictionary   "en"    )

@@ -163,6 +163,7 @@ line. It consostent with "
   "Hooks for commenting"
   (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
   (local-set-key (kbd "C-c C-v") 'my-comment-or-uncomment-line)
+  (flyspell-prog-mode)
   )
 
 (defun my-python-hooks ()
@@ -177,6 +178,7 @@ line. It consostent with "
                       "\"\"\"\n"))
 
 ;; Haskell utils
+(require 'haskell-mode)
 (require 'haskell-move-nested)
 (require 'haskell-navigate-imports)
 (require 'haskell-sort-imports)
@@ -239,6 +241,7 @@ line. It consostent with "
 ;; Haskell hooks
 (add-hook-list 'haskell-mode-hook    '(my-comment-hooks
 				       my-haskell-hooks))
-;; =================
+
+
 
 (provide 'my-programming)
