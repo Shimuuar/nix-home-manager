@@ -116,6 +116,13 @@ alias catwin='iconv -f cp1251 -t utf8'
 alias catkoi='iconv -f koi8-r -t utf8'
 alias catdos='iconv -f cp866 -t utf8'
 alias catlatin1='iconv -f latin1 -t utf8'
+# Recover names for cyrillic ZIP files
+#   WARNING|!!! Could and will corrupt unsuspection names
+zip-recover-name() {
+    convmv --notest -f cp1252 -t cp850 *
+    convmv --notest -f cp866  -t utf8  *
+}
+
 # Convert from DOS to unix line breaks
 alias dos2unix='tr -d "\r"'
 # Remove spaces from file names (Requires sane rename)
