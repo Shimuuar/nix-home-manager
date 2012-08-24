@@ -186,11 +186,11 @@ line. It consostent with "
   (abbrev-mode t)
   (turn-on-haskell-simple-indent)
   ;; Move nested blocks
-  (define-key haskell-mode-map (kbd "C-<left>")
+  (define-key haskell-mode-map (kbd "M-<left>")
     (lambda ()
       (interactive)
       (haskell-move-nested -1)))
-  (define-key haskell-mode-map (kbd "C-<right>")
+  (define-key haskell-mode-map (kbd "M-<right>")
     (lambda ()
       (interactive)
       (haskell-move-nested  1)))
