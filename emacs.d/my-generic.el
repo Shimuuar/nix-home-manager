@@ -5,16 +5,16 @@
 
 
 ;; =========================================================
-;; Backups 
+;; Backups
 ;; =========================================================
-; Place Backup Files in Specific Directory 
+; Place Backup Files in Specific Directory
 (setq make-backup-files t)
 (setq version-control   t)
-; Place Backup Files in Specific Directory 
+; Place Backup Files in Specific Directory
 (setq backup-directory-alist '((".*" . "~/.emacs.d/backups/")) )
 ; Remove excess backups silently
 (setq delete-old-versions t)
-;;=================
+
 
 
 ;; =========================================================
@@ -27,32 +27,36 @@
 (setq auto-mode-alist (cons '("\\.rst$"  . rst-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.rest$" . rst-mode) auto-mode-alist))
 ; Markdown mode
-(setq auto-mode-alist (cons '("\\.mark$" . markdown-mode) auto-mode-alist))
-;; ===========================
+(setq auto-mode-alist (cons '("\\.mark$"     . markdown-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.markdown$" . markdown-mode) auto-mode-alist))
+; Haskell
+(setq auto-mode-alist (cons '("\\.hs"  . haskell-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.hsc" . haskell-mode) auto-mode-alist))
+
 
 
 ;; =========================================================
-;; Scrolling 
+;; Scrolling
 ;; =========================================================
-; Support for mouse wheel 
+; Support for mouse wheel
 (mouse-wheel-mode t)
 ; my favourite scrolling
-(setq scroll-conservatively 50)
-(setq scroll-preserve-screen-position t)
-(setq scroll-margin 10)
-;; =================
+(setq scroll-conservatively           50)
+(setq scroll-preserve-screen-position t )
+(setq scroll-margin                   10)
+
 
 
 ;;============================================================
 ;; iswitchb
 ;;============================================================
-(require 'iswitchb)  
+(require 'iswitchb)
 (iswitchb-mode 1)
 ; Ignores
 (mapcar (lambda (buf) (add-to-list 'iswitchb-buffer-ignore buf))
 	'("*Messages*"  "*Buffer"    "*Completions"
 	  "*Apropos"    "*Warnings"  "*Quail"))
-;; =================
+
 
 
 ;; =========================================================
@@ -64,7 +68,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 ; Disable abbreviation saving
 (setq save-abbrevs nil)
-;; =================
+
 
 
 ;; =========================================================
@@ -85,7 +89,8 @@
 (defun add-hook-list (hook hooks-list)
   "Add list of hooks"
   (mapcar (lambda (one-hook) (add-hook hook one-hook)) hooks-list))
-;; =================
+
+
 
 
 (provide 'my-generic)
