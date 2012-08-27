@@ -187,7 +187,7 @@ line. It consostent with "
 (defun my-haskell-hooks ()
   "Hooks specific to haskell"
   (abbrev-mode t)
-  (turn-on-haskell-simple-indent)
+  (turn-on-haskell-indentation)
   ;; Move nested blocks
   (define-key haskell-mode-map (kbd "M-<left>")
     (lambda ()
