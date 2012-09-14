@@ -71,13 +71,13 @@ int main(int argc, char** argv)
   (setq tab-width wid))
 
 (defun my-haskell-insert-inline ()
-  "Insert inline pragma. It inserts pragma in directly above the
+  "Insert INLINE pragma. It inserts pragma in directly above the
 line. It consostent with "
   (interactive)
   ; Find out indentation and identifier name
   (if (save-excursion
 	(move-beginning-of-line 1)
-	(looking-at "^\\([ \t]*\\)\\([a-zA-Z]+\\)")
+	(looking-at "^\\([ \t]*\\)\\([a-zA-Z][a-zA-Z_1-9]*\\)")
 	)
     (let ((spaces (buffer-substring (match-beginning 1) (match-end 1))) ; Indentation
 	  (ident  (buffer-substring (match-beginning 2) (match-end 2))) ; Binding name
