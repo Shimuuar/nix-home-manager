@@ -179,6 +179,9 @@ function vsrc() { highlight "$@" -A | less -R; }
 function mkcd() { mkdir -p "$1" && cd "$1";  }
 # Kill all processes owned by me
 function suicide() { kill $(ps -u $(whoami) | grep -Eo '^ *[0-9]+'); }
+# Remove *.o and *.hi file
+#  WARNING: -print0 must be located after predicated
+clean-hi() { find -name \*.hi -o -name \*.o -print0 | xargs --null rm -v; }
 ## VCS shorcuts and goodies
 # Subversion
 function svn-diff()  {  svn diff "$@" | colordiff | tryless; } # Colored diff
