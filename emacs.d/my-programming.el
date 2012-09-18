@@ -240,8 +240,8 @@ line. It consostent with "
 (add-hook-list 'emacs-lisp-mode-hook '(my-indent-hook
 				       my-comment-hooks))
 ;; Haskell hooks
-(add-hook-list 'haskell-mode-hook    '(my-comment-hooks
-				       my-haskell-hooks))
+(add-hook-list 'haskell-mode-hook    '(my-haskell-hooks
+				       my-comment-hooks))
 
 
 
