@@ -183,6 +183,7 @@ line. It consostent with "
 (require 'haskell-move-nested)
 (require 'haskell-navigate-imports)
 (require 'haskell-sort-imports)
+(require 'ghc-core)
 (autoload 'ghc-init "ghc" nil t)
 (defun my-haskell-hooks ()
   "Hooks specific to haskell"

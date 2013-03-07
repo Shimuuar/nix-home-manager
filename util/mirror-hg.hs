@@ -109,16 +109,15 @@ mirror host path = do
   forM_ (local \\ remote) $ \n -> do
     putStrLn $ " * Removing repository: " ++ n
     rawSystem "rm" ["-rfv", n]
-  -- Cleanup empty directories"
-  _ <- system "find -depth -type d -empty -exec rmdir -v {} \\;"
   -- Clone missing repositories
   putStrLn "==== Clone missing ===="
-  forM_ (remote \\ local) $ clone host path
+  forM_ (remote \\ local) $
+    clone host path
   -- Update rest
   putStrLn "==== Update ===="
-  forM_ (remote `intersect` local) $ update host path
-    
-    
+  forM_ (remote `intersect` local) $
+    update host path
+
 
 
 main :: IO ()
