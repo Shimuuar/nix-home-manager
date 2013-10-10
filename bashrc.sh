@@ -274,7 +274,8 @@ source-repository head
 
 Library
   Ghc-options:          -Wall
-  Build-Depends:        base >=3 && <5
+  Build-Depends:
+    base >=3 && <5
   Exposed-modules:      
 EOF
     # Setup
