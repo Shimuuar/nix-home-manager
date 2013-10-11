@@ -36,7 +36,7 @@ export PYTHONPATH=${HOME}/opt/python/lib$(getconf LONG_BIT | sed 's/32//')/pytho
 ## ---------------------------------------------------------
 ## Shell options
 ## ---------------------------------------------------------
-# check the window size after each command 
+# check the window size after each command
 shopt -s checkwinsize
 # Extended globbing
 shopt -s extglob
@@ -54,7 +54,7 @@ complete -d cd
 ## ---------------------------------------------------------
 ## History control
 ## ---------------------------------------------------------
-## Ignore and erase duplicate commands 
+## Ignore and erase duplicate commands
 export HISTCONTROL=ignoredups:erasedups:ingnorespace
 ## Ignore particular commands
 export HISTIGNORE=ls:[fb]g
@@ -71,7 +71,7 @@ function truncate_pwd
     else
 	PS1_COL=41
     fi
-    ## Truncate $PWD to 20 last letters if too long 
+    ## Truncate $PWD to 20 last letters if too long
     newPWD="${PWD/#$HOME/~}"
     local pwdmaxlen=20
     if [ ${#newPWD} -gt $pwdmaxlen ]; then
@@ -98,7 +98,7 @@ esac
 export PAGER=less
 alias mo="less -R"
 
-# ls coloring & aliases 
+# ls coloring & aliases
 if [ "$TERM" != "dumb" ]; then
     eval "`dircolors -b`"
     alias ls='ls --color=auto'
@@ -108,7 +108,7 @@ alias ll='ls -lF'
 alias la='ls -A'
 alias lla='ls -lA'
 
-# rm safety belt 
+# rm safety belt
 alias rm='rm -i'
 
 # cat text in different encodings
@@ -135,12 +135,12 @@ alias envv="env | grep"
 alias pss="ps -ef | grep"
 alias dpkgg="dpkg -l | grep -i"
 
-# Process structure 
+# Process structure
 alias psme="ps -u $(whoami) --forest"
 suicide() { kill $(ps -u $(whoami) -o pid | grep -v PID); }
-# Disk usage 
+# Disk usage
 alias dum='du --max-depth=1'
-# Shorthand for jobs 
+# Shorthand for jobs
 alias j=jobs
 # Shorthand for wc -l
 alias wcl='wc -l'
@@ -169,7 +169,7 @@ alias python-setup="[ -f setup.py ] && python setup.py build && python setup.py 
 
 
 ## ---------------------------------------------------------
-## Useful functions 
+## Useful functions
 ## ---------------------------------------------------------
 # Calculate things ([p]rint) (borrowed from GDB)
 function p() {  echo $@ | bc -l;  }
@@ -186,8 +186,8 @@ clean-hi() { find -name \*.hi -o -name \*.o -print0 | xargs --null rm -v; }
 # Subversion
 function svn-diff()  {  svn diff "$@" | colordiff | tryless; } # Colored diff
 function svn-gdiff() {  svn diff "$@" | kompare -o -; }        # Diff in kompare
-# Mercurial  
-function hg-diff()  {  hg diff "$@" | colordiff | tryless; } # Colored diff 
+# Mercurial
+function hg-diff()  {  hg diff "$@" | colordiff | tryless; } # Colored diff
 function hg-gdiff() {  hg diff "$@" | kompare -o -; } # View diff in kompare
 function hg-qdiff() {  hg qdiff "$@" | colordiff | tryless; } # Colored diff for queues
 function hg-prune() {  # Remove all files not under version control
@@ -276,7 +276,7 @@ Library
   Ghc-options:          -Wall
   Build-Depends:
     base >=3 && <5
-  Exposed-modules:      
+  Exposed-modules:
 EOF
     # Setup
     cat > Setup.hs <<EOF
@@ -292,9 +292,36 @@ EOF
 }
 ## -----------------
 
+# Functions for mirroring
+bos-init-mirror() {(
+    local MIRROR=.hg-mirror
+    # Checks
+    [ -d .git    ] || { echo "No git repo here";      exit 1; }
+    [ -d $MIRROR ] && { echo "Mirror already exists"; exit 1; }
+    # Get paths
+    local GITHUB=$(git remote -v | sed '/^upstream.*fetch/!d; s/upstream[ \t]*//; s/(.*//; s/:/\//')
+    local BITBUC=$(echo $GITHUB | sed 's/git@github.com/hg@bitbucket.org/; s/\.git$//')
+    # Init
+    mkdir $MIRROR
+    cd    $MIRROR
+    hg init
+    cat > .hg/hgrc <<EOF
+[paths]
+bitbucket = ssh://$BITBUC
+github    = git+ssh://$GITHUB
+EOF
+)}
+bos-sync-hg() {(
+    local MIRROR=.hg-mirror
+    [ -d $MIRROR ] || { echo "Mirror already exists"; exit 1; }
+    cd $MIRROR
+    hg pull github
+    hg push bitbucket
+)}
+
 ## ---------------------------------------------------------
 ## Fortunes (pleasant reading)
 ## ---------------------------------------------------------
-if which fortune &> /dev/null; then 
-    echo ; echo ; fortune ; echo ; echo 
+if which fortune &> /dev/null; then
+    echo ; echo ; fortune ; echo ; echo
 fi
