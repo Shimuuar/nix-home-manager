@@ -108,7 +108,7 @@ mirror host path = do
   putStrLn "==== Remove orphans ===="
   forM_ (local \\ remote) $ \n -> do
     putStrLn $ " * Removing repository: " ++ n
-    rawSystem "rm" ["-rfv", n]
+    rawSystem "rm" ["-rf", n]
   -- Clone missing repositories
   putStrLn "==== Clone missing ===="
   forM_ (remote \\ local) $
