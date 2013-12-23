@@ -4,6 +4,7 @@
 ## Set up X.org
 ## ================================================================
 # Set xkb options
+xset -b
 setxkbmap -model pc104 -layout us,ru -variant basic,winkeys 
 setxkbmap -option -option "grp_led:scroll,grp:shifts_toggle,compose:menu,ctrl:nocaps" 
 
