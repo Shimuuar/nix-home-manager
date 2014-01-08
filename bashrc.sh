@@ -313,7 +313,7 @@ EOF
 )}
 bos-sync-hg() {(
     local MIRROR=.hg-mirror
-    [ -d $MIRROR ] || { echo "Mirror already exists"; exit 1; }
+    [ -d $MIRROR ] || { echo "No mercurial mirror"; exit 1; }
     cd $MIRROR
     hg pull github
     hg push bitbucket
