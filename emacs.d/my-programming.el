@@ -72,7 +72,7 @@ int main(int argc, char** argv)
 
 (defun my-haskell-insert-inline ()
   "Insert INLINE pragma. It inserts pragma in directly above the
-line. It consostent with "
+line."
   (interactive)
   ; Find out indentation and identifier name
   (if (save-excursion
