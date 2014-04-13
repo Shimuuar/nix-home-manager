@@ -1,10 +1,25 @@
 #!/bin/sh
 
-# Directory with wallpapers
+# Function for setting random wallpaper
+random_paper() {
+    feh --bg-center "$1"/$(ls "$1" | sort -R | head -1)
+}
+
+# Directory with wallpapers. We select directory with wallpaper using
+# screen resolution from xrandr
 WALLPAPERDIR=~/.wallpaper.d/$(xrandr -q 2>&1 | sed -re '/^ *[0-9]+x[0-9]+.*\*/!d; s/^ +([0-9]+x[0-9]+).*/\1/')
-# Directory with wallpapers is nonempty. Display random image
+
+
+# Directory with wallpapers is nonempty. Display random image.
 if [ -d "$WALLPAPERDIR" ] && [ ! -z "$(ls "$WALLPAPERDIR"/)" ]; then
-    feh --bg-center "$WALLPAPERDIR"/$(ls "$WALLPAPERDIR" | sort -R | head -1)
+    if [ -z "$1" ]; then
+	random_paper "$WALLPAPERDIR"
+    else
+	while : ; do
+	    random_paper "$WALLPAPERDIR"
+	    sleep "$1"
+	done
+    fi
 # There is .wallpaper
 elif [ -f ~/.wallpaper ]; then
     feh --bg-center ~/.wallpaper
