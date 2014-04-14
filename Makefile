@@ -25,7 +25,7 @@ emacs: ~/.emacs.d/haskell-mode
 # Install haskell-mode
 ~/.emacs.d/haskell-mode:
 	mkdir -p ~/.emacs.d
-	cd ~/.emacs.d && git clone http://github.com/haskell/haskell-mode
+	cd ~/.emacs.d && git clone https://github.com/haskell/haskell-mode
 # X
 X :
 	mkdir -p ~/.xmonad

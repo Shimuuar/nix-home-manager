@@ -96,58 +96,12 @@
 ;; =========================================================
 ;; Haskell abbreviations
 ;; =========================================================
-(define-skeleton my-skel-haskell-SCC
-  "Skeleton for haskell SCC pragma"
-  "SCC name: "
-  "{-# SCC \"" str "\" #-}" _
-  )
 (define-skeleton my-skel-haskell-LANG
   "Skeleton for haskell LANGUAGE pragma"
   ""
   "{-# LANGUAGE "
   (completing-read "Language extension: "
-		   '("Arrows"
-		     "BangPatterns"
-		     "CPP"
-		     "ConstraintKinds"
-		     "DeriveDataTypeable"
-		     "DeriveFunctor"
-		     "DeriveGeneric"
-		     "EmptyDataDecls"
-		     "ExistentialQuantification"
-		     "FlexibleContexts"
-		     "FlexibleInstances"
-		     "ForeignFunctionInterface"
-		     "FunctionalDependencies"
-		     "GADTs"
-                     "GeneralizedNewtypeDeriving"
-		     "IncoherentInstances"
-		     "ImpredicativeTypes"
-		     "KindSignatures"
-		     "LiberalTypeSynonyms"
-		     "MagicHash"
-		     "MultiParamTypeClasses"
-		     "NamedFieldPuns"
-		     "NoImplicitPrelude"
-		     "NoMonomorphismRestriction"
-		     "OverlappingInstances"
-		     "OverloadedStrings"
-		     "PatternGuards"
-		     "PackageImports"
-		     "PolyKinds"
-		     "Rank2Types"
-		     "RankNTypes"
-		     "RecordWildCards"
-		     "StandaloneDeriving"
-		     "ScopedTypeVariables"
-		     "TypeFamilies"
-		     "TemplateHaskell"
-		     "TypeOperators"
-		     "TypeSynonymInstances"
-		     "UndecidableInstances"
-		     "ViewPatterns"
-		     "QuasiQuotes"
-		     ))
+		   (split-string (shell-command-to-string "ghc --supported-extensions")))
   " #-}" 
   )
 (define-skeleton my-skel-haskell-import
@@ -197,7 +151,6 @@
     ("pr"   "print"            nil                    0)
     ("fi"   "fromIntegral"     nil                    0)
     ; Pragmas
-    ("pscc"  ""                my-skel-haskell-SCC    0)
     ("plang" ""                my-skel-haskell-LANG   0)
     ))
 

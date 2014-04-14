@@ -6,14 +6,15 @@
 ;; Load paths
 (defun add-load-path (path)
   (add-to-list 'load-path (expand-file-name path)))
-; Now add lists
+; Now add default pathes
 (mapcar 'add-load-path
 	(list "~/.emacs.d"
 	      "~/.emacs.d/lisp"
 	      "~/.emacs.d/lisp-personal"
 	      "~/.emacs.d/haskell-mode"))
-; try to load GHC-mod
-(let ((pathes (file-expand-wildcards "~/.cabal/share/ghc-mod-*")))
+; Now we need to add path to GHC-mod. If there's more than one
+; complain loudly.
+(let ((pathes (file-expand-wildcards "~/.cabal/share/*/ghc-mod-*")))
   (if (> (length pathes) 1)
     (error "Multiple ghc-mods. Do something!!!")
     (mapcar 'add-load-path pathes)))

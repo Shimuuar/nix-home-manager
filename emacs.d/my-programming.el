@@ -72,7 +72,7 @@ int main(int argc, char** argv)
 
 (defun my-haskell-insert-inline ()
   "Insert INLINE pragma. It inserts pragma in directly above the
-line. It consostent with "
+line."
   (interactive)
   ; Find out indentation and identifier name
   (if (save-excursion
@@ -95,12 +95,9 @@ line. It consostent with "
 ;; ===============================================
 ;; Syntax highlighting
 ;; ===============================================
-; turn on syntax highlighting
-(global-font-lock-mode t)
-; Highlight parensthesis
-(show-paren-mode t)
-; Highlight whole expression if it's not fully visible
-(setq show-paren-style 'mixed)
+(global-font-lock-mode t)      ; turn on syntax highlighting
+(show-paren-mode t)            ; Highlight parenthesis
+(setq show-paren-style 'mixed) ; Highlight whole expression if it's not fully visible
 
 
 
@@ -135,7 +132,7 @@ line. It consostent with "
 ;; Define hooks
 ;; =========================================================
 (defun my-make-hook()
-  "Add quick binind for compile"
+  "Add quick binding for compile"
   (local-set-key [f8] (lambda () (interactive)
 			(compile "make -k")))
   )
