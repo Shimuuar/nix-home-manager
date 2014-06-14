@@ -13,9 +13,9 @@
 ; No startup message
 (setq inhibit-startup-message t)
 ; No menu, no toolbar, no scroll bar. 
-(tool-bar-mode   nil)
-(scroll-bar-mode nil)
-(menu-bar-mode   nil)
+(tool-bar-mode   -1)
+(scroll-bar-mode -1)
+(menu-bar-mode   -1)
 ; Set cursor and mouse-pointer colours
 (set-cursor-color "red")
 (set-mouse-color  "goldenrod")
