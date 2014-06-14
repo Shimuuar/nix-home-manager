@@ -259,7 +259,7 @@ Synopsis:       <<<SYNOPSIS>>>
 Description:
   <<<DESCRIPTION>>>
 
-Cabal-Version:  >= 1.6
+Cabal-Version:  >= 1.10
 License:        BSD3
 License-File:   LICENSE
 Author:         Aleksey Khudyakov <alexey.skladnoy@gmail.com>
@@ -274,6 +274,7 @@ source-repository head
 
 Library
   Ghc-options:          -Wall
+  Default-Language:    Haskell2010
   Build-Depends:
     base >=3 && <5
   Exposed-modules:
