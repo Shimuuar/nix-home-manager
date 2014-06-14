@@ -52,7 +52,7 @@ mySearch (key , engine) = [ (key      , promptSearchBrowser myXPConfig browser e
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
---
+myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf =
   let upperKeys = ["1","2","3","4","5","6","7","8","9","0","-","="]
       -- Make pair of move/shift to workspace keybindings
@@ -161,7 +161,7 @@ myKeys conf =
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
---
+myMouseBindings :: XConfig t -> M.Map (KeyMask, Button) (Window -> X ())
 myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- mod-button1, Set the window to floating mode and move by dragging
     [ ((modMask, button1), (\w -> focus w >> mouseMoveWindow w))
@@ -272,34 +272,33 @@ myManageHook = composeAll $ concat [
 ------------------------------------------------------------------------
 -- XPromt settings
 myXPConfig :: XPConfig
-myXPConfig = defaultXPConfig {
-               font = "-xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*"
-             , historySize = 20
-             }
+myXPConfig = defaultXPConfig
+  { font = "-xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*"
+  , historySize = 20
+  }
 
 
 ----------------------------------------------------------------
 -- XMonad config
-myConfig = defaultConfig {
-      -- simple stuff
-      terminal           = "konsole",
-      modMask            = mod4Mask,
-      focusFollowsMouse  = True,
-      borderWidth        = 1,
-      workspaces         = (map show [1..10]) ++
-                           ["WWW","RSS","Почта","IM","Torrent","Audio","Media","Gimp"],
-      normalBorderColor  = "#dddddd",
-      focusedBorderColor = "#ff0000",
-      -- key bindings
-      keys               = myKeys,
-      mouseBindings      = myMouseBindings,
-      -- hooks, layouts
-      startupHook        = ewmhDesktopsStartup,
-      handleEventHook    = ewmhDesktopsEventHook,
-      layoutHook         = myLayout,
-      manageHook         = myManageHook,
-      logHook            = ewmhDesktopsLogHookCustom (scratchpadFilterOutWorkspace)
-      }
+myConfig = defaultConfig
+  { terminal           = "konsole"
+  , modMask            = mod4Mask
+  , focusFollowsMouse  = True
+  , borderWidth        = 1
+  , workspaces         = (map show [1..10]) ++
+                         ["WWW","RSS","Почта","IM","Torrent","Audio","Media","Gimp"]
+  , normalBorderColor  = "#dddddd"
+  , focusedBorderColor = "#ff0000"
+    -- key bindings
+  , keys               = myKeys
+  , mouseBindings      = myMouseBindings
+    -- hooks, layouts
+  , startupHook        = ewmhDesktopsStartup
+  , handleEventHook    = ewmhDesktopsEventHook
+  , layoutHook         = myLayout
+  , manageHook         = myManageHook
+  , logHook            = ewmhDesktopsLogHookCustom (scratchpadFilterOutWorkspace)
+  }
 
 
 ------------------------------------------------------------------------
