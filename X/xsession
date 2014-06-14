@@ -3,6 +3,7 @@
 ## ================================================================
 ## Set up X.org
 ## ================================================================
+xset -b
 case $(hostname) in
     manannan)
 	xrandr --output DVI-0 --auto --output DVI-1 --auto --right-of DVI-0
