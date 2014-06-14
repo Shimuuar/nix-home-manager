@@ -9,6 +9,7 @@ import System.Exit
 import XMonad
 import qualified XMonad.StackSet as W
 
+import XMonad.Actions.CycleWS
 import XMonad.Actions.Submap
 import XMonad.Actions.Search (SearchEngine, searchEngine, promptSearchBrowser, selectSearchBrowser,
                               google, youtube, isohunt, wikipedia, scholar, hoogle, hackage)
@@ -57,14 +58,14 @@ myKeys conf =
   let upperKeys = ["1","2","3","4","5","6","7","8","9","0","-","="]
       -- Make pair of move/shift to workspace keybindings
       makeShiftPair :: String -> (String, String) -> [(String, X())]
-      makeShiftPair p (k, name) = [ (p++k,       windows $ W.greedyView name)
+      makeShiftPair p (k, name) = [ (p++k,       windows $ W.view name)
                                   , (p++"S-"++k, windows $ W.shift name) ]
   in mkKeymap conf $
     -- Move/switch to workspace
     ((zip upperKeys $ take 10 $ XMonad.workspaces conf) >>= makeShiftPair "M-")
     ++
     -- More move/switch to workspace
-    [ ("M-w", windows $ W.greedyView "WWW")
+    [ ("M-w", windows $ W.view "WWW")
     , ("M-a", submap $ mkKeymap conf $
             [ ("w", "WWW")
             , ("r", "RSS")
@@ -100,6 +101,8 @@ myKeys conf =
     , ("M-j"         , windows W.focusDown)
     , ("M-<Right>"   , windows W.focusUp)
     , ("M-k"         , windows W.focusUp)
+    , ("M-S-<Left>"  , prevScreen)
+    , ("M-S-<Right>" , nextScreen)      
     -- Move focus to the master window
     , ("M-m"         , windows W.focusMaster)
     -- Swap the focused window and the master window
