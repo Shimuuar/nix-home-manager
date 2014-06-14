@@ -3,9 +3,20 @@
 ## ================================================================
 ## Set up X.org
 ## ================================================================
-# Set xkb options
-setxkbmap -model pc104 -layout us,ru -variant basic,winkeys 
-setxkbmap -option -option "grp_led:scroll,grp:shifts_toggle,compose:menu,ctrl:nocaps" 
+case $(hostname) in
+    manannan)
+	xrandr --output DVI-0 --auto --output DVI-1 --auto --right-of DVI-0
+	setxkbmap -model pc104 -layout us,ru -variant basic,winkeys 
+	setxkbmap -option -option "grp_led:scroll,grp:shifts_toggle,compose:menu,ctrl:nocaps"
+	;;
+    aengus)
+	setxkbmap -model pc104 -layout us,ru -variant basic,winkeys 
+	setxkbmap -option -option "grp_led:scroll,grp:shifts_toggle,compose:ralt,ctrl:nocaps"
+	;;
+    *)
+	setxkbmap -model pc104 -layout us,ru -variant basic,winkeys 
+	setxkbmap -option -option "grp_led:scroll,grp:shifts_toggle,compose:menu,ctrl:nocaps"
+esac	
 
 [ -f ~/.Xresources ] && xrdb ~/.Xresources # Read resources
 [ -f ~/.Xmodmap    ] && xmodmap ~/.Xmodmap # read modmaps
