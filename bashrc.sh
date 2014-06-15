@@ -26,12 +26,12 @@ function prepend_to() {
 prepend_to PATH ${HOME}/opt/bin
 prepend_to PATH ${HOME}/.cabal/bin
 export PYTHONPATH=${HOME}/opt/python/lib$(getconf LONG_BIT | sed 's/32//')/python$(python -V 2>&1 | egrep -o '2\.[0-9]')/site-packages
+## Use custom settings (this file is intended for computer-local settings)
+[ -f $HOME/.bashrc.local ] && source ~/.bashrc.local
 ## ----------------
 
 ## If not running interactively, don't do anything:
 [ -z "$PS1" ] && return
-## Use custom settings (this file is intended for use on multiple boxes)
-[ -f ~/.bashrc.local ] && source ~/.bashrc.local
 
 ## ---------------------------------------------------------
 ## Shell options
