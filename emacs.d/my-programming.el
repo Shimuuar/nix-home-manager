@@ -90,7 +90,14 @@ line."
     (error "No identifier here!"))
   )
 
-
+(defun my-haskell-toggle-style ()
+  "Toggle style of indentation"
+  (interactive)
+  (let ((n (if (eq haskell-indentation-layout-offset 2) 4 2)))
+    (setq tab-width n
+	  haskell-indentation-layout-offset n
+	  haskell-indentation-left-offset   n
+	  haskell-indentation-ifte-offset   n)))
 
 ;; ===============================================
 ;; Syntax highlighting
@@ -187,6 +194,8 @@ line."
   "Hooks specific to haskell"
   (abbrev-mode t)
   (turn-on-haskell-indentation)
+  ;; Switch between styles
+  (local-set-key (kbd "C-c C-s") 'my-haskell-toggle-style)
   ;; Move nested blocks
   (define-key haskell-mode-map (kbd "M-<left>")
     (lambda ()
