@@ -195,7 +195,7 @@ line."
   (abbrev-mode t)
   (turn-on-haskell-indentation)
   ;; Switch between styles
-  (local-set-key (kbd "C-c C-s") 'my-haskell-toggle-style)
+  (local-set-key (kbd "C-c C-j") 'my-haskell-toggle-style)
   ;; Move nested blocks
   (define-key haskell-mode-map (kbd "M-<left>")
     (lambda ()
