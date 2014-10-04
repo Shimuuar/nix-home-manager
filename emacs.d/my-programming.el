@@ -206,6 +206,10 @@ line."
   ;; ghc-mod
   (ghc-init)
   (flymake-mode)
+  (if (fboundp 'ghc-toggle-check-command)
+      (local-set-key (kbd "C-c C-g") 'ghc-toggle-check-command))
+  ;; Comments
+  (my-comment-hooks)
   )
 
 
@@ -239,8 +243,7 @@ line."
 (add-hook-list 'emacs-lisp-mode-hook '(my-indent-hook
 				       my-comment-hooks))
 ;; Haskell hooks
-(add-hook-list 'haskell-mode-hook    '(my-haskell-hooks
-				       my-comment-hooks))
+(add-hook-list 'haskell-mode-hook    '(my-haskell-hooks))
 
 
 
