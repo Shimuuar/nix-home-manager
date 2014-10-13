@@ -196,6 +196,9 @@ line."
   (turn-on-haskell-indentation)
   ;; Switch between styles
   (local-set-key (kbd "C-c C-j") 'my-haskell-toggle-style)
+  ;; Rename buffer on import.
+  (let ((nm (haskell-guess-module-name)))
+    (if nm (rename-buffer nm t)))
   ;; Move nested blocks
   (define-key haskell-mode-map (kbd "M-<left>")
     (lambda ()
