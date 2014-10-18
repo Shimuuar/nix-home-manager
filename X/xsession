@@ -3,7 +3,9 @@
 ## ================================================================
 ## Set up X.org
 ## ================================================================
+# Disable audible bell
 xset -b
+# Host-specific options
 case $(hostname) in
     manannan)
 	xrandr --output DVI-0 --auto --output DVI-1 --auto --right-of DVI-0
