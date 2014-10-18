@@ -68,8 +68,12 @@ XMONAD_PID=$!
 ## Autorun
 ## ================================================================
 AUTORUN=~/.config/autorun
-[ -f $AUTORUN ] && sh $AUTORUN &
-
+if [ -f $AUTORUN ]; then
+    while read -r cmd || [[ -n "$cmd" ]]; do
+	echo "]]] $cmd}"
+	exec sh -c "$cmd" &
+    done < $AUTORUN
+fi
 
 ## ================================================================
 ## Cleanup
