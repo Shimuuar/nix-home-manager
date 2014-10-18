@@ -90,7 +90,14 @@ line."
     (error "No identifier here!"))
   )
 
-
+(defun my-haskell-toggle-style ()
+  "Toggle style of indentation"
+  (interactive)
+  (let ((n (if (eq haskell-indentation-layout-offset 2) 4 2)))
+    (setq tab-width n
+	  haskell-indentation-layout-offset n
+	  haskell-indentation-left-offset   n
+	  haskell-indentation-ifte-offset   n)))
 
 ;; ===============================================
 ;; Syntax highlighting
@@ -187,6 +194,11 @@ line."
   "Hooks specific to haskell"
   (abbrev-mode t)
   (turn-on-haskell-indentation)
+  ;; Switch between styles
+  (local-set-key (kbd "C-c C-j") 'my-haskell-toggle-style)
+  ;; Rename buffer on import.
+  (let ((nm (haskell-guess-module-name)))
+    (if nm (rename-buffer nm t)))
   ;; Move nested blocks
   (define-key haskell-mode-map (kbd "M-<left>")
     (lambda ()
@@ -206,6 +218,10 @@ line."
   ;; ghc-mod
   (ghc-init)
   (flymake-mode)
+  (if (fboundp 'ghc-toggle-check-command)
+      (local-set-key (kbd "C-c C-g") 'ghc-toggle-check-command))
+  ;; Comments
+  (my-comment-hooks)
   )
 
 
@@ -239,8 +255,7 @@ line."
 (add-hook-list 'emacs-lisp-mode-hook '(my-indent-hook
 				       my-comment-hooks))
 ;; Haskell hooks
-(add-hook-list 'haskell-mode-hook    '(my-haskell-hooks
-				       my-comment-hooks))
+(add-hook-list 'haskell-mode-hook    '(my-haskell-hooks))
 
 
 

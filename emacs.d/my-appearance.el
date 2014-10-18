@@ -52,10 +52,18 @@
 	   (which-func-mode ("" which-func-format #("--" 0 2 (help-echo "mouse-1: select (drag to resize), mouse-2 = C-x 1, mouse-3 = C-x 0"))))
 	   (global-mode-string
 	    (#("--" 0 2 (help-echo "mouse-1: select (drag to resize), mouse-2 = C-x 1, mouse-3 = C-x 0")) global-mode-string))
-	   "--["
-	   (:eval (if indent-tabs-mode "tabs" "ws"))
-	   (:eval (format " Tab:%i" tab-width))
-	   "]"
+	   ; Tab width display for C/C++ modes and indentation type for haskell mode
+	   (:eval (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
+		      (format "--[%s Tab:%i]" (if indent-tabs-mode "tabs" "ws") tab-width)
+		      ""
+		    ))
+	   (:eval (if (eq major-mode 'haskell-mode)
+		      (cond ((eq haskell-indentation-layout-offset 2) "--[MY]")
+			    ((eq haskell-indentation-layout-offset 4) "--[JOHAN]")
+			    ( t                                       "--[WTF!!!]")
+		       )
+		    ""))
+	   ; Rest
 	   #("-%-" 0 3 (help-echo "mouse-1: select (drag to resize), mouse-2 = C-x 1, mouse-3 = C-x 0")))
 	  )))
 ;; ================
