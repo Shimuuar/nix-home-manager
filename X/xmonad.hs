@@ -77,25 +77,25 @@ myKeys conf =
             , ("g", "Gimp")
             ] >>= makeShiftPair ""
       )
-    -- Quit XMonad
+      -- Quit XMonad
     , ("M-S-q"       , io (exitWith ExitSuccess))
-    -- Restart XMonad
+      -- Restart XMonad
     , ("M-q"         , broadcastMessage ReleaseResources >> restart "xmonad" True)
-    -- Run termnal emulator
+      -- Run termnal emulator
     , ("M-S-<Return>", run $ XMonad.terminal conf)
-    -- Run menu
+      -- Run menu
     , ("M-p"         , run "dmenu_run")
-    -- Close focused window
+      -- Close focused window
     , ("M-S-c"       , kill)
-    -- Rotate through the available layout algorithms
+      -- Rotate through the available layout algorithms
     , ("M-<Space>"   , sendMessage NextLayout)
-    -- Reset the layouts on the current workspace to default
+      -- Reset the layouts on the current workspace to default
     , ("M-S-<Space>" , setLayout $ XMonad.layoutHook conf)
-    -- Resize viewed windows to the correct size
+      -- Resize viewed windows to the correct size
     , ("M-n"         , refresh)
-    -- Toggle struts on/off
+      -- Toggle struts on/off
     , ("M-b"         , sendMessage ToggleStruts)
-    -- Move focus to the next/prev window
+      -- Move focus to the next/prev window
     , ("M-<Tab>"     , windows W.focusDown)
     , ("M-<Left>"    , windows W.focusDown)
     , ("M-j"         , windows W.focusDown)
@@ -103,19 +103,19 @@ myKeys conf =
     , ("M-k"         , windows W.focusUp)
     , ("M-S-<Left>"  , prevScreen)
     , ("M-S-<Right>" , nextScreen)      
-    -- Move focus to the master window
+      -- Move focus to the master window
     , ("M-m"         , windows W.focusMaster)
-    -- Swap the focused window and the master window
+      -- Swap the focused window and the master window
     , ("M-<Return>"  , windows W.swapMaster)
-    -- Swap the focused window with the next/prev window
+      -- Swap the focused window with the next/prev window
     , ("M-S-j"       , windows W.swapDown)
     , ("M-S-k"       , windows W.swapUp)
-    -- Shrink/expand the master area
+      -- Shrink/expand the master area
     , ("M-h"         , sendMessage Shrink)
     , ("M-l"         , sendMessage Expand)
-    -- Push window back into tiling
+      -- Push window back into tiling
     , ("M-t"         , withFocused $ windows . W.sink)
-    -- Inc/dec the number of windows in the master area
+      -- Inc/dec the number of windows in the master area
     , ("M-,"          , sendMessage (IncMasterN 1))
     , ("M-."          , sendMessage (IncMasterN (-1)))
 
