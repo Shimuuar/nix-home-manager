@@ -118,7 +118,9 @@ myKeys conf =
       -- Inc/dec the number of windows in the master area
     , ("M-,"          , sendMessage (IncMasterN 1))
     , ("M-."          , sendMessage (IncMasterN (-1)))
-
+    -- Sound
+    , ("M-<Up>"     , spawn "amixer set Master 2%+")
+    , ("M-<Down>"   , spawn "amixer set Master 2%-")
     -- MPD keybindings
     , ("M-<Page_Down>"   , spawn "mpc next   > /dev/null")
     , ("M-<Page_Up>"     , spawn "mpc prev   > /dev/null")
