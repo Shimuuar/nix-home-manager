@@ -43,8 +43,9 @@ export GTK_IM_MODULE=xim
 ## ================================================================
 killall gpg-agent
 eval $(gpg-agent --daemon)
-which mpdscribble && mpdscribble --conf ~/.mpdscribble/mpdscribble
-which conky       && exec conky   &
+which mpdscribble   && mpdscribble --conf ~/.mpdscribble/mpdscribble
+which conky         && exec conky   &
+which xscreeensaver && exec xscreensaver -no-splash &
 if which lxpanel; then
     exec lxpanel &
 elif which tint2; then
