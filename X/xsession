@@ -45,7 +45,8 @@ killall gpg-agent
 eval $(gpg-agent --daemon)
 which mpdscribble   && mpdscribble --conf ~/.mpdscribble/mpdscribble
 which conky         && exec conky   &
-which xscreeensaver && exec xscreensaver -no-splash &
+which xscreensaver  && exec xscreensaver -no-splash &
+which xss-lock      && exec xss-lock -- xscreensaver-command -lock &
 if which lxpanel; then
     exec lxpanel &
 elif which tint2; then
