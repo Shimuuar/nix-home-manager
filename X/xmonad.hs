@@ -159,7 +159,7 @@ myKeys conf =
           [ ("z"   , spawn "xterm-less < ~/.xsession-errors")
           , ("S-z" , spawn "tail -f ~/.xsession-errors | xterm-less")
           , ("p"   , spawn "xprop | grep -v WM_ICON | xterm-less")
-          , ("l"   , spawn "xlock")
+          , ("l"   , spawn "xscreensaver-command --lock")
           ] )
     ]
 

@@ -182,6 +182,18 @@ function suicide() { kill $(ps -u $(whoami) | grep -Eo '^ *[0-9]+'); }
 # Remove *.o and *.hi file
 #  WARNING: -print0 must be located after predicated
 clean-hi() { find -name \*.hi -o -name \*.o -print0 | xargs --null rm -v; }
+# Start ghci in sandbox environment
+ghci-sandbox() {(
+    if [ -d .cabal-sandbox ]; then
+	local sandbox=.cabal-sandbox
+    elif [ -d ../.cabal-sandbox ]; then
+	local sandbox=../.cabal-sandbox
+    else
+	echo "No cabal sandbox"
+	exit 1
+    fi
+    exec ghci -no-user-package-db -package-db "$sandbox/$(uname -m)-linux-ghc-$(ghc -V | sed 's/[^0-9]*//')-packages.conf.d/" "$@"
+)}
 ## VCS shorcuts and goodies
 # Subversion
 function svn-diff()  {  svn diff "$@" | colordiff | tryless; } # Colored diff
