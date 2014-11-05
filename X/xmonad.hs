@@ -243,6 +243,7 @@ myManageHook = composeAll $ concat [
                            , (resource,  "terminal-float")
                            , (title,     "VLC (XVideo output)")],
     hookList doMedia [ (className, "MPlayer")
+                     , (className, "mplayer2")
                      , (className, "wesnoth") ],
     -- Windows placement hooks
     hookList (doWorkspace "WWW")     [ (className, "Iceweasel")
