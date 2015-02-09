@@ -181,7 +181,10 @@ line."
                       "\"\"\"\n"
                       "\"\"\"\n"))
 
-;; Haskell utils
+
+;; ----------------------------------------------------------------
+;; Haskell hooks
+;; ----------------------------------------------------------------
 (require 'haskell)
 (require 'haskell-mode)
 (require 'haskell-cabal)
@@ -190,7 +193,7 @@ line."
 (require 'haskell-navigate-imports)
 (require 'haskell-sort-imports)
 (require 'haskell-font-lock)
-(defun my-haskell-hooks ()
+(add-hook 'haskell-mode-hook (lambda ()
   "Hooks specific to haskell"
   (turn-on-haskell-indentation)
   ; Haskell hooks are run quite frequently by interactive mode so we
@@ -228,7 +231,7 @@ line."
       ;; Comments
       (my-comment-hooks)
       ))
-  )
+  ))
 
 
 
@@ -260,8 +263,6 @@ line."
 ;; Elisp hooks
 (add-hook-list 'emacs-lisp-mode-hook '(my-indent-hook
 				       my-comment-hooks))
-;; Haskell hooks
-(add-hook-list 'haskell-mode-hook    '(my-haskell-hooks))
 
 
 
