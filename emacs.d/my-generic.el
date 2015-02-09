@@ -21,18 +21,22 @@
 ;; Automode list
 ;; =========================================================
 ; scons files
-(setq auto-mode-alist (cons '("SConstruct" . python-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("SConscript" . python-mode) auto-mode-alist))
-; ReST mode
-(setq auto-mode-alist (cons '("\\.rst$"  . rst-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.rest$" . rst-mode) auto-mode-alist))
-; Markdown mode
-(setq auto-mode-alist (cons '("\\.mark$"     . markdown-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.markdown$" . markdown-mode) auto-mode-alist))
-; Haskell
-(setq auto-mode-alist (cons '("\\.hs"  . haskell-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.hsc" . haskell-mode) auto-mode-alist))
-
+(setq auto-mode-alist
+  (append
+   ; SCons
+   '(("SConstruct" . python-mode)
+     ("SConscript" . python-mode)
+   ; ReST mode
+     ("\\.rst$"  . rst-mode)
+     ("\\.rest$" . rst-mode)
+   ; Markdown mode
+     ("\\.md$"       . markdown-mode)
+     ("\\.mark$"     . markdown-mode)
+     ("\\.markdown$" . markdown-mode)
+   ; Haskell
+     ("\\.hs"  . haskell-mode)
+     ("\\.hsc" . haskell-mode)
+     ) auto-mode-alist))
 
 
 ;; =========================================================
