@@ -216,7 +216,8 @@ line."
       (local-set-key (kbd "C-`")     'haskell-interactive-bring)
       (local-set-key (kbd "C-c C-l") 'haskell-process-load-or-reload)
       ))
-  ))
+    ))
+(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup)
 
 
 ;; ================================================================
