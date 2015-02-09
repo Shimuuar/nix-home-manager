@@ -138,11 +138,6 @@ line."
 ;; ========================================================
 ;; Define hooks
 ;; =========================================================
-(defun my-make-hook()
-  "Add quick binding for compile"
-  (local-set-key [f8] (lambda () (interactive)
-			(compile "make -k")))
-  )
 
 (defun my-c-indent-hook()
   "Allow to change indentation "
@@ -242,6 +237,7 @@ line."
                       "\"\"\"\n")
   ))
 
+
 ;; ================================================================
 ;; Set up hooks
 ;; ================================================================
@@ -268,13 +264,11 @@ line."
 (add-hook 'lisp-mode-hook (lambda ()
   (my-indent-hook)
   (my-comment-hooks)
-  )))
+  ))
 ;; Elisp hooks
 (add-hook 'emacs-lisp-mode-hook (lambda ()
   (my-indent-hook)
   (my-comment-hooks)
   ))
-
-
 
 (provide 'my-programming)

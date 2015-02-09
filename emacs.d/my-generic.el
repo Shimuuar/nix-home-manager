@@ -90,7 +90,11 @@
   "Add list of hooks"
   (mapcar (lambda (one-hook) (add-hook hook one-hook)) hooks-list))
 
-
+(defun my-make-hook()
+  "Add quick binding for compile"
+  (local-set-key [f8] (lambda () (interactive)
+			(compile "make -k")))
+  )
 
 
 (provide 'my-generic)
