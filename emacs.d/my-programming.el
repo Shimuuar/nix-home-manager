@@ -225,7 +225,8 @@ line."
 
 (add-hook 'python-mode-hook (lambda ()
   "Python hooks"
-  (abbrev-mode t)			; Set abberviation mode
+  (abbrev-mode t)
+  (flycheck-mode)
   (my-indent-hook)
   (my-folding-hooks)
   (setq tab-width        4  )		; Override tab width
