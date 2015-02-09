@@ -182,47 +182,52 @@ line."
                       "\"\"\"\n"))
 
 ;; Haskell utils
+(require 'haskell)
 (require 'haskell-mode)
-(require 'haskell-indentation)
 (require 'haskell-cabal)
+(require 'haskell-indentation)
 (require 'haskell-move-nested)
 (require 'haskell-navigate-imports)
 (require 'haskell-sort-imports)
-(require 'ghc-core)
-(autoload 'ghc-init "ghc" nil t)
+(require 'haskell-font-lock)
 (defun my-haskell-hooks ()
   "Hooks specific to haskell"
-  (abbrev-mode t)
   (turn-on-haskell-indentation)
-  ;; Switch between styles
-  (local-set-key (kbd "C-c C-j") 'my-haskell-toggle-style)
-  ;; Rename buffer on import.
-  (let ((nm (haskell-guess-module-name)))
-    (if (and nm (not (string-equal nm "")))
-	(rename-buffer (concat "{" nm "}") t)))
-  ;; Move nested blocks
-  (define-key haskell-mode-map (kbd "M-<left>")
-    (lambda ()
-      (interactive)
-      (haskell-move-nested -1)))
-  (define-key haskell-mode-map (kbd "M-<right>")
-    (lambda ()
-      (interactive)
-      (haskell-move-nested  1)))
-  ;; Navigate imports
-  (local-set-key (kbd "M-[") 'haskell-navigate-imports)
-  (local-set-key (kbd "M-]") 'haskell-navigate-imports-return)
-  ;; PRAGMAS
-  (local-set-key (kbd "C-c C-s") 'haskell-mode-insert-scc-at-point)
-  (local-set-key (kbd "C-c s"  ) 'haskell-mode-kill-scc-at-point)
-  (local-set-key (kbd "C-c i"  ) 'my-haskell-insert-inline)
-  ;; ghc-mod
-  (ghc-init)
-  (flymake-mode)
-  (if (fboundp 'ghc-toggle-check-command)
-      (local-set-key (kbd "C-c C-g") 'ghc-toggle-check-command))
-  ;; Comments
-  (my-comment-hooks)
+  ; Haskell hooks are run quite frequently by interactive mode so we
+  ; disable most of them in temporary buffers
+  (when (buffer-file-name)
+    (progn
+      (abbrev-mode t)
+      (interactive-haskell-mode)
+      ;; Switch between styles
+      (local-set-key (kbd "C-c C-j") 'my-haskell-toggle-style)
+      ;; Rename buffer on import.
+      (let ((nm (haskell-guess-module-name)))
+	(if (and nm (not (string-equal nm "")))
+	    (rename-buffer (concat "{" nm "}") t)))
+      ;; Move nested blocks
+      (define-key haskell-mode-map (kbd "M-<left>")
+	(lambda ()
+	  (interactive)
+	  (haskell-move-nested -1)))
+      (define-key haskell-mode-map (kbd "M-<right>")
+	(lambda ()
+	  (interactive)
+	  (haskell-move-nested  1)))
+      ;; Navigate imports
+      (local-set-key (kbd "M-[") 'haskell-navigate-imports)
+      (local-set-key (kbd "M-]") 'haskell-navigate-imports-return)
+      ;; PRAGMAS
+      (local-set-key (kbd "C-c C-s") 'haskell-mode-insert-scc-at-point)
+      (local-set-key (kbd "C-c s"  ) 'haskell-mode-kill-scc-at-point)
+      (local-set-key (kbd "C-c i"  ) 'my-haskell-insert-inline)
+      ;; ghc-mod
+      (flycheck-mode)
+      (local-set-key (kbd "C-`")     'haskell-interactive-bring)
+      (local-set-key (kbd "C-c C-l") 'haskell-process-load-or-reload)
+      ;; Comments
+      (my-comment-hooks)
+      ))
   )
 
 

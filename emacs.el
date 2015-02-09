@@ -11,13 +11,13 @@
 	(list "~/.emacs.d"
 	      "~/.emacs.d/lisp"
 	      "~/.emacs.d/lisp-personal"
-	      "~/.emacs.d/haskell-mode"))
-; Now we need to add path to GHC-mod. If there's more than one
-; complain loudly.
-(let ((pathes (file-expand-wildcards "~/.cabal/share/*/ghc-mod-*")))
-  (if (> (length pathes) 1)
-    (error "Multiple ghc-mods. Do something!!!")
-    (mapcar 'add-load-path pathes)))
+	      "~/.emacs.d/haskell-mode"
+	      "~/.emacs.d/haskell-flycheck"))
+; Add MELPA to list of packages
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
 
 ; Require local modification (if any)
 (require 'my-local "my-local.el" t)
