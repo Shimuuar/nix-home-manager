@@ -8,8 +8,7 @@
   (add-to-list 'load-path (expand-file-name path)))
 ; Now add default pathes
 (mapcar 'add-load-path
-	(list "~/.emacs.d"
-	      "~/.emacs.d/lisp"
+	(list "~/.emacs.d/lisp"
 	      "~/.emacs.d/lisp-personal"
 	      "~/.emacs.d/haskell-mode"
 	      "~/.emacs.d/haskell-flycheck"))
