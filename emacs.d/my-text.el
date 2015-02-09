@@ -41,6 +41,15 @@
 				"en" "ru")))
 
 
+;; ================================================================
+;; Global settings
+;; ================================================================
+
+; orphography check
+(setq         ispell-dictionary   "en"    )
+(setq-default ispell-program-name "aspell")
+
+
 
 ;; =========================================================
 ;; Hooks
@@ -70,14 +79,22 @@
 "))
 
 (add-hook 'latex-mode-hook (lambda ()
-  (my-tex-hooks)
+  (my-base-text-hooks)
   (my-make-hook)
   (local-set-key "\C-c q" 'my-switch-tex-quotes)
+  ; Add more known blocks (esp. for beamer)
+  (set-variable 'latex-standard-block-names
+    (append '("frame" "block" "exampleblock" "alertblock"
+	      "columns" "column"
+	      )
+	    latex-standard-block-names
+	    ))
+  (set-variable 'latex-block-args-alist
+    (append '(("column" nil ?\{ (skeleton-read "Width: ") ?\})
+	      ("block"  nil ?\{ (skeleton-read "Title: ") ?\})
+	      )
+	    latex-block-args-alist))
   ))
 (add-hook      'text-mode-hook  'my-base-text-hooks)
-
-; orphography check
-(setq         ispell-dictionary   "en"    )
-(setq-default ispell-program-name "aspell")
 
 (provide 'my-text)
