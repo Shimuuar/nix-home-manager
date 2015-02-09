@@ -194,6 +194,18 @@ ghci-sandbox() {(
     fi
     exec ghci -no-user-package-db -package-db "$sandbox/$(uname -m)-linux-ghc-$(ghc -V | sed 's/[^0-9]*//')-packages.conf.d/" "$@"
 )}
+# Start ghci in sandbox environment
+ghc-sandbox() {(
+    if [ -d .cabal-sandbox ]; then
+	local sandbox=.cabal-sandbox
+    elif [ -d ../.cabal-sandbox ]; then
+	local sandbox=../.cabal-sandbox
+    else
+	echo "No cabal sandbox"
+	exit 1
+    fi
+    exec ghc -no-user-package-db -package-db "$sandbox/$(uname -m)-linux-ghc-$(ghc -V | sed 's/[^0-9]*//')-packages.conf.d/" "$@"
+)}
 ## VCS shorcuts and goodies
 # Subversion
 function svn-diff()  {  svn diff "$@" | colordiff | tryless; } # Colored diff
