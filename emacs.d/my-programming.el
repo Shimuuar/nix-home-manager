@@ -170,21 +170,11 @@ line."
   (flyspell-prog-mode)
   )
 
-(defun my-python-hooks ()
-  "Hooks specific to python"
-  (setq tab-width        4  )		; Override tab width
-  (setq indent-tabs-mode nil)		; Use spaces for indent
-  (setq python-indent    4  )		; Python indentation
-  (abbrev-mode t)			; Set abberviation mode
-  ;; Insert shebang into empty files
-  (my-insert-if-empty "#!/usr/bin/python\n"
-                      "\"\"\"\n"
-                      "\"\"\"\n"))
 
 
-;; ----------------------------------------------------------------
+;; ================================================================
 ;; Haskell hooks
-;; ----------------------------------------------------------------
+;; ================================================================
 (require 'haskell)
 (require 'haskell-mode)
 (require 'haskell-cabal)
@@ -200,6 +190,8 @@ line."
   ; disable most of them in temporary buffers
   (when (buffer-file-name)
     (progn
+      ;; generic part
+      (my-comment-hooks)
       (abbrev-mode t)
       (interactive-haskell-mode)
       ;; Switch between styles
@@ -228,41 +220,60 @@ line."
       (flycheck-mode)
       (local-set-key (kbd "C-`")     'haskell-interactive-bring)
       (local-set-key (kbd "C-c C-l") 'haskell-process-load-or-reload)
-      ;; Comments
-      (my-comment-hooks)
       ))
   ))
 
 
+;; ================================================================
+;; Python hooks
+;; ================================================================
+
+(add-hook 'python-mode-hook (lambda ()
+  "Python hooks"
+  (abbrev-mode t)			; Set abberviation mode
+  (my-indent-hook)
+  (my-folding-hooks)
+  (setq tab-width        4  )		; Override tab width
+  (setq indent-tabs-mode nil)		; Use spaces for indent
+  (setq python-indent    4  )		; Python indentation
+  ;; Insert shebang into empty files
+  (my-insert-if-empty "#!/usr/bin/python\n"
+                      "\"\"\"\n"
+                      "\"\"\"\n")
+  ))
 
 ;; ================================================================
 ;; Set up hooks
 ;; ================================================================
 ;; C hooks
-(add-hook-list 'c-mode-hook          '(my-indent-hook
-				       my-c-indent-hook
-				       my-make-hook
-				       my-comment-hooks
-				       my-folding-hooks))
+(add-hook-list 'c-mode-hook
+  '(my-indent-hook
+    my-c-indent-hook
+    my-make-hook
+    my-comment-hooks
+    my-folding-hooks))
 ;; C++ hooks
-(add-hook-list 'c++-mode-hook        '(my-indent-hook
-				       my-c-indent-hook
-				       my-make-hook
-				       my-comment-hooks
-				       my-folding-hooks))
-;; Python hooks
-(add-hook-list 'python-mode-hook     '(my-indent-hook
-				       my-folding-hooks
-				       my-python-hooks))
+(add-hook-list 'c++-mode-hook
+  '(my-indent-hook
+    my-c-indent-hook
+    my-make-hook
+    my-comment-hooks
+    my-folding-hooks))
 ;; Shell hooks
-(add-hook-list 'sh-mode-hook         '(my-indent-hook
-				       (lambda () (my-insert-if-empty "#!/bin/sh\n\n"))))
+(add-hook 'sh-mode-hook (lambda ()
+  (my-indent-hook)
+  (lambda () (my-insert-if-empty "#!/bin/sh\n\n"))
+  ))
 ;; Lisp hooks
-(add-hook-list 'lisp-mode-hook       '(my-indent-hook
-				       my-comment-hooks))
+(add-hook 'lisp-mode-hook (lambda ()
+  (my-indent-hook)
+  (my-comment-hooks)
+  )))
 ;; Elisp hooks
-(add-hook-list 'emacs-lisp-mode-hook '(my-indent-hook
-				       my-comment-hooks))
+(add-hook 'emacs-lisp-mode-hook (lambda ()
+  (my-indent-hook)
+  (my-comment-hooks)
+  ))
 
 
 
