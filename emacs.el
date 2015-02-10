@@ -13,10 +13,12 @@
 	      "~/.emacs.d/haskell-mode"
 	      "~/.emacs.d/haskell-flycheck"))
 ; Add MELPA to list of packages
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
-(package-initialize)
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (add-to-list 'package-archives
+	       '("melpa" . "http://melpa.org/packages/") t)
+  (package-initialize)
+)
 
 ; Require local modification (if any)
 (require 'my-local "my-local.el" t)

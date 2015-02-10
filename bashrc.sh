@@ -64,8 +64,9 @@ export HISTIGNORE=ls:[fb]g
 ## ---------------------------------------------------------
 ## Fancy prompt
 ## ---------------------------------------------------------
-function truncate_pwd
+function truncate_pwd()
 {
+    ## Set prompt color
     if [ "$?" = 0 ]; then
 	PS1_COL=42
     else
