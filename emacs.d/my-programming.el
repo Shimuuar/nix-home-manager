@@ -242,6 +242,8 @@ line."
   (flycheck-mode)
   (my-indent-hook)
   (my-folding-hooks)
+  (my-comment-hooks)
+  ; Python specific hooks
   (setq tab-width        4  )		; Override tab width
   (setq indent-tabs-mode nil)		; Use spaces for indent
   (setq python-indent    4  )		; Python indentation
