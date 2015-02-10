@@ -165,6 +165,19 @@ line."
   (flyspell-prog-mode)
   )
 
+;; ================================================================
+;; Flycheck hooks
+;; ================================================================
+(add-hook 'flycheck-mode-hook (lambda ()
+  #'flycheck-haskell-setup
+  ; Redefine flycheck prefix. "C-c !" is insane
+  (define-key flycheck-mode-map flycheck-keymap-prefix nil)
+  (setq flycheck-keymap-prefix (kbd "C-c f"))
+  (define-key flycheck-mode-map flycheck-keymap-prefix
+              flycheck-command-map)
+  ; Increase delay before displaying error
+  (setq 'flycheck-display-errors-delay 2)
+  ))
 
 
 ;; ================================================================
@@ -211,13 +224,12 @@ line."
       (local-set-key (kbd "C-c C-s") 'haskell-mode-insert-scc-at-point)
       (local-set-key (kbd "C-c s"  ) 'haskell-mode-kill-scc-at-point)
       (local-set-key (kbd "C-c i"  ) 'my-haskell-insert-inline)
-      ;; ghc-mod
+      ;; Flycheck
       (flycheck-mode)
       (local-set-key (kbd "C-`")     'haskell-interactive-bring)
       (local-set-key (kbd "C-c C-l") 'haskell-process-load-or-reload)
       ))
     ))
-(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup)
 
 
 ;; ================================================================
