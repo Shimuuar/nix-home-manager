@@ -176,7 +176,7 @@ line."
   (define-key flycheck-mode-map flycheck-keymap-prefix
               flycheck-command-map)
   ; Increase delay before displaying error
-  (setq 'flycheck-display-errors-delay 2)
+  (set-variable 'flycheck-display-errors-delay 2)
   ))
 
 
