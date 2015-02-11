@@ -58,7 +58,7 @@
 (iswitchb-mode 1)
 ; Ignores
 (mapcar (lambda (buf) (add-to-list 'iswitchb-buffer-ignore buf))
-	'("*Messages*"  "*Buffer"    "*Completions"
+	'("*Buffer"    "*Completions"
 	  "*Apropos"    "*Warnings"  "*Quail"))
 
 
