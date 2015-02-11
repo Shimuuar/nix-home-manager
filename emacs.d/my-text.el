@@ -59,7 +59,6 @@
   (auto-fill-mode  1 )
   (set-fill-column 80)
   (flyspell-mode   t )
-  (local-set-key (kbd "C-c C-a") 'my-switch-dict)
   )
 
 ; TeX template
