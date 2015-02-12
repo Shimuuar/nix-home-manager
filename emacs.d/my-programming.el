@@ -70,6 +70,11 @@ int main(int argc, char** argv)
   (interactive "nType tab width ")
   (setq tab-width wid))
 
+(defun my-try-flycheck()
+  "Enable flycheck if avaialble and proform actions"
+  (when (fboundp 'flycheck-mode)
+    (flycheck-mode)))
+
 (defun my-haskell-insert-inline ()
   "Insert INLINE pragma. It inserts pragma in directly above the
 line."
@@ -98,6 +103,7 @@ line."
 	  haskell-indentation-layout-offset n
 	  haskell-indentation-left-offset   n
 	  haskell-indentation-ifte-offset   n)))
+
 
 ;; ===============================================
 ;; Syntax highlighting
@@ -225,7 +231,7 @@ line."
       (local-set-key (kbd "C-c s"  ) 'haskell-mode-kill-scc-at-point)
       (local-set-key (kbd "C-c i"  ) 'my-haskell-insert-inline)
       ;; Flycheck
-      (flycheck-mode)
+      (my-try-flycheck)
       (local-set-key (kbd "C-`")     'haskell-interactive-bring)
       (local-set-key (kbd "C-c C-l") 'haskell-process-load-or-reload)
       ))
@@ -239,7 +245,7 @@ line."
 (add-hook 'python-mode-hook (lambda ()
   "Python hooks"
   (abbrev-mode t)
-  (flycheck-mode)
+  (my-try-flycheck)
   (my-indent-hook)
   (my-folding-hooks)
   (my-comment-hooks)
