@@ -90,7 +90,9 @@
 	    ))
   (set-variable 'latex-block-args-alist
     (append '(("column" nil ?\{ (skeleton-read "Width: ") ?\})
-	      ("block"  nil ?\{ (skeleton-read "Title: ") ?\})
+	      ("block"        nil ?\{ (skeleton-read "Title: ") ?\})
+	      ("exampleblock" nil ?\{ (skeleton-read "Title: ") ?\})
+	      ("alertblock"   nil ?\{ (skeleton-read "Title: ") ?\})
 	      )
 	    latex-block-args-alist))
   ))
