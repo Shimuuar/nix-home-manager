@@ -43,8 +43,10 @@
 	   mode-line-modified
 	   mode-line-frame-identification
 	   mode-line-buffer-identification
+	   "  "
 	   mode-line-position
 	   (vc-mode vc-mode)
+	   " "
 	   mode-line-modes
 	   ; Tab width display for C/C++ modes and indentation type for haskell mode
 	   "-- "
