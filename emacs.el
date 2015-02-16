@@ -12,12 +12,25 @@
 	      "~/.emacs.d/lisp-personal"
 	      "~/.emacs.d/haskell-mode"
 	      "~/.emacs.d/haskell-flycheck"))
-; Add MELPA to list of packages
+;; Load necessary packages
+;(require 'cl)
+
+
+; Define packages 
 (when (>= emacs-major-version 24)
   (require 'package)
+  ; Add MELPA to list of packages
   (add-to-list 'package-archives
 	       '("melpa" . "http://melpa.org/packages/") t)
   (package-initialize)
+
+  ; Check that all required packages are installed
+  (defvar prelude-packages
+    '( haskell-mode
+       flycheck
+       flycheck-haskell
+       )
+    "List of required packages")
 )
 
 ; Require local modification (if any)
@@ -28,6 +41,5 @@
 (require 'my-text)
 (require 'my-programming)
 (require 'my-abbrevs)
-
 (require 'my-bindings)
 (require 'my-appearance)
