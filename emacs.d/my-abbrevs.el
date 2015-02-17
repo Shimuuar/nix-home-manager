@@ -72,10 +72,10 @@
 ;; =========================================================
 ;; Python abbreviations
 ;; =========================================================
-(define-skeleton my-skel-python-import-all
+(define-skeleton my-skel-python-import-list
   "``Import all'' clause"
   "Import from: "
-  "from " str " import *" _ "")
+  "from " str " import " _ "")
 
 (define-skeleton my-skel-python-range
   "skeleton for python ``range''"
@@ -86,8 +86,8 @@
   '(
     ; import clause  
     ("imp"   "import" nil 0)
-    ("impa"  ""       my-skel-python-import-all 0)
-    ("ra"    ""       my-skel-python-range      0)
+    ("impa"  ""       my-skel-python-import-list 0)
+    ("ra"    ""       my-skel-python-range       0)
     ; Return
     ("ret"   "return" nil 0)
     ))
