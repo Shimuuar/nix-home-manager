@@ -54,13 +54,23 @@
 ;;============================================================
 ;; iswitchb
 ;;============================================================
-(require 'iswitchb)
-(iswitchb-mode 1)
-; Ignores
-(mapcar (lambda (buf) (add-to-list 'iswitchb-buffer-ignore buf))
+(require 'ido)
+(ido-mode 1)
+;; Ignores following buffers
+(mapcar (lambda (buf) (add-to-list 'ido-ignore-buffers buf))
 	'("*Buffer"    "*Completions" "*ESS"
 	  "*Apropos"    "*Warnings"  "*Quail"))
-
+;; Ensure case insensitivity
+(when ido-case-fold (ido-toggle-case))
+;; Tweak appearance
+(setq ido-decorations
+      '("\n{" "}" " | " " | ..."
+	"[" "]"
+	" [No match]"
+	" [Matched]"
+	" [Not readable]"
+	" [Too big]"
+	" [Confirm]"))
 
 
 ;; =========================================================
