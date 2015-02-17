@@ -42,39 +42,6 @@ int main(int argc, char** argv)
 }
 "))
 
-(defun my/indent-buffer()
-  "Indent whole buffer"
-  (interactive)
-  (delete-trailing-whitespace)
-  (indent-region (point-min) (point-max) nil))
-
-(defun my/indent-line()
-  "Indent line and move to next"
-  (interactive)
-  (indent-according-to-mode)
-  (next-line))
-
-(defun my/match-paren (arg)
-  "Jump to matching parenthesis"
-  (interactive "p")
-  (cond ((looking-at  "[\[<\(\{]") (forward-list  1))
-        ((looking-back "[]>\)\}]") (backward-list 1))))
-
-(defun my/comment-or-uncomment-line ()
-  "Comment or uncomment line under cursor"
-  (interactive)
-  (comment-or-uncomment-region (point-at-bol) (point-at-eol)))
-
-(defun my/settab(wid)
-  "Set tab width"
-  (interactive "nType tab width ")
-  (setq tab-width wid))
-
-(defun my/try-flycheck()
-  "Enable flycheck if avaialble and proform actions"
-  (when (fboundp 'flycheck-mode)
-    (flycheck-mode)))
-
 (defun my/haskell-insert-inline ()
   "Insert INLINE pragma. It inserts pragma in directly above the
 line."
@@ -264,14 +231,14 @@ line."
 ;; Set up hooks
 ;; ================================================================
 ;; C hooks
-(add-hook-list 'c-mode-hook
+(my/add-hook-list 'c-mode-hook
   '(my/indent-hook
     my/c-indent-hook
     my/make-hook
     my/comment-hooks
     my/folding-hooks))
 ;; C++ hooks
-(add-hook-list 'c++-mode-hook
+(my/add-hook-list 'c++-mode-hook
   '(my/indent-hook
     my/c-indent-hook
     my/make-hook

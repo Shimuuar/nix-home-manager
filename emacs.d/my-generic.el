@@ -3,6 +3,56 @@
 ;;; Generic customization
 ;;;
 
+;; =========================================================
+;; Useful functions
+;; =========================================================
+(defun my/insert-if-empty(&rest msg)
+  (if (= 0 (- (point-min) (point-max)))
+      (mapcar 'insert msg)))
+
+(defun my/add-hook-list (hook hooks-list)
+  "Add list of hooks"
+  (mapcar (lambda (one-hook) (add-hook hook one-hook)) hooks-list))
+
+(defun my/make-hook()
+  "Add quick binding for compile"
+  (local-set-key [f8] (lambda () (interactive)
+			(compile "make -k")))
+  )
+
+(defun my/indent-buffer()
+  "Indent whole buffer"
+  (interactive)
+  (delete-trailing-whitespace)
+  (indent-region (point-min) (point-max) nil))
+
+(defun my/indent-line()
+  "Indent line and move to next"
+  (interactive)
+  (indent-according-to-mode)
+  (next-line))
+
+(defun my/match-paren (arg)
+  "Jump to matching parenthesis"
+  (interactive "p")
+  (cond ((looking-at  "[\[<\(\{]") (forward-list  1))
+        ((looking-back "[]>\)\}]") (backward-list 1))))
+
+(defun my/comment-or-uncomment-line ()
+  "Comment or uncomment line under cursor"
+  (interactive)
+  (comment-or-uncomment-region (point-at-bol) (point-at-eol)))
+
+(defun my/try-flycheck()
+  "Enable flycheck if avaialble and proform actions"
+  (when (fboundp 'flycheck-mode)
+    (flycheck-mode)))
+(defun my/settab(wid)
+  "Set tab width"
+  (interactive "nType tab width ")
+  (setq tab-width wid))
+
+
 
 ;; =========================================================
 ;; Backups
@@ -91,24 +141,6 @@
 ; Temporarily disabled
 ;(server-start))
 ;; =================
-
-
-;; =========================================================
-;; Useful functions
-;; =========================================================
-(defun my/insert-if-empty(&rest msg)
-  (if (= 0 (- (point-min) (point-max)))
-      (mapcar 'insert msg)))
-
-(defun add-hook-list (hook hooks-list)
-  "Add list of hooks"
-  (mapcar (lambda (one-hook) (add-hook hook one-hook)) hooks-list))
-
-(defun my/make-hook()
-  "Add quick binding for compile"
-  (local-set-key [f8] (lambda () (interactive)
-			(compile "make -k")))
-  )
 
 
 (provide 'my-generic)
