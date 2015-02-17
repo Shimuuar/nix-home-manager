@@ -6,15 +6,15 @@
 ;; =========================================================
 ;; C/C++ abbreviations
 ;; =========================================================
-(define-skeleton my-skel-reintepret-cast
+(define-skeleton my/skel-reintepret-cast
   "Skeleton for reinterpret cast"
   "Typename: "
   "reinterpret_cast<" str ">(" _ ")")
-(define-skeleton my-skel-static-cast
+(define-skeleton my/skel-static-cast
   "Skeleton for static cast"
   "Typename: "
   "static_cast<" str ">(" _ ")")
-(define-skeleton my-skel-printf
+(define-skeleton my/skel-printf
   "Skeleton for printf" ""
   "printf(\"" _ "\");" )
   
@@ -35,7 +35,7 @@
     ("vo" "void"       nil 0)
     ("bo" "bool"       nil 0)
     ; printf
-    ("pr" ""           my-skel-printf 0)
+    ("pr" ""           my/skel-printf 0)
     ))
 (define-abbrev-table 'c++-mode-abbrev-table
   '(
@@ -57,10 +57,10 @@
     ("pub"  "public"   nil 0)
     ("priv" "private"  nil 0)
     ; printf
-    ("pr" ""           my-skel-printf 0)
+    ("pr" ""           my/skel-printf 0)
     ; Casts
-    ("rcast" ""       my-skel-reintepret-cast 0)
-    ("scast" ""       my-skel-static-cast 0)
+    ("rcast" ""       my/skel-reintepret-cast 0)
+    ("scast" ""       my/skel-static-cast 0)
     ; STL
     ("cout"  "std::cout" nil 0)
     ("cerr"  "std::cerr" nil 0)
@@ -72,12 +72,12 @@
 ;; =========================================================
 ;; Python abbreviations
 ;; =========================================================
-(define-skeleton my-skel-python-import-list
+(define-skeleton my/skel-python-import-list
   "``Import all'' clause"
   "Import from: "
   "from " str " import " _ "")
 
-(define-skeleton my-skel-python-range
+(define-skeleton my/skel-python-range
   "skeleton for python ``range''"
   "Range: "
   "range(" str ")" _ )
@@ -86,8 +86,8 @@
   '(
     ; import clause  
     ("imp"   "import" nil 0)
-    ("impa"  ""       my-skel-python-import-list 0)
-    ("ra"    ""       my-skel-python-range       0)
+    ("impa"  ""       my/skel-python-import-list 0)
+    ("ra"    ""       my/skel-python-range       0)
     ; Return
     ("ret"   "return" nil 0)
     ))
@@ -96,7 +96,7 @@
 ;; =========================================================
 ;; Haskell abbreviations
 ;; =========================================================
-(define-skeleton my-skel-haskell-LANG
+(define-skeleton my/skel-haskell-LANG
   "Skeleton for haskell LANGUAGE pragma"
   ""
   "{-# LANGUAGE "
@@ -104,7 +104,7 @@
 		   (split-string (shell-command-to-string "ghc --supported-extensions")))
   " #-}" 
   )
-(define-skeleton my-skel-haskell-import
+(define-skeleton my/skel-haskell-import
   "Skeleton for common haskell imports"
   ""
   "import "
@@ -145,13 +145,13 @@
     ; Import
     ("imp"  "import"           nil                    0)
     ("impq" "import qualified" nil                    0)
-    ("impa" ""                 my-skel-haskell-import 0)
+    ("impa" ""                 my/skel-haskell-import 0)
     ; Shorhands
     ("ret"  "return"           nil                    0)
     ("pr"   "print"            nil                    0)
     ("fi"   "fromIntegral"     nil                    0)
     ; Pragmas
-    ("plang" ""                my-skel-haskell-LANG   0)
+    ("plang" ""                my/skel-haskell-LANG   0)
     ))
 
 (provide 'my-abbrevs)

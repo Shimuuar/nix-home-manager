@@ -3,7 +3,7 @@
 ;;; Text editing customization
 ;;;
 
-(defun my-switch-tex-quotes ()
+(defun my/switch-tex-quotes ()
   "Hack to replace TeX english `` and '' quotes with << >>"
   (interactive)
   (if (string-equal tex-open-quote  "``")
@@ -13,7 +13,7 @@
     (set-variable 'tex-close-quote  ">>")
     (set-variable 'tex-close-quote  "''")))
 
-(defun my-recode-buffer-safe (target-coding-system)
+(defun my/recode-buffer-safe (target-coding-system)
   "* Recode buffer as if it were encoded with `target-coding-system'.
   If current buffer is write-protected (`buffer-read-only'), do nothing."
   (interactive "zEnter target coding system: ")
@@ -26,7 +26,7 @@
                           target-coding-system)
     (set-buffer-file-coding-system target-coding-system)))
 
-(defun my-change-encoding (actual-encoding) 
+(defun my/change-encoding (actual-encoding) 
   "Sets file encoding
   I'm not sure that it would work as intended everywhere, but it work at least"
   (interactive "zEnter file encoding: ")
@@ -34,7 +34,7 @@
                  actual-encoding buffer-file-coding-system)
   (set-buffer-file-coding-system actual-encoding))
 
-(defun my-switch-dict ()
+(defun my/switch-dict ()
   "Swtich between dictionaries"
   (interactive)
   (ispell-change-dictionary (if (string= "ru" ispell-dictionary)
@@ -55,14 +55,14 @@
 ;; Hooks
 ;; =========================================================
 ; Basic text hook
-(defun my-base-text-hooks()
+(defun my/base-text-hooks()
   (auto-fill-mode  1 )
   (set-fill-column 80)
   (flyspell-mode   t )
   )
 
 ; TeX template
-(defun my-insert-tex-template()
+(defun my/insert-tex-template()
   (interactive)
   (insert
 "\\documentclass[a4paper]{article}
@@ -78,9 +78,9 @@
 "))
 
 (add-hook 'latex-mode-hook (lambda ()
-  (my-base-text-hooks)
-  (my-make-hook)
-  (local-set-key "\C-c q" 'my-switch-tex-quotes)
+  (my/base-text-hooks)
+  (my/make-hook)
+  (local-set-key "\C-c q" 'my/switch-tex-quotes)
   ; Add more known blocks (esp. for beamer)
   (set-variable 'latex-standard-block-names
     (append '("frame" "block" "exampleblock" "alertblock"
@@ -96,6 +96,6 @@
 	      )
 	    latex-block-args-alist))
   ))
-(add-hook      'text-mode-hook  'my-base-text-hooks)
+(add-hook      'text-mode-hook  'my/base-text-hooks)
 
 (provide 'my-text)
