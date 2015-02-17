@@ -6,7 +6,7 @@
 ;; Load paths
 (defun add-load-path (path)
   (add-to-list 'load-path (expand-file-name path)))
-; Now add default pathes
+;; Now add default pathes
 (mapcar 'add-load-path
 	(list "~/.emacs.d/lisp"
 	      "~/.emacs.d/lisp-personal"
@@ -31,6 +31,10 @@
        flycheck-haskell
        )
     "List of required packages")
+  (dolist (p prelude-packages)
+    (unless (package-installed-p p)
+      (message "WARNING: `%s' is not installed" p)))
+
 )
 
 ; Require local modification (if any)
