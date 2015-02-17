@@ -33,8 +33,6 @@
 ; Line and column numbering
 (line-number-mode   t)
 (column-number-mode t)
-; Display time (May be it's useful)
-(display-time)
 ; Set mode line format
 (custom-set-variables
  '(mode-line-format
