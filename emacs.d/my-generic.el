@@ -120,7 +120,10 @@
 	" [Not readable]"
 	" [Too big]"
 	" [Confirm]"))
-
+;; 
+(add-hook 'ido-setup-hook (lambda ()
+  (define-key ido-completion-map (kbd "C-w") 'backward-kill-word)
+  ))
 
 ;; =========================================================
 ;; Miscelanneous
