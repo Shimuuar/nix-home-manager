@@ -101,7 +101,7 @@
 
 
 ;;============================================================
-;; iswitchb
+;; Switching between buffers
 ;;============================================================
 (require 'ido)
 (ido-mode 1)
@@ -125,21 +125,19 @@
 ;; =========================================================
 ;; Miscelanneous
 ;; =========================================================
-; Visible mark
+
+;; Adds undo/redo functionality for window configuration
+;;  C-c <Left>  - Undo
+;;  C-c <Right> - redo
+(when (fboundp 'winner-mode)
+  (winner-mode 1))
+;; Visible mark
 (setq transient-mark-mode t)
-; replace yes/no question with y/n
+;; replace yes/no question with y/n
 (fset 'yes-or-no-p 'y-or-n-p)
-; Disable abbreviation saving
+;; Disable abbreviation saving
 (setq save-abbrevs nil)
 
-
-
-;; =========================================================
-;; Start emacs server
-;; =========================================================
-; Temporarily disabled
-;(server-start))
-;; =================
 
 
 (provide 'my-generic)
