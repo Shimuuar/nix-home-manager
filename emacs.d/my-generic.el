@@ -109,7 +109,7 @@
 (mapcar (lambda (buf) (add-to-list 'ido-ignore-buffers buf))
 	'("*Buffer"    "*Completions" "*ESS"
 	  "*Apropos"    "*Warnings"  "*Quail"))
-;; Ensure case insensitivity
+;; Ensure case sensitivity
 (when ido-case-fold (ido-toggle-case))
 ;; Tweak appearance
 (setq ido-decorations
@@ -124,6 +124,7 @@
 (add-hook 'ido-setup-hook (lambda ()
   (define-key ido-completion-map (kbd "C-w") 'backward-kill-word)
   ))
+
 
 ;; =========================================================
 ;; Miscelanneous
