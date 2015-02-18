@@ -106,9 +106,11 @@
 (require 'ido)
 (ido-mode 1)
 ;; Ignores following buffers
-(mapcar (lambda (buf) (add-to-list 'ido-ignore-buffers buf))
-	'("*Buffer"    "*Completions" "*ESS"
-	  "*Apropos"    "*Warnings"  "*Quail"))
+(setq ido-ignore-buffers
+  (append '("*Buffer"    "*Completions" "*ESS"
+	    "*Apropos"    "*Warnings"  "*Quail")
+	   ido-ignore-buffers
+	  ))
 ;; Ensure case sensitivity
 (when ido-case-fold (ido-toggle-case))
 ;; Tweak appearance
@@ -122,7 +124,9 @@
 	" [Confirm]"))
 ;; 
 (add-hook 'ido-setup-hook (lambda ()
-  (define-key ido-completion-map (kbd "C-w") 'backward-kill-word)
+  (define-key ido-completion-map (kbd "C-w")    'backward-kill-word)
+  (define-key ido-completion-map (kbd "<up>")   'ido-prev-work-file)
+  (define-key ido-completion-map (kbd "<down>") 'ido-next-work-file)
   ))
 
 
