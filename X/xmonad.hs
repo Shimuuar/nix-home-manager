@@ -45,6 +45,9 @@ run = safeSpawnProg
 wikipediaLang' :: String -> SearchEngine
 wikipediaLang' lang = searchEngine (lang++".wiki") ("https://secure.wikimedia.org/wikipedia/"++lang++"/wiki/Special:Search?go=Go&search=")
 
+duckduckgo :: SearchEngine
+duckduckgo = searchEngine "duckduckgo" "https://duckduckgo.com/?q="
+
 mySearch :: (String, SearchEngine) -> [(String, X ())]
 mySearch (key , engine) = [ (key      , promptSearchBrowser myXPConfig browser engine)
                           , ("M-"++key, selectSearchBrowser            browser engine)
@@ -144,15 +147,15 @@ myKeys conf =
     -- Search
     , ("M-g"     , submap $ mkKeymap conf $ concatMap mySearch
           [ ("g"  , google )
+          , ("a"  , searchEngine "Яндекс" "http://yandex.ru/yandsearch?text=")
+          , ("d"  , duckduckgo)
           , ("s"  , scholar)
           , ("y"  , youtube)
           , ("h"  , hoogle )
           , ("w"  , wikipedia )
           , ("r"  , wikipediaLang' "ru")
-          , ("i"  , isohunt)
           , ("S-h", hackage)
           , ("u"  , searchEngine "Лурка" "http://lurkmore.ru/%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:Search?search=")
-          , ("a"  , searchEngine "Яндекс" "http://yandex.ru/yandsearch?text=")
           ] )
     -- Useful action
     , ("M-x"     , submap $ mkKeymap conf $
