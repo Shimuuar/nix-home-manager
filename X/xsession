@@ -51,6 +51,8 @@ if which lxpanel; then
     exec lxpanel &
 elif which tint2; then
     exec tint2 &
+elif which xmobar; then
+    exec xmobar &
 fi
 
 
