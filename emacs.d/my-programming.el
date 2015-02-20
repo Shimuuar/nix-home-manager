@@ -133,8 +133,7 @@ line."
 
 (defun my/comment-hooks ()
   "Hooks for commenting"
-  (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
-  (local-set-key (kbd "C-c C-v") 'my/comment-or-uncomment-line)
+  (local-set-key (kbd "C-c C-v") 'my/comment-or-uncomment)
   (flyspell-prog-mode)
   )
 
