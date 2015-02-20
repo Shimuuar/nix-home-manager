@@ -56,11 +56,36 @@
 ;; =========================================================
 ; Basic text hook
 (defun my/base-text-hooks()
+  "Common hooks for text mode"
   (auto-fill-mode  1 )
   (set-fill-column 80)
   (flyspell-mode   t )
   )
 
+(defun my/tex-hooks()
+  "Hooks for TeX mode"
+  (my/base-text-hooks)
+  (my/make-hook)
+  (local-set-key (kbd "C-c q") 'my/switch-tex-quotes)
+  (local-set-key (kbd "C-c SPC") (lambda ()
+    (interactive)
+    (insert "~")
+    ))
+  ; Add more known blocks (esp. for beamer)
+  (set-variable 'latex-standard-block-names
+    (append '("frame" "block" "exampleblock" "alertblock"
+	      "columns" "column"
+	      )
+	    latex-standard-block-names
+	    ))
+  (set-variable 'latex-block-args-alist
+    (append '(("column" nil ?\{ (skeleton-read "Width: ") ?\})
+	      ("block"        nil ?\{ (skeleton-read "Title: ") ?\})
+	      ("exampleblock" nil ?\{ (skeleton-read "Title: ") ?\})
+	      ("alertblock"   nil ?\{ (skeleton-read "Title: ") ?\})
+	      )
+	    latex-block-args-alist))
+  )
 ; TeX template
 (defun my/insert-tex-template()
   (interactive)
@@ -77,25 +102,8 @@
 \\end{document}
 "))
 
-(add-hook 'latex-mode-hook (lambda ()
-  (my/base-text-hooks)
-  (my/make-hook)
-  (local-set-key "\C-c q" 'my/switch-tex-quotes)
-  ; Add more known blocks (esp. for beamer)
-  (set-variable 'latex-standard-block-names
-    (append '("frame" "block" "exampleblock" "alertblock"
-	      "columns" "column"
-	      )
-	    latex-standard-block-names
-	    ))
-  (set-variable 'latex-block-args-alist
-    (append '(("column" nil ?\{ (skeleton-read "Width: ") ?\})
-	      ("block"        nil ?\{ (skeleton-read "Title: ") ?\})
-	      ("exampleblock" nil ?\{ (skeleton-read "Title: ") ?\})
-	      ("alertblock"   nil ?\{ (skeleton-read "Title: ") ?\})
-	      )
-	    latex-block-args-alist))
-  ))
-(add-hook      'text-mode-hook  'my/base-text-hooks)
+(add-hook 'latex-mode-hook 'my/tex-hooks)
+(add-hook 'tex-mode-hook   'my/tex-hooks)
+(add-hook 'text-mode-hook  'my/base-text-hooks)
 
 (provide 'my-text)
