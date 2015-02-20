@@ -38,15 +38,18 @@
   (cond ((looking-at  "[\[<\(\{]") (forward-list  1))
         ((looking-back "[]>\)\}]") (backward-list 1))))
 
-(defun my/comment-or-uncomment-line ()
+(defun my/comment-or-uncomment ()
   "Comment or uncomment line under cursor"
   (interactive)
-  (comment-or-uncomment-region (point-at-bol) (point-at-eol)))
+  (if mark-active
+    (comment-or-uncomment-region (region-beginning) (region-end))
+    (comment-or-uncomment-region (point-at-bol)     (point-at-eol))))
 
 (defun my/try-flycheck()
   "Enable flycheck if avaialble and proform actions"
   (when (fboundp 'flycheck-mode)
     (flycheck-mode)))
+
 (defun my/settab(wid)
   "Set tab width"
   (interactive "nType tab width ")
