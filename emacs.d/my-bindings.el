@@ -25,9 +25,9 @@
 ;; kill-yank
 ;; =========================================================
 ; Replace kill-region with backward-kill-word
-(global-set-key "\C-w" 'backward-kill-word)
+(global-set-key (kbd "C-w") 'backward-kill-word)
 ; Set kill-region to "C-x C-k"
-(global-set-key "\C-x\C-k" 'kill-region)
+(global-set-key (kbd "C-x C-k") 'kill-region)
 
 ;; =========================================================
 ;; Programming and identation 
