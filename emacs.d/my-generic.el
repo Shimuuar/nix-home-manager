@@ -144,6 +144,12 @@
 ;;  C-c <Right> - redo
 (when (fboundp 'winner-mode)
   (winner-mode 1))
+;; Add undo tree mode
+(when (require 'undo-tree nil t)
+  (progn
+    (global-undo-tree-mode)
+    ))
+
 ;; Visible mark
 (setq transient-mark-mode t)
 ;; replace yes/no question with y/n
