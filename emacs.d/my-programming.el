@@ -200,6 +200,10 @@ line."
       (my/try-flycheck)
       (local-set-key (kbd "C-`")     'haskell-interactive-bring)
       (local-set-key (kbd "C-c C-l") 'haskell-process-load-or-reload)
+      ;; haskell-interactive-mode
+      (local-set-key (kbd "C-c M-t") (lambda ()
+        (interactive)
+        (haskell-process-do-type t)))	
       ))
     ))
 
