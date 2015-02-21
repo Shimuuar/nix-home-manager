@@ -111,7 +111,9 @@
 ;; Ignores following buffers
 (setq ido-ignore-buffers
   (append '("*Buffer"    "*Completions" "*ESS"
-	    "*Apropos"    "*Warnings"  "*Quail")
+	    "*Apropos"    "*Warnings"  "*Quail"
+	    "*Flycheck error messages*"
+	    )
 	   ido-ignore-buffers
 	  ))
 ;; Ensure case sensitivity
