@@ -71,6 +71,10 @@
     (interactive)
     (insert "~")
     ))
+  (local-set-key (kbd "C-c -") (lambda ()
+    (interactive)
+    (insert "~---")
+    ))
   ; Add more known blocks (esp. for beamer)
   (set-variable 'latex-standard-block-names
     (append '("frame" "block" "exampleblock" "alertblock"
