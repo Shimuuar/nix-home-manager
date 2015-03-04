@@ -176,6 +176,9 @@ line."
       (interactive-haskell-mode)
       ;; Switch between styles
       (local-set-key (kbd "C-c C-j") 'my/haskell-toggle-style)
+      (local-set-key (kbd "C-c u") (lambda ()
+        (interactive)
+	(insert "undefined")))
       ;; Rename buffer on import.
       (let ((nm (haskell-guess-module-name)))
 	(if (and nm (not (string-equal nm "")))
