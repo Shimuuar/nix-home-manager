@@ -71,6 +71,15 @@ line."
 	  haskell-indentation-left-offset   n
 	  haskell-indentation-ifte-offset   n)))
 
+(defun my/haskell-insert-language-pragma()
+  (interactive)
+  (save-excursion
+    (beginning-of-buffer)
+    (insert "{-# LANGUAGE ")
+    (insert (completing-read "Language extension: " my/haskell-language-pragmas))
+    (insert " #-}\n")
+    ))
+
 
 ;; ===============================================
 ;; Syntax highlighting
@@ -205,7 +214,8 @@ line."
       ;; PRAGMAS
       (local-set-key (kbd "C-c C-s") 'haskell-mode-insert-scc-at-point)
       (local-set-key (kbd "C-c s"  ) 'haskell-mode-kill-scc-at-point)
-      (local-set-key (kbd "C-c i"  ) 'my/haskell-insert-inline)
+      (local-set-key (kbd "C-c i i") 'my/haskell-insert-inline)
+      (local-set-key (kbd "C-c i l") 'my/haskell-insert-language-pragma)
       ;; Flycheck
       (my/try-flycheck)
       (local-set-key (kbd "C-`")     'haskell-interactive-bring)
