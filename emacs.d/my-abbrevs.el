@@ -100,8 +100,7 @@
   "Skeleton for haskell LANGUAGE pragma"
   ""
   "{-# LANGUAGE "
-  (completing-read "Language extension: "
-		   (split-string (shell-command-to-string "ghc --supported-extensions")))
+  (completing-read "Language extension: " my/haskell-language-pragmas)
   " #-}" 
   )
 (define-skeleton my/skel-haskell-import

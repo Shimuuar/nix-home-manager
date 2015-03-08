@@ -163,6 +163,13 @@ line."
 (require 'haskell-navigate-imports)
 (require 'haskell-sort-imports)
 (require 'haskell-font-lock)
+
+(defcustom my/haskell-language-pragmas
+  (split-string (shell-command-to-string "ghc --supported-extensions"))
+  "List of language pragmas supported by the installed version of GHC."
+  :group 'my/haskell
+  :type  '(repeat string))
+
 (add-hook 'haskell-mode-hook (lambda ()
   "Hooks specific to haskell"
   (turn-on-haskell-indentation)
