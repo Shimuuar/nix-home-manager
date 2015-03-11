@@ -29,6 +29,7 @@
     '( haskell-mode
        flycheck
        flycheck-haskell
+       browse-kill-ring
        undo-tree
        )
     "List of required packages")
