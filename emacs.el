@@ -29,6 +29,7 @@
     '( haskell-mode
        flycheck
        flycheck-haskell
+       undo-tree
        )
     "List of required packages")
   (dolist (p prelude-packages)
