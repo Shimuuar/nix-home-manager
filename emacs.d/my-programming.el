@@ -176,7 +176,7 @@ line."
   #'flycheck-haskell-setup
   ; Redefine flycheck prefix. "C-c !" is insane
   (define-key flycheck-mode-map flycheck-keymap-prefix nil)
-  (setq flycheck-keymap-prefix (kbd "C-c f"))
+  (setq flycheck-keymap-prefix (kbd "C-c c"))
   (define-key flycheck-mode-map flycheck-keymap-prefix
               flycheck-command-map)
   ; Increase delay before displaying error
