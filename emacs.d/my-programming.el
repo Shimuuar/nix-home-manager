@@ -72,6 +72,7 @@ line."
 	  haskell-indentation-ifte-offset   n)))
 
 (defun my/haskell-insert-language-pragma()
+  "Insert LANGUAGE pragmas at top of the file"
   (interactive)
   (save-excursion
     (beginning-of-buffer)
@@ -79,6 +80,28 @@ line."
     (insert (completing-read "Language extension: " my/haskell-language-pragmas))
     (insert " #-}\n")
     ))
+
+(defun my/haskell-find-pragma-region()
+  "Find region which contains LANGUAGE pragmas"
+  (let* ((find (lambda (n)
+		 (goto-line n)
+		 (if (looking-at "^{-# +LANGUAGE +\\([a-zA-Z0-9]+\\) +#-} *$")
+		     (funcall find (+ n 1))
+		     (- (point-at-bol) 1))))
+	 (p1 (point-min))
+	 (p2 (save-excursion (funcall find 1)))
+	 )
+    (cons p1 p2)))
+
+(defun my/haskell-align-language-pragmas()
+  "Align and sort language pragmas"
+  (interactive)
+  (pcase (my/haskell-find-pragma-region)
+    (`(,p1 . ,p2) (progn (align-regexp p1 p2 "\\(\\s-*\\)#-}")
+			 (sort-lines nil p1 p2)
+			 ))
+    ))
+
 
 
 ;; ===============================================
