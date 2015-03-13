@@ -97,9 +97,12 @@ line."
   "Align and sort language pragmas"
   (interactive)
   (pcase (my/haskell-find-pragma-region)
-    (`(,p1 . ,p2) (progn (align-regexp p1 p2 "\\(\\s-*\\)#-}")
-			 (sort-lines nil p1 p2)
-			 ))
+    (`(,p1 . ,p2)
+     (save-excursion
+       (save-restriction
+	 (align-regexp p1 p2 "\\(\\s-*\\)#-}")
+	 (sort-lines nil p1 p2)
+	 )))
     ))
 
 
