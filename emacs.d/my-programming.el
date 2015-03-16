@@ -100,8 +100,9 @@ line."
     (`(,p1 . ,p2)
      (save-excursion
        (save-restriction
-	 (align-regexp p1 p2 "\\(\\s-*\\)#-}")
-	 (sort-lines nil p1 p2)
+	 (narrow-to-region p1 p2)
+	 (align-regexp   (point-min) (point-max) "\\(\\s-*\\)#-}")
+	 (sort-lines nil (point-min) (point-max))
 	 )))
     ))
 
