@@ -39,7 +39,7 @@
         ((looking-back "[]>\)\}]") (backward-list 1))))
 
 (defun my/comment-or-uncomment ()
-  "Comment or uncomment line under cursor"
+  "Comment or uncomment line under cursor or current selection"
   (interactive)
   (if mark-active
     (comment-or-uncomment-region (region-beginning) (region-end))
