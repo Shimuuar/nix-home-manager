@@ -72,6 +72,7 @@ line."
 	  haskell-indentation-ifte-offset   n)))
 
 (defun my/haskell-insert-language-pragma()
+  "Insert LANGUAGE pragmas at top of the file"
   (interactive)
   (save-excursion
     (beginning-of-buffer)
@@ -79,6 +80,32 @@ line."
     (insert (completing-read "Language extension: " my/haskell-language-pragmas))
     (insert " #-}\n")
     ))
+
+(defun my/haskell-find-pragma-region()
+  "Find region which contains LANGUAGE pragmas"
+  (let* ((find (lambda (n)
+		 (goto-line n)
+		 (if (looking-at "^{-# +LANGUAGE +\\([a-zA-Z0-9]+\\) +#-} *$")
+		     (funcall find (+ n 1))
+		     (- (point-at-bol) 1))))
+	 (p1 (point-min))
+	 (p2 (save-excursion (funcall find 1)))
+	 )
+    (cons p1 p2)))
+
+(defun my/haskell-align-language-pragmas()
+  "Align and sort language pragmas"
+  (interactive)
+  (pcase (my/haskell-find-pragma-region)
+    (`(,p1 . ,p2)
+     (save-excursion
+       (save-restriction
+	 (narrow-to-region p1 p2)
+	 (align-regexp   (point-min) (point-max) "\\(\\s-*\\)#-}")
+	 (sort-lines nil (point-min) (point-max))
+	 )))
+    ))
+
 
 
 ;; ===============================================
@@ -153,7 +180,7 @@ line."
   #'flycheck-haskell-setup
   ; Redefine flycheck prefix. "C-c !" is insane
   (define-key flycheck-mode-map flycheck-keymap-prefix nil)
-  (setq flycheck-keymap-prefix (kbd "C-c f"))
+  (setq flycheck-keymap-prefix (kbd "C-c c"))
   (define-key flycheck-mode-map flycheck-keymap-prefix
               flycheck-command-map)
   ; Increase delay before displaying error
