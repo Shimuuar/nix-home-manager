@@ -8,7 +8,7 @@ PREFIX =${HOME}/opt/bin
 
 # Executables
 EXE     = word mdo tryless mirror-hg
-SCRIPTS = caps2ctl set-random-wallpaper
+SCRIPTS = caps2ctl set-random-wallpaper x-set-keyboard
 
 .PHONY: all clean install
 all : ${EXE}

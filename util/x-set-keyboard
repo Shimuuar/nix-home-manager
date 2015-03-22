@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Set up keyboard for X
+
+# Compose key
+COMPOSE=${1:-menu}
+
+setxkbmap -model pc104 -layout us,ru -variant basic,winkeys
+setxkbmap -option -option "grp_led:scroll,grp:shifts_toggle,compose:${COMPOSE},ctrl:nocaps"

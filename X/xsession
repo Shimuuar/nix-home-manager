@@ -9,16 +9,13 @@ xset -b
 case $(hostname) in
     manannan)
 	xrandr --output DVI-0 --auto --output DVI-1 --auto --left-of DVI-0
-	setxkbmap -model pc104 -layout us,ru -variant basic,winkeys 
-	setxkbmap -option -option "grp_led:scroll,grp:shifts_toggle,compose:menu,ctrl:nocaps"
+	x-set-keyboard menu
 	;;
     aengus)
-	setxkbmap -model pc104 -layout us,ru -variant basic,winkeys 
-	setxkbmap -option -option "grp_led:scroll,grp:shifts_toggle,compose:ralt,ctrl:nocaps"
+	x-set-keyboard ralt
 	;;
     *)
-	setxkbmap -model pc104 -layout us,ru -variant basic,winkeys 
-	setxkbmap -option -option "grp_led:scroll,grp:shifts_toggle,compose:menu,ctrl:nocaps"
+	x-set-keyboard menu
 esac	
 
 [ -f ~/.Xresources ] && xrdb ~/.Xresources # Read resources
