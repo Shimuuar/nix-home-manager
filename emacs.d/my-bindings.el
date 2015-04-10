@@ -20,6 +20,9 @@
 (global-set-key [f12] 'switch-to-buffer)
 ; Call last recorded macro
 (global-set-key [f2] 'call-last-kbd-macro)
+;; Swap windows
+(global-set-key (kbd "C-x t") (lambda () (interactive)
+				(my/swap-windows 1)))
 
 ;; =========================================================
 ;; kill-yank
@@ -36,5 +39,6 @@
 (global-set-key (kbd "C-<tab>") 'my/indent-line)
 ; Find matching paren
 (global-set-key (kbd "C-%") 'my/match-paren)
+
 
 (provide 'my-bindings)
