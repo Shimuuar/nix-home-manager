@@ -243,6 +243,7 @@ line."
         (local-set-key (kbd "C-c s"  ) 'haskell-mode-kill-scc-at-point)
         (local-set-key (kbd "C-c i i") 'my/haskell-insert-inline)
         (local-set-key (kbd "C-c i l") 'my/haskell-insert-language-pragma)
+        (local-set-key (kbd "C-c i a") 'my/haskell-align-language-pragmas)
         ;; Flycheck
         (my/try-flycheck)
         (local-set-key (kbd "C-`")     'haskell-interactive-bring)
