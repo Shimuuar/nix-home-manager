@@ -3,7 +3,7 @@
 ;;; Text editing customization
 ;;;
 
-(defun my/switch-tex-quotes ()
+(defun my/tex-switch-quotes ()
   "Hack to replace TeX english `` and '' quotes with << >>"
   (interactive)
   (if (string-equal tex-open-quote  "``")
@@ -66,7 +66,7 @@
   "Hooks for TeX mode"
   (my/base-text-hooks)
   (my/make-hook)
-  (local-set-key (kbd "C-c q") 'my/switch-tex-quotes)
+  (local-set-key (kbd "C-c q") 'my/tex-switch-quotes)
   (local-set-key (kbd "C-c SPC") (lambda ()
     (interactive)
     (insert "~")
@@ -91,7 +91,7 @@
 	    latex-block-args-alist))
   )
 ; TeX template
-(defun my/insert-tex-template()
+(defun my/tex-insert-template()
   (interactive)
   (insert
 "\\documentclass[a4paper]{article}
