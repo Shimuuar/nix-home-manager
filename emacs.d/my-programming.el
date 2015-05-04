@@ -205,6 +205,11 @@ line."
     "List of language pragmas supported by the installed version of GHC."
     :group 'my/haskell
     :type  '(repeat string))
+  (defcustom my/haskell-ghc-options
+    (split-string (shell-command-to-string "ghc --show-options"))
+    "List of all GHC's command line options"
+    :group 'my/haskell
+    :type  '(repeat string))
 
   (add-hook 'haskell-mode-hook (lambda ()
     "Hooks specific to haskell"

@@ -103,6 +103,13 @@
   (completing-read "Language extension: " my/haskell-language-pragmas)
   " #-}" 
   )
+(define-skeleton my/skel-haskell-OPTGCH
+  "Skeleton for haskell OPTIONS_GHC pragma"
+  ""
+  "{-# OPTIONS_GHC "
+  (completing-read "Command line: " my/haskell-ghc-options)
+  " #-}" 
+  )
 (define-skeleton my/skel-haskell-import
   "Skeleton for common haskell imports"
   ""
@@ -151,6 +158,8 @@
     ("fi"   "fromIntegral"     nil                    0)
     ; Pragmas
     ("plang" ""                my/skel-haskell-LANG   0)
+    ("opt_ghc" ""              my/skel-haskell-OPTGCH 0)
+    ("ghc_opt" ""              my/skel-haskell-OPTGCH 0)
     ))
 
 (provide 'my-abbrevs)
