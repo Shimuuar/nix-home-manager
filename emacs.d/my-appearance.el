@@ -59,8 +59,19 @@
 		       )
 		    ""))
 	   )
-	   )))
-;; ================
+	  )))
+
+;; Set up rich-minority
+(when (fboundp 'rich-minority-mode)
+  (rich-minority-mode t)
+  (setq rm-blacklist
+	'(" Undo-Tree"
+	  " Fill"
+
+	  ))
+  (setq rm-text-properties
+	'(("\\` Ovwrt\\'" 'face 'font-lock-comment-face)))
+  )
 
 
 (provide 'my-appearance)
