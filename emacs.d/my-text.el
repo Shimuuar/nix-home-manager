@@ -78,7 +78,7 @@
   ; Add more known blocks (esp. for beamer)
   (set-variable 'latex-standard-block-names
     (append '("frame" "block" "exampleblock" "alertblock"
-	      "columns" "column"
+	      "columns" "column" "align" "aligned"
 	      )
 	    latex-standard-block-names
 	    ))
