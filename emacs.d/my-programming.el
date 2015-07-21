@@ -106,7 +106,12 @@ line."
 	 )))
     ))
 
-
+(defun my/haskell-insert-module-stub()
+  "Insert stub declaration for haskell module"
+  (interactive)
+  (insert "-- |\n")
+  (insert (concat "module " (haskell-guess-module-name) " where\n"))
+  )
 
 ;; ===============================================
 ;; Syntax highlighting
@@ -249,7 +254,8 @@ line."
         (local-set-key (kbd "C-c i i") 'my/haskell-insert-inline)
         (local-set-key (kbd "C-c i l") 'my/haskell-insert-language-pragma)
         (local-set-key (kbd "C-c i a") 'my/haskell-align-language-pragmas)
-        ;; Flycheck
+	(local-set-key (kbd "C-c i m") 'my/haskell-insert-module-stub)
+	;; Flycheck
         (my/try-flycheck)
         (local-set-key (kbd "C-`")     'haskell-interactive-bring)
         (local-set-key (kbd "C-c C-l") 'haskell-process-load-or-reload)
