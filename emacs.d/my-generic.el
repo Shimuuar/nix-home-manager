@@ -87,19 +87,23 @@
 ;; =========================================================
 (setq auto-mode-alist
   (append
-   ; SCons
+   ;; SCons
    '(("SConstruct" . python-mode)
      ("SConscript" . python-mode)
-   ; ReST mode
+   ;; ReST mode
      ("\\.rst$"  . rst-mode)
      ("\\.rest$" . rst-mode)
-   ; Markdown mode
+   ;; Markdown mode
      ("\\.md$"       . markdown-mode)
      ("\\.mark$"     . markdown-mode)
      ("\\.markdown$" . markdown-mode)
-   ; Haskell
+   ;; Haskell
      ("\\.hs"  . haskell-mode)
      ("\\.hsc" . haskell-mode)
+     ;; CUDA
+     ("\\.cu"  . c++-mode)
+   ;; Conf files
+     (".offlineimaprc" . conf-mode)
      ) auto-mode-alist))
 
 
