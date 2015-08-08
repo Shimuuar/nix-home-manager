@@ -22,7 +22,7 @@ emacs:
 	mkdir -p ~/.emacs.d/lisp
 	[ -L ~/.emacs                 ] || ln -sf ${PWD}/emacs.el ~/.emacs
 	[ -d ~/.emacs.d/lisp-personal ] || ln -sf ${PWD}/emacs.d  ~/.emacs.d/lisp-personal
-# X
+# X stuff
 X :
 	mkdir -p ~/.xmonad
 	[ -L ~/.xmonad/xmonad.hs ] || ln -sf ${PWD}/X/xmonad.hs     ~/.xmonad/xmonad.hs
@@ -30,5 +30,4 @@ X :
 	[ -L ~/.Xresources       ] || ln -sf ${PWD}/X/Xresources    ~/.Xresources 
 	[ -L ~/.XCompose         ] || ln -sf ${PWD}/X/XCompose	    ~/.XCompose
 	[ -L ~/.conkyrc          ] || ln -sf ${PWD}/X/conky/conkyrc ~/.conkyrc
-	mkdir -p ~/.config/tint2
-	[ -L ~/.config/tint2/tint2rc ] || ln -sf ${PWD}/X/tint2rc   ~/.config/tint2/tint2rc
+
