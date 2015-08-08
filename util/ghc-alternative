@@ -1,0 +1,30 @@
+#!/bin/sh
+
+VER="$1"
+
+# Check that file exists before creating symlink
+check_exe () {
+    if ! [ -x "$1-$VER" ]; then
+	echo "No $1-$VER executable"
+	exit 1
+    fi;
+}
+
+cd ~/opt/bin
+# Check symlinks
+check_exe ghc
+check_exe ghci
+check_exe ghc-pkg
+check_exe haddock-ghc
+check_exe runghc
+# Create symlinks
+ln -sf "ghc-$VER"         ghc
+ln -sf "ghci-$VER"        ghci
+ln -sf "ghc-pkg-$VER"     ghc-pkg
+ln -sf "haddock-ghc-$VER" haddock
+ln -sf "runghc-$VER"      runghc
+ln -sf "runghc"           runhaskell
+# Renamed exes
+ln -sf "hsc2hs-$VER"      hsc2hs
+ln -sf "hpc-$VER"         hpc
+ln -sf "hp2ps-$VER"       hp2ps
