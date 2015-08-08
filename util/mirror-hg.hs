@@ -1,6 +1,5 @@
 import Control.Applicative
 import Control.Monad
-import Control.Monad.Instances ()
 import Control.Exception       (bracket)
 
 import Data.Char
