@@ -15,9 +15,9 @@ all : ${EXE}
 clean:
 	rm -rf *.o ${EXE}
 install: all
-	mkdir -p ${PREFIX}
-	install ${EXE}     ${PREFIX}/
-	install ${SCRIPTS} ${PREFIX}/
+	mkdir -p ${DESTDIR}/${PREFIX}
+	install ${EXE}     ${DESTDIR}/${PREFIX}/
+	install ${SCRIPTS} ${DESTDIR}/${PREFIX}/
 
 word: word.c
 	${CC} ${CFLAGS} -o $@ $<

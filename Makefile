@@ -1,15 +1,20 @@
 
-.PHONY: all install clean   \
+.PHONY: all install clean symlinks  \
 	bash screen emacs X \
 	up
 
-all     : install
+all     : symlinks install
+# Install stuff
+install :
+	make -C util install
+# Create symlinks to config files
+symlinks : bash screen emacs X
+# Clean up
 clean	:
 	make -C util clean
-install : bash screen emacs X
-	mkdir -p ${HOME}/opt/bin
-	make -C util install
+
 ## ================================================================
+## Create symlinks
 
 # Bash
 bash: 
