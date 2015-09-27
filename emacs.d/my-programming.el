@@ -318,7 +318,7 @@ line."
 ;; Shell hooks
 (add-hook 'sh-mode-hook (lambda ()
   (my/indent-hook)
-  (lambda () (my/insert-if-empty "#!/bin/sh\n\n"))
+  (my/insert-if-empty "#!/bin/sh\n\n")
   ))
 ;; Lisp hooks
 (add-hook 'lisp-mode-hook (lambda ()
