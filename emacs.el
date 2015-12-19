@@ -49,3 +49,10 @@
 (require 'my-abbrevs)
 (require 'my-bindings)
 (require 'my-appearance)
+;; FIXME: is this a right way?
+(custom-set-variables
+  '(safe-local-variable-values
+   (quote
+    ((org-todo-keyword-faces
+      ("BLOCKED" . "red")
+      ("RC" . "yellow"))))))
