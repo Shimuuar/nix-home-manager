@@ -35,12 +35,12 @@ int main(int argc, char** argv)
     for(i = start+1; i < end; i++) {
         switch( fork() ) {
         case -1:                /* Cannot fork */
-            perror("mdo");
+            perror("mdo: cannot fork");
             exit(1);
         case 0:                 /* Child */
             command[start] = argv[i];
             execvp(command[1], command+1);
-            perror("mdo");
+            perror("mdo: cannot execute command: ");
             exit(1);
         default:                /* Parent */
             wait(&status);
