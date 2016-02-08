@@ -27,6 +27,17 @@ int main(int argc, char** argv)
     int max_pool  = 1;
     int pool_size = 0;
 
+    /* Parse command line parameters */
+    if( argc > 1 && 0==strcmp(argv[1],"-j") ) {
+        if( argc <= 2 )
+            usage();
+        max_pool = atoi(argv[2]);
+        if( max_pool <= 0 )
+            usage();
+        argc -= 2;
+        argv += 2;
+    }
+
     /* Find both "--" */
     for(start = 1;         start < argc && strcmp(argv[start],"--"); start++);
     for(end   = start + 1; end   < argc && strcmp(argv[end],  "--"); end++);
