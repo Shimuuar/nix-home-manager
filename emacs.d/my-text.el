@@ -117,7 +117,7 @@
 ;; org-mode
 ;; =========================================================
 (setq org-todo-keywords
-      '((sequence "TODO" "RC" "BLOCKED" "|" "DONE" "DROPPED")))
+      '((sequence "TODO" "PROG" "RC" "BLOCKED" "|" "DONE" "DROPPED")))
 ; Support for mobile
 (setq org-mobile-directory      "~/Dropbox/org-mode")
 (setq org-directory             "~/work/tracker")
