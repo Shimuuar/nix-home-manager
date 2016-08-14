@@ -94,6 +94,8 @@
 <Multi_key> <plus> <minus>       	: "±"   plusminus # PLUS-MINUS SIGN
 <Multi_key> <minus> <plus>       	: "±"   plusminus # PLUS-MINUS SIGN
 <Multi_key> <period> <period>    	: "·"   periodcentered # MIDDLE DOT
+<Multi_key> <period> <o>                : "∘"    U2218 # U+2218: RING OPERATOR
+<Multi_key> <o> <period>                : "∘"    U2218 # U+2218: RING OPERATOR
 <Multi_key> <x> <x>              	: "×"   multiply # MULTIPLICATION SIGN
 <Multi_key> <colon> <minus>      	: "÷"   division # DIVISION SIGN
 <Multi_key> <minus> <colon>      	: "÷"   division # DIVISION SIGN
