@@ -72,13 +72,12 @@ myKeys conf =
     [ ("M-w", windows $ W.view "WWW")
     , ("M-a", submap $ mkKeymap conf $
             [ ("w", "WWW")
-            , ("r", "RSS")
-            , ("m", "Почта")
             , ("i", "IM")
             , ("t", "Torrent")
             , ("a", "Audio")
             , ("x", "Media")
             , ("g", "Gimp")
+            , ("s", "αSheets")
             ] >>= makeShiftPair ""
       )
       -- Quit XMonad
@@ -192,8 +191,9 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 --
 myLayout = smartBorders
          $ avoidStruts
-         $ onWorkspace "IM"   im
-         $ onWorkspace "Gimp" gimp
+         $ onWorkspace "IM"      im
+         $ onWorkspace "Gimp"    gimp
+         $ onWorkspace "αSheets" αSheets
          $ defaultLayout
   where
     -- Default layout
@@ -209,6 +209,10 @@ myLayout = smartBorders
     gimp = withIM (0.18) (Role "gimp-toolbox") $
               combineTwoP (reflectHoriz $ TwoPane 0.2 0.2)
                           (simpleTabbed) (defaultLayout) (Role "gimp-dock")
+    -- Layout for αSheets
+    αSheets = Grid
+
+
 
 ------------------------------------------------------------------------
 -- Window rules:
@@ -233,13 +237,7 @@ myManageHook = composeAll $ concat [
                       , (className, "xfce4-panel")
                       , (className, "Xfce4-Panel")
                       , (className, "Conky")
-                      , (className, "cairo-dock")
-                      , (className, "avant-window-navigator")
-                      , (className, "tint2")
-                      , (className, "Tint2")
                       , (className, "lxpanel")
-                      , (className, "taffybar")
-                      , (className, "Taffybar")
                       ],
     -- Floating windows
     hookList doCenterFloat [ (className, "XDosEmu")
@@ -253,14 +251,8 @@ myManageHook = composeAll $ concat [
     hookList (doWorkspace "WWW")     [ (className, "Iceweasel")
                                      , (className, "Firefox-bin")
                                      , (className, "Firefox") ],
-    hookList (doWorkspace "RSS")     [ (className, "Akregator")
-                                     , (className, "Liferea") ],
     hookList (doWorkspace "IM")      [ (className, "psi")
                                      , (className, "Pidgin")
-                                     ],
-    hookList (doWorkspace "Почта")   [ (className, "Kmail")
-                                     , (className, "Mail")
-                                     , (className, "Icedove")
                                      ],
     hookList (doWorkspace "Torrent") [ (className, "Ktorrent")
                                      , (className, "Deluge") ],
@@ -296,7 +288,7 @@ myConfig = defaultConfig
   , focusFollowsMouse  = True
   , borderWidth        = 1
   , workspaces         = (map show [1..10]) ++
-                         ["WWW","RSS","Почта","IM","Torrent","Audio","Media","Gimp"]
+                         ["WWW","IM","Torrent","Audio","Media","Gimp", "αSheets"]
   , normalBorderColor  = "#dddddd"
   , focusedBorderColor = "#ff0000"
     -- key bindings
