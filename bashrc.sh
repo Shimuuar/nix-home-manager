@@ -127,7 +127,7 @@ zip-recover-name() {
 # Convert from DOS to unix line breaks
 alias dos2unix='tr -d "\r"'
 # Remove spaces from file names (Requires sane rename)
-alias space2_='rename -v "s/ *- */-/g; s/ /_/g; s/_-_/-/g"'
+alias space2_='rename -v "s/\s*-\s*/-/g; s/\s+/_/g; s/_-_/-/g"'
 
 # nice grep coloring
 alias grep='grep --color'
