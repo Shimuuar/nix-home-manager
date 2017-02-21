@@ -204,6 +204,7 @@ line."
   (require 'haskell-navigate-imports)
   (require 'haskell-sort-imports)
   (require 'haskell-font-lock)
+  (custom-set-variables '(haskell-tags-on-save t))
 
   (defcustom my/haskell-language-pragmas
     (split-string (shell-command-to-string "ghc --supported-extensions"))
