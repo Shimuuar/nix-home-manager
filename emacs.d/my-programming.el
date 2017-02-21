@@ -331,5 +331,12 @@ line."
   (my/indent-hook)
   (my/comment-hooks)
   ))
-
+;; JavaScript hooks
+(add-hook 'js-mode-hook (lambda ()
+  (my/indent-hook)
+  (my/comment-hooks)
+  (my/folding-hooks)
+  (setq js-indent-level 2)
+  (setq indent-tabs-mode nil)
+  ))
 (provide 'my-programming)
