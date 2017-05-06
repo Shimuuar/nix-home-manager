@@ -250,6 +250,7 @@ myManageHook = composeAll $ concat [
     -- Windows placement hooks
     hookList (doWorkspace "WWW")     [ (className, "Iceweasel")
                                      , (className, "Firefox-bin")
+                                     , (className, "Firefox-esr")
                                      , (className, "Firefox") ],
     hookList (doWorkspace "IM")      [ (className, "psi")
                                      , (className, "Pidgin")
