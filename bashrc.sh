@@ -57,7 +57,7 @@ complete -d cd
 ## Ignore and erase duplicate commands
 export HISTCONTROL=ignoredups:erasedups:ingnorespace
 ## Ignore particular commands
-export HISTIGNORE=ls:[fb]g
+export HISTIGNORE=ls:[fb]g:sudo s2ram:sudo s2disk
 ## -----------------
 
 
