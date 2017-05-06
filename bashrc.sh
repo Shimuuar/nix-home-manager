@@ -240,9 +240,6 @@ function hg-qexport { # export top patch in mercurial queue
 	&& echo "$name exported" \
 	|| echo "Could not export $name"
 }
-# Darcs
-function darcs-diff() { darcs diff -u "$@" | colordiff | less -R --quit-if-one-screenless; }
-function darcs-what() { yes y | darcs send -o /dev/null; }
 
 # Force removal of all packages
 ghc-pkg-force-remove() {
