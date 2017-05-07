@@ -1,5 +1,5 @@
 import Codec.Binary.UTF8.String
-
+import Data.Monoid ((<>))
 import qualified Data.Map as M
 import Data.Ratio            ((%))
 
@@ -13,7 +13,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.Submap
 import XMonad.Actions.Search (SearchEngine, searchEngine, promptSearchBrowser, selectSearchBrowser,
                               google, youtube, isohunt, wikipedia, scholar, hoogle, hackage)
-
+import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageDocks
@@ -275,7 +275,7 @@ myManageHook = composeAll $ concat [
 ------------------------------------------------------------------------
 -- XPromt settings
 myXPConfig :: XPConfig
-myXPConfig = defaultXPConfig
+myXPConfig = def
   { font = "-xos4-terminus-medium-r-normal-*-16-160-*-*-*-*-iso10646-*"
   , historySize = 20
   }
@@ -283,7 +283,7 @@ myXPConfig = defaultXPConfig
 
 ----------------------------------------------------------------
 -- XMonad config
-myConfig = defaultConfig
+myConfig = def
   { terminal           = "konsole"
   , modMask            = mod4Mask
   , focusFollowsMouse  = True
@@ -296,10 +296,10 @@ myConfig = defaultConfig
   , keys               = myKeys
   , mouseBindings      = myMouseBindings
     -- hooks, layouts
-  , startupHook        = ewmhDesktopsStartup
-  , handleEventHook    = ewmhDesktopsEventHook
+  , startupHook        = ewmhDesktopsStartup >> docksStartupHook
+  , handleEventHook    = ewmhDesktopsEventHook <> docksEventHook
   , layoutHook         = myLayout
-  , manageHook         = myManageHook
+  , manageHook         = myManageHook <> manageDocks
   , logHook            = do ewmhDesktopsLogHookCustom scratchpadFilterOutWorkspace
                             -- Needed for Java apps to work properly
                             takeTopFocus
