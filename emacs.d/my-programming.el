@@ -339,4 +339,9 @@ line."
   (setq js-indent-level 2)
   (setq indent-tabs-mode nil)
   ))
+;; Elm hooks
+(add-hook 'elm-mode-hook (lambda ()
+  (my/comment-hooks)
+  (setq indent-tabs-mode nil)
+  ))
 (provide 'my-programming)
