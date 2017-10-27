@@ -39,9 +39,6 @@
 
 )
 
-; Require local modification (if any)
-(require 'my-local "my-local.el" t)
-
 ; Load files
 (require 'my-generic)
 (require 'my-text)
@@ -49,6 +46,10 @@
 (require 'my-abbrevs)
 (require 'my-bindings)
 (require 'my-appearance)
+; Require local modification (if any)
+(require 'my-local "my-local.el" t)
+(require 'my-extra "my-extra.el" t)
+
 ;; FIXME: is this a right way?
 (custom-set-variables
   '(safe-local-variable-values
