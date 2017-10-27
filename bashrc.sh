@@ -56,7 +56,7 @@ complete -d cd
 ## Ignore and erase duplicate commands
 export HISTCONTROL=ignoredups:erasedups:ingnorespace
 ## Ignore particular commands
-export HISTIGNORE='ls:[fb]g:sudo s2ram:sudo s2disk'
+export HISTIGNORE='ls:[fb]g:sudo s2ram:sudo s2disk:sudo s2ram :sudo s2disk '
 ## -----------------
 
 
@@ -118,7 +118,7 @@ alias catdos='iconv -f cp866 -t utf8'
 alias catlatin1='iconv -f latin1 -t utf8'
 # Recover names for cyrillic ZIP files
 #   WARNING|!!! Could and will corrupt unsuspection names
-zip-recover-name() {
+function zip-recover-name() {
     convmv --notest -f cp1252 -t cp850 *
     convmv --notest -f cp866  -t utf8  *
 }
@@ -137,15 +137,10 @@ alias dpkgg="dpkg -l | grep -i"
 
 # Process structure
 alias psme="ps -u $(whoami) --forest"
-suicide() { kill $(ps -u $(whoami) -o pid | grep -v PID); }
 # Disk usage
 alias dum='du --max-depth=1'
-# Shorthand for jobs
-alias j=jobs
 # Shorthand for wc -l
 alias wcl='wc -l'
-# Make which shows notification on completion
-function make-notify () { make "$@" && notify-send "Make done" || notify-send "Make failed"; }
 # IPython with math functions
 alias mpython='ipython ~/.config/mpython.py'
 
@@ -153,8 +148,6 @@ alias mpython='ipython ~/.config/mpython.py'
 alias apt-search='apt-cache search'
 alias apt-show='aptitude show'
 alias apt-source='apt-get source'
-alias yum-avail='yum list available | grep'
-alias yum-installed='yum list installed | grep'
 
 # Console emacs
 alias cemacs="emacs -nw"
@@ -163,9 +156,6 @@ alias cemacs="emacs -nw"
 alias    latex='latex    < /dev/null'
 alias pdflatex='pdflatex < /dev/null'
 
-# Configure and build python packages
-alias python-setup="[ -f setup.py ] && python setup.py build && python setup.py install --prefix=${HOME}/opt/python"
-##-----------------
 
 
 ## ---------------------------------------------------------
@@ -179,83 +169,6 @@ function vsrc() { highlight "$@" -A | less -R; }
 function mkcd() { mkdir -p "$1" && cd "$1";  }
 # Kill all processes owned by me
 function suicide() { kill $(ps -u $(whoami) | grep -Eo '^ *[0-9]+'); }
-# Remove *.o and *.hi file
-#  WARNING: -print0 must be located after predicated
-clean-hi() { find -name \*.hi -o -name \*.o -print0 | xargs --null rm -v; }
-# Start ghci in sandbox environment
-ghci-sandbox() {(
-    if [ -d .cabal-sandbox ]; then
-	local sandbox=.cabal-sandbox
-    elif [ -d ../.cabal-sandbox ]; then
-	local sandbox=../.cabal-sandbox
-    else
-	echo "No cabal sandbox"
-	exit 1
-    fi
-    exec ghci -no-user-package-db -package-db "$sandbox/$(uname -m)-linux-ghc-$(ghc -V | sed 's/[^0-9]*//')-packages.conf.d/" "$@"
-)}
-# Start ghci in sandbox environment
-ghc-sandbox() {(
-    if [ -d .cabal-sandbox ]; then
-	local sandbox=.cabal-sandbox
-    elif [ -d ../.cabal-sandbox ]; then
-	local sandbox=../.cabal-sandbox
-    else
-	echo "No cabal sandbox"
-	exit 1
-    fi
-    exec ghc -no-user-package-db -package-db "$sandbox/$(uname -m)-linux-ghc-$(ghc -V | sed 's/[^0-9]*//')-packages.conf.d/" "$@"
-)}
-# Start ghci in sandbox environment
-ghcjs-sandbox() {(
-    if [ -d .cabal-sandbox ]; then
-	local sandbox=.cabal-sandbox
-    elif [ -d ../.cabal-sandbox ]; then
-	local sandbox=../.cabal-sandbox
-    else
-	echo "No cabal sandbox"
-	exit 1
-    fi
-    exec ghc -no-user-package-db -package-db "$sandbox/$(uname -m)-linux-ghcjs"* "$@"
-)}
-
-## VCS shorcuts and goodies
-# Subversion
-function svn-diff()  {  svn diff "$@" | colordiff | tryless; } # Colored diff
-function svn-gdiff() {  svn diff "$@" | kompare -o -; }        # Diff in kompare
-# Mercurial
-function hg-diff()  {  hg diff "$@" | colordiff | tryless; } # Colored diff
-function hg-gdiff() {  hg diff "$@" | kompare -o -; } # View diff in kompare
-function hg-qdiff() {  hg qdiff "$@" | colordiff | tryless; } # Colored diff for queues
-function hg-prune() {  # Remove all files not under version control
-    hg st -un | sed "s:^:$(hg root)/:" | while read q; do rm -rfv "$q"; done
-}
-function hg-clean() { # Remove *.{orig,rej} files
-    hg st -un | sed "s:^:$(hg root)/:" | egrep '\.(rej|orig)$' | while read q; do rm -rfv "$q"; done
-}
-function hg-qexport { # export top patch in mercurial queue
-    local name=$(hg qtop) || return 1
-    hg export "$name" > "/tmp/${name}.patch" \
-	&& echo "$name exported" \
-	|| echo "Could not export $name"
-}
-
-# Force removal of all packages
-ghc-pkg-force-remove() {
-    ghc-pkg unregister "$1"
-    if [ $? != 0 ]; then
-	# Check that package is indeed here
-	if ghc-pkg unregister "$1" 2>&1 | grep -E '^ghc-pkg: cannot find package' > /dev/null; then
-	    return
-	fi
-	# Happily remove everything
-	for i in $( ghc-pkg unregister "$1" 2>&1 | sed -e 's/.*would break the following packages://; s/(.*//'); do
-	    echo ' * Removing' "$i"
-	    ghc-pkg unregister "$i"
-	done
-	ghc-pkg unregister "$1"
-    fi
-}
 
 # Functionn to fetch and unpack gzipped tarball
 function gettar() {
