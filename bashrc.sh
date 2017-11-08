@@ -191,9 +191,21 @@ function getzipc() {
     unzip "$TMP"           || (rm -f "$TMP"; exit 1)
 }
 # Convert SVG to PDF and EPS
-svg2pdf() { inkscape "$1" --export-text-to-path --export-area-drawing --export-pdf ${1%.svg}.pdf; }
-svg2eps() { inkscape "$1" --export-text-to-path --export-area-drawing --export-eps ${1%.svg}.eps; }
-svg2png() { inkscape "$1" --export-text-to-path --export-area-drawing --export-dpi=${2-90} --export-png ${1%.svg}.png; }
+function svg2pdf() {
+    inkscape "$1" --export-text-to-path --export-area-drawing --export-pdf ${1%.svg}.pdf;
+}
+function svg2eps() {
+    inkscape "$1" --export-text-to-path --export-area-drawing --export-eps ${1%.svg}.eps;
+}
+function svg2png() {
+    inkscape "$1" --export-text-to-path --export-area-drawing --export-dpi=${2-90} --export-png ${1%.svg}.png;
+}
+# Strip first page from papers downloaded from JSTOR
+function dejstor() {
+    if [ -z "$1" ]; then echo "No input file";  return 1; fi
+    if [ -z "$2" ]; then echo "No output file"; return 1; fi
+    pdftk "$1" cat 2-end output "$2"
+}
 # Cabalize haskell project
 cabalize () {
     # Project name
