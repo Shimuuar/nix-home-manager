@@ -21,7 +21,7 @@ import XMonad.Hooks.ICCCMFocus (takeTopFocus)
 
 import XMonad.Layout.IM (withIM)
 import XMonad.Layout.PerWorkspace
-import XMonad.Layout.NoBorders
+import XMonad.Layout.NoBorders    (smartBorders,noBorders)
 import XMonad.Layout.Reflect
 import XMonad.Layout.ComboP
 import XMonad.Layout.TwoPane
@@ -105,7 +105,7 @@ myKeys conf =
     , ("M-<Right>"   , windows W.focusUp)
     , ("M-k"         , windows W.focusUp)
     , ("M-S-<Left>"  , prevScreen)
-    , ("M-S-<Right>" , nextScreen)      
+    , ("M-S-<Right>" , nextScreen)
       -- Move focus to the master window
     , ("M-m"         , windows W.focusMaster)
       -- Swap the focused window and the master window
@@ -194,6 +194,7 @@ myLayout = smartBorders
          $ onWorkspace "IM"      im
          $ onWorkspace "Gimp"    gimp
          $ onWorkspace "αSheets" αSheets
+         $ onWorkspace "Media"   (noBorders Full)
          $ defaultLayout
   where
     -- Default layout
@@ -245,6 +246,7 @@ myManageHook = composeAll $ concat [
                            , (resource,  "terminal-float")
                            , (title,     "VLC (XVideo output)")],
     hookList doMedia [ (className, "MPlayer")
+                     , (className, "mpv")
                      , (className, "mplayer2")
                      , (className, "wesnoth") ],
     -- Windows placement hooks
