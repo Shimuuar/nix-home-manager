@@ -63,7 +63,8 @@ myKeys conf =
       -- Make pair of move/shift to workspace keybindings
       makeShiftPair :: String -> (String, String) -> [(String, X())]
       makeShiftPair p (k, name) = [ (p++k,       windows $ W.view name)
-                                  , (p++"S-"++k, windows $ W.shift name) ]
+                                  , (p++"S-"++k, windows $ W.shift name)
+                                  ]
   in mkKeymap conf $
     -- Move/switch to workspace
     ((zip upperKeys $ take 10 $ XMonad.workspaces conf) >>= makeShiftPair "M-")
@@ -227,11 +228,11 @@ myLayout = smartBorders
 -- 'className' and 'resource' are used below.
 --
 myManageHook :: ManageHook
-myManageHook = composeAll $ concat [
-    -- Float dialogs
-    [isDialog --> doFloat],
+myManageHook = composeAll $ concat
+  [ -- Float dialogs
+    [isDialog --> doFloat]
     -- Ignored windows
-    hookList doIgnore [ (className, "stalonetray")
+  , hookList doIgnore [ (className, "stalonetray")
                       , (className, "trayer")
                       , (className, "fbpanel")
                       , (title,     "plasma-desktop")
@@ -239,40 +240,46 @@ myManageHook = composeAll $ concat [
                       , (className, "Xfce4-Panel")
                       , (className, "Conky")
                       , (className, "lxpanel")
-                      ],
+                      ]
     -- Floating windows
-    hookList doCenterFloat [ (className, "XDosEmu")
+  , hookList doCenterFloat [ (className, "XDosEmu")
                            , (className, "feh")
                            , (resource,  "terminal-float")
-                           , (title,     "VLC (XVideo output)")],
-    hookList doMedia [ (className, "MPlayer")
+                           , (title,     "VLC (XVideo output)")
+                           ]
+  , hookList doMedia [ (className, "MPlayer")
                      , (className, "mpv")
                      , (className, "mplayer2")
-                     , (className, "wesnoth") ],
+                     , (className, "wesnoth")
+                     ]
     -- Windows placement hooks
-    hookList (doWorkspace "WWW")     [ (className, "Iceweasel")
+  , hookList (doWorkspace "WWW")     [ (className, "Iceweasel")
                                      , (className, "Firefox-bin")
                                      , (className, "Firefox-esr")
-                                     , (className, "Firefox") ],
-    hookList (doWorkspace "IM")      [ (className, "psi")
+                                     , (className, "Firefox")
+                                     ]
+  , hookList (doWorkspace "IM")      [ (className, "psi")
                                      , (className, "Pidgin")
-                                     ],
-    hookList (doWorkspace "Torrent") [ (className, "Ktorrent")
-                                     , (className, "Deluge") ],
-    hookList (doWorkspace "Audio")   [ (className, "Sonata") ],
-    hookList (doWorkspace "Gimp")    [ (className, "Gimp") ],
+                                     ]
+  , hookList (doWorkspace "Torrent") [ (className, "Ktorrent")
+                                     , (className, "Deluge")
+                                     ]
+  , hookList (doWorkspace "Audio")   [ (className, "Sonata")
+                                     ]
+  , hookList (doWorkspace "Gimp")    [ (className, "Gimp")
+                                     ]
     -- Scratchpad hook
-    [ scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3) ]
-    ]
-    where
-      hookList :: Eq a => ManageHook -> [(Query a, a)] -> [ManageHook]
-      hookList hook = map $ (--> hook) . uncurry (=?)
-      -- Move window to workspace
-      doWorkspace :: String -> ManageHook
-      doWorkspace = doF . W.shift
-      -- Hook for multimedia related windows
-      doMedia :: ManageHook
-      doMedia = doF (W.greedyView "Media" . W.shift "Media") <+> doFullFloat
+  , [ scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3) ]
+  ]
+  where
+    hookList :: Eq a => ManageHook -> [(Query a, a)] -> [ManageHook]
+    hookList hook = map $ (--> hook) . uncurry (=?)
+    -- Move window to workspace
+    doWorkspace :: String -> ManageHook
+    doWorkspace = doF . W.shift
+    -- Hook for multimedia related windows
+    doMedia :: ManageHook
+    doMedia = doF (W.greedyView "Media" . W.shift "Media") <+> doFullFloat
 
 ------------------------------------------------------------------------
 -- XPromt settings
