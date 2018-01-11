@@ -4,6 +4,8 @@
 ## Set up X.org
 ## ================================================================
 # Disable audible bell
+export XDG_CURRENT_DESKTOP=kde
+export PATH=$HOME/opt/bin:$PATH
 xset -b
 # Host-specific options
 case $(hostname) in
@@ -16,7 +18,7 @@ case $(hostname) in
 	;;
     *)
 	x-set-keyboard menu
-esac	
+esac
 
 [ -f ~/.Xresources ] && xrdb ~/.Xresources # Read resources
 [ -f ~/.Xmodmap    ] && xmodmap ~/.Xmodmap # read modmaps
