@@ -77,7 +77,6 @@ myKeys conf =
             , ("a", "Audio")
             , ("x", "Media")
             , ("g", "Gimp")
-            , ("s", "αSheets")
             ] >>= makeShiftPair ""
       )
       -- Quit XMonad
@@ -194,7 +193,6 @@ myLayout = smartBorders
          $ avoidStruts
          $ onWorkspace "IM"      im
          $ onWorkspace "Gimp"    gimp
-         $ onWorkspace "αSheets" αSheets
          $ defaultLayout
   where
     -- Default layout
@@ -210,9 +208,7 @@ myLayout = smartBorders
     gimp = withIM (0.18) (Role "gimp-toolbox") $
               combineTwoP (reflectHoriz $ TwoPane 0.2 0.2)
                           (simpleTabbed) (defaultLayout) (Role "gimp-dock")
-    -- Layout for αSheets
-    αSheets = Grid
-
+ 
 
 
 ------------------------------------------------------------------------
@@ -297,7 +293,7 @@ myConfig = def
   , focusFollowsMouse  = True
   , borderWidth        = 1
   , workspaces         = (map show [1..10]) ++
-                         ["WWW","IM","Torrent","Audio","Media","Gimp", "αSheets"]
+                         ["WWW","IM","Torrent","Audio","Media","Gimp"]
   , normalBorderColor  = "#dddddd"
   , focusedBorderColor = "#ff0000"
     -- key bindings
