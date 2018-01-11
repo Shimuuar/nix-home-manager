@@ -17,7 +17,6 @@ import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ICCCMFocus (takeTopFocus)
 
 import XMonad.Layout.IM (withIM)
 import XMonad.Layout.PerWorkspace
@@ -310,8 +309,6 @@ myConfig = def
   , layoutHook         = myLayout
   , manageHook         = myManageHook <> manageDocks
   , logHook            = do ewmhDesktopsLogHookCustom scratchpadFilterOutWorkspace
-                            -- Needed for Java apps to work properly
-                            takeTopFocus
   }
 
 
