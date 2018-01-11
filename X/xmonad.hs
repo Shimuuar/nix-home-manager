@@ -190,11 +190,11 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- defaults, as xmonad preserves your old layout settings by default.
 --
 myLayout = smartBorders
+         $ onWorkspace "Media"   (noBorders Full)
          $ avoidStruts
          $ onWorkspace "IM"      im
          $ onWorkspace "Gimp"    gimp
          $ onWorkspace "αSheets" αSheets
-         $ onWorkspace "Media"   (noBorders Full)
          $ defaultLayout
   where
     -- Default layout
