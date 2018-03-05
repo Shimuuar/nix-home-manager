@@ -74,9 +74,9 @@ myKeys conf =
             [ ("w", "WWW")
             , ("i", "IM")
             , ("t", "Torrent")
-            , ("a", "Audio")
             , ("x", "Media")
             , ("g", "Gimp")
+            , ("m", "e-Mail")
             ] >>= makeShiftPair ""
       )
       -- Quit XMonad
@@ -255,11 +255,10 @@ myManageHook = composeAll $ concat
                                      ]
   , hookList (doWorkspace "IM")      [ (className, "psi")
                                      , (className, "Pidgin")
+                                     , (className, "TelegramDesktop")
                                      ]
   , hookList (doWorkspace "Torrent") [ (className, "Ktorrent")
                                      , (className, "Deluge")
-                                     ]
-  , hookList (doWorkspace "Audio")   [ (className, "Sonata")
                                      ]
   , hookList (doWorkspace "Gimp")    [ (className, "Gimp")
                                      ]
@@ -293,7 +292,7 @@ myConfig = def
   , focusFollowsMouse  = True
   , borderWidth        = 1
   , workspaces         = (map show [1..10]) ++
-                         ["WWW","IM","Torrent","Audio","Media","Gimp"]
+                         ["WWW","IM","Torrent","Media","Gimp","e-Mail"]
   , normalBorderColor  = "#dddddd"
   , focusedBorderColor = "#ff0000"
     -- key bindings
