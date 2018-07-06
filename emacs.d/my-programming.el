@@ -62,15 +62,6 @@ line."
     (error "No identifier here!"))
   )
 
-(defun my/haskell-toggle-style ()
-  "Toggle style of indentation"
-  (interactive)
-  (let ((n (if (eq haskell-indentation-layout-offset 2) 4 2)))
-    (setq tab-width n
-	  haskell-indentation-layout-offset n
-	  haskell-indentation-left-offset   n
-	  haskell-indentation-ifte-offset   n)))
-
 (defun my/haskell-insert-language-pragma()
   "Insert LANGUAGE pragmas at top of the file"
   (interactive)
@@ -229,7 +220,6 @@ line."
         (abbrev-mode t)
         (interactive-haskell-mode)
         ;; Switch between styles
-        (local-set-key (kbd "C-c C-j") 'my/haskell-toggle-style)
         (local-set-key (kbd "C-c u") (lambda ()
           (interactive)
 	  (insert "undefined")))
