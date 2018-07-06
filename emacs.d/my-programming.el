@@ -196,6 +196,13 @@ line."
   (require 'haskell-navigate-imports)
   (require 'haskell-sort-imports)
   (require 'haskell-font-lock)
+  ;;
+  (setq auto-mode-alist
+	(append
+	 '(("cabal.project" . haskell-cabal-mode)
+	   ) auto-mode-alist))
+
+  ;; Generate TAGS
   (custom-set-variables '(haskell-tags-on-save t))
   ;; ----------------------------------------------------------------
   ;; Change keybindings
