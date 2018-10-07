@@ -246,8 +246,12 @@ EOF
     # BSD3 license
     cat ~/program/config/licenses/BSD3 > LICENSE
     # .hgignore if not present
-    [ -f .hgignore ] || cat > .hgignore <<EOF
+    [ -f .gitignore ] || cat > .gitignore <<EOF
 dist
+dist-newstyle
+.ghc.environment
+.stack-work
+TAGS
 EOF
 }
 ## -----------------
