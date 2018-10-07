@@ -207,6 +207,7 @@ line."
   ;; ----------------------------------------------------------------
   ;; Change keybindings
   (define-key haskell-mode-map (kbd "C-c C-v") 'my/comment-or-uncomment)
+  (define-key haskell-mode-map (kbd "C-c v")   'haskell-cabal-visit-file)
   (define-key haskell-mode-map (kbd "C-c u")
     (lambda () (interactive)
       (insert "undefined")))
