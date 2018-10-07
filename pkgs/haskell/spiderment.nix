@@ -8,7 +8,7 @@ mkDerivation {
   version = "0.1";
   src = fetchhgPrivate {
     url = "ssh://hg@bitbucket.org/Shimuuar/spiderment";
-    rev = "3a008267dcabffd26110fd5b7e95f700ff3d0fc0";
+    rev = "58c02373f82f9742e612c419fac0935e5fb1cbad";
   };
   libraryHaskellDepends = [
     aeson ansi-wl-pprint async base bytestring containers directory
