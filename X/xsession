@@ -30,12 +30,6 @@ rm -rf .macromedia/*
 ## Set input methods
 ## ================================================================
 export GTK_IM_MODULE=xim
-# if which scim; then
-#     export XMODIFIERS='@im=scim-bridge'
-#     export GTK_IM_MODULE="scim-bridge"
-#     export QT_IM_MODULE="scim-bridge"
-#     scim -d
-# fi
 
 ## ================================================================
 ## Run session programs
@@ -75,10 +69,7 @@ XMONAD_PID=$!
 ## ================================================================
 AUTORUN=~/.config/autorun
 if [ -f $AUTORUN ]; then
-    while read -r cmd || [[ -n "$cmd" ]]; do
-	echo "]]] $cmd}"
-	exec sh -c "$cmd" &
-    done < $AUTORUN
+    . $AUTORUN
 fi
 
 ## ================================================================
