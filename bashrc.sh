@@ -141,8 +141,6 @@ alias psme="ps -u $(whoami) --forest"
 alias dum='du --max-depth=1'
 # Shorthand for wc -l
 alias wcl='wc -l'
-# IPython with math functions
-alias mpython='ipython ~/.config/mpython.py'
 
 # apt-aliases
 alias apt-search='apt-cache search'
@@ -170,26 +168,6 @@ function mkcd() { mkdir -p "$1" && cd "$1";  }
 # Kill all processes owned by me
 function suicide() { kill $(ps -u $(whoami) | grep -Eo '^ *[0-9]+'); }
 
-# Functionn to fetch and unpack gzipped tarball
-function gettar() {
-    cd $(wget "$1" -O - | tee $(expr match "$1" '.*/\([^/]*\)') | tar xzvf - | (head -1 ; cat > /dev/null))
-}
-# Function to fetch and unpack gzipped tarball (without leaving tarball behind)
-function gettarc() {
-    cd $(wget "$1" -O - | tar xzvf - | (head -1 ; cat > /dev/null))
-}
-# Download and unpack ZIP file
-function getzip() {
-    local name=$(expr match "$1" '.*/\([^/]*\)')
-    wget -q "$1" -O "$name"
-    unzip "$name"
-}
-# Download and unpack ZIP file without leaving it behind
-function getzipc() {
-    local TMP=$(mktemp)    || exit 1
-    wget -q "$1" -O "$TMP" || (rm -f "$TMP"; exit 1)
-    unzip "$TMP"           || (rm -f "$TMP"; exit 1)
-}
 # Convert SVG to PDF and EPS
 function svg2pdf() {
     inkscape "$1" --export-text-to-path --export-area-drawing --export-pdf ${1%.svg}.pdf;
@@ -254,34 +232,7 @@ dist-newstyle
 TAGS
 EOF
 }
-## -----------------
 
-# Functions for mirroring
-bos-init-mirror() {(
-    local MIRROR=.hg-mirror
-    # Checks
-    [ -d .git    ] || { echo "No git repo here";      exit 1; }
-    [ -d $MIRROR ] && { echo "Mirror already exists"; exit 1; }
-    # Get paths
-    local GITHUB=$(git remote -v | sed '/^upstream.*fetch/!d; s/upstream[ \t]*//; s/(.*//; s/:/\//')
-    local BITBUC=$(echo $GITHUB | sed 's/git@github.com/hg@bitbucket.org/; s/\.git$//')
-    # Init
-    mkdir $MIRROR
-    cd    $MIRROR
-    hg init
-    cat > .hg/hgrc <<EOF
-[paths]
-bitbucket = ssh://$BITBUC
-github    = git+ssh://$GITHUB
-EOF
-)}
-bos-sync-hg() {(
-    local MIRROR=.hg-mirror
-    [ -d $MIRROR ] || { echo "No mercurial mirror"; exit 1; }
-    cd $MIRROR
-    hg pull github
-    hg push bitbucket
-)}
 
 ## ---------------------------------------------------------
 ## ghci shells
