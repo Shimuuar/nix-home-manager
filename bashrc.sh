@@ -284,6 +284,17 @@ bos-sync-hg() {(
 )}
 
 ## ---------------------------------------------------------
+## ghci shells
+## ---------------------------------------------------------
+
+ghci-numeric() {
+    local PKGS="statistics"
+    nix-shell \
+	-p "haskell.packages.ghc843.ghcWithPackages(p: with p; [statistics])" \
+	--command ghci
+}
+
+## ---------------------------------------------------------
 ## Fortunes (pleasant reading)
 ## ---------------------------------------------------------
 if which fortune &> /dev/null; then
