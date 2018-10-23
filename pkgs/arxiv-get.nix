@@ -1,5 +1,5 @@
 { mkDerivation, fetchhg, base, process, stdenv, tagsoup }:
-    mkDerivation {
+mkDerivation {
   pname   = "arxiv-get";
   version = "0.1";
   src = fetchhg {
