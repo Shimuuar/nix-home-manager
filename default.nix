@@ -33,7 +33,7 @@ in
 {
   # Additional programs & tools
   fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate.nix {};
-  root-plot      = self.callPackage ./pkgs/root-plot.nix {};
+  root-plot      = self.callPackage ./pkgs/root-plot {};
   arxiv-get      = self.haskellPackages.callPackage ./pkgs/arxiv-get.nix {};
   # Override haskell stuff
   haskellPackages = pkgs.haskellPackages.override haskOverrides;

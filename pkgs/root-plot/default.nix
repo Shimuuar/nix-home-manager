@@ -4,9 +4,10 @@ stdenv.mkDerivation {
   version = 0.1;
   src = fetchhg {
     url = "https://bitbucket.org/Shimuuar/root-plot";
-    rev = "608b3ad9cbd82bc267f9ef1497f8480c76c763e0";
+    rev = "9333e13c4e7cf3ece65675ecf75c46033bfd3b62";
   };
   nativeBuildInputs = [ bison flex ];
   buildInputs       = [ stdenv root boost ];
-  makeFlags         = [ "INSTALLDIR=$(out)" ];
+  makeFlags         = [ "INSTALLDIR=$(out)" "-j4" ];
+  postInstall       = ./root-wrapper.sh;
 }
