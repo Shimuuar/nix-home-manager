@@ -32,9 +32,9 @@ let
 in
 {
   # Additional programs & tools
-  fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate.nix {};
+  fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate {};
   root-plot      = self.callPackage ./pkgs/root-plot {};
-  arxiv-get      = self.haskellPackages.callPackage ./pkgs/arxiv-get.nix {};
+  arxiv-get      = self.haskellPackages.callPackage ./pkgs/arxiv-get {};
   # Override haskell stuff
   haskellPackages = pkgs.haskellPackages.override haskOverrides;
   haskell         = pkgs.haskell // {
