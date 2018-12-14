@@ -238,11 +238,13 @@ EOF
 ## ghci shells
 ## ---------------------------------------------------------
 
+ghci-with() {
+    local EXPR="haskellPackages.ghcWithPackages(p: with p; [$@])"
+    nix-shell -p "$EXPR" --run ghci
+}
+
 ghci-numeric() {
-    local PKGS="statistics"
-    nix-shell \
-	-p "haskell.packages.ghc843.ghcWithPackages(p: with p; [statistics])" \
-	--command ghci
+    ghci-with "statistics" "$@"
 }
 
 ## ---------------------------------------------------------
