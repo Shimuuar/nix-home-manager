@@ -1,7 +1,7 @@
-self: pkgs:
+self: previous:
 let
   #
-  khudyakovEnv = pkgs.lib.lowPrio( pkgs.buildEnv {
+  khudyakovEnv = previous.lib.lowPrio( previous.buildEnv {
     name             = "khudyakov-env";
     ignoreCollisions = true;
     paths = [
@@ -27,27 +27,23 @@ let
     });
 
   # Extra haskell packages
-  haskOverrides = {
-    overrides = hsPkgNew: hsPkgOld: rec {
-      spiderment    = hsPkgOld.callPackage ./pkgs/haskell/spiderment.nix {};
-      comic-scraper = hsPkgOld.callPackage ./pkgs/haskell/comic-scraper  {};
-    };
+  haskOverrides = self: super: {
+    spiderment    = self.callPackage ./pkgs/haskell/spiderment.nix {};
+    comic-scraper = self.callPackage ./pkgs/haskell/comic-scraper  {};
   };
 in
 {
+  # Fetchall package
+  inherit khudyakovEnv;
   # Additional programs & tools
   fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate {};
   root-plot      = self.callPackage ./pkgs/root-plot {};
   arxiv-get      = self.haskellPackages.callPackage ./pkgs/arxiv-get {};
   plotly-server  = self.haskellPackages.callPackage ./pkgs/plotly-server {};
   # Override haskell stuff
-  haskellPackages = pkgs.haskellPackages.override haskOverrides;
-  haskell         = pkgs.haskell // {
-    packages = pkgs.haskell.packages // {
-      ghc862 = pkgs.haskell.packages.ghc862.override haskOverrides;
-      ghc844 = pkgs.haskell.packages.ghc844.override haskOverrides;
-    };
+  haskell        = previous.haskell // {
+    packageOverrides = self: super:
+      previous.haskell.packageOverrides self super //
+      haskOverrides self super;
   };
-  # Build environment
-  inherit khudyakovEnv;
 }
