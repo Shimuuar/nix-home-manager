@@ -11,7 +11,7 @@ let
       self.haskell.compiler.ghc844
       self.haskell.compiler.ghc802
       self.haskell.compiler.ghc822
-      self.haskell.compiler.ghc862
+      self.haskell.compiler.ghc863
       # Other haskell utils
       self.haskellPackages.cabal-install
       self.haskellPackages.stack
