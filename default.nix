@@ -1,7 +1,7 @@
 self: previous:
 let
   #
-  khudyakovEnv = previous.lib.lowPrio( previous.buildEnv {
+  khudyakovEnv = self.lib.lowPrio( self.buildEnv {
     name             = "khudyakov-env";
     ignoreCollisions = true;
     paths = [
@@ -9,16 +9,16 @@ let
       self.nix-prefetch-git
       # GHC
       self.haskell.compiler.ghc844
-      self.haskell.compiler.ghc802
       self.haskell.compiler.ghc822
       self.haskell.compiler.ghc863
       # Other haskell utils
-      self.haskellPackages.cabal-install
+      self.cabal-install
       self.haskellPackages.stack
       self.haskellPackages.weeder
       self.haskellPackages.graphmod
       self.hlint
       self.cabal2nix
+#      self.nbstripout
       # My programs
       self.arxiv-get
       self.plotly-server
