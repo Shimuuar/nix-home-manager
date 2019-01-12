@@ -18,14 +18,19 @@ let
       self.haskellPackages.graphmod
       self.hlint
       self.cabal2nix
-#      self.nbstripout
+      self.nbstripout
       # My programs
       self.arxiv-get
       self.plotly-server
       self.root-plot
       ];
     });
-
+  # Python overrides
+  pyOverrides = self: super: {
+    pytest-cram = super.pytest-cram.overridePythonAttrs (old: {
+      checkPhase = "";
+    });
+  };
   # Extra haskell packages
   haskOverrides = self: super: {
     spiderment    = self.callPackage ./pkgs/haskell/spiderment.nix {};
@@ -41,6 +46,7 @@ in
   arxiv-get      = self.haskellPackages.callPackage ./pkgs/arxiv-get {};
   plotly-server  = self.haskellPackages.callPackage ./pkgs/plotly-server {};
   # Override haskell stuff
+  python27       = previous.python27.override { packageOverrides = pyOverrides; };
   haskell        = previous.haskell // {
     packageOverrides = self: super:
       previous.haskell.packageOverrides self super //
