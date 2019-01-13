@@ -21,6 +21,7 @@ let
       self.nbstripout
       # My programs
       self.arxiv-get
+      self.gittery
       self.plotly-server
       self.root-plot
       ];
@@ -44,6 +45,7 @@ in
   fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate {};
   root-plot      = self.callPackage ./pkgs/root-plot {};
   arxiv-get      = self.haskellPackages.callPackage ./pkgs/arxiv-get {};
+  gittery        = self.haskellPackages.callPackage ./pkgs/haskell/gittery.nix {};
   plotly-server  = self.haskellPackages.callPackage ./pkgs/plotly-server {};
   # Override haskell stuff
   python27       = previous.python27.override { packageOverrides = pyOverrides; };
