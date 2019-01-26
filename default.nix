@@ -16,6 +16,7 @@ let
       self.haskellPackages.stack
       self.haskellPackages.weeder
       self.haskellPackages.graphmod
+      self.haskellPackages.hasktags
       self.hlint
       self.cabal2nix
       self.nbstripout
