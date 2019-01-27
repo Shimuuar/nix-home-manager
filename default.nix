@@ -46,7 +46,7 @@ in
   fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate {};
   root-plot      = self.callPackage ./pkgs/root-plot {};
   arxiv-get      = self.haskellPackages.callPackage ./pkgs/arxiv-get {};
-  gittery        = self.haskellPackages.callPackage ./pkgs/haskell/gittery.nix {};
+  gittery        = self.haskellPackages.callPackage ./pkgs/gittery   {};
   plotly-server  = self.haskellPackages.callPackage ./pkgs/plotly-server {};
   # Override haskell stuff
   python27       = previous.python27.override { packageOverrides = pyOverrides; };
