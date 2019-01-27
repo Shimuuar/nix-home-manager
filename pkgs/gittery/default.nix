@@ -1,5 +1,5 @@
 { mkDerivation, fetchgitPrivate
-, aeson, base, directory, filepath, hostname
+, aeson, base, directory, filepath, hostname, containers
 , optparse-applicative, process, stdenv, text, transformers
 , unordered-containers, yaml
 }:
@@ -8,14 +8,14 @@ mkDerivation {
   version = "0.1";
   src = fetchgitPrivate {
     url    = "git@bitbucket.org:Shimuuar/gittery.git";
-    rev    = "94a22db3f1141e4be1d3f465b9106e1da9e05004";
-    sha256 = "0iyhgg1mhhar6l9fy2c59cgzyla6aayn2vl97yin3wiw28i683jf";
+    rev    = "c8ad05602a371a46029947b0ee1e242b81ec2b3f";
+    sha256 = "06r5mp1lfap1czlay597f95ghiyk5czrb6gkz3i3m4yxvkkcfnda";
   };
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [
     aeson base directory filepath hostname optparse-applicative process
-    text transformers unordered-containers yaml
+    text transformers unordered-containers yaml containers
   ];
   description = "Tool for managing multiple repositories";
   license = stdenv.lib.licenses.bsd3;
