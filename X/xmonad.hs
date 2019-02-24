@@ -275,8 +275,10 @@ myManageHook = composeAll $ concat
 -- XPromt settings
 myXPConfig :: XPConfig
 myXPConfig = def
-  { font        = "-xos4-terminus-medium-r-normal-*-16-*-*-*-*-*-*-*"
+  { font        = "-*-fixed-medium-*-*-*-18-*-*-*-*-*-iso10646-*"
   , historySize = 20
+  , height      = 22
+  , bgColor     = "gray10"
   }
 
 
