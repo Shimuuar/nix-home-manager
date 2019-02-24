@@ -191,7 +191,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 myLayout = smartBorders
          $ onWorkspace "Media"   (noBorders Full)
          $ avoidStruts
-         $ onWorkspace "IM"      im
+         $ onWorkspace "IM"      Full
          $ onWorkspace "Gimp"    gimp
          $ defaultLayout
   where
@@ -200,10 +200,6 @@ myLayout = smartBorders
                  ||| Mirror tiled
                  ||| Full
                  where tiled = Tall 1  0.02  0.50
-    -- IM layout
-    im = withIM 0.20 res Grid
-      where res =   Resource "main"       -- Psi
-               `Or` Role     "buddy_list" -- Pidgin
     -- Layout for GIMP
     gimp = withIM (0.18) (Role "gimp-toolbox") $
               combineTwoP (reflectHoriz $ TwoPane 0.2 0.2)
