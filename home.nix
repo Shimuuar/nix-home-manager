@@ -110,7 +110,7 @@ in
       # Programs
       lxpanel &
       firefox &
-      telegram-desktop &
+      XDG_CURRENT_DESKTOP= telegram-desktop &
       # Wallpapers
       while : ; do
         python ${cfg}/util/set-random-wallpaper
