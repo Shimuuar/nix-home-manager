@@ -1,4 +1,4 @@
-#!/bin/bash
+#/usr/bin/env bash
 #
 # We need to set environment variables in order to allow cling to find
 # *.pcm & some of includes. It foolishly try to find them in the current
