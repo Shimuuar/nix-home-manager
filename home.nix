@@ -1,8 +1,9 @@
 { config, pkgs, ... }:
 let
+  # Repository with config files
   cfg = pkgs.fetchhg {
     url = "https://bitbucket.org/Shimuuar/config";
-    rev = "90a2ebb4f090ea05dac276c990b0bda9e5a7f9fd";
+    rev = "b473cc39777675e45fc32f5b0f28ac99f6113c20";
   };
 in
 {
@@ -12,30 +13,31 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  # Generic list of programs  
+  # Generic list of programs
   home.packages = with pkgs; [
-    # General utils
+    # CLI utils
     ag
     fortune
     haskellPackages.git-annex
+    haskellPackages.hasktags
     mercurial
     # Window magament
     dmenu
     lxpanel
     spectacle
-    xorg.xev
-    xorg.xmodmap
-    xfontsel
-    gnome3.adwaita-icon-theme
-    # KDE
+    # GUI programs
+    arandr
+    chromium
+    darktable
+    firefox
+    gwenview
+    gwenview
     kate
     konsole
     krusader
     okular
-    # GUI programs   
     qpdfview
     tdesktop
-    firefox
     # media
     feh
     mpv
@@ -92,14 +94,23 @@ in
   # ---- X session ----
   xsession = {
     enable    = true;
+    # Gtk & Qt needed handholding to make use of XCompose but Qt5 does
+    # need explicit instructions to find XCompose file.
     initExtra = ''
       # X
-      [ -L ~/.XCompose ] || ln -sf ${cfg}/X/XCompose ~/.XCompose
       xrdb ${cfg}/X/Xresources
-      # Session programs
-      eval $(ssh-agent)
+      bash ${cfg}/util/x-set-keyboard ralt
+      export GTK_IM_MODULE=xim
+      export QT_IM_MODULE=xim
+      export XCOMPOSEFILE=${cfg}/X/XCompose
+      export XDG_CURRENT_DESKTOP=kde
+      xset +fp ${pkgs.terminus_font}/share/fonts/terminus
+      # Sessions
+      systemctl --user start ssh-agent
       # Programs
       lxpanel &
+      firefox &
+      telegram-desktop &
       # Wallpapers
       while : ; do
         python ${cfg}/util/set-random-wallpaper
@@ -109,6 +120,7 @@ in
     windowManager.xmonad = {
       enable                 = true;
       enableContribAndExtras = true;
+      # config               = null; # Used for debugging configuration
       config                 = "${cfg}/X/xmonad.hs";
     };
   };
