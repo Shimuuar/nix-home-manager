@@ -7,6 +7,8 @@ let
     paths = [
       # Nix
       self.nix-prefetch-git
+      # GCC
+      self.gcc
       # GHC
       self.haskell.compiler.ghc844
       self.haskell.compiler.ghc822
