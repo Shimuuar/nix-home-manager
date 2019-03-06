@@ -25,6 +25,7 @@ let
       # My programs
       self.arxiv-get
       self.gittery
+      self.mdo
       self.plotly-server
       self.root-plot
       ];
@@ -46,6 +47,7 @@ in
   inherit khudyakovEnv;
   # Additional programs & tools
   fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate {};
+  mdo            = self.callPackage ./pkgs/mdo {};
   root-plot      = self.callPackage ./pkgs/root-plot {};
   arxiv-get      = self.haskellPackages.callPackage ./pkgs/arxiv-get {};
   gittery        = self.haskellPackages.callPackage ./pkgs/gittery   {};
