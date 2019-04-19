@@ -10,9 +10,9 @@ let
       # GCC
       self.gcc
       # GHC
+      self.haskell.compiler.ghc864
       self.haskell.compiler.ghc844
       self.haskell.compiler.ghc822
-      self.haskell.compiler.ghc863
       # Other haskell utils
       self.cabal-install
       self.haskellPackages.stack
@@ -21,7 +21,6 @@ let
       self.haskellPackages.hasktags
       self.hlint
       self.cabal2nix
-      self.nbstripout
       # My programs
       self.arxiv-get
       self.gittery
@@ -59,4 +58,6 @@ in
       previous.haskell.packageOverrides self super //
       haskOverrides self super;
   };
+  # nbstripout fails
+  nbstripout     = previous.nbstripout.overrideAttrs (_: { installCheckPhase = ""; });
 }
