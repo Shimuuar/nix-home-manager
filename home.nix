@@ -17,27 +17,54 @@ in
   home.packages = with pkgs; [
     # CLI utils
     ag
+    crudini
+    diffstat
     fortune
+    ghostscript
+    gnupg
     haskellPackages.git-annex
     haskellPackages.hasktags
+    imagemagick
+    jq
+    graphviz
     mercurial
+    pdftk
+    postgresql
+    python36Packages.ipython
+    rlwrap
+    sqlite
+    sshfs
+    # Devtools
+    binutils-unwrapped
+    pypi2nix
+    python27Packages.pip
+    python36Packages.pip
     # Window magament
     dmenu
     lxpanel
+    xdotool
     spectacle
     # GUI programs
     arandr
     chromium
     darktable
+    deluge
+    dolphin
     firefox
     gwenview
-    gwenview
+    evince
+    gimp
+    wireshark
     kate
     konsole
-    krusader
+    kdiff3
+    kdeApplications.konqueror
+    libreoffice
     okular
     qpdfview
     tdesktop
+    thunderbird
+    xournal
     # media
     feh
     mpv
@@ -63,6 +90,7 @@ in
       julia-mode
       haskell-mode
       markdown-mode
+      yaml-mode
     ];
   };
   # ----
@@ -70,12 +98,12 @@ in
     enable      = true;
     userName    = "Alexey Khudyakov";
     userEmail   = "alexey.skladnoy@gmail.com";
-    extraConfig = ''
-      [filter "nbstripout"]
-        clean    = ${pkgs.nbstripout}/bin/nbstripout
-        smudge   = cat
-        required
-      '';
+#    extraConfig = ''
+#      [filter "nbstripout"]
+#        clean    = ${pkgs.nbstripout}/bin/nbstripout
+#        smudge   = cat
+#        required
+#      '';
   };
   # ----
   programs.mercurial = {
