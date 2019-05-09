@@ -142,7 +142,7 @@ myKeys conf =
     , ("M-M1-i"  , run "firefox")
     , ("M-M1-k"  , run "konqueror")
     , ("M-s"     , scratchpadSpawnActionCustom "exec xterm -name scratchpad -e sh -c 'screen -d -R scratch'")
-    , ("<Print>" , run "ksnapshot")
+    , ("<Print>" , run "spectacle")
     -- Search
     , ("M-g"     , submap $ mkKeymap conf $ concatMap mySearch
           [ ("g"  , google )
