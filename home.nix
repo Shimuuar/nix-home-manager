@@ -34,6 +34,7 @@ in
     rlwrap
     sqlite
     sshfs
+    zip
     # Devtools
     binutils-unwrapped
     pypi2nix
@@ -98,12 +99,12 @@ in
     enable      = true;
     userName    = "Alexey Khudyakov";
     userEmail   = "alexey.skladnoy@gmail.com";
-#    extraConfig = ''
-#      [filter "nbstripout"]
-#        clean    = ${pkgs.nbstripout}/bin/nbstripout
-#        smudge   = cat
-#        required
-#      '';
+    extraConfig = ''
+      [filter "nbstripout"]
+        clean    = ${pkgs.nbstripout}/bin/nbstripout
+        smudge   = cat
+        required
+      '';
   };
   # ----
   programs.mercurial = {
