@@ -58,7 +58,6 @@ in
     wireshark
     kate
     konsole
-    kdiff3
     kdeApplications.konqueror
     libreoffice
     okular
@@ -104,6 +103,10 @@ in
         clean    = ${pkgs.nbstripout}/bin/nbstripout
         smudge   = cat
         required
+      [merge]
+        tool = kdiff3
+      [mergetool "kdiff3"]
+        path = ${pkgs.kdiff3}
       '';
   };
   # ----
