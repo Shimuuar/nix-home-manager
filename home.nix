@@ -24,7 +24,6 @@ in
     ghostscript
     gnupg
     haskellPackages.git-annex
-    haskellPackages.hasktags
     imagemagick
     jq
     graphviz
@@ -38,8 +37,7 @@ in
     zip
     # Devtools
     pypi2nix
-    python27Packages.pip
-    python36Packages.pip
+    haskellPackages.hasktags
     # Window magament
     dmenu
     lxpanel
