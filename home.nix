@@ -15,6 +15,7 @@ in
   programs.home-manager.enable = true;
   # Generic list of programs
   home.packages = with pkgs; [
+    khudyakovEnv
     # CLI utils
     ag
     crudini
@@ -36,7 +37,6 @@ in
     sshfs
     zip
     # Devtools
-    binutils-unwrapped
     pypi2nix
     python27Packages.pip
     python36Packages.pip
@@ -106,7 +106,7 @@ in
       [merge]
         tool = kdiff3
       [mergetool "kdiff3"]
-        path = ${pkgs.kdiff3}
+        path = ${pkgs.kdiff3}/bin/kdiff3
       '';
   };
   # ----
