@@ -5,8 +5,6 @@ let
     name             = "khudyakov-env";
     ignoreCollisions = true;
     paths = [
-      # Nix
-      self.nix-prefetch-git
       # GCC
       self.gcc
       # GHC
