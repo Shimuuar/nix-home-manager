@@ -1,10 +1,7 @@
 { config, pkgs, ... }:
 let
   # Repository with config files
-  cfg = pkgs.fetchhg {
-    url = "https://bitbucket.org/Shimuuar/config";
-    rev = "b401c40cd3d0e4b1efa142f2f193af9d7a857218";
-  };
+  cfg = import ./cfg/cfg.nix pkgs;
 in
 {
    imports = [
