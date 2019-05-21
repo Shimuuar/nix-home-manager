@@ -63,6 +63,7 @@ in
     tdesktop
     thunderbird
     xournal
+    xterm
     # media
     feh
     mpv
@@ -71,8 +72,16 @@ in
 
   # ----
   programs.bash = {
-    enable      = true;
-    bashrcExtra = builtins.readFile "${cfg}/bashrc.sh";
+    enable       = true;
+    bashrcExtra  = builtins.readFile "${cfg}/bashrc.sh";
+    profileExtra = ''
+      if [ -e /home/alexey/.nix-profile/etc/profile.d/nix.sh ]; then
+        . /home/alexey/.nix-profile/etc/profile.d/nix.sh;
+      fi
+      export NIX_PATH=$HOME/.nix-defexpr/channels:$NIX_PATH
+      export NIX_PATH=ssh-auth-sock=$SSH_AUTH_SOCK:$NIX_PATH
+      export NIX_PATH=ssh-config-file=/etc/ssh/ssh_config:$NIX_PATH
+      '';
   };
   # ----
   programs.screen = {
@@ -129,7 +138,7 @@ in
     initExtra = ''
       # X
       xrdb ${cfg}/X/Xresources
-      bash ${cfg}/util/x-set-keyboard ralt
+      bash ${cfg}/util/x-set-keyboard menu
       export GTK_IM_MODULE=xim
       export QT_IM_MODULE=xim
       export XCOMPOSEFILE=${cfg}/X/XCompose
@@ -137,10 +146,15 @@ in
       xset +fp ${pkgs.terminus_font}/share/fonts/terminus
       # Sessions
       systemctl --user start ssh-agent
+      # Desktop stuff
+      nm-applet          &
+      xfce4-panel         &
+      xfce4-power-manager &
+      xfce4-volumed       &
       # Programs
-      lxpanel &
-      firefox &
-      XDG_CURRENT_DESKTOP= telegram-desktop &
+      ${pkgs.lxpanel}/bin/lxpanel &
+      ${pkgs.firefox}/bin/firefox &
+      XDG_CURRENT_DESKTOP= ${pkgs.tdesktop}/bin/telegram-desktop &
       # Wallpapers
       while : ; do
         python ${cfg}/util/set-random-wallpaper
