@@ -156,12 +156,11 @@ myKeys conf =
           , ("S-h", hackage)
           , ("u"  , searchEngine "Лурка" "http://lurkmore.ru/%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:Search?search=")
           ] )
+    -- Mouse middle button
+    , ("M-z", spawn "xdotool click 2")
     -- Useful action
     , ("M-x"     , submap $ mkKeymap conf $
-          [ ("z"   , spawn "xterm-less < ~/.xsession-errors")
-          , ("S-z" , spawn "tail -f ~/.xsession-errors | xterm-less")
-          , ("p"   , spawn "xprop | grep -v WM_ICON | xterm-less")
-          , ("l"   , spawn "xscreensaver-command --lock")
+          [ ("l"  , spawn "xscreensaver-command --lock")
           ] )
     ]
 
@@ -170,14 +169,10 @@ myKeys conf =
 -- Mouse bindings: default actions bound to mouse events
 myMouseBindings :: XConfig t -> M.Map (KeyMask, Button) (Window -> X ())
 myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
-    -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modMask, button1), (\w -> focus w >> mouseMoveWindow w))
-    -- mod-button2, Raise the window to the top of the stack
-    , ((modMask, button2), (\w -> focus w >> windows W.swapMaster))
-    -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modMask, button3), (\w -> focus w >> mouseResizeWindow w))
-    -- you may also bind events to the mouse scroll wheel (button4 and button5)
-    ]
+  [ ((modMask, button1), (\w -> focus w >> mouseMoveWindow w))
+  , ((modMask, button2), (\w -> focus w >> windows W.swapMaster))
+  , ((modMask, button3), (\w -> focus w >> mouseResizeWindow w))
+  ]
 
 
 ------------------------------------------------------------------------
@@ -188,12 +183,13 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- restarting (with 'mod-q') to reset your layout state to the new
 -- defaults, as xmonad preserves your old layout settings by default.
 --
-myLayout = smartBorders
-         $ onWorkspace "Media"   (noBorders Full)
-         $ avoidStruts
-         $ onWorkspace "IM"      Full
-         $ onWorkspace "Gimp"    gimp
-         $ defaultLayout
+myLayout
+  = smartBorders
+  $ avoidStruts
+  $ onWorkspace "Media"   (noBorders Full)
+  $ onWorkspace "IM"      Full
+  $ onWorkspace "Gimp"    gimp
+  $ defaultLayout
   where
     -- Default layout
     defaultLayout =  tiled
