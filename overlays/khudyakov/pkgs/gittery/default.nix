@@ -8,8 +8,8 @@ mkDerivation {
   version = "0.1";
   src = fetchgitPrivate {
     url    = "git@bitbucket.org:Shimuuar/gittery.git";
-    rev    = "ed2d25303d06b1c59a774eee4e777f4e7852e62d";
-    sha256 = "1hxl5sf6za1h69c6vcyhnif8yl5llv7r0wn5m9a66hg6s9kg877z";
+    rev    = "5e23356110ddda5cf2dcfa1893a0ed27e4fdf4aa";
+    sha256 = "1yv14nk0aingam0ba788kwqr7fma1zyp08x4py1zkf0mqmiyk315";
   };
   isLibrary = false;
   isExecutable = true;
