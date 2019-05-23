@@ -97,6 +97,7 @@ in
     enable      = true;
     userName    = "Alexey Khudyakov";
     userEmail   = "alexey.skladnoy@gmail.com";
+    package     = pkgs.gitAndTools.gitFull;
     extraConfig = ''
       [filter "nbstripout"]
         clean    = ${pkgs.nbstripout}/bin/nbstripout
