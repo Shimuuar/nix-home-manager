@@ -3,6 +3,8 @@ let
   params = {
     bash = {
       profileExtra = ''
+        export EDITOR=nano
+
         if [ -e /home/alexey/.nix-profile/etc/profile.d/nix.sh ]; then
           . /home/alexey/.nix-profile/etc/profile.d/nix.sh;
         fi
