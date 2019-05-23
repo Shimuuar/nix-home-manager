@@ -156,8 +156,8 @@ myKeys conf =
           , ("S-h", hackage)
           , ("u"  , searchEngine "Лурка" "http://lurkmore.ru/%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:Search?search=")
           ] )
-    -- Mouse middle button
-    , ("M-z", spawn "xdotool click 2")
+    -- Emullation of middle mouse click.
+    , ("M-z", safeSpawn "xdotool" ["keyup", "Super_L", "click", "2"])
     -- Useful action
     , ("M-x"     , submap $ mkKeymap conf $
           [ ("l"  , spawn "xscreensaver-command --lock")
