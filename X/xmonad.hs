@@ -12,7 +12,7 @@ import qualified XMonad.StackSet as W
 import XMonad.Actions.CycleWS
 import XMonad.Actions.Submap
 import XMonad.Actions.Search (SearchEngine, searchEngine, promptSearchBrowser, selectSearchBrowser,
-                              google, youtube, isohunt, wikipedia, scholar, hoogle, hackage)
+                              google, youtube, wikipedia, scholar, hoogle, hackage, escape)
 import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
@@ -40,6 +40,10 @@ run = safeSpawnProg
 
 wikipediaLang' :: String -> SearchEngine
 wikipediaLang' lang = searchEngine (lang++".wiki") ("https://secure.wikimedia.org/wikipedia/"++lang++"/wiki/Special:Search?go=Go&search=")
+
+hoogle' :: String -> SearchEngine
+hoogle' scope = search "hooogle"
+  ("https://hoogle.haskell.org/scope="++escape scope++"&?hoogle=")
 
 duckduckgo :: SearchEngine
 duckduckgo = searchEngine "duckduckgo" "https://duckduckgo.com/?q="
@@ -146,7 +150,7 @@ myKeys conf =
           , ("d"  , duckduckgo)
           , ("s"  , scholar)
           , ("y"  , youtube)
-          , ("h"  , hoogle )
+          , ("h"  , hoogle' "set:stackage")
           , ("w"  , wikipedia )
           , ("r"  , wikipediaLang' "ru")
           , ("S-h", hackage)
