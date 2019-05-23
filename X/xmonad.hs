@@ -35,10 +35,6 @@ import XMonad.Prompt
 
 ----------------------------------------------------------------
 
--- | Unicode safe spawn
-spawnU :: MonadIO m => String -> m ()
-spawnU = spawn . encodeString
-
 run :: MonadIO m => String -> m ()
 run = safeSpawnProg
 
