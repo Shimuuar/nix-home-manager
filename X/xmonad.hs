@@ -43,7 +43,7 @@ wikipediaLang' lang = searchEngine (lang++".wiki") ("https://secure.wikimedia.or
 
 hoogle' :: String -> SearchEngine
 hoogle' scope = searchEngine "hooogle"
-  ("https://hoogle.haskell.org/scope="++escape scope++"&?hoogle=")
+  ("https://hoogle.haskell.org/?scope="++escape scope++"&hoogle=")
 
 duckduckgo :: SearchEngine
 duckduckgo = searchEngine "duckduckgo" "https://duckduckgo.com/?q="
