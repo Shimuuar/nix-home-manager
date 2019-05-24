@@ -1,30 +1,7 @@
-
-
 ## ~/.bashrc: executed by bash(1) for non-login shells.
 ## see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 ## for examples
 
-## ---------------------------------------------------------
-## Pathes
-## ---------------------------------------------------------
-# Prepend path to envvar if it's not there already
-function prepend_to() {
-    local name="$1"
-    local var=$(eval echo \$"{$1}")
-    if [ x${var} = 'x' ]; then
-	# Envvar is empty export it
-	eval export $name="$2"
-    elif echo $var | tr : '\n' | grep -qE "^$2$"; then
-	# It's already there
-	:
-    else
-	# Let's prepend it
-	eval export $name="$2":$var
-    fi
-}
-
-prepend_to PATH ${HOME}/opt/bin
-export PYTHONPATH=${HOME}/opt/lib/python2.7/site-packages/
 ## Use custom settings (this file is intended for computer-local settings)
 [ -f $HOME/.bashrc.local ] && source ~/.bashrc.local
 ## ----------------
@@ -161,8 +138,6 @@ alias pdflatex='pdflatex < /dev/null'
 ## ---------------------------------------------------------
 # Calculate things ([p]rint) (borrowed from GDB)
 function p() {  echo $@ | bc -l;  }
-# View colored source code
-function vsrc() { highlight "$@" -A | less -R; }
 # Make dir and cd to it
 function mkcd() { mkdir -p "$1" && cd "$1";  }
 # Kill all processes owned by me
