@@ -7,37 +7,10 @@
 (defun add-load-path (path)
   (add-to-list 'load-path (expand-file-name path)))
 ;; Now add default pathes
+(add-load-path "~/.emacs.d/lisp-personal")
 (mapcar 'add-load-path
-	(list "~/.emacs.d/lisp"
-	      "~/.emacs.d/lisp-personal"
-	      "~/.emacs.d/haskell-mode"
-	      "~/.emacs.d/haskell-flycheck"))
-;; Load necessary packages
-;(require 'cl)
-
-
-; Define packages 
-(when (>= emacs-major-version 24)
-  (require 'package)
-  ; Add MELPA to list of packages
-  (add-to-list 'package-archives
-	       '("melpa" . "http://melpa.org/packages/") t)
-  (package-initialize)
-
-  ; Check that all required packages are installed
-  (defvar prelude-packages
-    '( haskell-mode
-       flycheck
-       flycheck-haskell
-       browse-kill-ring
-       undo-tree
-       )
-    "List of required packages")
-  (dolist (p prelude-packages)
-    (unless (package-installed-p p)
-      (message "WARNING: `%s' is not installed" p)))
-
-)
+	(seq-filter 'file-directory-p
+		    (file-expand-wildcards (expand-file-name "~/.emacs.d/lisp/*"))))
 
 ; Load files
 (require 'my-generic)
