@@ -9,7 +9,7 @@ let
           . /home/alexey/.nix-profile/etc/profile.d/nix.sh;
         fi
         # See https://github.com/NixOS/nixpkgs/issues/38991
-        export LOCALE_ARCHIVE_2_27=$(nix-build --no-out-link "<nixpkgs>" -A glibcLocales)/lib/locale/locale-archive
+        export LOCALE_ARCHIVE_2_27=${pkgs.glibcLocales}/lib/locale/locale-archive
         #
         export NIX_PATH=$HOME/.nix-defexpr/channels:$NIX_PATH
         export NIX_PATH=ssh-auth-sock=$SSH_AUTH_SOCK:$NIX_PATH
