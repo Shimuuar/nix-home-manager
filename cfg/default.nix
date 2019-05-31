@@ -67,8 +67,14 @@ in
     feh
     mpv
     pavucontrol
+    # Fonts
+    unifont
+    terminus_font
+    terminus_font_ttf
   ];
 
+  #
+  fonts.fontconfig.enableProfileFonts = params.fontconfig or false;
   # ----
   programs.bash = {
     enable       = true;

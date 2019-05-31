@@ -25,5 +25,6 @@ let
         xfce4-volumed       &
         '';
     };
+    fontconfig = true;
   };
 in import ./cfg params args
