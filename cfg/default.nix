@@ -4,7 +4,7 @@ let
   # Repository with config files
   cfg = pkgs.fetchhg {
     url = "https://bitbucket.org/Shimuuar/config";
-    rev = "189dd5e80e1cf71cd5bf7b9dd194e88c6fe0e5d6";
+    rev = "f78de939fa73a0b2f3862d414bdae79d22597e98";
   };
 in
 {
