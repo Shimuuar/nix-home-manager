@@ -38,10 +38,16 @@ let
     spiderment    = self.callPackage ./pkgs/haskell/spiderment.nix {};
     comic-scraper = self.callPackage ./pkgs/haskell/comic-scraper  {};
   };
+  # Extra emacs packages
+  emacsPkg = {
+    polymode  = self.callPackage ./pkgs/emacsPkg/polymode.nix {};
+    tla-tools = self.callPackage ./pkgs/emacsPkg/tla-tools.nix {};
+  };
 in
 {
   # Fetchall package
   inherit khudyakovEnv;
+  inherit emacsPkg;
   # Additional programs & tools
   drone-cli-110  = self.callPackage ./pkgs/drone-cli {};
   fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate {};

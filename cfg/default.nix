@@ -10,6 +10,7 @@ in
 {
    imports = [
      ../modules/screen.nix
+     ../modules/emacsPkg.nix
    ];
 
   # Let Home Manager install and manage itself.
@@ -91,11 +92,22 @@ in
     enable = true;
     extraPackages = epkg : with epkg; [
       undo-tree
+      browse-kill-ring
+      # Modes
       nix-mode
       julia-mode
       haskell-mode
       markdown-mode
       yaml-mode
+      # Tools
+      magit
+    ];
+  };
+  programs.emacsPkg = {
+    enable   = true;
+    packages = [
+      pkgs.emacsPkg.polymode
+      pkgs.emacsPkg.tla-tools
     ];
   };
   # ----
