@@ -11,6 +11,7 @@ in
    imports = [
      ../modules/screen.nix
      ../modules/emacsPkg.nix
+     ../modules/xdgUserDirs.nix
    ];
 
   # Let Home Manager install and manage itself.
@@ -76,6 +77,17 @@ in
 
   #
   fonts.fontconfig.enableProfileFonts = params.fontconfig or false;
+  xdgUserDirs = {
+    enable      = true;
+    desktop     = "$HOME/Desktop";
+    documents   = "$HOME/Desktop/Documents";
+    download    = "$HOME/Desktop/Downloads";
+    music       = "$HOME/Desktop/Music";
+    pictures    = "$HOME/Desktop/Pictures";
+    publicshare = "$HOME/Desktop/Public";
+    templates   = "$HOME/Desktop/Templates";
+    videos      = "$HOME/Desktop/Videos";
+  };
   # ----
   programs.bash = {
     enable       = true;
