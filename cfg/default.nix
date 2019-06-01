@@ -153,6 +153,11 @@ in
     '';
   };
 
+  # ----
+  services.syncthing = {
+    enable = true;
+  };
+
   # ---- X session ----
   xsession = {
     enable    = true;
