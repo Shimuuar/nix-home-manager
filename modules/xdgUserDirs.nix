@@ -2,6 +2,7 @@
 
 with lib;
 let
+  dag = config.lib.dag;
   cfg = config.xdgUserDirs;
 
 in
@@ -63,5 +64,16 @@ in
       '';
 
     xdg.configFile."user-dirs.locale".text = cfg.locale;
+
+    home.activation.xdgUserDirs = dag.entryAnywhere ''
+      mkdir -p "${cfg.desktop}"
+      mkdir -p "${cfg.documents}"
+      mkdir -p "${cfg.download}"
+      mkdir -p "${cfg.music}"
+      mkdir -p "${cfg.pictures}"
+      mkdir -p "${cfg.publicshare}"
+      mkdir -p "${cfg.templates}"
+      mkdir -p "${cfg.videos}"
+      '';
   };
 }
