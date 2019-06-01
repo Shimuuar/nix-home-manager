@@ -5,7 +5,7 @@ stdenv.mkDerivation {
   version = "20190529.2050";
   src = fetchurl {
     url    = "https://melpa.org/packages/polymode-20190529.2050.tar";
-    sha256 = "0qhbrm38v0b6ff0cr0wxdc7jg1c7jyh0cs570d31j3mbgy704w57";
+    sha256 = "1wn330vl4v795j5ixiw9dy4makgrxfndm3abwbsijx2iww77fpd3";
   };
   buildInputs = [ stdenv ];
   buildPhase  = "";

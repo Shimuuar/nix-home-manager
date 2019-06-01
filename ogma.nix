@@ -6,7 +6,7 @@ let
       extraPrograms = ''
         systemctl --user start ssh-agent
         '';
-    }
+    };
   };
 in import ./cfg params args
 
