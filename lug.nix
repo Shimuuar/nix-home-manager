@@ -1,6 +1,3 @@
-
-
-
 args@{config, pkgs, ...}:
 let
   params = {
@@ -27,7 +24,7 @@ let
           ${pkgs.bash}/bin/bash ${pkgs.writeTextFile {
             name = "lug-glx.sh";
             text = builtins.readFile ./lug-glx.sh;
-          }}
+          }} $XDG_RUNTIME_DIR/GLX
         fi
         '';
     };

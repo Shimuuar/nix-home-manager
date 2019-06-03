@@ -6,6 +6,7 @@ if [ "$1" == "" ]; then
     exit 1
 fi
 
+cd "$1"
 # Symlink GLX libraries
 ln -s /usr/lib/x86_64-linux-gnu/libGLX_indirect.so.0
 ln -s /usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0    
