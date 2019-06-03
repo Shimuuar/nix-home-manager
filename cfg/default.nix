@@ -50,21 +50,33 @@ in
     chromium
     darktable
     deluge
-    dolphin
-    firefox
-    gwenview
     evince
+    firefox
     gimp
-    wireshark
-    kate
-    konsole
-    kdeApplications.konqueror
+    gwenview
     libreoffice
-    okular
     tdesktop
     thunderbird
+    wireshark
     xournal
     xterm
+    # KDE
+    breeze-icons
+    hicolor-icon-theme
+    kdeApplications.dolphin
+    kdeApplications.dolphin-plugins
+    kdeApplications.kate
+    kdeApplications.konqueror
+    kdeApplications.konsole
+    kdeApplications.okular
+    plasma5.systemsettings
+    plasma5.breeze-gtk
+    plasma5.breeze-qt5
+    plasma5.breeze-grub
+    plasma5.breeze-plymouth
+    plasma5.oxygen
+    plasma5.plasma-integration
+    plasma5.oxygen
     # media
     feh
     mpv
