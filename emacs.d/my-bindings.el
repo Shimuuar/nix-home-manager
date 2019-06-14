@@ -23,6 +23,8 @@
 ;; Swap windows
 (global-set-key (kbd "C-x t") (lambda () (interactive)
 				(my/swap-windows 1)))
+;; Magit
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; =========================================================
 ;; kill-yank
