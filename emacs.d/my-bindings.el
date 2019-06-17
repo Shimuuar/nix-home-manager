@@ -21,8 +21,7 @@
 ; Call last recorded macro
 (global-set-key [f2] 'call-last-kbd-macro)
 ;; Swap windows
-(global-set-key (kbd "C-x t") (lambda () (interactive)
-				(my/swap-windows 1)))
+(global-set-key (kbd "C-x t") 'my/swap-windows)
 ;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
