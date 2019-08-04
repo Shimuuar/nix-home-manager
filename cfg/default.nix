@@ -24,6 +24,7 @@ in
     crudini
     diffstat
     fortune
+    enca
     ghostscript
     gnupg
     graphviz
@@ -33,7 +34,8 @@ in
     mercurial
     pdftk
     postgresql
-    python36Packages.ipython
+    pdfgrep
+    python3Packages.ipython
     rlwrap
     sqlite
     sshfs
@@ -44,11 +46,13 @@ in
     # Window magament
     dmenu
     xdotool
+    wmctrl
     spectacle
     # GUI programs
     arandr
     chromium
     darktable
+    djview
     deluge
     evince
     firefox
