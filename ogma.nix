@@ -5,6 +5,7 @@ let
       composeKey = "ralt";
       extraPrograms = ''
         systemctl --user start ssh-agent
+        ${pkgs.lxpanel}/bin/lxpanel &
         '';
     };
   };
