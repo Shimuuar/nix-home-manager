@@ -177,6 +177,31 @@ in
     enable  = true;
     gdbinit = ''
       set disassembly-flavor intel
+
+      define ghcR1
+        printf "R1: 0x%016lx\n", $rbx
+        x *$rbx
+      end
+      define ghcR2
+        printf "R2: 0x%016lx\n", $r14
+        x *$r14
+      end
+      define ghcR3
+        printf "R3: 0x%016lx\n", $rsi
+        x *$rsi
+      end
+      define ghcR4
+        printf "R4: 0x%016lx\n", $rdi
+        x *$rdi
+      end
+      define ghcR5
+        printf "R5: 0x%016lx\n", $r8
+        x *$r8
+      end
+      define ghcR6
+        printf "R6: 0x%016lx\n", $r9
+        x *$r9
+      end
       '';
   };
 
