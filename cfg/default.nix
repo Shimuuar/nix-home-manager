@@ -188,8 +188,9 @@ in
   # ---- X session ----
   xsession = {
     enable    = true;
-    # Gtk & Qt needed handholding to make use of XCompose but Qt5 does
-    # need explicit instructions to find XCompose file.
+    # Gtk & Qt needed handholding to make use of XCompose and Qt5
+    # specifically does need explicit instructions to find XCompose
+    # file.
     initExtra = ''
       # X
       xrdb ${cfg}/X/Xresources
