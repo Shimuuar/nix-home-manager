@@ -12,6 +12,7 @@ in
      ../modules/screen.nix
      ../modules/emacsPkg.nix
      ../modules/xdgUserDirs.nix
+     ../modules/gdb.nix
    ];
 
   # Let Home Manager install and manage itself.
@@ -44,7 +45,6 @@ in
     zip
     # Devtools
     pypi2nix
-    gdb
     rr
     haskellPackages.hasktags
     # Window magament
@@ -171,6 +171,13 @@ in
     color    =
     pager    =
     '';
+  };
+  # ----
+  programs.gdb = {
+    enable  = true;
+    gdbinit = ''
+      set disassembly-flavor intel
+      '';
   };
 
   # ----
