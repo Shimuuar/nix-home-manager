@@ -28,6 +28,7 @@ in
     ghostscript
     gnupg
     graphviz
+    htop
     haskellPackages.git-annex
     imagemagick
     jq
@@ -37,11 +38,14 @@ in
     pdfgrep
     python3Packages.ipython
     rlwrap
+    sysstat
     sqlite
     sshfs
     zip
     # Devtools
     pypi2nix
+    gdb
+    rr
     haskellPackages.hasktags
     # Window magament
     dmenu
