@@ -1,5 +1,7 @@
+{-# LANGUAGE ApplicativeDo #-}
 import Codec.Binary.UTF8.String
 import Data.Monoid ((<>))
+import Data.List   (isInfixOf)
 import qualified Data.Map as M
 import Data.Ratio            ((%))
 
@@ -200,7 +202,7 @@ myLayout
     gimp = withIM (0.18) (Role "gimp-toolbox") $
               combineTwoP (reflectHoriz $ TwoPane 0.2 0.2)
                           (simpleTabbed) (defaultLayout) (Role "gimp-dock")
- 
+
 
 
 ------------------------------------------------------------------------
@@ -219,26 +221,26 @@ myManageHook = composeAll $ concat
   [ -- Float dialogs
     [isDialog --> doFloat]
     -- Ignored windows
-  , hookList doIgnore [ (className, "stalonetray")
-                      , (className, "trayer")
-                      , (className, "fbpanel")
-                      , (title,     "plasma-desktop")
+  , hookList doIgnore [ (title,     "plasma-desktop")
                       , (className, "xfce4-panel")
                       , (className, "Xfce4-Panel")
-                      , (className, "Conky")
                       , (className, "lxpanel")
                       ]
     -- Floating windows
-  , hookList doCenterFloat [ (className, "XDosEmu")
-                           , (className, "feh")
+  , hookList doCenterFloat [ (className, "feh")
                            , (resource,  "terminal-float")
-                           , (title,     "VLC (XVideo output)")
                            ]
-  , hookList doMedia [ (className, "MPlayer")
-                     , (className, "mpv")
-                     , (className, "mplayer2")
-                     , (className, "wesnoth")
-                     ]
+  , hookList doMedia       [ (className, "MPlayer")
+                           , (className, "mpv")
+                           , (className, "mplayer2")
+                           , (className, "wesnoth")
+                           ]
+    -- KDiff3
+  , [ (do dialog <- isDialog
+          kdiff  <- className =? "kdiff3"
+          return $! kdiff
+      ) --> (doF (W.greedyView "10" . W.shift "10"))
+    ]
     -- Windows placement hooks
   , hookList (doWorkspace "WWW")     [ (className, "Iceweasel")
                                      , (className, "Firefox-bin")
@@ -254,7 +256,8 @@ myManageHook = composeAll $ concat
                                      ]
   , hookList (doWorkspace "Gimp")    [ (className, "Gimp")
                                      ]
-    -- Scratchpad hook
+  , hookList (doWorkspace "e-Mail")  [ (resource, "Mail")
+                                     ]
   , [ scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3) ]
   ]
   where
