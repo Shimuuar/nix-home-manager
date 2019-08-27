@@ -229,6 +229,7 @@ in
       ${params.X.extraPrograms or ""}
       # Programs
       ${pkgs.firefox}/bin/firefox &
+      ${pkgs.thunderbird}/bin/thunderbird &
       XDG_CURRENT_DESKTOP= ${pkgs.tdesktop}/bin/telegram-desktop &
       # Wallpapers
       while : ; do
