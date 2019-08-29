@@ -76,7 +76,7 @@ line."
   "Find region which contains LANGUAGE pragmas"
   (let* ((find (lambda (n)
 		 (goto-line n)
-		 (if (looking-at "^{-# +LANGUAGE +\\([a-zA-Z0-9]+\\) +#-} *$")
+		 (if (looking-at "^ *{-# +LANGUAGE +\\([a-zA-Z0-9]+\\) +#-} *$")
 		     (funcall find (+ n 1))
 		     (- (point-at-bol) 1))))
 	 (p1 (point-min))
@@ -92,8 +92,10 @@ line."
      (save-excursion
        (save-restriction
 	 (narrow-to-region p1 p2)
-	 (align-regexp   (point-min) (point-max) "\\(\\s-*\\)#-}")
-	 (sort-lines nil (point-min) (point-max))
+	 (replace-regexp "^ +" "")
+	 (align-regexp           (point-min) (point-max) "\\(\\s-*\\)#-}")
+	 (sort-lines nil         (point-min) (point-max))
+	 (delete-duplicate-lines (point-min) (point-max))
 	 )))
     ))
 
