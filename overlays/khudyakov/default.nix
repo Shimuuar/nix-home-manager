@@ -25,6 +25,8 @@ let
       self.mdo
       self.plotly-server
       self.root-plot
+      self.nixtools.ghc
+      self.nixtools.ipython
       ];
     });
   # Python overrides
@@ -56,6 +58,10 @@ in
   arxiv-get      = self.haskellPackages.callPackage ./pkgs/arxiv-get {};
   gittery        = self.haskellPackages.callPackage ./pkgs/gittery   {};
   plotly-server  = self.haskellPackages.callPackage ./pkgs/plotly-server {};
+  nixtools = {
+    ghc     = import ./pkgs/nixtools/ghc.nix     self;
+    ipython = import ./pkgs/nixtools/ipython.nix self;
+  };
   # Override haskell stuff
   python27       = previous.python27.override { packageOverrides = pyOverrides; };
   haskell        = previous.haskell // {
