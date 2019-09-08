@@ -127,6 +127,7 @@ in
       browse-kill-ring
       # Modes
       nix-mode
+      go-mode
       julia-mode
       haskell-mode
       markdown-mode
