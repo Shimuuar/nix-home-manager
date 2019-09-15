@@ -17,3 +17,4 @@ mdo ln -s -- $(ldd * | sed '/=>/!d; s/ (.*//; s/^.*=> //' | sort | uniq)
 mdo ln -s -- $(ls /usr/lib/x86_64-linux-gnu/libdrm_*)
 ln -s /usr/lib/x86_64-linux-gnu/libpciaccess.so.0
 ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+ln -s /lib/x86_64-linux-gnu/libz.so.1
