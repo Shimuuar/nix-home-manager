@@ -169,6 +169,7 @@ in
     [extensions]
     record   =
     hgk      =
+    hggit    =
     color    =
     pager    =
     '';
