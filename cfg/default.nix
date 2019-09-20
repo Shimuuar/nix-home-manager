@@ -128,6 +128,7 @@ in
       # Modes
       nix-mode
       go-mode
+      scala-mode
       julia-mode
       haskell-mode
       markdown-mode
