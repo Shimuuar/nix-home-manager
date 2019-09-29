@@ -71,4 +71,5 @@ in
   };
   # nbstripout fails
   nbstripout     = previous.nbstripout.overrideAttrs (_: { installCheckPhase = ""; });
+  chromium-temp  = import ./pkgs/chromium-temp self;
 }
