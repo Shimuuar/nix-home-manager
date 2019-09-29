@@ -56,6 +56,7 @@ in
     # GUI programs
     arandr
     chromium
+    chromium-temp
     darktable
     djview
     deluge
