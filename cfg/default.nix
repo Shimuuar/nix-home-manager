@@ -13,6 +13,7 @@ in
      ../modules/emacsPkg.nix
      ../modules/xdgUserDirs.nix
      ../modules/gdb.nix
+     ../modules/haskeline.nix
    ];
 
   # Let Home Manager install and manage itself.
@@ -174,6 +175,13 @@ in
     color    =
     pager    =
     '';
+  };
+  # ----
+  programs.haskeline = {
+    enable = true;
+    config = ''
+      historyDuplicates: IgnoreAll
+      '';
   };
   # ----
   programs.gdb = {
