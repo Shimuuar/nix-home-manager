@@ -135,6 +135,7 @@ in
       haskell-mode
       markdown-mode
       yaml-mode
+      kotlin-mode
       # Tools
       magit
     ];
