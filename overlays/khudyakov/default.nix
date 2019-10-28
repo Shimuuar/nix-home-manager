@@ -23,8 +23,9 @@ let
       self.arxiv-get
       self.gittery
       self.mdo
-      self.plotly-server
-      self.root-plot
+      ## servant-websockets is marked as brocken
+      # self.plotly-server
+#      self.root-plot
       self.nixtools.ghc
       self.nixtools.ipython
       ];
@@ -70,6 +71,8 @@ in
       haskOverrides self super;
   };
   # nbstripout fails
-  nbstripout     = previous.nbstripout.overrideAttrs (_: { installCheckPhase = ""; });
+  nbstripout     = previous.nbstripout.overridePythonAttrs (_: {
+    checkPhase = "echo NO_TESTS"; # For some reason setting empty string doesn't work
+  });
   chromium-temp  = import ./pkgs/chromium-temp self;
 }

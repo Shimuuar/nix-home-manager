@@ -98,7 +98,7 @@ in
   ];
 
   #
-  fonts.fontconfig.enableProfileFonts = params.fontconfig or false;
+  fonts.fontconfig.enable = params.fontconfig or false;
   xdgUserDirs = {
     enable      = true;
     desktop     = "$HOME/Desktop";
