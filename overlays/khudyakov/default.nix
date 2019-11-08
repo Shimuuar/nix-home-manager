@@ -23,6 +23,7 @@ let
       self.arxiv-get
       self.gittery
       self.mdo
+      self.colcalc
       ## servant-websockets is marked as brocken
       # self.plotly-server
 #      self.root-plot
@@ -59,6 +60,7 @@ in
   arxiv-get      = self.haskellPackages.callPackage ./pkgs/arxiv-get {};
   gittery        = self.haskellPackages.callPackage ./pkgs/gittery   {};
   plotly-server  = self.haskellPackages.callPackage ./pkgs/plotly-server {};
+  colcalc        = self.callPackage ./pkgs/colcalc {};
   nixtools = {
     ghc     = import ./pkgs/nixtools/ghc.nix     self;
     ipython = import ./pkgs/nixtools/ipython.nix self;
