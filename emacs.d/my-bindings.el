@@ -14,8 +14,6 @@
 ; Close curent buffer
 (global-set-key [f10]            
                 (lambda () (interactive) (kill-buffer (current-buffer))) )
-; Finish editing when acting as server
-(global-set-key [f9] 'server-edit)
 ; Swith to buffer (same as 'C-x b')
 (global-set-key [f12] 'switch-to-buffer)
 ; Call last recorded macro
