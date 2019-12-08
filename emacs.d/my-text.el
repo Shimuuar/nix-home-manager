@@ -17,7 +17,7 @@
   "Swtich between dictionaries"
   (interactive)
   (ispell-change-dictionary (if (string= "ru" ispell-dictionary)
-				"en" "ru")))
+                                "en" "ru")))
 
 
 ;; ================================================================
@@ -57,12 +57,12 @@
   ; Add more known blocks (esp. for beamer)
   (set-variable 'latex-standard-block-names
     (append '("frame" "block" "exampleblock" "alertblock"
-	      "columns" "column" "align" "aligned"
-	      )
-	    latex-standard-block-names
-	    ))
+              "columns" "column" "align" "aligned"
+              )
+            latex-standard-block-names
+            ))
   (set-variable 'latex-block-args-alist
-    (append '(("column" nil ?\{ (skeleton-read "Width: ") ?\})
+    (append '(("column"       nil ?\{ (skeleton-read "Width: ") ?\})
 	      ("block"        nil ?\{ (skeleton-read "Title: ") ?\})
 	      ("exampleblock" nil ?\{ (skeleton-read "Title: ") ?\})
 	      ("alertblock"   nil ?\{ (skeleton-read "Title: ") ?\})
