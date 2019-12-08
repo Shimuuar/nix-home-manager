@@ -13,27 +13,6 @@
     (set-variable 'tex-close-quote  ">>")
     (set-variable 'tex-close-quote  "''")))
 
-(defun my/recode-buffer-safe (target-coding-system)
-  "* Recode buffer as if it were encoded with `target-coding-system'.
-  If current buffer is write-protected (`buffer-read-only'), do nothing."
-  (interactive "zEnter target coding system: ")
-  (unless buffer-read-only
-    (encode-coding-region (point-min)
-                          (point-max)
-                          buffer-file-coding-system)
-    (decode-coding-region (point-min)
-                          (point-max)
-                          target-coding-system)
-    (set-buffer-file-coding-system target-coding-system)))
-
-(defun my/change-encoding (actual-encoding) 
-  "Sets file encoding
-  I'm not sure that it would work as intended everywhere, but it work at least"
-  (interactive "zEnter file encoding: ")
-  (recode-region (point-min) (point-max)
-                 actual-encoding buffer-file-coding-system)
-  (set-buffer-file-coding-system actual-encoding))
-
 (defun my/switch-dict ()
   "Swtich between dictionaries"
   (interactive)
