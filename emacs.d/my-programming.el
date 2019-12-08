@@ -146,14 +146,6 @@ line."
 ;; Define hooks
 ;; =========================================================
 
-(defun my/c-indent-hook()
-  "Allow to change indentation "
-  (local-set-key (kbd "C-c C-<tab>") (lambda () (interactive)
-				       (c-set-style "bsd-tab")))
-  (local-set-key (kbd "C-c C-SPC")   (lambda () (interactive)
-				       (c-set-style "bsd-ws")))
-  )
-
 (defun my/indent-hook()
   "Make new lines indented"
   (local-set-key (kbd "RET") 'newline-and-indent))
@@ -296,14 +288,12 @@ line."
 ;; C hooks
 (my/add-hook-list 'c-mode-hook
   '(my/indent-hook
-    my/c-indent-hook
     my/make-hook
     my/comment-hooks
     my/folding-hooks))
 ;; C++ hooks
 (my/add-hook-list 'c++-mode-hook
   '(my/indent-hook
-    my/c-indent-hook
     my/make-hook
     my/comment-hooks
     my/folding-hooks))
