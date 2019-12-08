@@ -20,10 +20,11 @@
 (require 'my-abbrevs)
 (require 'my-bindings)
 (require 'my-appearance)
-
+; Mode tweaks
 (require 'mod-hledger-mode)
 (require 'mod-org-mode)
 (require 'mod-c-mode)
+(require 'mod-haskell-mode)
 ; Require local modification (if any)
 (require 'my-local "my-local.el" t)
 (require 'my-extra "my-extra.el" t)
