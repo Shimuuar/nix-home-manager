@@ -14,6 +14,7 @@
 
 ; Load files
 (require 'my-generic)
+(require 'my-hooks)
 (require 'my-text)
 (require 'my-programming)
 (require 'my-abbrevs)
@@ -22,6 +23,7 @@
 
 (require 'mod-hledger-mode)
 (require 'mod-org-mode)
+(require 'mod-c-mode)
 ; Require local modification (if any)
 (require 'my-local "my-local.el" t)
 (require 'my-extra "my-extra.el" t)

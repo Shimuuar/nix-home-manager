@@ -1,0 +1,34 @@
+;;;
+;;; Alexey Khudyakov
+;;;
+;;; Generic hooks for various modes
+
+
+(defun my/hook/indent()
+  "RET inserts newline and indents"
+  (local-set-key (kbd "RET") 'newline-and-indent))
+
+(defun my/hook/comment()
+  "Commenting/uncommenting fullr regions of code"
+  (local-set-key (kbd "C-c C-v") 'my/comment-or-uncomment)
+  )
+
+(defun my/hook/flyspell()
+  "Enable spellchecking in comments"
+  (flyspell-prog-mode)
+  )
+
+(defun my/hook/folding()
+  "Hook for code folding"
+  (hs-minor-mode t)
+  (local-set-key (kbd "C-S-<left>" ) 'hs-hide-block)
+  (local-set-key (kbd "C-S-<right>") 'hs-show-block)
+  )
+
+(defun my/hook/make()
+  "Add quick binding for running make"
+  (local-set-key [f8] (lambda () (interactive)
+			(compile "make -k")))
+  )
+
+(provide 'my-hooks)

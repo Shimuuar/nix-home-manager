@@ -6,42 +6,6 @@
 ;; =========================================================
 ;; Useful functions
 ;; =========================================================
-(defun my/insert-guard(title)
-  "Insert C/C++ header guards quickly"
-  (interactive "sType guard name: ")
-  (insert "#ifndef " title
-          "\n#define " title
-          "\n\n#endif /* " title " */\n" ))
-
-(defun my/insert-c-template(foo)
-  "Insert C program template"
-  (interactive "i")
-  (insert
-"
-#include <stdlib.h>
-#include <stdio.h>
-
-
-int main(int argc, char** argv)
-{
-    return 0;
-}
-"))
-
-(defun my/insert-c++-template(foo)
-  "Insert C program template"
-  (interactive "i")
-  (insert
-"
-#include <iostream>
-
-
-int main(int argc, char** argv)
-{
-    return 0;
-}
-"))
-
 (defun my/haskell-insert-inline ()
   "Insert INLINE pragma. It inserts pragma in directly above the
 line."
@@ -114,54 +78,6 @@ line."
 (setq show-paren-style 'mixed) ; Highlight whole expression if it's not fully visible
 
 
-
-;; ===============================================
-;; Indentation
-;; ===============================================
-; Could be set with c-set-style
-(defconst my/c-tab-style
-  '( "bsd"
-	(indent-tabs-mode . t)
-	(tab-width        . 4)
-	(c-basic-offset   . 4)
- 	(c-echo-syntactic-information-p . t)
- 	)
-  )
-(defconst my/c-ws-style
-  '( "bsd"
-	(indent-tabs-mode . nil)
-	(tab-width        . 4)
-	(c-basic-offset   . 4)
- 	(c-echo-syntactic-information-p . t)
- 	)
-  )
-
-(c-add-style "bsd-tab" my/c-tab-style)
-(c-add-style "bsd-ws"  my/c-ws-style)
-(setq c-default-style "bsd-ws")
-
-
-
-;; ========================================================
-;; Define hooks
-;; =========================================================
-
-(defun my/indent-hook()
-  "Make new lines indented"
-  (local-set-key (kbd "RET") 'newline-and-indent))
-
-(defun my/folding-hooks()
-  "Hook for code folding"
-  (hs-minor-mode t)
-  (local-set-key (kbd "C-S-<left>" ) 'hs-hide-block)
-  (local-set-key (kbd "C-S-<right>") 'hs-show-block)
-  )
-
-(defun my/comment-hooks ()
-  "Hooks for commenting"
-  (local-set-key (kbd "C-c C-v") 'my/comment-or-uncomment)
-  (flyspell-prog-mode)
-  )
 
 ;; ================================================================
 ;; Flycheck hooks
@@ -268,9 +184,9 @@ line."
   "Python hooks"
   (abbrev-mode t)
   (my/try-flycheck)
-  (my/indent-hook)
-  (my/folding-hooks)
-  (my/comment-hooks)
+  (my/hook/indent)
+  (my/hook/folding)
+  (my/hook/comment)
   ; Python specific hooks
   (setq tab-width        4  )		; Override tab width
   (setq indent-tabs-mode nil)		; Use spaces for indent
@@ -285,44 +201,28 @@ line."
 ;; ================================================================
 ;; Set up hooks
 ;; ================================================================
-;; C hooks
-(my/add-hook-list 'c-mode-hook
-  '(my/indent-hook
-    my/make-hook
-    my/comment-hooks
-    my/folding-hooks))
-;; C++ hooks
-(my/add-hook-list 'c++-mode-hook
-  '(my/indent-hook
-    my/make-hook
-    my/comment-hooks
-    my/folding-hooks))
 ;; Shell hooks
 (add-hook 'sh-mode-hook (lambda ()
-  (my/indent-hook)
+  (my/hook/indent)
   (my/insert-if-empty "#!/bin/sh\n\n")
   ))
 ;; Lisp hooks
 (add-hook 'lisp-mode-hook (lambda ()
-  (my/indent-hook)
-  (my/comment-hooks)
+  (my/hook/indent)
+  (my/hook/comment)
   ))
 ;; Elisp hooks
 (add-hook 'emacs-lisp-mode-hook (lambda ()
-  (my/indent-hook)
-  (my/comment-hooks)
+  (my/hook/indent)
+  (my/hook/comment)
   ))
 ;; JavaScript hooks
 (add-hook 'js-mode-hook (lambda ()
-  (my/indent-hook)
-  (my/comment-hooks)
-  (my/folding-hooks)
-  (setq js-indent-level 2)
+  (my/hook/indent)
+  (my/hook/comment)
+  (my/hook/folding)
+  (setq js-indent-level  2)
   (setq indent-tabs-mode nil)
   ))
-;; Elm hooks
-(add-hook 'elm-mode-hook (lambda ()
-  (my/comment-hooks)
-  (setq indent-tabs-mode nil)
-  ))
+
 (provide 'my-programming)
