@@ -111,15 +111,3 @@
 (add-hook 'text-mode-hook  'my/base-text-hooks)
 
 (provide 'my-text)
-
-
-;; =========================================================
-;; org-mode
-;; =========================================================
-(setq org-todo-keywords
-      '((sequence "TODO" "PROG" "RC" "BLOCKED" "|" "DONE" "DROPPED")))
-; Support for mobile
-(setq org-mobile-directory      "~/Dropbox/org-mode")
-(setq org-directory             "~/work/tracker")
-(setq org-mobile-inbox-for-pull "~/work/tracker/flagged.org")
-(setq org-mobile-files          '("todo.org" "etc.org"))

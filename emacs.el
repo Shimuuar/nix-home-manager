@@ -21,14 +21,7 @@
 (require 'my-appearance)
 
 (require 'mod-hledger-mode)
+(require 'mod-org-mode)
 ; Require local modification (if any)
 (require 'my-local "my-local.el" t)
 (require 'my-extra "my-extra.el" t)
-
-;; FIXME: is this a right way?
-(custom-set-variables
-  '(safe-local-variable-values
-   (quote
-    ((org-todo-keyword-faces
-      ("BLOCKED" . "red")
-      ("RC" . "yellow"))))))
