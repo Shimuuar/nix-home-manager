@@ -19,6 +19,8 @@
 (require 'my-abbrevs)
 (require 'my-bindings)
 (require 'my-appearance)
+
+(require 'mod-hledger-mode)
 ; Require local modification (if any)
 (require 'my-local "my-local.el" t)
 (require 'my-extra "my-extra.el" t)
