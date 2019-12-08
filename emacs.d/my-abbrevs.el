@@ -30,59 +30,6 @@
     ))
 ;; =================
 
-;; =========================================================
-;; Haskell abbreviations
-;; =========================================================
-(define-skeleton my/skel-haskell-LANG
-  "Skeleton for haskell LANGUAGE pragma"
-  ""
-  "{-# LANGUAGE "
-  (completing-read "Language extension: " my/haskell-language-pragmas)
-  " #-}" 
-  )
-(define-skeleton my/skel-haskell-OPTGCH
-  "Skeleton for haskell OPTIONS_GHC pragma"
-  ""
-  "{-# OPTIONS_GHC "
-  (completing-read "Command line: " my/haskell-ghc-options)
-  " #-}" 
-  )
-(define-skeleton my/skel-haskell-import
-  "Skeleton for common haskell imports"
-  ""
-  "import "
-  (completing-read "Import module: "
-		   '("Control.Applicative"
-		     "Control.Arrow"
-		     "Control.Exception"
-		     "Control.Monad"
-		     "Control.Monad.Error"
-		     "Control.Monad.Reader"
-		     "Control.Monad.State"
-		     "Control.Monad.Trans"
-		     "Control.Monad.Writer"
-		     "Data.Accesor"
-		     "Data.Accesor.Template"
-		     "Data.Default"
-		     "Data.List"
-		     "Data.Maybe"
-		     "Data.Monoid"
-		     "Language.Haskell.TH"
-		     "Prelude"
-		     "System"
-		     "System.Directory"
-		     "System.IO"
-		     "System.Process"
-		     "Text.Printf"
-		     ; Modules which usually imported qualified
-		     "qualified Data.Map as Map"
-		     "qualified Data.IntMap as IntMap"
-		     "qualified Data.Set as Set"
-		     "qualified Data.ByteString"
-		     "qualified Data.ByteString.Lazy"
-		     )))
-
-
 (define-abbrev-table 'haskell-mode-abbrev-table
   '(
     ; Import
