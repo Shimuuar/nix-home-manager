@@ -25,6 +25,7 @@
 (require 'mod-org-mode)
 (require 'mod-c-mode)
 (require 'mod-haskell-mode)
+(require 'mod-latex-mode)
 ; Require local modification (if any)
 (require 'my-local "my-local.el" t)
 (require 'my-extra "my-extra.el" t)

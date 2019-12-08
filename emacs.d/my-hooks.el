@@ -31,4 +31,11 @@
 			(compile "make -k")))
   )
 
+(defun my/hook/base-text()
+  "Common hooks for text mode"
+  (auto-fill-mode  1 )
+  (set-fill-column 80)
+  (flyspell-mode   t )
+  )
+
 (provide 'my-hooks)
