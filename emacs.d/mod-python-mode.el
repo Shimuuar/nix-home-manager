@@ -1,9 +1,6 @@
-;;;
 ;;; Alexey Khudyakov
-;;; Abbreviations
 ;;;
-
-;; =================
+;;; Tweaks for python-mode
 
 
 ;; =========================================================
@@ -21,7 +18,7 @@
 
 (define-abbrev-table 'python-mode-abbrev-table
   '(
-    ; import clause  
+    ; import clause
     ("imp"   "import" nil 0)
     ("impa"  ""       my/skel-python-import-list 0)
     ("ra"    ""       my/skel-python-range       0)
@@ -46,4 +43,8 @@
     ("ghc_opt" ""              my/skel-haskell-OPTGCH 0)
     ))
 
-(provide 'my-abbrevs)
+
+
+(provide 'mod-python-mode)
+
+
