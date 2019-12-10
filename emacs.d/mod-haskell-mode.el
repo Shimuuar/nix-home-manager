@@ -182,7 +182,7 @@ line."
     "Hooks specific to haskell"
     (turn-on-haskell-indentation)
     ;; generic part
-    (my/comment-hooks)
+    (my/hook/comment)
     (abbrev-mode t)
     (interactive-haskell-mode)
     ;; Rename buffer on import.
