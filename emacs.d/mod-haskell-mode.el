@@ -127,7 +127,11 @@ line."
   (define-key haskell-mode-map (kbd "M-]") 'haskell-navigate-imports-return)
   ;; PRAGMAS
   (define-key haskell-mode-map (kbd "C-c i i") 'my/haskell-insert-inline)
-  (define-key haskell-mode-map (kbd "C-c i l") 'my/haskell-insert-language-pragma)
+  (define-key haskell-mode-map (kbd "C-c i l")
+    (lambda () (interactive)
+      (progn
+	(my/haskell-insert-language-pragma)
+	(my/haskell-align-language-pragmas))))
   (define-key haskell-mode-map (kbd "C-c i a") 'my/haskell-align-language-pragmas)
   (define-key haskell-mode-map (kbd "C-c i m") 'my/haskell-insert-module-stub)
   ;; Remove unneeded keybindings
