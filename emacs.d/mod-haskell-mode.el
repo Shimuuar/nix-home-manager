@@ -28,12 +28,13 @@ line."
 (defun my/haskell-insert-language-pragma()
   "Insert LANGUAGE pragmas at top of the file"
   (interactive)
-  (save-excursion
-    (beginning-of-buffer)
-    (insert "{-# LANGUAGE ")
-    (insert (completing-read "Language extension: " my/haskell-language-pragmas))
-    (insert " #-}\n")
-    ))
+  (atomic-change-group
+    (save-excursion
+      (beginning-of-buffer)
+      (insert "{-# LANGUAGE ")
+      (insert (completing-read "Language extension: " my/haskell-language-pragmas))
+      (insert " #-}\n")
+      )))
 
 (defun my/haskell-find-pragma-region()
   "Find region which contains LANGUAGE pragmas"
