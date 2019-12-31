@@ -156,16 +156,15 @@ in
     userName    = "Alexey Khudyakov";
     userEmail   = "alexey.skladnoy@gmail.com";
     package     = pkgs.gitAndTools.gitFull;
-    extraConfig = ''
-      [filter "nbstripout"]
-        clean    = ${pkgs.nbstripout}/bin/nbstripout
-        smudge   = cat
-        required
-      [merge]
-        tool = kdiff3
-      [mergetool "kdiff3"]
-        path = ${pkgs.kdiff3}/bin/kdiff3
-      '';
+    extraConfig = {
+      merge             = { tool = "kdiff"; };
+      mergetool.kdiff3  = { path = "${pkgs.kdiff3}/bin/kdiff3"; };
+      filter.nbstripout = {
+        clean    = "${pkgs.nbstripout}/bin/nbstripout";
+        smudge   = "cat";
+        required = true;
+      };
+    };
   };
   # ----
   programs.mercurial = {
