@@ -130,15 +130,15 @@ in
       undo-tree
       browse-kill-ring
       # Modes
-      nix-mode
       go-mode
-      scala-mode
-      julia-mode
       haskell-mode
-      markdown-mode
-      yaml-mode
-      kotlin-mode
       hledger-mode
+      julia-mode
+      kotlin-mode
+      markdown-mode
+      nix-mode
+      scala-mode
+      yaml-mode
       # Tools
       magit
     ];
