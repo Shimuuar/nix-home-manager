@@ -44,6 +44,8 @@ in
     sqlite
     sshfs
     zip
+    hledger
+    hledger-ui
     # Devtools
     pypi2nix
     rr
@@ -136,6 +138,7 @@ in
       markdown-mode
       yaml-mode
       kotlin-mode
+      hledger-mode
       # Tools
       magit
     ];
