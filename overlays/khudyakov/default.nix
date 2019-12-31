@@ -47,8 +47,6 @@ let
   };
   # Extra emacs packages
   emacsPkg = {
-    polymode  = self.callPackage ./pkgs/emacsPkg/polymode.nix {};
-    tla-tools = self.callPackage ./pkgs/emacsPkg/tla-tools.nix {};
   };
 in
 {

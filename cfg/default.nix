@@ -146,8 +146,6 @@ in
   programs.emacsPkg = {
     enable   = true;
     packages = [
-      pkgs.emacsPkg.polymode
-      pkgs.emacsPkg.tla-tools
     ];
   };
   # ----
