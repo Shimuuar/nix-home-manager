@@ -17,6 +17,7 @@ let
       self.haskellPackages.weeder
       self.haskellPackages.graphmod
       self.haskellPackages.hasktags
+      self.haskellPackages.ghc-prof-flamegraph
       self.hlint
       self.cabal2nix
       # My programs
@@ -41,6 +42,8 @@ let
   haskOverrides = self: super: {
     spiderment    = self.callPackage ./pkgs/haskell/spiderment.nix {};
     comic-scraper = self.callPackage ./pkgs/haskell/comic-scraper  {};
+    #
+    ghc-prof-flamegraph = self.callPackage ./pkgs/haskell/ghc-prof-flamegraph.nix {};
   };
   # Extra emacs packages
   emacsPkg = {
