@@ -20,7 +20,14 @@ in
   programs.home-manager.enable = true;
   # Generic list of programs
   home.packages = with pkgs; [
-    khudyakovEnv
+    # ----------------
+    # My utils
+    arxiv-get
+    gittery
+    mdo
+    colcalc
+    root-plot
+    # ---------------- 
     # CLI utils
     ag
     crudini
@@ -46,15 +53,30 @@ in
     zip
     hledger
     hledger-ui
+    # ----------------
     # Devtools
     pypi2nix
     rr
+    gcc
+    # ----------------
+    # Haskell tools
+    cabal-install
+    cabal2nix
+    ghc
+    haskellPackages.ghc-prof-flamegraph
+    haskellPackages.graphmod
     haskellPackages.hasktags
+    haskellPackages.hasktags
+    haskellPackages.stack
+    haskellPackages.weeder
+    hlint
+    # ----------------
     # Window magament
     dmenu
     xdotool
     wmctrl
     spectacle
+    # ----------------
     # GUI programs
     arandr
     chromium
@@ -72,6 +94,7 @@ in
     wireshark
     xournal
     xterm
+    # ----------------
     # KDE
     breeze-icons
     hicolor-icon-theme
@@ -89,10 +112,12 @@ in
     plasma5.oxygen
     plasma5.plasma-integration
     plasma5.oxygen
+    # ----------------
     # media
     feh
     mpv
     pavucontrol
+    # ----------------
     # Fonts
     unifont
     terminus_font

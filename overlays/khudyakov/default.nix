@@ -1,37 +1,5 @@
 self: previous:
 let
-  #
-  khudyakovEnv = self.lib.lowPrio( self.buildEnv {
-    name             = "khudyakov-env";
-    ignoreCollisions = true;
-    paths = [
-      # GCC
-      self.gcc
-      # GHC
-      self.haskell.compiler.ghc864
-      self.haskell.compiler.ghc844
-      self.haskell.compiler.ghc822
-      # Other haskell utils
-      self.cabal-install
-      self.haskellPackages.stack
-      self.haskellPackages.weeder
-      self.haskellPackages.graphmod
-      self.haskellPackages.hasktags
-      self.haskellPackages.ghc-prof-flamegraph
-      self.hlint
-      self.cabal2nix
-      # My programs
-      self.arxiv-get
-      self.gittery
-      self.mdo
-      self.colcalc
-      ## servant-websockets is marked as brocken
-      # self.plotly-server
-#      self.root-plot
-      self.nixtools.ghc
-      self.nixtools.ipython
-      ];
-    });
   # Python overrides
   pyOverrides = self: super: {
     pytest-cram = super.pytest-cram.overridePythonAttrs (old: {
@@ -51,7 +19,6 @@ let
 in
 {
   # Fetchall package
-  inherit khudyakovEnv;
   inherit emacsPkg;
   # Additional programs & tools
   drone-cli-110  = self.callPackage ./pkgs/drone-cli {};
