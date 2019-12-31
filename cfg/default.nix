@@ -32,27 +32,28 @@ in
     ag
     crudini
     diffstat
-    fortune
     enca
+    fortune
     ghostscript
     gnupg
     graphviz
-    htop
     haskellPackages.git-annex
+    hledger
+    hledger-ui
+    htop
     imagemagick
     jq
     mercurial
+    p7zip
+    pdfgrep
     pdftk
     postgresql
-    pdfgrep
     python3Packages.ipython
     rlwrap
-    sysstat
     sqlite
     sshfs
+    sysstat
     zip
-    hledger
-    hledger-ui
     # ----------------
     # Devtools
     pypi2nix
