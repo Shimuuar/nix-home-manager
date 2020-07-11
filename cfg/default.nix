@@ -31,6 +31,7 @@ in
     # CLI utils
     ag
     crudini
+    convmv
     diffstat
     enca
     fortune
@@ -42,12 +43,13 @@ in
     hledger-ui
     htop
     imagemagick
+    lz4
     jq
     mercurial
     p7zip
     pdfgrep
     pdftk
-    postgresql
+    postgresql_12
     python3Packages.ipython
     rlwrap
     sqlite
@@ -94,11 +96,13 @@ in
     thunderbird
     wireshark
     xournal
+    xorg.xkill
     xterm
     # ----------------
     # KDE
     breeze-icons
     hicolor-icon-theme
+    kcharselect
     kdeApplications.dolphin
     kdeApplications.dolphin-plugins
     kdeApplications.kate
