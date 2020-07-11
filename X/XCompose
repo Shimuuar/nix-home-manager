@@ -71,6 +71,11 @@
 # Logical relations
 <Multi_key> <asciitilde> <asciitilde>   : "≈" U2248 # ALMOST EQUAL TO, TildeTilde
 <Multi_key> <i> <n>                     : "∈" U2208 # ELEMENT OF
+<Multi_key> <backslash> <i> <n>         : "∉" U2209 # NOT AN ELEMENT OF
+<Multi_key> <s> <u> <b>                 : "⊂" U2282 # SUBSET OF
+<Multi_key> <backslash> <s> <u> <b>     : "⊄" U2284 # NOT A SUBSET OF
+<Multi_key> <s> <u> <equal>             : "⊆" U2286 # SUBSET OF OR EQUAL TO
+
 <Multi_key> <comma> <minus>      	: "¬"   notsign # NOT SIGN
 <Multi_key> <minus> <comma>      	: "¬"   notsign # NOT SIGN
 <Multi_key> <equal> <slash>             : "≠"   U2260 # NOT EQUAL TO
@@ -88,8 +93,14 @@
 <Multi_key> <slash> <0>                 : "∅" U2205 # empty set
 <Multi_key> <A> <A>                     : "∀" U2200 # forall
 <Multi_key> <E> <E>                     : "∃" U2203 # there exists
+<Multi_key> <slash> <E> <E>             : "∄" U2204 # THERE DOES NOT EXIST
 <Multi_key> <bar> <underscore>          : "⊥" U22A5 # UP TACK (bottom)
 <Multi_key> <underscore> <bar>          : "⊥" U22A5 # UP TACK (bottom)
+<Multi_key> <N> <N>                     : "ℕ" U2115 # DOUBLE-STRUCK CAPITAL N
+<Multi_key> <Z> <Z>                     : "ℤ" U2124 # DOUBLE-STRUCK CAPITAL Z
+<Multi_key> <Q> <Q>                     : "ℚ" U211A # DOUBLE-STRUCK CAPITAL Q
+<Multi_key> <R> <R>                     : "ℝ" U211D # DOUBLE-STRUCK CAPITAL R
+<Multi_key> <C> <C>                     : "ℂ" U2102 # DOUBLE-STRUCK CAPITAL C
 # Plus minus & other 
 <Multi_key> <plus> <minus>       	: "±"   plusminus # PLUS-MINUS SIGN
 <Multi_key> <minus> <plus>       	: "±"   plusminus # PLUS-MINUS SIGN
