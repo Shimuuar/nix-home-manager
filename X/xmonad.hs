@@ -79,6 +79,7 @@ myKeys conf =
             , ("x", "Media")
             , ("g", "Gimp")
             , ("m", "e-Mail")
+            , ("k", "gitk")
             ] >>= makeShiftPair ""
       )
       -- Quit XMonad
@@ -190,6 +191,7 @@ myLayout
   $ avoidStruts
   $ onWorkspace "Media"   (noBorders Full)
   $ onWorkspace "IM"      Full
+  $ onWorkspace "gitk"    Full
   $ onWorkspace "Gimp"    gimp
   $ defaultLayout
   where
@@ -258,6 +260,8 @@ myManageHook = composeAll $ concat
                                      ]
   , hookList (doWorkspace "e-Mail")  [ (resource, "Mail")
                                      ]
+  , hookList (doWorkspace "gitk")    [ (className, "Gitk")
+                                     ]
   , [ scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3) ]
   ]
   where
@@ -289,7 +293,7 @@ myConfig = def
   , focusFollowsMouse  = True
   , borderWidth        = 1
   , workspaces         = (map show [1..10]) ++
-                         ["WWW","IM","Torrent","Media","Gimp","e-Mail"]
+                         ["WWW","IM","Torrent","Media","Gimp","e-Mail","gitk"]
   , normalBorderColor  = "#dddddd"
   , focusedBorderColor = "#ff0000"
     -- key bindings
