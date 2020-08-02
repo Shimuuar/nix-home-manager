@@ -2,9 +2,10 @@ params:
 { config, pkgs, ... }:
 let
   # Repository with config files
-  cfg = pkgs.fetchhg {
-    url = "https://bitbucket.org/Shimuuar/config";
-    rev = "0295f6eb89384a3680bf1e16a84dee697e4aac35";
+  cfg = builtins.fetchGit {
+    url = "https://github.com/Shimuuar/config.git";
+    ref = "master";
+    rev = "7882b23a44f67b39cfaf8f36ccc5384e9ba8b799";
   };
 in
 {
@@ -219,6 +220,7 @@ in
   programs.gdb = {
     enable  = true;
     gdbinit = ''
+      set auto-load safe-path /
       set disassembly-flavor intel
 
       define ghcR1
