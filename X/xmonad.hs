@@ -236,6 +236,7 @@ myManageHook = composeAll $ concat
                            , (className, "mpv")
                            , (className, "mplayer2")
                            , (className, "wesnoth")
+                           , (className, "Steam")
                            ]
     -- KDiff3
   , [ (do dialog <- isDialog
