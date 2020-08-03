@@ -31,6 +31,8 @@ line."
   (atomic-change-group
     (save-excursion
       (beginning-of-buffer)
+      (search-forward "{-# LANGUAGE" nil t)
+      (move-beginning-of-line nil)
       (insert "{-# LANGUAGE ")
       (insert (completing-read "Language extension: " my/haskell-language-pragmas))
       (insert " #-}\n")
