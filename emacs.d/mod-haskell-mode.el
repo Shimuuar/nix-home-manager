@@ -129,8 +129,9 @@ line."
   (define-key haskell-mode-map (kbd "C-c i l")
     (lambda () (interactive)
       (progn
-	(my/haskell-insert-language-pragma)
-	(my/haskell-align-language-pragmas))))
+	(atomic-change-group
+	  (my/haskell-insert-language-pragma)
+	  (my/haskell-align-language-pragmas)))))
   (define-key haskell-mode-map (kbd "C-c i a") 'my/haskell-align-language-pragmas)
   (define-key haskell-mode-map (kbd "C-c i m") 'my/haskell-insert-module-stub)
   ;; Remove unneeded keybindings
