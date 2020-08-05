@@ -38,22 +38,18 @@ line."
       (insert " #-}\n")
       )))
 
-(defun my/haskell-find-pragma-region()
+(defun my/haskell-find-pragma-region(str)
   "Find region which contains LANGUAGE pragmas"
-  (let* ((find (lambda (n)
-		 (goto-line n)
-		 (if (looking-at "^ *{-# +LANGUAGE +\\([a-zA-Z0-9]+\\) +#-} *$")
-		     (funcall find (+ n 1))
-		     (- (point-at-bol) 1))))
-	 (p1 (point-min))
-	 (p2 (save-excursion (funcall find 1)))
-	 )
-    (cons p1 p2)))
+  (save-match-data
+    (let ((p1 (string-match "\\(^ *{-# +LANGUAGE +\\([a-zA-Z0-9]+\\) +#-} *\n\\)+" str))
+	  (p2 (match-end 0))
+	  )
+      (if p1 (cons p1 p2) nil))))
 
 (defun my/haskell-align-language-pragmas()
   "Align and sort language pragmas"
   (interactive)
-  (pcase (my/haskell-find-pragma-region)
+  (pcase (my/haskell-find-pragma-region (buffer-string))
     (`(,p1 . ,p2)
      (save-excursion
        (save-restriction
