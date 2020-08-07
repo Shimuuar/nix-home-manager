@@ -53,7 +53,7 @@ line."
     (`(,p1 . ,p2)
      (save-excursion
        (save-restriction
-	 (narrow-to-region p1 p2)
+	 (narrow-to-region (if (= 0 p1) 1 p1) p2)
 	 (replace-regexp "^ +" "")
 	 (align-regexp           (point-min) (point-max) "\\(\\s-*\\)#-}")
 	 (sort-lines nil         (point-min) (point-max))
