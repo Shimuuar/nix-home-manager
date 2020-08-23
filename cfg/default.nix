@@ -5,7 +5,7 @@ let
   cfg = builtins.fetchGit {
     url = "https://github.com/Shimuuar/config.git";
     ref = "master";
-    rev = "7882b23a44f67b39cfaf8f36ccc5384e9ba8b799";
+    rev = "ec750c063ccaac7a1a0d4a7bc88af44cd8ab0986";
   };
 in
 {
