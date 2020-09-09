@@ -1,9 +1,10 @@
-{stdenv, fetchhg}:
+{stdenv}:
 stdenv.mkDerivation {
   name = "mdo-0.1";
-  src  = fetchhg {
-    url = "https://bitbucket.org/Shimuuar/config";
-    rev = "b473cc39777675e45fc32f5b0f28ac99f6113c20";
+  src  = builtins.fetchGit {
+    url = "https://github.com/Shimuuar/config.git";
+    ref = "master";
+    rev = "ec750c063ccaac7a1a0d4a7bc88af44cd8ab0986";
   };
   builder = ./builder.sh;
 }
