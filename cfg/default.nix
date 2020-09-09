@@ -26,7 +26,7 @@ in
     arxiv-get
     gittery
     mdo
-    colcalc
+    # colcalc
     root-plot
     # ---------------- 
     # CLI utils

@@ -28,7 +28,7 @@ in
   arxiv-get      = self.haskellPackages.callPackage ./pkgs/arxiv-get {};
   gittery        = self.haskellPackages.callPackage ./pkgs/gittery   {};
   plotly-server  = self.haskellPackages.callPackage ./pkgs/plotly-server {};
-  colcalc        = self.callPackage ./pkgs/colcalc {};
+  # colcalc        = self.callPackage ./pkgs/colcalc {};
   nixtools = {
     ghc     = import ./pkgs/nixtools/ghc.nix     self;
     ipython = import ./pkgs/nixtools/ipython.nix self;
