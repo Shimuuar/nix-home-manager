@@ -1,0 +1,91 @@
+#!/usr/bin/python
+"""
+"""
+
+import ConfigParser
+import sys
+import os
+from   os.path import expanduser
+import subprocess
+
+def system(*args) :
+    "Replacement for os.sysem calls"
+    p = subprocess.Popen(args)
+    return os.waitpid(p.pid, 0)[1]
+
+def readConfig() :
+    "Read config file"
+    # Read configuration file
+    config = ConfigParser.ConfigParser()
+    config.read(
+        expanduser( os.getenv("XDG_CONFIG","~/.config") + "/sshfsmount.conf" ))
+    # Parse sections
+    hosts = dict( [ (section, dict(config.items(section)))
+                    for section in config.sections() ] )
+    for key in hosts.keys() :
+        if not hosts[key].has_key('fs') :
+            print>>sys.stderr, "No mountpoint in config file"
+            sys.exit(1)
+        hosts[key]['fs']    = expanduser( hosts[key]['fs'] )
+        hosts[key]['flags'] = hosts[key].get('flags','').split()
+    return hosts
+
+def readMtab() :
+    "Read mtab and returns list of mounted devices"
+    return set( [ x.split()[0]
+                  for x in open('/etc/mtab').readlines() ]
+                )
+
+def runZenity(hosts, mtab) :
+    "Run zenity and return host to perform action on"
+    hostlist = [ ('[+] ' if x in mtab else '[ ] ') + x
+                 for x in hosts.keys() ]
+    zenity   = subprocess.Popen(['zenity','--list','--column','Remote host'] + hostlist,
+                                stdout = subprocess.PIPE)
+    hostname,_ = zenity.communicate()
+    return hostname[4:].strip()
+
+################################################################
+
+def help() :
+    print "sshmount - script for mounting/umounting sshfs"
+    print "    Usage: sshfs [-flags]"
+    print "        no flags - run interactively"
+    print "        -u       - umount all"
+    sys.exit(1)
+
+def interactive(hosts, mtab) :
+    "Mount/umount interacevely"
+    hostname = runZenity(hosts, mtab)
+    if not hostname :
+        sys.exit(0)
+    elif hostname in mtab :
+        os.execvp('fusermount', ['fusermount', '-u', hosts[hostname]['fs']])
+    else :
+        os.execvp('sshfs', ['sshfs', hostname, hosts[hostname]['fs']] + hosts[hostname]['flags'])
+
+def umountAll(hosts, mtab) :
+    "umount all filesystems"
+    for h in hosts.keys() :
+        if h in mtab :
+            system('fusermount','-u', hosts[h]['fs'])
+
+def listMounted(hosts, mtab) :
+    "List all mounted fs"
+    for h in hosts.keys() :
+        if h in mtab :
+            print hosts[h]['fs']
+################################################################
+
+hosts = readConfig() # Get config
+mtab  = readMtab()   # Read mtab
+a = sys.argv[1:]
+
+if   a == [] :
+    interactive(hosts, mtab)
+elif a == ['-u'] :
+    umountAll(hosts, mtab)
+elif a == ['-l'] :
+    listMounted(hosts, mtab)
+else :
+    help()

@@ -1,0 +1,87 @@
+#!/bin/bash
+
+## ================================================================
+## Set up X.org
+## ================================================================
+# Disable audible bell
+export XDG_CURRENT_DESKTOP=kde
+export PATH=$HOME/opt/bin:$PATH
+xset -b
+# Host-specific options
+case $(hostname) in
+    manannan)
+	xrandr --output HDMI-A-1 --auto --output DVI-D-0 --auto --left-of HDMI-A-1
+	x-set-keyboard menu
+	;;
+    aengus)
+	x-set-keyboard ralt
+	;;
+    *)
+	x-set-keyboard menu
+esac
+
+[ -f ~/.Xresources ] && xrdb ~/.Xresources # Read resources
+[ -f ~/.Xmodmap    ] && xmodmap ~/.Xmodmap # read modmaps
+
+# Cleanup resources
+rm -rf .macromedia/*
+
+## ================================================================
+## Set input methods
+## ================================================================
+export GTK_IM_MODULE=xim
+
+## ================================================================
+## Run session programs
+## ================================================================
+killall gpg-agent
+eval $(gpg-agent --daemon)
+which mpdscribble   && mpdscribble --conf ~/.mpdscribble/mpdscribble
+which conky         && exec conky   &
+which xscreensaver  && exec xscreensaver -no-splash &
+which xss-lock      && exec xss-lock -- xscreensaver-command -lock &
+if which lxpanel; then
+    exec lxpanel &
+elif which tint2; then
+    exec tint2 &
+elif which xmobar; then
+    exec xmobar &
+fi
+
+
+## ================================================================
+## Wallpaper
+## ================================================================
+while : ; do
+    set-random-wallpaper
+    sleep 1800
+done &
+
+## ================================================================
+## Run window manager
+## ================================================================
+xmonad &
+XMONAD_PID=$!
+
+
+## ================================================================
+## Autorun
+## ================================================================
+AUTORUN=~/.config/autorun
+if [ -f $AUTORUN ]; then
+    . $AUTORUN
+fi
+
+## ================================================================
+## Cleanup
+## ================================================================
+wait $XMONAD_PID		# wait for xmonad termination
+
+# Kill everything
+pkill -TERM -P $$		# send SIGTERM to all children
+pkill -TERM gpg-agent           # Kill gpg-agent
+
+
+mpc pause			# Stop music
+wait				# Wait for everyone to terminate
+

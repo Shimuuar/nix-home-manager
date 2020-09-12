@@ -1,0 +1,19 @@
+## Screen configuration
+
+# detach on hangup
+autodetach on
+
+# don't display the copyright page
+startup_message off
+
+# Set convinient escape
+escape ^]]
+
+# Show captions
+caption always
+
+# Allow multiple attach
+multiuser on
+
+# Disable visual bell 
+vbell off 

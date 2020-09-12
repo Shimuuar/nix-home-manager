@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+set -e
+
+# Do not overwrite existsing makefile
+[ -f Makefile ] && {
+    echo "Makefile already exists!"
+    exit 1
+}
+
+## ================================================================
+write_tex() {
+    cat <<'EOF'
+.PHONY: all fig clean
+PDF  =
+
+## ================================================================
+all   :
+clean :
+	rm -f *.uax *.log *.dvi chod_note.pdf chod_note.ps
+
+%.pdf : %.tex
+	pdflatex $< < /dev/null
+	pdflatex $< < /dev/null
+%.pdf : %.svg
+	inkscape $< --export-text-to-path --export-area-drawing --export-pdf $@
+EOF
+}
+
+
+case "$1" in
+    "tex")
+	write_tex > Makefile
+	;;
+    *)
+	echo "Unknown makefile type"
+	exit 1
+	;;
+    
+esac

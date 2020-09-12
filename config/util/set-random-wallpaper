@@ -1,0 +1,25 @@
+#!/usr/bin/python
+"""
+"""
+import os
+import glob
+import re
+import subprocess
+import random
+
+def get_screens() :
+    "Obtain list of screen resolutions"
+    for row in subprocess.check_output(["xrandr"]).split("\n") :
+        m = re.match(r'^ +(\d+x\d+) +\d+\.\d+\*\+', row)
+        if m is not None :
+            yield m.group(1)
+
+# Obtain random wallpaer files
+files = [
+    random.choice(
+        glob.glob(
+            os.path.expanduser("~/.wallpaper.d/"+screen+"/*")))
+    for screen in get_screens() ]
+# Set wallpapers
+subprocess.call(
+    ["feh"]+sum([["--bg-center",nm] for nm in files],[]))
