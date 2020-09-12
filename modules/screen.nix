@@ -18,7 +18,7 @@ in
       };
 
       settings = mkOption {
-        type = types.string;
+        type = types.str;
         default = {};
         description = ''
           Configuration written to

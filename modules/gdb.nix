@@ -9,7 +9,7 @@ in
     programs.gdb = {
       enable = mkEnableOption "Extra gdb packages";
       gdbinit = mkOption {
-        type        = types.string;
+        type        = types.str;
         default     = "";
         description = ".gdbinit";
       };
