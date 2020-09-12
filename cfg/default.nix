@@ -250,6 +250,10 @@ in
   services.syncthing = {
     enable = true;
   };
+  # ----
+  services.gpg-agent = {
+    enable      = true;
+  };
 
   # ---- X session ----
   xsession = {
