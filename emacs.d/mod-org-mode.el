@@ -13,5 +13,8 @@
     ((org-todo-keyword-faces
       ("BLOCKED" . "red")
       )))))
+(add-hook 'org-mode-hook (lambda ()
+  (local-set-key (kbd "C-c d") (lambda () (interactive) (org-todo "DONE")))
+  ))
 
 (provide 'mod-org-mode)
