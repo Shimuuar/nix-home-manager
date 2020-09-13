@@ -37,7 +37,7 @@ in
     mdo
     # colcalc
     root-plot
-    # ---------------- 
+    # ----------------
     # CLI utils
     ag
     crudini
