@@ -79,6 +79,7 @@ myKeys conf =
             , ("x", "Media")
             , ("m", "e-Mail")
             , ("k", "gitk")
+            , ("d", "TODO")
             ] >>= makeShiftPair ""
       )
       -- Quit XMonad
@@ -238,6 +239,8 @@ myManageHook = composeAll $ concat
       ) --> (doF (W.greedyView "10" . W.shift "10"))
     ]
     -- Windows placement hooks
+  , hookList (doWorkspace "TODO")    [ (appName, "emacs-todo")
+                                     ]
   , hookList (doWorkspace "WWW")     [ (className, "Iceweasel")
                                      , (className, "Firefox-bin")
                                      , (className, "Firefox-esr")
@@ -285,7 +288,7 @@ myConfig = def
   , focusFollowsMouse  = True
   , borderWidth        = 1
   , workspaces         = (map show [1..10]) ++
-                         ["WWW","IM","Torrent","Media","e-Mail","gitk"]
+                         ["WWW","IM","Torrent","Media","e-Mail","gitk","TODO"]
   , normalBorderColor  = "#dddddd"
   , focusedBorderColor = "#ff0000"
     -- key bindings
