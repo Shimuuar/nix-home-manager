@@ -3,6 +3,19 @@ params:
 let
   # Repository with config files
   cfg = ../config;
+  # Wrapped telegram. It oesn;t like XDG_CURRENT_DESKTOP set
+  telegram-wrapped = pkgs.stdenv.mkDerivation {
+    name    = "telegram-desktop";
+    builder = pkgs.writeScript "telegram-builder" ''
+      ${pkgs.coreutils}/bin/mkdir -p $out/bin
+      ${pkgs.coreutils}/bin/cat > $out/bin/telegram-wrapped <<EOF
+      #!${pkgs.stdenv.shell}
+      unset XDG_CURRENT_DESKTOP
+      ${pkgs.tdesktop}/bin/telegram-desktop "\$@"
+      EOF
+      ${pkgs.coreutils}/bin/chmod +x $out/bin/telegram-wrapped
+      '';
+  };
 in
 {
    imports = [
@@ -89,7 +102,7 @@ in
     gimp
     gwenview
     libreoffice
-    tdesktop
+    telegram-wrapped
     thunderbird
     wireshark
     xournal
@@ -275,7 +288,7 @@ in
       # Programs
       ${pkgs.firefox}/bin/firefox &
       ${pkgs.thunderbird}/bin/thunderbird &
-      XDG_CURRENT_DESKTOP= ${pkgs.tdesktop}/bin/telegram-desktop &
+      ${telegram-wrapped}/bin/telegram-desktop &
       emacs --name emacs-todo --eval '(load-file "${cfg}/emacs-todo.el")'
       # Wallpapers
       while : ; do
