@@ -276,6 +276,7 @@ in
       ${pkgs.firefox}/bin/firefox &
       ${pkgs.thunderbird}/bin/thunderbird &
       XDG_CURRENT_DESKTOP= ${pkgs.tdesktop}/bin/telegram-desktop &
+      emacs --name emacs-todo --eval '(load-file "${cfg}/emacs-todo.el")'
       # Wallpapers
       while : ; do
         python ${cfg}/util/set-random-wallpaper
