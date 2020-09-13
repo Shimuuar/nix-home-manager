@@ -77,7 +77,6 @@ myKeys conf =
             , ("i", "IM")
             , ("t", "Torrent")
             , ("x", "Media")
-            , ("g", "Gimp")
             , ("m", "e-Mail")
             , ("k", "gitk")
             ] >>= makeShiftPair ""
@@ -192,7 +191,6 @@ myLayout
   $ onWorkspace "Media"   (noBorders Full)
   $ onWorkspace "IM"      Full
   $ onWorkspace "gitk"    Full
-  $ onWorkspace "Gimp"    gimp
   $ defaultLayout
   where
     -- Default layout
@@ -200,11 +198,6 @@ myLayout
                  ||| Mirror tiled
                  ||| Full
                  where tiled = Tall 1  0.02  0.50
-    -- Layout for GIMP
-    gimp = withIM (0.18) (Role "gimp-toolbox") $
-              combineTwoP (reflectHoriz $ TwoPane 0.2 0.2)
-                          (simpleTabbed) (defaultLayout) (Role "gimp-dock")
-
 
 
 ------------------------------------------------------------------------
@@ -257,8 +250,6 @@ myManageHook = composeAll $ concat
   , hookList (doWorkspace "Torrent") [ (className, "Ktorrent")
                                      , (className, "Deluge")
                                      ]
-  , hookList (doWorkspace "Gimp")    [ (className, "Gimp")
-                                     ]
   , hookList (doWorkspace "e-Mail")  [ (resource, "Mail")
                                      ]
   , hookList (doWorkspace "gitk")    [ (className, "Gitk")
@@ -294,7 +285,7 @@ myConfig = def
   , focusFollowsMouse  = True
   , borderWidth        = 1
   , workspaces         = (map show [1..10]) ++
-                         ["WWW","IM","Torrent","Media","Gimp","e-Mail","gitk"]
+                         ["WWW","IM","Torrent","Media","e-Mail","gitk"]
   , normalBorderColor  = "#dddddd"
   , focusedBorderColor = "#ff0000"
     -- key bindings
