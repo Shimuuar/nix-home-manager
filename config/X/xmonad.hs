@@ -214,54 +214,57 @@ myLayout
 --
 myManageHook :: ManageHook
 myManageHook = composeAll $ concat
-  [ -- Float dialogs
-    [isDialog --> doFloat]
-    -- Ignored windows
-  , hookList doIgnore [ (title,     "plasma-desktop")
-                      , (className, "xfce4-panel")
-                      , (className, "Xfce4-Panel")
-                      , (className, "lxpanel")
-                      ]
-    -- Floating windows
-  , hookList doCenterFloat [ (className, "feh")
-                           , (resource,  "terminal-float")
-                           ]
-  , hookList doMedia       [ (className, "MPlayer")
-                           , (className, "mpv")
-                           , (className, "mplayer2")
-                           , (className, "wesnoth")
-                           , (className, "Steam")
-                           ]
-    -- KDiff3
-  , [ (do dialog <- isDialog
+  [ -- Specific hooks
+    [ isDialog --> doFloat
+    , scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3)
+    , (do dialog <- isDialog
           kdiff  <- className =? "kdiff3"
           return $! kdiff
       ) --> (doF (W.greedyView "10" . W.shift "10"))
     ]
+    -- Ignored windows
+  , [ title     =? "plasma-desktop"
+    , className =? "xfce4-panel"
+    , className =? "Xfce4-Panel"
+    , className =? "lxpanel"
+    ] ==> doIgnore
+    -- Floating windows
+  , [ className =? "feh"
+    , resource  =? "terminal-float"
+    ] ==> doCenterFloat
+    -- Media programs
+  , [ className =? "MPlayer"
+    , className =? "mpv"
+    , className =? "mplayer2"
+    , className =? "wesnoth"
+    , className =? "Steam"
+    ] ==> doMedia
     -- Windows placement hooks
-  , hookList (doWorkspace "TODO")    [ (appName, "emacs-todo")
-                                     ]
-  , hookList (doWorkspace "WWW")     [ (className, "Iceweasel")
-                                     , (className, "Firefox-bin")
-                                     , (className, "Firefox-esr")
-                                     , (className, "Firefox")
-                                     ]
-  , hookList (doWorkspace "IM")      [ (className, "psi")
-                                     , (className, "Pidgin")
-                                     , (className, "TelegramDesktop")
-                                     ]
-  , hookList (doWorkspace "Torrent") [ (className, "Ktorrent")
-                                     , (className, "Deluge")
-                                     ]
-  , hookList (doWorkspace "e-Mail")  [ (resource, "Mail")
-                                     ]
-  , hookList (doWorkspace "gitk")    [ (className, "Gitk")
-                                     ]
-  , [ scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3) ]
+  , [ appName =? "emacs-todo"
+    ] ==> doWorkspace "TODO"
+    --
+  , [ className =? "Firefox-bin"
+    , className =? "Firefox-esr"
+    , className =? "Firefox"
+    ] ==> doWorkspace "WWW"
+    --
+  , [ className =? "psi"
+    , className =? "Pidgin"
+    , className =? "TelegramDesktop"
+    ] ==> doWorkspace "IM"
+    --
+  , [ className =? "Ktorrent"
+    , className =? "Deluge"
+    ] ==> doWorkspace "Torrent"
+    --
+  , [ resource =? "Mail"
+    ] ==> doWorkspace "e-Mail"
+    --
+  , [ className =? "Gitk"
+    ] ==> doWorkspace "gitk"
   ]
   where
-    hookList :: Eq a => ManageHook -> [(Query a, a)] -> [ManageHook]
-    hookList hook = map $ (--> hook) . uncurry (=?)
+    queries ==> hook = [ q --> hook | q <- queries ]
     -- Move window to workspace
     doWorkspace :: String -> ManageHook
     doWorkspace = doF . W.shift
