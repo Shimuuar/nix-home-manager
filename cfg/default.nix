@@ -286,10 +286,10 @@ in
       # Machine-specific programs
       ${params.X.extraPrograms or ""}
       # Programs
-      ${pkgs.firefox}/bin/firefox &
-      ${pkgs.thunderbird}/bin/thunderbird &
-      ${telegram-wrapped}/bin/telegram-desktop &
-      emacs --name emacs-todo --eval '(load-file "${cfg}/emacs-todo.el")'
+      ${pkgs.firefox}/bin/firefox                                         &
+      ${pkgs.thunderbird}/bin/thunderbird                                 &
+      ${telegram-wrapped}/bin/telegram-wrapped                            &
+      emacs --name emacs-todo --eval '(load-file "${cfg}/emacs-todo.el")' &
       # Wallpapers
       while : ; do
         python ${cfg}/util/set-random-wallpaper
