@@ -24,15 +24,28 @@
 	"~/data/tracker/trading.org"
 	))
 
-;; Set up agenda files
+;; ----------------------------------------------------------------
+;; Hooks and keybindings
 (add-hook 'org-mode-hook (lambda ()
   ;; Key bindings
-  (local-set-key (kbd "C-c d") (lambda () (interactive) (org-todo "DONE")))
+  (local-set-key (kbd "C-c d")    (lambda () (interactive) (org-todo "DONE")))
+  (local-set-key (kbd "S-<up>")   (lambda () (interactive) (other-window 1)))
+  (local-set-key (kbd "S-<down>") (lambda () (interactive) (other-window -1)))
+  (local-set-key (kbd "M-<up>")   (lambda () (interactive) (org-shiftup)))
+  (local-set-key (kbd "M-<down>") (lambda () (interactive) (org-shiftdown)))
   ;; Delete trailing space on save
   (add-hook 'before-save-hook
 	    (lambda () (delete-trailing-whitespace))
 	    nil
 	    'local)
+  ))
+
+;; ----------------------------------------------------------------
+;; org-agenda
+(add-hook 'org-agenda-mode-hook (lambda ()
+  ;; Key bindings
+  (local-set-key (kbd "S-<up>")   (lambda () (interactive) (other-window 1)))
+  (local-set-key (kbd "S-<down>") (lambda () (interactive) (other-window -1)))
   ))
 
 (provide 'mod-org-mode)
