@@ -24,6 +24,7 @@ in
      ../modules/xdgUserDirs.nix
      ../modules/gdb.nix
      ../modules/haskeline.nix
+     ../modules/aspell.nix
    ];
 
   # Let Home Manager install and manage itself.
@@ -151,6 +152,12 @@ in
     publicshare = "$HOME/Desktop/Public";
     templates   = "$HOME/Desktop/Templates";
     videos      = "$HOME/Desktop/Videos";
+  };
+  # ----
+  programs.aspell = {
+    enable = true;
+    config = "data-dir /home/alexey/.nix-profile/lib/aspell";
+    dicts  = a: [ a.en a.ru ];
   };
   # ----
   programs.bash = {
