@@ -25,23 +25,6 @@
     ; Return
     ("ret"   "return" nil 0)
     ))
-;; =================
-
-(define-abbrev-table 'haskell-mode-abbrev-table
-  '(
-    ; Import
-    ("imp"  "import"           nil                    0)
-    ("impq" "import qualified" nil                    0)
-    ("impa" ""                 my/skel-haskell-import 0)
-    ; Shorhands
-    ("ret"  "return"           nil                    0)
-    ("pr"   "print"            nil                    0)
-    ("fi"   "fromIntegral"     nil                    0)
-    ; Pragmas
-    ("plang" ""                my/skel-haskell-LANG   0)
-    ("opt_ghc" ""              my/skel-haskell-OPTGCH 0)
-    ("ghc_opt" ""              my/skel-haskell-OPTGCH 0)
-    ))
 
 
 
