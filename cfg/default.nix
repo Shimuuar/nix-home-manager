@@ -156,8 +156,9 @@ in
   # ----
   programs.aspell = {
     enable = true;
+    dicts  = a: with a; [ en ru ];
+    # See discussion: https://github.com/NixOS/nixpkgs/issues/1000
     config = "data-dir /home/alexey/.nix-profile/lib/aspell";
-    dicts  = a: [ a.en a.ru ];
   };
   # ----
   programs.bash = {
