@@ -155,6 +155,7 @@ line."
     ;; generic part
     (my/hook/comment)
     (abbrev-mode t)
+    (flyspell-prog-mode)		; Spellcheck in comments
     (interactive-haskell-mode)
     ;; Rename buffer on import.
     (when (buffer-file-name)

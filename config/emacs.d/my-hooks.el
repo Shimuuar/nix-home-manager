@@ -13,11 +13,6 @@
   (local-set-key (kbd "C-c C-v") 'my/comment-or-uncomment)
   )
 
-(defun my/hook/flyspell()
-  "Enable spellchecking in comments"
-  (flyspell-prog-mode)
-  )
-
 (defun my/hook/folding()
   "Hook for code folding"
   (hs-minor-mode t)
