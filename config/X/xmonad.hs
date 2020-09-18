@@ -72,7 +72,7 @@ mySearch (key , engine) = [ (key      , promptSearchBrowser myXPConfig browser e
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf = mkKeymap conf
   $ -- Move/switch to workspace
-    ((zip upperKeys $ take 10 $ XMonad.workspaces conf) >>= makeShiftPair "M-")
+    ((upperKeys `zip` XMonad.workspaces conf) >>= makeShiftPair "M-")
   ++
     -- More move/switch to workspace
     [ ("M-w", windows $ W.view "WWW")
@@ -171,7 +171,7 @@ myKeys conf = mkKeymap conf
           ] )
     ]
   where
-    upperKeys = ["1","2","3","4","5","6","7","8","9","0","-","="]
+    upperKeys = ["1","2","3","4","5","6","7","8","9","0"]
     -- Make pair of move/shift to workspace keybindings
     makeShiftPair :: String -> (String, String) -> [(String, X())]
     makeShiftPair p (k, name) = [ (p++k,       windows $ W.view name)
