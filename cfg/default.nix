@@ -298,6 +298,9 @@ in
       ${pkgs.thunderbird}/bin/thunderbird                                 &
       ${telegram-wrapped}/bin/telegram-wrapped                            &
       emacs --name emacs-todo --eval '(load-file "${cfg}/emacs-todo.el")' &
+      if which spotify &> /dev/null; then
+          spotify &
+      fi
       # Wallpapers
       while : ; do
         python ${cfg}/util/set-random-wallpaper
