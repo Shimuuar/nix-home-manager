@@ -1,6 +1,6 @@
 {-# LANGUAGE ApplicativeDo #-}
 import Codec.Binary.UTF8.String
-import Data.Monoid ((<>))
+import Data.Monoid (All(..))
 import Data.List   (isInfixOf)
 import qualified Data.Map as M
 import Data.Ratio            ((%))
@@ -19,6 +19,7 @@ import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.DynamicProperty
 
 import XMonad.Layout.IM (withIM)
 import XMonad.Layout.PerWorkspace
@@ -36,6 +37,15 @@ import XMonad.Util.Run
 import XMonad.Prompt
 
 ----------------------------------------------------------------
+
+-- | Move window to workspace
+doWorkspace :: String -> ManageHook
+doWorkspace = doF . W.shift
+
+-- | Hook for multimedia related windows
+doMedia :: ManageHook
+doMedia = doF (W.greedyView "Media" . W.shift "Media")
+       <> doFullFloat
 
 run :: MonadIO m => String -> m ()
 run = safeSpawnProg
@@ -80,6 +90,7 @@ myKeys conf =
             , ("m", "e-Mail")
             , ("k", "gitk")
             , ("d", "TODO")
+            , ("s", "Spotify")
             ] >>= makeShiftPair ""
       )
       -- Quit XMonad
@@ -213,7 +224,7 @@ myLayout
 -- 'className' and 'resource' are used below.
 --
 myManageHook :: ManageHook
-myManageHook = composeAll $ concat
+myManageHook = mconcat $ concat
   [ -- Specific hooks
     [ isDialog --> doFloat
     , scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3)
@@ -221,6 +232,8 @@ myManageHook = composeAll $ concat
           kdiff  <- className =? "kdiff3"
           return $! kdiff
       ) --> (doF (W.greedyView "10" . W.shift "10"))
+    , className =? "Gitk"    --> doWorkspace "gitk"
+    , className =? "Spotify" --> doWorkspace "Spotify"
     ]
     -- Ignored windows
   , [ title     =? "plasma-desktop"
@@ -259,18 +272,16 @@ myManageHook = composeAll $ concat
     --
   , [ resource =? "Mail"
     ] ==> doWorkspace "e-Mail"
-    --
-  , [ className =? "Gitk"
-    ] ==> doWorkspace "gitk"
   ]
   where
     queries ==> hook = [ q --> hook | q <- queries ]
-    -- Move window to workspace
-    doWorkspace :: String -> ManageHook
-    doWorkspace = doF . W.shift
-    -- Hook for multimedia related windows
-    doMedia :: ManageHook
-    doMedia = doF (W.greedyView "Media" . W.shift "Media") <+> doFullFloat
+
+dynamicHooks :: Event -> X All
+dynamicHooks = dynamicPropertyChange "WM_CLASS" $ mconcat
+  -- Spotify is extremely annoying and only sets its WM_CLASS after
+  -- window creation. That requires watching WM_CLASS property
+  [ className =? "Spotify" --> doWorkspace "Spotify"
+  ]
 
 ------------------------------------------------------------------------
 -- XPromt settings
@@ -291,18 +302,22 @@ myConfig = def
   , focusFollowsMouse  = True
   , borderWidth        = 1
   , workspaces         = (map show [1..10]) ++
-                         ["WWW","IM","Torrent","Media","e-Mail","gitk","TODO"]
+                         ["WWW","IM","Torrent","Media","e-Mail","gitk","TODO","Spotify"]
   , normalBorderColor  = "#dddddd"
   , focusedBorderColor = "#ff0000"
     -- key bindings
   , keys               = myKeys
   , mouseBindings      = myMouseBindings
     -- hooks, layouts
-  , startupHook        = ewmhDesktopsStartup >> docksStartupHook
-  , handleEventHook    = ewmhDesktopsEventHook <> docksEventHook
+  , startupHook        = ewmhDesktopsStartup
+                      >> docksStartupHook
+  , handleEventHook    = ewmhDesktopsEventHook
+                      <> docksEventHook
+                      <> dynamicHooks
   , layoutHook         = myLayout
-  , manageHook         = myManageHook <> manageDocks
-  , logHook            = do ewmhDesktopsLogHookCustom scratchpadFilterOutWorkspace
+  , manageHook         = myManageHook
+                      <> manageDocks
+  , logHook            = ewmhDesktopsLogHookCustom scratchpadFilterOutWorkspace
   }
 
 
