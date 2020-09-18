@@ -53,6 +53,7 @@ run = safeSpawnProg
 wikipediaLang' :: String -> SearchEngine
 wikipediaLang' lang = searchEngine (lang++".wiki") ("https://secure.wikimedia.org/wikipedia/"++lang++"/wiki/Special:Search?go=Go&search=")
 
+-- Search string from XMonad.Actions.Search is broken
 hoogle' :: String -> SearchEngine
 hoogle' scope = searchEngine "hooogle"
   ("https://hoogle.haskell.org/?scope="++escape scope++"&hoogle=")
@@ -168,7 +169,6 @@ myKeys conf =
           , ("w"  , wikipedia )
           , ("r"  , wikipediaLang' "ru")
           , ("S-h", hackage)
-          , ("u"  , searchEngine "Лурка" "http://lurkmore.ru/%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:Search?search=")
           ] )
     -- Emullation of middle mouse click.
     , ("M-z", safeSpawn "xdotool" ["keyup", "Super_L", "click", "2"])
