@@ -90,6 +90,7 @@ in
     xdotool
     wmctrl
     spectacle
+    libnotify
     # ----------------
     # GUI programs
     arandr
@@ -273,9 +274,13 @@ in
   };
   # ----
   services.gpg-agent = {
-    enable      = true;
+    enable = true;
   };
-
+  # ----
+  # Surprisingly nm-apple doesn't work without notification service
+  services.dunst = {
+    enable = true;
+  };
   # ---- X session ----
   xsession = {
     enable    = true;
