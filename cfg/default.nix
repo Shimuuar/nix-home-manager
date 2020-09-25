@@ -139,6 +139,10 @@ in
     unifont
     terminus_font
     terminus_font_ttf
+    # ----------------
+    stalonetray
+    xmobar
+    gnome3.networkmanagerapplet
   ];
 
   #
