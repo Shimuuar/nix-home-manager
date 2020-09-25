@@ -308,7 +308,7 @@ in
       ${telegram-wrapped}/bin/telegram-wrapped                            &
       emacs --name emacs-todo --eval '(load-file "${cfg}/emacs-todo.el")' &
       if which spotify &> /dev/null; then
-          spotify &
+         (sleep 4 && spotify) &
       fi
       # Wallpapers
       while : ; do
