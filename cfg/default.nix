@@ -143,8 +143,8 @@ in
     stalonetray
     xmobar
     gnome3.networkmanagerapplet
+    xfce.xfce4-power-manager
   ];
-
   #
   fonts.fontconfig.enable = params.fontconfig or false;
   xdgUserDirs = {

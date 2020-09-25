@@ -12,6 +12,7 @@ let
         # Programs
         xmobar      &
         stalonetray &
+        xfce4-power-manager
         '';
     };
     fontconfig = true;
