@@ -1,0 +1,44 @@
+Config { font			= "-*-fixed-medium-*-*-*-18-*-*-*-*-*-iso10646-*"
+       , borderColor		= "black"
+       , border			= TopB
+       , bgColor		= "black"
+       , fgColor		= "grey"
+       , position		= TopP 0 220
+       , textOffset		= -1
+       , iconOffset		= -1
+       -- , lowerOnStart		= True
+       -- , pickBroadest		= False
+       -- , persistent		= False
+       -- , hideOnStart		= False
+       , iconRoot		= "."
+       -- , allDesktops		= True
+       -- , overrideRedirect	= True
+       , commands = [ Run Cpu [ "-L","3"
+                              , "-H","50"
+                              , "--high", "red"
+                              ] 10
+-- 8 cores are too much (space)
+--                    , Run CpuFreq [ "-t", "Freq:<cpu0>|<cpu1>GHz"
+--                                  , "--ddigits", "2"
+--                                  ] 10
+                    , Run Memory ["-t","<usedratio>%"] 10
+                    , Run Swap   ["-t","<usedratio>%"] 10
+                    , Run Date "%b %_d %H:%M:%S" "date" 10
+                    , Run BatteryP ["BAT0"]
+                      [ "-t", "<acstatus>"
+                      , "--"
+                      , "--hight", "66"
+                      , "--lowt",  "25"
+                      , "--mediums", "<fc=#ee9000>(!)</fc>"             -- Below high
+                      , "--lows",    "<fc=#ee2000>LOW!</fc>"            -- Low battery
+                      , "-o",        "<left>% <timeleft>"               -- Discharing
+                      , "-O",        "<fc=green>Charging <left>%</fc>"  -- Charging
+                      , "-i",        "<fc=green>AC</fc>"                -- Charged
+                      ] 1
+                    -- Again we need to average over cores
+                    , Run ThermalZone 0 [] 10
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%cpu% | Mem: %memory%/%swap% }{ %thermal0% | %battery% | <fc=#ee9a00>%date%</fc> "
+       }
