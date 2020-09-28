@@ -13,7 +13,7 @@ let
         done &
         # Run tunnel to dagda (syncthing)
         while : ; do
-          ssh -oBatchMode=yes -N -L 127.0.0.2:58846:127.0.0.1:58846 192.168.1.4
+          ssh -oBatchMode=yes -N -L 127.0.0.2:8384:127.0.0.1:8384 192.168.1.4
           sleep 30
         done &
         '';
