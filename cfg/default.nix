@@ -284,6 +284,22 @@ in
   # Surprisingly nm-apple doesn't work without notification service
   services.dunst = {
     enable = true;
+    settings = {
+      global = {
+        geometry           = "400x20-30+50";
+        frame_color        = "#eceff1";
+        font               = "Droid Sans 12";
+        padding            = 2;
+        horizontal_padding = 5;
+        frame_width        = 1;
+        separator_heights  = 4;
+      };
+      urgency_normal = {
+        background = "#37474f";
+        foreground = "#eceff1";
+        timeout    = 10;
+      };
+    };
   };
   # ---- X session ----
   xsession = {
