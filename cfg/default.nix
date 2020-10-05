@@ -300,6 +300,8 @@ in
       export XCOMPOSEFILE=${cfg}/X/XCompose
       export XDG_CURRENT_DESKTOP=kde
       xset +fp ${pkgs.terminus_font}/share/fonts/terminus
+      # Turn on num lock
+      ${pkgs.numlockx}/bin/numlockx
       # Machine-specific programs
       ${params.X.extraPrograms or ""}
       # Programs
