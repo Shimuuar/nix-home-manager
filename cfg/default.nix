@@ -63,7 +63,7 @@ in
     postgresql_12
     python3Packages.ipython
     rlwrap
-    sqlite
+    sqlite-interactive
     sshfs
     sysstat
     zip
