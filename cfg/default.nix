@@ -25,6 +25,7 @@ in
      ../modules/gdb.nix
      ../modules/haskeline.nix
      ../modules/aspell.nix
+     ../modules/lxpanel.nix
    ];
 
   # Let Home Manager install and manage itself.
@@ -157,6 +158,23 @@ in
     publicshare = "$HOME/Desktop/Public";
     templates   = "$HOME/Desktop/Templates";
     videos      = "$HOME/Desktop/Videos";
+  };
+  # ----
+  programs.lxpanel = {
+    enable  = true;
+    edge    = "top";
+    plugins = [
+      { type = "deskno"; }
+      { type = "taskbar";
+        config = {
+          ShowAllDesks="0";
+        };
+      }
+      { type = "thermal"; }
+      { type = "tray";    }
+      { type = "cpu";     }
+      { type = "dclock";  }
+    ];
   };
   # ----
   programs.aspell = {
