@@ -340,9 +340,8 @@ in
       export XCOMPOSEFILE=${cfg}/X/XCompose
       export XDG_CURRENT_DESKTOP=kde
       xset +fp ${pkgs.terminus_font}/share/fonts/terminus
-      # Turn on num lock
-      ${pkgs.numlockx}/bin/numlockx
       # Machine-specific programs
+      lxpanel &
       ${params.X.extraPrograms or ""}
       # Programs
       ${pkgs.firefox}/bin/firefox                                         &

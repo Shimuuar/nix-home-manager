@@ -10,8 +10,6 @@ let
       composeKey    = "menu";
       extraPrograms = ''
         # Programs
-        xmobar ${./config/xmobarrc}              &
-        stalonetray -c ${./config/stalonetrayrc} &
         xfce4-power-manager
         '';
     };
