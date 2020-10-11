@@ -347,6 +347,7 @@ in
       ${pkgs.firefox}/bin/firefox                                         &
       ${pkgs.thunderbird}/bin/thunderbird                                 &
       ${telegram-wrapped}/bin/telegram-wrapped                            &
+      ${pkgs.udiskie}/bin/udiskie --tray                                  &
       emacs --name emacs-todo --eval '(load-file "${cfg}/emacs-todo.el")' &
       if which spotify &> /dev/null; then
          (sleep 4 && spotify) &
