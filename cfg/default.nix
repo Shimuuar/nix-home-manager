@@ -170,6 +170,12 @@ in
           ShowAllDesks="0";
         };
       }
+      { type = "batt";
+        config = {
+          HideIfNoBattery = "1";
+        };
+      }
+      { type = "cpufreq"; }
       { type = "thermal"; }
       { type = "tray";    }
       { type = "cpu";     }
