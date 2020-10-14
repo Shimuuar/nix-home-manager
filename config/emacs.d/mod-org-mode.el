@@ -48,5 +48,7 @@
   (local-set-key (kbd "S-<up>")   (lambda () (interactive) (other-window 1)))
   (local-set-key (kbd "S-<down>") (lambda () (interactive) (other-window -1)))
   ))
+;; Add CLOSED when entry marked as DONE
+(setq org-log-done 'time)
 
 (provide 'mod-org-mode)
