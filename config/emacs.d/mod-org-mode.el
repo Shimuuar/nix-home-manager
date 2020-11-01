@@ -22,6 +22,7 @@
 	"~/data/tracker/realty.org"
 	"~/data/tracker/realty-plan.org"
 	"~/data/tracker/work.org"
+	"~/data/tracker/delayed.org"
 	"~/data/tracker/trading.org"
 	))
 
