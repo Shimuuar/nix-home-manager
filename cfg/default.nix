@@ -239,8 +239,12 @@ in
     userEmail   = "alexey.skladnoy@gmail.com";
     package     = pkgs.gitAndTools.gitFull;
     extraConfig = {
+      pull = { ff = "only"; };
+      #
       merge             = { tool = "kdiff3"; };
       mergetool.kdiff3  = { path = "${pkgs.kdiff3}/bin/kdiff3"; };
+      mergetool.meld    = { path = "${pkgs.meld}/bin/meld"; };
+      #
       filter.nbstripout = {
         clean    = "${pkgs.nbstripout}/bin/nbstripout";
         smudge   = "cat";
