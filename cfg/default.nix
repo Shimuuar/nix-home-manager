@@ -55,6 +55,8 @@ in
     hledger-ui
     htop
     imagemagick
+    inetutils
+    mc
     lz4
     jq
     mercurial
@@ -66,7 +68,9 @@ in
     rlwrap
     sqlite-interactive
     sshfs
+    pwntools
     sysstat
+    usbutils
     zip
     # ----------------
     # Devtools
@@ -103,6 +107,7 @@ in
     evince
     firefox
     gimp
+    nomacs
     gwenview
     libreoffice
     telegram-wrapped
@@ -111,6 +116,8 @@ in
     xournal
     xorg.xkill
     xterm
+    freecad
+    cura
     # ----------------
     # KDE
     breeze-icons
