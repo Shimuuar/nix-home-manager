@@ -239,6 +239,7 @@ in
     userEmail   = "alexey.skladnoy@gmail.com";
     package     = pkgs.gitAndTools.gitFull;
     extraConfig = {
+      core = { quotePath = false; };
       pull = { ff = "only"; };
       #
       merge             = { tool = "kdiff3"; };
