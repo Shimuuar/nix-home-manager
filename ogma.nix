@@ -20,7 +20,3 @@ let
     };
   };
 in import ./cfg params args
-
-      
-
-
