@@ -19,8 +19,6 @@
 (setq calendar-week-start-day     1)
 (setq org-agenda-files
       '("~/data/tracker/todo.org"
-	"~/data/tracker/realty.org"
-	"~/data/tracker/realty-plan.org"
 	"~/data/tracker/work.org"
 	"~/data/tracker/delayed.org"
 	"~/data/tracker/trading.org"
