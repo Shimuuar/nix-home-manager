@@ -17,12 +17,7 @@
 ;; Customize org-mode
 (setq org-agenda-start-on-weekday 1)
 (setq calendar-week-start-day     1)
-(setq org-agenda-files
-      '("~/data/tracker/todo.org"
-	"~/data/tracker/work.org"
-	"~/data/tracker/delayed.org"
-	"~/data/tracker/trading.org"
-	))
+(setq org-agenda-files '( "~/data/tracker/"))
 
 ;; ----------------------------------------------------------------
 ;; Hooks and keybindings
