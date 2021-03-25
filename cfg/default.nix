@@ -215,6 +215,7 @@ in
       browse-kill-ring
       # Modes
       go-mode
+      rust-mode
       haskell-mode
       hledger-mode
       julia-mode
