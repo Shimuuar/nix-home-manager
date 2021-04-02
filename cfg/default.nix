@@ -71,6 +71,7 @@ in
     pwntools
     sysstat
     usbutils
+    youtube-dl
     zip
     # ----------------
     # Devtools
