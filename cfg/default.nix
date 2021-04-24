@@ -66,6 +66,7 @@ in
     postgresql_12
     python3Packages.ipython
     rlwrap
+    rustup
     sqlite-interactive
     sshfs
     pwntools
@@ -119,6 +120,7 @@ in
     xterm
     freecad
     cura
+    idea.idea-community
     # ----------------
     # KDE
     breeze-icons
@@ -225,8 +227,11 @@ in
       nix-mode
       scala-mode
       yaml-mode
+      toml-mode
       # Tools
+      org-ref
       magit
+      deft
     ];
   };
   programs.emacsPkg = {
