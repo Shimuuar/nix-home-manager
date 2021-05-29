@@ -27,7 +27,4 @@
     ))
 
 
-
 (provide 'mod-python-mode)
-
-
