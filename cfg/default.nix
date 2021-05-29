@@ -108,6 +108,7 @@ in
     deluge
     evince
     firefox
+    krusader
     gimp
     nomacs
     gwenview
