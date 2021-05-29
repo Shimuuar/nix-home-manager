@@ -9,6 +9,9 @@
 
   ;;
   (setq deft-use-filter-string-for-filename t)
+
+  ;; Autosave interval. Default is 1s which is too aggressive
+  (setq deft-auto-save-interval 60)
   )
 
 (provide 'mod-deft)
