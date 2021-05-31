@@ -240,6 +240,19 @@ in
     ];
   };
   # ----
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      "oka04.ihep.su" = {
+        user         = "khudyakov";
+        proxyJump    = "istrad.ihep.su";
+        extraOptions = {
+          "KexAlgorithms" = "+diffie-hellman-group1-sha1";
+        };
+      };
+    };
+  };
+  # ----
   programs.git = {
     enable      = true;
     userName    = "Alexey Khudyakov";
