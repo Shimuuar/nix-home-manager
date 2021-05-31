@@ -218,8 +218,29 @@ ghci-with() {
     nix-shell -p "$EXPR" --run ghci
 }
 
-ghci-numeric() {
-    ghci-with "statistics" "$@"
+ghc-with() {
+    local EXPR="haskellPackages.ghcWithPackages(p: with p; [$@])"
+    nix-shell -p "$EXPR"
+}
+
+hell() {
+    # Subshell in order to undo changes of shell options
+    (
+	set -e
+	# Test that we have cabal file here. cabal2nix will get crazy otherwise.
+	shopt -s nullglob
+	cabals=(*.cabal)
+	if [ ${#cabals[@]} != 1 ]; then
+	    echo "No cabal file found. Aborting"
+	    exit 1
+	fi
+	# Create shell
+	SNIX=$(mktemp ${XDG_RUNTIME_DIR-/tmp}/hell-XXXXXX.nix)
+	cabal2nix --shell . > ${SNIX}
+	nix-shell ${SNIX} "$@"
+	# Cleanup
+	rm ${SNIX}
+    )
 }
 
 ## ---------------------------------------------------------
