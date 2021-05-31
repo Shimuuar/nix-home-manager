@@ -324,7 +324,7 @@ in
     enable = true;
   };
   # ----
-  # Surprisingly nm-apple doesn't work without notification service
+  # Surprisingly nm-applet doesn't work without notification service
   services.dunst = {
     enable = true;
     settings = {
