@@ -130,7 +130,6 @@ in
     kdeApplications.dolphin
     kdeApplications.dolphin-plugins
     kdeApplications.kate
-#    kdeApplications.konqueror
     kdeApplications.konsole
     kdeApplications.okular
     plasma5.systemsettings
