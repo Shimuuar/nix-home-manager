@@ -253,6 +253,18 @@ in
           "KexAlgorithms" = "+diffie-hellman-group1-sha1";
         };
       };
+      "oka01.ihep.su" = {
+        user         = "khudyakov";
+        proxyJump    = "sepulcarium.org";
+      };
+      "oka02.ihep.su" = {
+        user         = "khudyakov";
+        proxyJump    = "sepulcarium.org";
+      };
+      "oka03.ihep.su" = {
+        user         = "khudyakov";
+        proxyJump    = "sepulcarium.org";
+      };
     };
   };
   # ----
