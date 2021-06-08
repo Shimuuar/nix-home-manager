@@ -229,7 +229,10 @@ in
       yaml-mode
       toml-mode
       # Tools
+      org-roam
+      org-roam-bibtex
       org-ref
+      helm
       magit
       deft
     ];
