@@ -127,19 +127,19 @@ in
     breeze-icons
     hicolor-icon-theme
     kcharselect
-    kdeApplications.dolphin
-    kdeApplications.dolphin-plugins
-    kdeApplications.kate
-    kdeApplications.konsole
-    kdeApplications.okular
-    plasma5.systemsettings
-    plasma5.breeze-gtk
-    plasma5.breeze-qt5
-    plasma5.breeze-grub
-    plasma5.breeze-plymouth
-    plasma5.oxygen
-    plasma5.plasma-integration
-    plasma5.oxygen
+    plasma5Packages.dolphin
+    plasma5Packages.dolphin-plugins
+    plasma5Packages.kate
+    plasma5Packages.konsole
+    plasma5Packages.okular
+    plasma5Packages.systemsettings
+    plasma5Packages.breeze-gtk
+    plasma5Packages.breeze-qt5
+    plasma5Packages.breeze-grub
+    plasma5Packages.breeze-plymouth
+    plasma5Packages.oxygen
+    plasma5Packages.plasma-integration
+    plasma5Packages.oxygen
     # ----------------
     # media
     feh
