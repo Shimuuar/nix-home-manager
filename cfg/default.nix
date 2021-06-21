@@ -280,6 +280,7 @@ in
       merge             = { tool = "kdiff3"; };
       mergetool.kdiff3  = { path = "${pkgs.kdiff3}/bin/kdiff3"; };
       mergetool.meld    = { path = "${pkgs.meld}/bin/meld"; };
+      init.defaultBranch = "master";
       #
       filter.nbstripout = {
         clean    = "${pkgs.nbstripout}/bin/nbstripout";
