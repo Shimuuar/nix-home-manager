@@ -116,33 +116,42 @@
 ;;============================================================
 ;; Switching between buffers
 ;;============================================================
-(require 'ido)
-(ido-mode 1)
-;; Ignores following buffers
-(setq ido-ignore-buffers
-  (append '("*Buffer"    "*Completions" "*ESS"
-	    "*Apropos"    "*Warnings"  "*Quail"
-	    "*Flycheck error messages*"
-	    )
-	   ido-ignore-buffers
-	  ))
-;; Ensure case sensitivity
-(when ido-case-fold (ido-toggle-case))
-;; Tweak appearance
-(setq ido-decorations
-      '("\n{" "}" " | " " | ..."
-	"[" "]"
-	" [No match]"
-	" [Matched]"
-	" [Not readable]"
-	" [Too big]"
-	" [Confirm]"))
-;; 
-(add-hook 'ido-setup-hook (lambda ()
-  (define-key ido-completion-map (kbd "C-w")    'backward-kill-word)
-  (define-key ido-completion-map (kbd "<up>")   'ido-prev-work-file)
-  (define-key ido-completion-map (kbd "<down>") 'ido-next-work-file)
-  ))
+(when (boundp 'helm-mode)
+  (helm-mode)
+  ;; Bound helm-based functions
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (define-key helm-find-files-map (kbd "C-w") 'helm-find-files-up-one-level)
+  (define-key helm-find-files-map (kbd "<tab>") 'helm-execute-persistent-action)
+  (define-key helm-find-files-map (kbd "S-<tab>") 'helm-execute-action)  
+  )
+;; (require 'ido)
+;; (ido-mode 1)
+;; ;; Ignores following buffers
+;; (setq ido-ignore-buffers
+;;   (append '("*Buffer"    "*Completions" "*ESS"
+;; 	    "*Apropos"    "*Warnings"  "*Quail"
+;; 	    "*Flycheck error messages*"
+;; 	    )
+;; 	   ido-ignore-buffers
+;; 	  ))
+;; ;; Ensure case sensitivity
+;; (when ido-case-fold (ido-toggle-case))
+;; ;; Tweak appearance
+;; (setq ido-decorations
+;;       '("\n{" "}" " | " " | ..."
+;; 	"[" "]"
+;; 	" [No match]"
+;; 	" [Matched]"
+;; 	" [Not readable]"
+;; 	" [Too big]"
+;; 	" [Confirm]"))
+;; ;; 
+;; (add-hook 'ido-setup-hook (lambda ()
+;;   (define-key ido-completion-map (kbd "C-w")    'backward-kill-word)
+;;   (define-key ido-completion-map (kbd "<up>")   'ido-prev-work-file)
+;;   (define-key ido-completion-map (kbd "<down>") 'ido-next-work-file)
+;;   ))
 
 
 ;; =========================================================

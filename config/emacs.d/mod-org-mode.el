@@ -45,4 +45,23 @@
 ;; Add CLOSED when entry marked as DONE
 (setq org-log-done 'time)
 
+
+;; ----------------------------------------------------------------
+;; Set up org-roam
+(when (boundp 'org-roam-mode)
+  ;; Data source 
+  (setq org-roam-directory '"~/data/zettel")
+  (setq org-roam-completion-system 'helm)
+  ;; Key bindings
+  (global-set-key (kbd "C-c q") 'org-roam-find-file)
+  )
+;(setq reftex-default-bibliography	;
+ ;/zettel/bib/hep.bib"))
+
+;; see org-ref for use of these variables
+(setq org-ref-bibliography-notes "~/data/zettel/org-ref.org")
+(setq org-ref-default-bibliography
+      (directory-files "~/data/zettel/bib" t ".\.bib"))
+(setq org-ref-pdf-directory "~/Dropbox/bibliography/bibtex-pdfs/")
+
 (provide 'mod-org-mode)
