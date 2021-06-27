@@ -85,6 +85,7 @@ myKeys conf = mkKeymap conf
             , ("k", "gitk")
             , ("d", "TODO")
             , ("s", "Spotify")
+            , ("z", "Zettel")
             ] >>= makeShiftPair ""
       )
       -- Quit XMonad
@@ -255,6 +256,8 @@ myManageHook = mconcat $ concat
     -- Windows placement hooks
   , [ appName =? "emacs-todo"
     ] ==> doWorkspace "TODO"
+  , [ appName =? "emacs-zettel"
+    ] ==> doWorkspace "Zettel"
     --
   , [ className =? "Firefox-bin"
     , className =? "Firefox-esr"
@@ -302,7 +305,7 @@ myConfig = def
   , focusFollowsMouse  = True
   , borderWidth        = 1
   , workspaces         = (map show [1..10]) ++
-                         ["WWW","IM","Torrent","Media","e-Mail","gitk","TODO","Spotify"]
+                         ["WWW","IM","Torrent","Media","e-Mail","gitk","TODO","Spotify","Zettel"]
   , normalBorderColor  = "#dddddd"
   , focusedBorderColor = "#ff0000"
     -- key bindings
