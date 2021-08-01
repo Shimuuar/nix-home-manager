@@ -1,4 +1,4 @@
-{ mkDerivation, base, process, stdenv, tagsoup }:
+{ mkDerivation, base, process, lib, tagsoup }:
 mkDerivation {
   pname   = "arxiv-get";
   version = "0.1";
@@ -11,5 +11,5 @@ mkDerivation {
   isExecutable = true;
   executableHaskellDepends = [ base process tagsoup ];
   description = "Small utility to download papers from arXiv.org and give them meaningful names";
-  license = stdenv.lib.licenses.bsd3;
+  license = lib.licenses.bsd3;
 }

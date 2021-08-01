@@ -1,5 +1,5 @@
 { mkDerivation, base, filepath, optparse-applicative, process
-, stdenv
+, lib
 }:
 mkDerivation {
   pname = "ghc-prof-flamegraph";
@@ -12,5 +12,5 @@ mkDerivation {
     base filepath optparse-applicative process
   ];
   description = "Generates flamegraphs from GHC .prof files.";
-  license = stdenv.lib.licenses.mit;
+  license = lib.licenses.mit;
 }

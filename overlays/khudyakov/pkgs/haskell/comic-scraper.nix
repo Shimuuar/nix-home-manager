@@ -1,5 +1,5 @@
 { mkDerivation, fetchhgPrivate, aeson, async, base, bytestring, containers, lens
-, network-uri, regex-applicative, spiderment, stdenv, text, time
+, network-uri, regex-applicative, spiderment, lib, text, time
 }:
 mkDerivation {
   pname = "comic-scrapper";
@@ -15,5 +15,5 @@ mkDerivation {
     regex-applicative spiderment text time
   ];
   description = "Scrapper for comicss";
-  license = stdenv.lib.licenses.bsd3;
+  license = lib.licenses.bsd3;
 }

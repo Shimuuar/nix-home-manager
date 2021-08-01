@@ -1,6 +1,6 @@
-{ mkDerivation
+{ mkDerivation, lib
 , aeson, base, directory, filepath, hostname, containers
-, optparse-applicative, process, stdenv, text, transformers
+, optparse-applicative, process, text, transformers
 , unordered-containers, yaml
 }:
 mkDerivation {
@@ -18,5 +18,5 @@ mkDerivation {
     text transformers unordered-containers yaml containers
   ];
   description = "Tool for managing multiple repositories";
-  license = stdenv.lib.licenses.bsd3;
+  license = lib.licenses.bsd3;
 }

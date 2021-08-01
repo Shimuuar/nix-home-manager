@@ -1,6 +1,6 @@
 { mkDerivation, fetchhgPrivate, aeson, ansi-wl-pprint, async, base, bytestring
 , containers, directory, http-client, lens, mtl, network-uri
-, regex-applicative, stdenv, stm, tagsoup, text, time, transformers
+, regex-applicative, lib, stm, tagsoup, text, time, transformers
 , wreq
 }:
 mkDerivation {
@@ -16,5 +16,5 @@ mkDerivation {
     time transformers wreq
   ];
   description = "Kind of web scrapper";
-  license = stdenv.lib.licenses.bsd3;
+  license = lib.licenses.bsd3;
 }

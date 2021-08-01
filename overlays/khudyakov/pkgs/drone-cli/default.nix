@@ -1,5 +1,5 @@
 # with import <nixpkgs>{};
-{ stdenv, fetchFromGitHub, buildGoPackage }:
+{ fetchFromGitHub, lib, buildGoPackage }:
 
 buildGoPackage rec {
   name = "drone-cli-110";
@@ -16,7 +16,7 @@ buildGoPackage rec {
     sha256 = "1qpp7klh1dzicjbfvb2gkrnl001nr1lpqr8x0s9ybbhqgh3lrlak";
   };
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     maintainers = with maintainers; [ bricewge ];
     license = licenses.asl20;
     description = "Command line client for the Drone continuous integration server.";
