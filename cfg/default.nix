@@ -118,6 +118,7 @@ in
     wireshark
     xournal
     xorg.xkill
+    xorg.xdpyinfo
     xterm
     freecad
     cura
@@ -168,6 +169,27 @@ in
     publicshare = "$HOME/Desktop/Public";
     templates   = "$HOME/Desktop/Templates";
     videos      = "$HOME/Desktop/Videos";
+  };
+  # GTK
+  # FIXME: doesn't work due to dconf errors
+#  gtk = {
+#    enable = true;
+#    iconTheme = {
+#      name    = "Breeze-Dark";
+#      package = pkgs.breeze-icons;
+#    };
+#    theme = {
+#      name    = "Breeze-Dark";
+#      package = pkgs.breeze-gtk;
+#    };
+#  };
+  # Qt
+  qt = {
+    enable = true;
+    style  = {
+      name    = "Breeze-Dark";
+      package = pkgs.breeze-qt5;
+    };
   };
   # ----
   programs.lxpanel = {
