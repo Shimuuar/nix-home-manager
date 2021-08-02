@@ -22,4 +22,4 @@ files = [
     for screen in get_screens() ]
 # Set wallpapers
 subprocess.call(
-    ["feh"]+sum([["--bg-center",nm] for nm in files],[]))
+    ["feh"]+sum([["--bg-max",nm] for nm in files],[]))
