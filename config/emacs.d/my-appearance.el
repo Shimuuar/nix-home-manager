@@ -10,7 +10,19 @@
 ; Font faces
 (if (intern-soft "font-lock-comment-face")
     (set-face-foreground (symbol-value (intern-soft "font-lock-comment-face")) "red3"))
-; No startup message
+;; OGMA custimizations
+(when (string-equal system-name "ogma")
+  (custom-set-faces
+   '(default ((t (:inherit nil :extend nil :stipple nil
+			   :background "black" :foreground "white"
+			   :inverse-video nil :box nil :strike-through nil
+			   :overline nil :underline nil
+			   :slant normal :weight normal :height 90
+			   :width normal
+			   :foundry "CTDB" :family "Fira Code")))))
+  )
+
+;; No startup message
 (setq inhibit-startup-message t)
 ; No menu, no toolbar, no scroll bar. 
 (tool-bar-mode   -1)
