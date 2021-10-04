@@ -10,7 +10,7 @@ let
       composeKey    = "menu";
       extraPrograms = ''
         # Programs
-        xfce4-power-manager
+        xfce4-power-manager &
         '';
     };
     fontconfig = true;
