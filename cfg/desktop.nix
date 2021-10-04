@@ -16,71 +16,83 @@ let
 in
 {
     home.packages = with pkgs; [
-    # ----------------
-    # Window magament
-    dmenu
-    xdotool
-    wmctrl
-    spectacle
-    libnotify
-    # ----------------
-    # GUI programs
-    arandr
-    chromium
-    chromium-temp
-    darktable
-    djview
-    deluge
-    evince
-    firefox
-    krusader
-    gimp
-    nomacs
-    gwenview
-    libreoffice
-    telegram-wrapped
-    thunderbird
-    wireshark
-    xournal
-    xorg.xkill
-    xorg.xdpyinfo
-    xterm
-    freecad
-    cura
-    # ----------------
-    # KDE
-    breeze-icons
-    hicolor-icon-theme
-    kcharselect
-    plasma5Packages.dolphin
-    plasma5Packages.dolphin-plugins
-    plasma5Packages.kate
-    plasma5Packages.konsole
-    plasma5Packages.okular
-    plasma5Packages.systemsettings
-    plasma5Packages.breeze-gtk
-    plasma5Packages.breeze-qt5
-    plasma5Packages.breeze-grub
-    plasma5Packages.breeze-plymouth
-    plasma5Packages.oxygen
-    plasma5Packages.plasma-integration
-    plasma5Packages.oxygen
-    # ----------------
-    # media
-    feh
-    mpv
-    pavucontrol
-    # ----------------
-    # Fonts
-    unifont
-    terminus_font
-    terminus_font_ttf
-    # ----------------
-    stalonetray
-    xmobar
-    gnome3.networkmanagerapplet
-    xfce.xfce4-power-manager
+      # ----------------
+      # Window magament
+      dmenu
+      xdotool
+      wmctrl
+      spectacle
+      libnotify
+      # ----------------
+      # GUI programs
+      arandr
+      chromium
+      chromium-temp
+      darktable
+      djview
+      deluge
+      evince
+      firefox
+      krusader
+      gimp
+      nomacs
+      gwenview
+      libreoffice
+      telegram-wrapped
+      thunderbird
+      wireshark
+      xournal
+      xorg.xkill
+      xorg.xdpyinfo
+      xterm
+      freecad
+      cura
+      # ----------------
+      # KDE
+      breeze-icons
+      hicolor-icon-theme
+      kcharselect
+      plasma5Packages.dolphin
+      plasma5Packages.dolphin-plugins
+      plasma5Packages.kate
+      plasma5Packages.konsole
+      plasma5Packages.okular
+      plasma5Packages.systemsettings
+      plasma5Packages.breeze-gtk
+      plasma5Packages.breeze-qt5
+      plasma5Packages.breeze-grub
+      plasma5Packages.breeze-plymouth
+      plasma5Packages.oxygen
+      plasma5Packages.plasma-integration
+      plasma5Packages.oxygen
+      # ----------------
+      # media
+      feh
+      mpv
+      pavucontrol
+      # ----------------
+      # Fonts
+      unifont
+      terminus_font
+      terminus_font_ttf
+      # ----------------
+      stalonetray
+      xmobar
+      gnome3.networkmanagerapplet
+      xfce.xfce4-power-manager
     ];
+  # ----
+  xdgUserDirs = {
+    enable      = true;
+    desktop     = "$HOME/Desktop";
+    documents   = "$HOME/Desktop/Documents";
+    download    = "$HOME/Desktop/Downloads";
+    music       = "$HOME/Desktop/Music";
+    pictures    = "$HOME/Desktop/Pictures";
+    publicshare = "$HOME/Desktop/Public";
+    templates   = "$HOME/Desktop/Templates";
+    videos      = "$HOME/Desktop/Videos";
+  };
   # GTK
   # FIXME: doesn't work due to dconf errors
 #  gtk = {

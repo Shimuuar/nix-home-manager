@@ -13,20 +13,17 @@ in
      ../modules/haskeline.nix
      ../modules/aspell.nix
      ../modules/lxpanel.nix
+     #
      ./desktop.nix
+     ./haskell.nix
+     ./idea.nix
+     ./extra-cli.nix
    ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   # Generic list of programs
   home.packages = with pkgs; [
-    # ----------------
-    # My utils
-    arxiv-get
-    gittery
-    mdo
-    # colcalc
-    root-plot
     # ----------------
     # CLI utils
     ag
@@ -38,9 +35,6 @@ in
     ghostscript
     gnupg
     graphviz
-    haskellPackages.git-annex
-    hledger
-    hledger-ui
     htop
     imagemagick
     inetutils
@@ -57,7 +51,6 @@ in
     rustup
     sqlite-interactive
     sshfs
-    pwntools
     sysstat
     usbutils
     youtube-dl
@@ -67,32 +60,9 @@ in
     pypi2nix
     rr
     gcc
-    # ----------------
-    # Haskell tools
-    cabal-install
-    cabal2nix
-    ghc
-    haskellPackages.ghc-prof-flamegraph
-    haskellPackages.graphmod
-    haskellPackages.hasktags
-    haskellPackages.stack
-    hlint
-
-    idea.idea-community
   ];
   #
   fonts.fontconfig.enable = params.fontconfig or false;
-  xdgUserDirs = {
-    enable      = true;
-    desktop     = "$HOME/Desktop";
-    documents   = "$HOME/Desktop/Documents";
-    download    = "$HOME/Desktop/Downloads";
-    music       = "$HOME/Desktop/Music";
-    pictures    = "$HOME/Desktop/Pictures";
-    publicshare = "$HOME/Desktop/Public";
-    templates   = "$HOME/Desktop/Templates";
-    videos      = "$HOME/Desktop/Videos";
-  };
   # ----
   programs.aspell = {
     enable = true;
