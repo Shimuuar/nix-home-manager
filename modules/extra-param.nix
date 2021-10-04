@@ -7,21 +7,6 @@ in
 {
   options = {
     extra-param = {
-      # fontconfig = mkOption {
-      #   type        = types.bool;
-      #   default     = false;
-      #   defaultText = "false";
-      #   description = ''
-      #     Whether to install aspell
-      #   '';
-      # };
-
-      # dicts  = mkOption {
-      #   default = _: [];
-      #   description = ''
-      #     Which dictionaries should be installed
-      #   '';      };
-
       composeKey = mkOption {
         type        = types.str;
         default     = "ralt";
