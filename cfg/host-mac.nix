@@ -12,5 +12,6 @@ in
   ];
   extra-param.extraBashProfile = ''
     . /Users/alexeykhudyakov/.nix-profile/etc/profile.d/nix.sh
+    # We want to use proper bash and not one supplied by apple
     '';
 }

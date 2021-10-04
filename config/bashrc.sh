@@ -12,10 +12,12 @@
 ## ---------------------------------------------------------
 ## Shell options
 ## ---------------------------------------------------------
-# check the window size after each command
-shopt -s checkwinsize
-# Extended globbing
-shopt -s extglob
+if [[ "$OSTYPE" != darwin* ]]; then
+    # check the window size after each command
+    shopt -s checkwinsize
+    # Extended globbing
+    shopt -s extglob
+fi
 ## -----------------
 
 
