@@ -18,7 +18,12 @@ in
         default     = "";
         description = "Extra bits to insert into .xsession file";
       };
-      
+
+      isMac = mkOption {
+        type        = types.bool;
+        default     = false;
+        description = "Whether we're working on mac";
+      };
     };
   };
 

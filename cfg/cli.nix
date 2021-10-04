@@ -10,7 +10,6 @@ in
     # CLI utils
     ag
     crudini
-    convmv
     diffstat
     enca
     fortune
@@ -33,17 +32,26 @@ in
     rustup
     sqlite-interactive
     sshfs
-    sysstat
-    usbutils
     youtube-dl
     zip
     # ----------------
     # Devtools
-    pypi2nix
-    rr
     gcc
-  ];
-    # ----
+  ] ++
+  (if config.extra-param.isMac
+   then
+     [ coreutils ]
+   else
+     [
+       convmv
+       sysstat
+       usbutils
+       # Devtools
+       pypi2nix
+       rr
+     ]
+  );
+  # ----
   programs.aspell = {
     enable = true;
     dicts  = a: with a; [ en ru ];
