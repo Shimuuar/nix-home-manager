@@ -29,6 +29,7 @@
 (require 'mod-sql-mode)
 (require 'mod-rust-mode)
 (require 'mod-deft)
+;(require 'my-ebib)
 ; Require local modification (if any)
 (require 'my-local "my-local.el" t)
 (require 'my-extra "my-extra.el" t)

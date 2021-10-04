@@ -59,9 +59,11 @@
  ;/zettel/bib/hep.bib"))
 
 ;; see org-ref for use of these variables
-(setq org-ref-bibliography-notes "~/data/zettel/org-ref.org")
-(setq org-ref-default-bibliography
-      (directory-files "~/data/zettel/bib" t ".\.bib"))
-(setq org-ref-pdf-directory "~/Dropbox/bibliography/bibtex-pdfs/")
+(when (require 'org-ref nil t)
+  (setq org-ref-bibliography-notes "~/data/zettel/org-ref.org")
+  (setq org-ref-default-bibliography
+	(directory-files "~/data/zettel/bib" t ".\.bib"))
+  (setq org-ref-pdf-directory "~/data/pdf/")
+  )
 
 (provide 'mod-org-mode)

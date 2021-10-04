@@ -257,6 +257,8 @@ in
       helm
       magit
       deft
+      ebib
+      biblio
     ];
   };
   programs.emacsPkg = {
