@@ -26,6 +26,7 @@ in
      ../modules/haskeline.nix
      ../modules/aspell.nix
      ../modules/lxpanel.nix
+     ./desktop.nix
    ];
 
   # Let Home Manager install and manage itself.
