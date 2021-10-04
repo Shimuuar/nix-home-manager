@@ -19,13 +19,6 @@ in
         description = "Extra bits to insert into .xsession file";
       };
       
-      extraBashProfile = mkOption {
-        type = types.str;
-        default = "";
-        description = ''
-          Extra bits to add to bash profile
-          '';
-      };
     };
   };
 

@@ -51,12 +51,9 @@ in
     config = "data-dir /home/alexey/.nix-profile/lib/aspell";
   };
   # ----
-  extra-param.extraBashProfile = "export EDITOR=nano";
   programs.bash = {
     enable       = true;
     bashrcExtra  = builtins.readFile "${cfg}/bashrc.sh";
-    profileExtra = config.extra-param.extraBashProfile
-    ;
   };
   # ----
   programs.screen = {

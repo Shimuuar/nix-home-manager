@@ -10,7 +10,7 @@ in
     ./haskell.nix
     ./cli.nix
   ];
-  extra-param.extraBashProfile = ''
+  programs.bash.profileExtra = ''
     . /Users/alexeykhudyakov/.nix-profile/etc/profile.d/nix.sh
     # We want to use proper bash and not one supplied by apple
     '';
