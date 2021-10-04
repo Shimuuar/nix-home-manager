@@ -134,10 +134,18 @@ in
     extraConfig = {
       core = { quotePath = false; };
       pull = { ff = "only"; };
-      #
-      merge             = { tool = "kdiff3"; };
-      mergetool.kdiff3  = { path = "${pkgs.kdiff3}/bin/kdiff3"; };
-      mergetool.meld    = { path = "${pkgs.meld}/bin/meld"; };
+      # Kdiff3 doesn't work on macs
+      merge             = {
+        tool = if config.extra-param.isMac then "meld" else "kdiff3";
+      };
+      mergetool =
+        if config.extra-param.isMac then
+          { meld = { path = "${pkgs.meld}/bin/meld"; };
+          }
+        else
+          { meld   = { path = "${pkgs.meld}/bin/meld";     };
+            kdiff3 = { path = "${pkgs.kdiff3}/bin/kdiff3"; };
+          };
       init.defaultBranch = "master";
       #
       filter.nbstripout = {
