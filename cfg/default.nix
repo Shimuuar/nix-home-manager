@@ -1,4 +1,3 @@
-params:
 { config, pkgs, ... }:
 let
   # Repository with config files
@@ -13,6 +12,7 @@ in
      ../modules/haskeline.nix
      ../modules/aspell.nix
      ../modules/lxpanel.nix
+     ../modules/extra-param.nix
      #
      ./desktop.nix
      ./haskell.nix
@@ -62,7 +62,8 @@ in
     gcc
   ];
   #
-  fonts.fontconfig.enable = params.fontconfig or false;
+  # FIXME
+  fonts.fontconfig.enable = false; 
   # ----
   programs.aspell = {
     enable = true;
@@ -71,10 +72,12 @@ in
     config = "data-dir /home/alexey/.nix-profile/lib/aspell";
   };
   # ----
+  extra-param.extraBashProfile = "export EDITOR=nano";
   programs.bash = {
     enable       = true;
     bashrcExtra  = builtins.readFile "${cfg}/bashrc.sh";
-    profileExtra = params.bash.profileExtra or "";
+    profileExtra = config.extra-param.extraBashProfile
+    ;
   };
   # ----
   programs.screen = {
@@ -224,6 +227,13 @@ in
     enable = true;
   };
   # ---- X session ----
+
+  extra-param.composeKey = "menu";
+  extra-param.extraXSession = ''
+    # Programs
+    xfce4-power-manager &
+    '';
+  
   xsession = {
     enable    = true;
     # Gtk & Qt needed handholding to make use of XCompose and Qt5
@@ -232,7 +242,7 @@ in
     initExtra = ''
       # X
       xrdb ${cfg}/X/Xresources
-      bash ${cfg}/util/x-set-keyboard ${params.X.composeKey}
+      bash ${cfg}/util/x-set-keyboard ${config.extra-param.composeKey}
       export GTK_IM_MODULE=xim
       export QT_IM_MODULE=xim
       export XCOMPOSEFILE=${cfg}/X/XCompose
@@ -240,7 +250,7 @@ in
       xset +fp ${pkgs.terminus_font}/share/fonts/terminus
       # Machine-specific programs
       lxpanel &
-      ${params.X.extraPrograms or ""}
+      ${config.extra-param.extraXSession}
       # Programs
       ${pkgs.firefox}/bin/firefox                                         &
       ${pkgs.thunderbird}/bin/thunderbird                                 &
