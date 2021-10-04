@@ -10,4 +10,7 @@ in
     ./haskell.nix
     ./cli.nix
   ];
+  extra-param.extraBashProfile = ''
+    . /Users/alexeykhudyakov/.nix-profile/etc/profile.d/nix.sh
+    '';
 }
