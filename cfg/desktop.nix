@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 let
+  # Repository with config files
+  cfg = ../config;
   # Wrapped telegram. It oesn;t like XDG_CURRENT_DESKTOP set
   telegram-wrapped = pkgs.stdenv.mkDerivation {
     name    = "telegram-desktop";
@@ -138,6 +140,14 @@ in
     ];
   };
   # ----
+  services.syncthing = {
+    enable = true;
+  };
+  # ----
+  services.gpg-agent = {
+    enable = true;
+  };
+  # ----
   # Surprisingly nm-applet doesn't work without notification service
   services.dunst = {
     enable = true;
@@ -156,6 +166,47 @@ in
         foreground = "#eceff1";
         timeout    = 10;
       };
+    };
+  };
+  xsession = {
+    enable    = true;
+    # Gtk & Qt needed handholding to make use of XCompose and Qt5
+    # specifically does need explicit instructions to find XCompose
+    # file.
+    initExtra = ''
+      # X
+      xrdb ${cfg}/X/Xresources
+      bash ${cfg}/util/x-set-keyboard ${config.extra-param.composeKey}
+      export GTK_IM_MODULE=xim
+      export QT_IM_MODULE=xim
+      export XCOMPOSEFILE=${cfg}/X/XCompose
+      export XDG_CURRENT_DESKTOP=kde
+      xset +fp ${pkgs.terminus_font}/share/fonts/terminus
+      # Machine-specific programs
+      lxpanel &
+      ${config.extra-param.extraXSession}
+      # Programs
+      ${pkgs.firefox}/bin/firefox                                         &
+      ${pkgs.thunderbird}/bin/thunderbird                                 &
+      telegram-wrapped                                                    &
+      ${pkgs.udiskie}/bin/udiskie --tray                                  &
+      emacs --name emacs-todo --eval '(load-file "${cfg}/emacs-todo.el")' &
+      nix-shell -p 'texlive.combine {inherit (texlive) scheme-medium;}'   \
+        --run "emacs --name emacs-zettel" &
+      if which spotify &> /dev/null; then
+         (sleep 4 && spotify) &
+      fi
+      # Wallpapers
+      while : ; do
+        python ${cfg}/util/set-random-wallpaper
+        sleep 1800
+      done &
+      '';
+    windowManager.xmonad = {
+      enable                 = true;
+      enableContribAndExtras = true;
+      # config               = null; # Used for debugging configuration
+      config                 = "${cfg}/X/xmonad.hs";
     };
   };
 }

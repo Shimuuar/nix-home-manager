@@ -1,0 +1,199 @@
+{ config, pkgs, ... }:
+let
+  # Repository with config files
+  cfg = ../config;
+in
+{
+  # Generic list of programs
+  home.packages = with pkgs; [
+    # ----------------
+    # CLI utils
+    ag
+    crudini
+    convmv
+    diffstat
+    enca
+    fortune
+    ghostscript
+    gnupg
+    graphviz
+    htop
+    imagemagick
+    inetutils
+    mc
+    lz4
+    jq
+    mercurial
+    p7zip
+    pdfgrep
+    pdftk
+    postgresql_12
+    python3Packages.ipython
+    rlwrap
+    rustup
+    sqlite-interactive
+    sshfs
+    sysstat
+    usbutils
+    youtube-dl
+    zip
+    # ----------------
+    # Devtools
+    pypi2nix
+    rr
+    gcc
+  ];
+    # ----
+  programs.aspell = {
+    enable = true;
+    dicts  = a: with a; [ en ru ];
+    # See discussion: https://github.com/NixOS/nixpkgs/issues/1000
+    config = "data-dir /home/alexey/.nix-profile/lib/aspell";
+  };
+  # ----
+  extra-param.extraBashProfile = "export EDITOR=nano";
+  programs.bash = {
+    enable       = true;
+    bashrcExtra  = builtins.readFile "${cfg}/bashrc.sh";
+    profileExtra = config.extra-param.extraBashProfile
+    ;
+  };
+  # ----
+  programs.screen = {
+    enable   = true;
+    settings = builtins.readFile "${cfg}/screenrc";
+  };
+  # ----
+  programs.emacs = {
+    enable = true;
+    extraPackages = epkg : with epkg; [
+      undo-tree
+      browse-kill-ring
+      # Modes
+      go-mode
+      rust-mode
+      haskell-mode
+      hledger-mode
+      julia-mode
+      kotlin-mode
+      markdown-mode
+      nix-mode
+      scala-mode
+      yaml-mode
+      toml-mode
+      # Tools
+      org-roam
+      org-roam-bibtex
+      org-ref
+      helm
+      magit
+      deft
+    ];
+  };
+  programs.emacsPkg = {
+    enable   = true;
+    packages = [
+    ];
+  };
+  # ----
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      "oka04.ihep.su" = {
+        user         = "khudyakov";
+        proxyJump    = "istrad.ihep.su";
+        extraOptions = {
+          "KexAlgorithms" = "+diffie-hellman-group1-sha1";
+        };
+      };
+      "oka01.ihep.su" = {
+        user         = "khudyakov";
+        proxyJump    = "sepulcarium.org";
+      };
+      "oka02.ihep.su" = {
+        user         = "khudyakov";
+        proxyJump    = "sepulcarium.org";
+      };
+      "oka03.ihep.su" = {
+        user         = "khudyakov";
+        proxyJump    = "sepulcarium.org";
+      };
+    };
+  };
+  # ----
+  programs.git = {
+    enable      = true;
+    userName    = "Alexey Khudyakov";
+    userEmail   = "alexey.skladnoy@gmail.com";
+    package     = pkgs.gitAndTools.gitFull;
+    extraConfig = {
+      core = { quotePath = false; };
+      pull = { ff = "only"; };
+      #
+      merge             = { tool = "kdiff3"; };
+      mergetool.kdiff3  = { path = "${pkgs.kdiff3}/bin/kdiff3"; };
+      mergetool.meld    = { path = "${pkgs.meld}/bin/meld"; };
+      init.defaultBranch = "master";
+      #
+      filter.nbstripout = {
+        clean    = "${pkgs.nbstripout}/bin/nbstripout";
+        smudge   = "cat";
+        required = true;
+      };
+    };
+  };
+  # ----
+  programs.mercurial = {
+    enable      = true;
+    userName    = "Alexey Khudyakov";
+    userEmail   = "alexey.skladnoy@gmail.com";
+    extraConfig = ''
+    [extensions]
+    record   =
+    hgk      =
+    hggit    =
+    color    =
+    pager    =
+    '';
+  };
+  # ----
+  programs.haskeline = {
+    enable = true;
+    config = ''
+      historyDuplicates: IgnoreAll
+      '';
+  };
+  # ----
+  programs.gdb = {
+    enable  = true;
+    gdbinit = ''
+      set auto-load safe-path /
+      set disassembly-flavor intel
+
+      define ghcR1
+        printf "R1: 0x%016lx\n", $rbx
+        x *$rbx
+      end
+      define ghcR2
+        printf "R2: 0x%016lx\n", $r14
+        x *$r14
+      end
+      define ghcR3
+        printf "R3: 0x%016lx\n", $rsi
+        x *$rsi
+      end
+      define ghcR4
+        printf "R4: 0x%016lx\n", $rdi
+        x *$rdi
+      end
+      define ghcR5
+        printf "R5: 0x%016lx\n", $r8
+        x *$r8
+      end
+      define ghcR6
+        printf "R6: 0x%016lx\n", $r9
+        x *$r9
+      end
+      '';
+  };
+}
