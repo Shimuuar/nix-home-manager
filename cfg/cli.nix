@@ -69,6 +69,12 @@ in
     settings = builtins.readFile "${cfg}/screenrc";
   };
   # ----
+  programs.tmux = {
+    enable   = true;
+    clock24  = true;
+    shortcut = "]";
+  };
+  # ----
   programs.emacs = {
     enable = true;
     extraPackages = epkg : with epkg; [
