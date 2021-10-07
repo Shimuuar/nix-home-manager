@@ -128,8 +128,8 @@ line."
     (lambda () (interactive)
       (haskell-move-nested  1)))
   ;; Comments
-  (define-key haskell-mode-map (kbd "M-[") 'haskell-navigate-imports)
-  (define-key haskell-mode-map (kbd "M-]") 'haskell-navigate-imports-return)
+  (define-key haskell-mode-map (kbd "C-M-[") 'haskell-navigate-imports)
+  (define-key haskell-mode-map (kbd "C-M-]") 'haskell-navigate-imports-return)
   ;; PRAGMAS
   (define-key haskell-mode-map (kbd "C-c i i") 'my/haskell-insert-inline)
   (define-key haskell-mode-map (kbd "C-c i l")
