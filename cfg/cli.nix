@@ -135,7 +135,9 @@ in
   programs.git = {
     enable      = true;
     userName    = "Alexey Khudyakov";
-    userEmail   = "alexey.skladnoy@gmail.com";
+    userEmail   = if config.extra-param.isMac
+                  then "khudyakov@sirius.online"
+                  else "alexey.skladnoy@gmail.com";
     package     = pkgs.gitAndTools.gitFull;
     extraConfig = {
       core = { quotePath = false; };
