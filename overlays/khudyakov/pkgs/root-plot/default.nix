@@ -2,7 +2,7 @@
 stdenv.mkDerivation {
   name    = "root-plot";
   version = 0.1;
-  builtins.fetchGit {
+  src = builtins.fetchGit {
     url = "https://Shimuuar@bitbucket.org/Shimuuar/root-plot.git";
     rev = "ea425d1e3f5764b77f5615f03b01c95be0873fca";
     ref = "master";
