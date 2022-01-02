@@ -35,6 +35,7 @@ in
       deluge
       evince
       firefox
+      inkscape
       krusader
       gimp
       nomacs
