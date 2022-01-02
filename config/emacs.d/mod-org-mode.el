@@ -49,12 +49,13 @@
 
 ;; ----------------------------------------------------------------
 ;; Set up org-roam
-(when (boundp 'org-roam-mode)
+(setq org-roam-v2-ack t)
+(when (require 'org-roam-mode nil t)
   ;; Data source 
   (setq org-roam-directory '"~/data/zettel")
   (setq org-roam-completion-system 'helm)
   ;; Key bindings
-  (global-set-key (kbd "C-c q") 'org-roam-find-file)
+  (global-set-key (kbd "C-c q") 'org-roam-node-find)
   )
 ;(setq reftex-default-bibliography	;
  ;/zettel/bib/hep.bib"))
