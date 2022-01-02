@@ -18,6 +18,7 @@
 (setq org-agenda-start-on-weekday 1)
 (setq calendar-week-start-day     1)
 (setq org-agenda-files '( "~/data/tracker/"))
+(setq org-adapt-indentation t)
 
 ;; ----------------------------------------------------------------
 ;; Hooks and keybindings
