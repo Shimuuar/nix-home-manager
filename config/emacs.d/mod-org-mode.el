@@ -62,10 +62,9 @@
 
 ;; see org-ref for use of these variables
 (when (require 'org-ref nil t)
-  (setq org-ref-bibliography-notes "~/data/zettel/org-ref.org")
-  (setq org-ref-default-bibliography
-	(directory-files "~/data/zettel/bib" t ".\.bib"))
-  (setq org-ref-pdf-directory "~/data/pdf/")
+  (setq bibtex-completion-bibliography (directory-files "~/data/zettel/bib" t ".\.bib"))
+  (setq bibtex-completion-library-path "~/data/pdf/")  
+  (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
   )
 
 (provide 'mod-org-mode)
