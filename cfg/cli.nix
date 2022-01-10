@@ -28,6 +28,7 @@ in
     pdftk
     postgresql_12
     python3Packages.ipython
+    sdist-release
     rlwrap
     rustup
     sqlite-interactive
