@@ -86,6 +86,7 @@ alias l='ls -1'
 alias ll='ls -lF'
 alias la='ls -A'
 alias lla='ls -lA'
+alias aghs="ag -rs -G '\.hs$'"
 
 # rm safety belt
 alias rm='rm -i'

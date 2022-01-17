@@ -18,6 +18,7 @@
 (setq org-agenda-start-on-weekday 1)
 (setq calendar-week-start-day     1)
 (setq org-agenda-files '( "~/data/tracker/"))
+(setq org-adapt-indentation t)
 
 ;; ----------------------------------------------------------------
 ;; Hooks and keybindings
@@ -48,22 +49,22 @@
 
 ;; ----------------------------------------------------------------
 ;; Set up org-roam
-(when (boundp 'org-roam-mode)
+(setq org-roam-v2-ack t)
+(when (require 'org-roam-mode nil t)
   ;; Data source 
   (setq org-roam-directory '"~/data/zettel")
   (setq org-roam-completion-system 'helm)
   ;; Key bindings
-  (global-set-key (kbd "C-c q") 'org-roam-find-file)
+  (global-set-key (kbd "C-c q") 'org-roam-node-find)
   )
 ;(setq reftex-default-bibliography	;
  ;/zettel/bib/hep.bib"))
 
 ;; see org-ref for use of these variables
 (when (require 'org-ref nil t)
-  (setq org-ref-bibliography-notes "~/data/zettel/org-ref.org")
-  (setq org-ref-default-bibliography
-	(directory-files "~/data/zettel/bib" t ".\.bib"))
-  (setq org-ref-pdf-directory "~/data/pdf/")
+  (setq bibtex-completion-bibliography (directory-files "~/data/zettel/bib" t ".\.bib"))
+  (setq bibtex-completion-library-path "~/data/pdf/")  
+  (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
   )
 
 (provide 'mod-org-mode)

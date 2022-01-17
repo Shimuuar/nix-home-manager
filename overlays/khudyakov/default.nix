@@ -25,6 +25,7 @@ in
   fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate {};
   mdo            = self.callPackage ./pkgs/mdo {};
   root-plot      = self.callPackage ./pkgs/root-plot {};
+  sdist-release  = self.callPackage ./pkgs/sdist-release {};
   arxiv-get      = self.haskellPackages.callPackage ./pkgs/arxiv-get {};
   gittery        = self.haskellPackages.callPackage ./pkgs/gittery   {};
   plotly-server  = self.haskellPackages.callPackage ./pkgs/plotly-server {};

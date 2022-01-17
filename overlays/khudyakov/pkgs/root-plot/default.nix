@@ -2,10 +2,10 @@
 stdenv.mkDerivation {
   name    = "root-plot";
   version = 0.1;
-  src = fetchgit {
-    url    = "https://Shimuuar@bitbucket.org/Shimuuar/root-plot.git";
-    rev    = "38299765689e0217fd4c3bab17b832f992c47e5c";
-    sha256 = "183kf6gvpng6gb8kkfnhscr7vv04wb2wxif7vgjsv4y2qy55kdyi";
+  src = builtins.fetchGit {
+    url = "https://Shimuuar@bitbucket.org/Shimuuar/root-plot.git";
+    rev = "ea425d1e3f5764b77f5615f03b01c95be0873fca";
+    ref = "master";
   };
   nativeBuildInputs = [ bison flex ];
   buildInputs       = [ stdenv root boost ];

@@ -31,6 +31,7 @@ in
     parallel
     postgresql_12
     python3Packages.ipython
+    sdist-release
     rlwrap
     rustup
     sqlite-interactive
@@ -133,6 +134,22 @@ in
       "oka03.ihep.su" = {
         user         = "khudyakov";
         proxyJump    = "sepulcarium.org";
+        # oka03 is very old
+        extraOptions = {
+          "HostKeyAlgorithms" = "+ssh-rsa";
+        };
+      };
+      "istrad.ihep.su" = {
+        # istrad is very old
+        extraOptions = {
+          "HostKeyAlgorithms" = "+ssh-rsa";
+        };
+      };
+      "istra.ihep.su" = {
+        # istra is very old
+        extraOptions = {
+          "HostKeyAlgorithms" = "+ssh-rsa";
+        };
       };
     };
   };
