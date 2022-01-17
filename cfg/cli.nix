@@ -13,6 +13,7 @@ in
     diffstat
     enca
     fortune
+    findutils
     ghostscript
     gnupg
     graphviz
@@ -22,10 +23,12 @@ in
     mc
     lz4
     jq
+    yq
     mercurial
     p7zip
     pdfgrep
     pdftk
+    parallel
     postgresql_12
     python3Packages.ipython
     rlwrap
@@ -34,6 +37,8 @@ in
     sshfs
     youtube-dl
     zip
+    curl
+    wget
     # ----------------
     # Devtools
     gcc
