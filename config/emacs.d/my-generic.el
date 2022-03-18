@@ -124,6 +124,11 @@
   (define-key helm-find-files-map (kbd "C-w") 'helm-find-files-up-one-level)
   (define-key helm-find-files-map (kbd "<tab>") 'helm-execute-persistent-action)
   (define-key helm-find-files-map (kbd "S-<tab>") 'helm-execute-action)  
+  ;; Helm uses current input method of buffer. This is usually very
+  ;; wrong thing. This resets input method to default
+  (add-hook 'helm-minibuffer-set-up-hook
+            (lambda ()
+              (deactivate-input-method)))
   )
 ;; (require 'ido)
 ;; (ido-mode 1)
