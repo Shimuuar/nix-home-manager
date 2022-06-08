@@ -24,17 +24,25 @@
 
 ;; No startup message
 (setq inhibit-startup-message t)
-; No menu, no toolbar, no scroll bar. 
+;; No menu, no toolbar, no scroll bar.
 (tool-bar-mode   -1)
 (scroll-bar-mode -1)
 (menu-bar-mode   -1)
-; Set cursor and mouse-pointer colours
+;; Set cursor and mouse-pointer colours
 (set-cursor-color "red")
 (set-mouse-color  "goldenrod")
 (set-face-background 'region "gray30")
 (set-foreground-color "white")
 (set-background-color "black")
-; No annoying beeps
+;; Change cursor color depending on input method
+(add-hook 'input-method-activate-hook
+	  (lambda ()
+	    (if (string= current-input-method "russian-computer")
+		(set-cursor-color "#CC44FF"))))
+(add-hook 'input-method-deactivate-hook
+	  (lambda ()
+	    (set-cursor-color "red")))
+;; No annoying beeps
 (setq visible-bell t)
 ;; ================
 
