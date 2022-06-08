@@ -118,6 +118,11 @@
 ;;============================================================
 (when (boundp 'helm-mode)
   (helm-mode)
+  ;; Filter boring files
+  (customize-set-variable 'helm-boring-file-regexp-list
+			  (append '("\\.dyn_o$" "\\.dyn_hi$" "^TAGS$")
+				  helm-boring-file-regexp-list))
+  (setq helm-ff-skip-boring-files t)
   ;; Bound helm-based functions
   (global-set-key (kbd "M-x") 'helm-M-x)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
