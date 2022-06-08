@@ -35,13 +35,21 @@
 (set-foreground-color "white")
 (set-background-color "black")
 ;; Change cursor color depending on input method
-(add-hook 'input-method-activate-hook
-	  (lambda ()
-	    (if (string= current-input-method "russian-computer")
-		(set-cursor-color "#CC44FF"))))
-(add-hook 'input-method-deactivate-hook
-	  (lambda ()
-	    (set-cursor-color "red")))
+(if (boundp 'window-selection-change-functions)
+    (progn
+      (defun my/set-cursor-by-input-method()
+	(cond ((equal   nil                current-input-method) (set-cursor-color "red"))
+	      ((string= "russian-computer" current-input-method) (set-cursor-color "#CC44FF"))
+	      ))
+      ;; Change cursor color when we switch between buffers
+      (add-to-list
+       'window-selection-change-functions
+       (lambda (x) (my/set-cursor-by-input-method))
+      ;; Change cursor color when we change layout
+      (add-hook 'input-method-activate-hook 'my/set-cursor-by-input-method)
+      (add-hook 'input-method-deactivate-hook
+		(lambda () (set-cursor-color "red")))
+      )))
 ;; No annoying beeps
 (setq visible-bell t)
 ;; ================
