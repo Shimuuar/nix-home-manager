@@ -4,7 +4,7 @@
     # ----------------
     # My utils
     arxiv-get
-    gittery
+#    gittery
     mdo
     # colcalc
     root-plot

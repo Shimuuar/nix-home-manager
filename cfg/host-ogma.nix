@@ -9,7 +9,7 @@ in
     #
     ./desktop.nix
     ./haskell.nix
-    ./idea.nix
+    #./idea.nix
     ./cli.nix
     ./extra-cli.nix
   ];

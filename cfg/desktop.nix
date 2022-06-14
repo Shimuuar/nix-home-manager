@@ -81,7 +81,7 @@ in
       # ----------------
       stalonetray
       xmobar
-      gnome3.networkmanagerapplet
+      networkmanagerapplet
       xfce.xfce4-power-manager
     ];
   # ----
