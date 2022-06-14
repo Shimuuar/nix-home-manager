@@ -145,7 +145,9 @@ line."
 
   ;; Constants definition
   (defcustom my/haskell-language-pragmas
-    (split-string (shell-command-to-string "ghc --supported-extensions"))
+    (seq-filter
+     (lambda (s) (not (string-match-p "^No" s)))
+     (split-string (shell-command-to-string "ghc --supported-extensions")))
     "List of language pragmas supported by the installed version of GHC."
     :group 'my/haskell
     :type  '(repeat string))
