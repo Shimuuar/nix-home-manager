@@ -177,6 +177,7 @@
 (when (require 'undo-tree nil t)
   (progn
     (global-undo-tree-mode)
+    (setq undo-tree-auto-save-history nil)
     ))
 
 ;; Visible mark
