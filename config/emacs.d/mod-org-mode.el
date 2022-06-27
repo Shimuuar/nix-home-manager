@@ -54,6 +54,12 @@
   ;; Data source 
   (setq org-roam-directory '"~/data/zettel")
   (setq org-roam-completion-system 'helm)
+  ;; We need to disable exclusion oherwise whole direcory gets excluded. See:
+  ;;  - https://github.com/org-roam/org-roam/issues/2165
+  ;;  - https://github.com/org-roam/org-roam/pull/2178
+  ;;
+  ;; So far has not propagated to nixpkgs yet
+  (setq org-roam-file-exclude-regexp nil)
   ;; Key bindings
   (global-set-key (kbd "C-c q") 'org-roam-node-find)
   ;; Render tags too
