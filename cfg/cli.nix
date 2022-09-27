@@ -43,6 +43,7 @@ in
     # ----------------
     # Devtools
     gcc
+    julia-bin
   ] ++
   (if config.extra-param.isMac
    then
@@ -162,6 +163,7 @@ in
                   else "alexey.skladnoy@gmail.com";
     package     = pkgs.gitAndTools.gitFull;
     extraConfig = {
+      safe = { directory = "/etc/nixos"; };
       core = { quotePath = false; };
       pull = { ff = "only"; };
       # Kdiff3 doesn't work on macs
