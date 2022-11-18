@@ -73,6 +73,7 @@ in
       feh
       mpv
       pavucontrol
+      mpc-cli
       # ----------------
       # Fonts
       unifont
