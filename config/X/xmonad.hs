@@ -299,7 +299,12 @@ myXPConfig = def
 
 ----------------------------------------------------------------
 -- XMonad config
-myConfig = def
+myConfig
+  = addEwmhWorkspaceSort (pure scratchpadFilterOutWorkspace)
+  $ ewmhFullscreen
+  $ ewmh
+  $ docks
+  $ def
   { terminal           = "konsole"
   , modMask            = mod4Mask
   , focusFollowsMouse  = True
@@ -312,15 +317,10 @@ myConfig = def
   , keys               = myKeys
   , mouseBindings      = myMouseBindings
     -- hooks, layouts
-  , startupHook        = ewmhDesktopsStartup
-                      >> docksStartupHook
-  , handleEventHook    = ewmhDesktopsEventHook
-                      <> docksEventHook
-                      <> dynamicHooks
+  , handleEventHook    = dynamicHooks
   , layoutHook         = myLayout
   , manageHook         = myManageHook
                       <> manageDocks
-  , logHook            = ewmhDesktopsLogHookCustom scratchpadFilterOutWorkspace
   }
 
 
