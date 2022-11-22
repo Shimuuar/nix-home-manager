@@ -41,6 +41,7 @@ in
       nomacs
       gwenview
       libreoffice
+      sonata
       telegram-wrapped
       thunderbird
       wireshark
