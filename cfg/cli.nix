@@ -117,13 +117,6 @@ in
   programs.ssh = {
     enable = true;
     matchBlocks = {
-      "oka04.ihep.su" = {
-        user         = "khudyakov";
-        proxyJump    = "istrad.ihep.su";
-        extraOptions = {
-          "KexAlgorithms" = "+diffie-hellman-group1-sha1";
-        };
-      };
       "oka01.ihep.su" = {
         user         = "khudyakov";
         proxyJump    = "sepulcarium.org";
@@ -132,26 +125,33 @@ in
         user         = "khudyakov";
         proxyJump    = "sepulcarium.org";
       };
+      # oka03,oka04 are very old
       "oka03.ihep.su" = {
         user         = "khudyakov";
         proxyJump    = "sepulcarium.org";
-        # oka03 is very old
         extraOptions = {
-          "HostKeyAlgorithms" = "+ssh-rsa";
+          "HostKeyAlgorithms"      = "+ssh-rsa";
+          "PubkeyAcceptedKeyTypes" = "+ssh-rsa";
+          "KexAlgorithms"          = "+diffie-hellman-group1-sha1";
         };
       };
-      "istrad.ihep.su" = {
-        # istrad is very old
+      "oka04.ihep.su" = {
+        user         = "khudyakov";
+        proxyJump    = "oka01.ihep.su";
         extraOptions = {
-          "HostKeyAlgorithms" = "+ssh-rsa";
+          "HostKeyAlgorithms"      = "+ssh-rsa";
+          "PubkeyAcceptedKeyTypes" = "+ssh-rsa";
+          "KexAlgorithms"          = "+diffie-hellman-group1-sha1";
         };
       };
+      # istra & istrad are no longer accessible from outside
       "istra.ihep.su" = {
-        # istra is very old
-        extraOptions = {
-          "HostKeyAlgorithms" = "+ssh-rsa";
-        };
+        proxyJump = "oka01.ihep.su";
       };
+      # istrad is mostly off
+#      "istrad.ihep.su" = {
+#        proxyJump = "oka01.ihep.su";
+#      };
     };
   };
   # ----

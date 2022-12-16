@@ -6,9 +6,9 @@ in
 {
   imports = [
     ./cfg/common.nix
+    #
     ./cfg/cli.nix
     ./cfg/extra-cli.nix
-    #
     ./cfg/desktop.nix
     ./cfg/haskell.nix
     #./cfg/idea.nix
