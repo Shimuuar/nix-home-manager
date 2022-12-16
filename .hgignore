@@ -1,8 +1,0 @@
-syntax:glob
-*.o
-*.hi
-*.pyc
-util/word
-util/mdo
-util/tryless
-util/mirror-hg
