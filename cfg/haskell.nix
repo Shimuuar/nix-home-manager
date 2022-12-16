@@ -5,7 +5,7 @@
     # Haskell tools
     cabal-install
     cabal2nix
-    ghc
+    (haskellPackages.ghcWithPackages(p: with p; [xmonad xmonad-contrib]))
     haskellPackages.ghc-prof-flamegraph
     haskellPackages.graphmod
     haskellPackages.hasktags

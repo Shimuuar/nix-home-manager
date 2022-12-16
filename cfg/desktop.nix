@@ -85,10 +85,6 @@ in
       xmobar
       networkmanagerapplet
       xfce.xfce4-power-manager
-      # ---------------
-      # XMonad recompilation
-      haskellPackages.xmonad
-      haskellPackages.xmonad-contrib
     ];
   # ----
   xdgUserDirs = {
