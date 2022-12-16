@@ -9,10 +9,13 @@ in
     #
     ./desktop.nix
     ./haskell.nix
-    ./idea.nix
+    #./idea.nix
     ./cli.nix
     ./extra-cli.nix
   ];
+  home.stateVersion  = "22.11";
+  home.username      = "alexey";
+  home.homeDirectory = "/home/alexey";
   #
   fonts.fontconfig.enable = true;
   #
