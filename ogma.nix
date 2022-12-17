@@ -23,15 +23,29 @@ in
   extra-param.extraXSession = ''
     # Turn on num lock
     ${pkgs.numlockx}/bin/numlockx
-    # Run tunnel to dagda (Deluge)
-    while : ; do
-      ssh -oBatchMode=yes -N -L 127.0.0.2:58846:127.0.0.1:58846 192.168.1.4
-      sleep 30
-    done &
-    # Run tunnel to dagda (syncthing)
-    while : ; do
-      ssh -oBatchMode=yes -N -L 127.0.0.2:8384:127.0.0.1:8384 192.168.1.4
-      sleep 30
-    done &
     '';
+  # ----------------------------------------------------------------
+  # SSH tunnels
+  systemd.user.services = {
+    # Tunnel for deluge
+    tunnel-deluge = {
+      Unit.Description = "SSH tunnel for deluge";
+      Install.WantedBy = [ "default.target" ];
+      Service = {
+        ExecStart  = "${pkgs.openssh}/bin/ssh -oBatchMode=yes -N -L 127.0.0.2:58846:127.0.0.1:58846 192.168.1.4";
+        Restart    = "always";
+        RestartSec = "30s";
+      };
+    };
+    # Tunnel for syncthing API on dagda
+    tunnel-syncthing = {
+      Unit.Description = "SSH tunnel for web API on dagda";
+      Install.WantedBy = [ "default.target" ];
+      Service = {
+        ExecStart  = "${pkgs.openssh}/bin/ssh -oBatchMode=yes -N -L 127.0.0.2:8384:127.0.0.1:8384 192.168.1.4";
+        Restart    = "always";
+        RestartSec = "30s";
+      };
+    };
+  };
 }
