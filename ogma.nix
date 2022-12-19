@@ -1,7 +1,17 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   # Repository with config files
   cfg = ../config;
+  # Function to make SSH tunnels
+  makeTunnel = { magic, host, description, enable ? true }:
+    { Unit.Description = description;
+      Install.WantedBy = if enable then [ "default.target" ] else lib.mkForce [];
+      Service = {
+        ExecStart  = "${pkgs.openssh}/bin/ssh -oBatchMode=yes -N -L ${magic} ${host}";
+        Restart    = "always";
+        RestartSec = "30s";
+      };
+    };
 in
 {
   imports = [
@@ -27,24 +37,52 @@ in
   # ----------------------------------------------------------------
   # SSH tunnels
   systemd.user.services = {
-    # Tunnel for deluge
-    tunnel-deluge = {
-      Unit.Description = "SSH tunnel for deluge";
+    tunnel-deluge = makeTunnel {
+      description = "SSH tunnel for deluge";
+      magic       = "127.0.0.2:58846:127.0.0.1:58846";
+      host        = "192.168.1.4";
+    };
+    tunnel-syncthing = makeTunnel {
+      description = "SSH tunnel for syncthing's web API on dagda";
+      magic       = "127.0.0.2:8384:127.0.0.1:8384";
+      host        = "192.168.1.4";
+    };
+    tunnel-oka-wiki = makeTunnel {
+      description = "SSH tunnel OKA wiki";
+      magic       = "127.100.0.1:8080:istra.ihep.su:80";
+      host        = "oka01.ihep.su";
+      enable      = false;
+    };
+    tunnel-okavme = makeTunnel {
+      description = "SSH tunnel for OKA slow control";
+      magic       = "127.100.0.2:8080:okavme.ihep.su:80";
+      host        = "oka01.ihep.su";
+      enable      = false;
+    };
+  };
+  # ----------------------------------------------------------------
+  # Mount for SSHFS
+  systemd.user.mounts = {
+    "home-alexey-sshfs-dagda" = {
+      Unit.Description = "SSHFS to dagda's nixos";
       Install.WantedBy = [ "default.target" ];
-      Service = {
-        ExecStart  = "${pkgs.openssh}/bin/ssh -oBatchMode=yes -N -L 127.0.0.2:58846:127.0.0.1:58846 192.168.1.4";
-        Restart    = "always";
-        RestartSec = "30s";
+      Mount = {
+        What    = "root@192.168.1.4:/etc/nixos";
+        Where   = "/home/alexey/sshfs/dagda";
+        Type    = "fuse.sshfs";
+        Options = "_netdev,noauto,users,idmap=user,x-systemd-automount";
       };
     };
-    # Tunnel for syncthing API on dagda
-    tunnel-syncthing = {
-      Unit.Description = "SSH tunnel for web API on dagda";
+  };
+  systemd.user.mounts = {
+    "home-alexey-sshfs-aengus" = {
+      Unit.Description = "SSHFS to dagda's nixos";
       Install.WantedBy = [ "default.target" ];
-      Service = {
-        ExecStart  = "${pkgs.openssh}/bin/ssh -oBatchMode=yes -N -L 127.0.0.2:8384:127.0.0.1:8384 192.168.1.4";
-        Restart    = "always";
-        RestartSec = "30s";
+      Mount = {
+        What    = "root@192.168.1.6:/etc/nixos";
+        Where   = "/home/alexey/sshfs/aengus";
+        Type    = "fuse.sshfs";
+        Options = "_netdev,noauto,users,idmap=user,x-systemd-automount";
       };
     };
   };

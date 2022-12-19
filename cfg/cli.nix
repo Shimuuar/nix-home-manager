@@ -125,6 +125,10 @@ in
         user         = "khudyakov";
         proxyJump    = "sepulcarium.org";
       };
+      "okavme.ihep.su" = {
+        user         = "control";
+        proxyJump    = "oka01.ihep.su";
+      };
       # oka03,oka04 are very old
       "oka03.ihep.su" = {
         user         = "khudyakov";
