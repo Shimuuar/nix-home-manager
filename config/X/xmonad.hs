@@ -84,7 +84,6 @@ myKeys conf = mkKeymap conf
             , ("m", "e-Mail")
             , ("k", "gitk")
             , ("d", "TODO")
-            , ("s", "Spotify")
             , ("z", "Zettel")
             ] >>= makeShiftPair ""
       )
@@ -234,7 +233,6 @@ myManageHook = mconcat $ concat
           return $! kdiff
       ) --> (doF (W.greedyView "10" . W.shift "10"))
     , className =? "Gitk"    --> doWorkspace "gitk"
-    , className =? "Spotify" --> doWorkspace "Spotify"
     ]
     -- Ignored windows
   , [ title     =? "plasma-desktop"
@@ -279,13 +277,6 @@ myManageHook = mconcat $ concat
   where
     queries ==> hook = [ q --> hook | q <- queries ]
 
-dynamicHooks :: Event -> X All
-dynamicHooks = dynamicPropertyChange "WM_CLASS" $ mconcat
-  -- Spotify is extremely annoying and only sets its WM_CLASS after
-  -- window creation. That requires watching WM_CLASS property
-  [ className =? "Spotify" --> doWorkspace "Spotify"
-  ]
-
 ------------------------------------------------------------------------
 -- XPromt settings
 myXPConfig :: XPConfig
@@ -310,14 +301,13 @@ myConfig
   , focusFollowsMouse  = True
   , borderWidth        = 1
   , workspaces         = (map show [1..10]) ++
-                         ["WWW","IM","Torrent","Media","e-Mail","gitk","TODO","Spotify","Zettel"]
+                         ["WWW","IM","Torrent","Media","e-Mail","gitk","TODO","Zettel"]
   , normalBorderColor  = "#dddddd"
   , focusedBorderColor = "#ff0000"
     -- key bindings
   , keys               = myKeys
   , mouseBindings      = myMouseBindings
     -- hooks, layouts
-  , handleEventHook    = dynamicHooks
   , layoutHook         = myLayout
   , manageHook         = myManageHook
                       <> manageDocks
