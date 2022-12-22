@@ -77,11 +77,23 @@ in
   };
   systemd.user.mounts = {
     "home-alexey-sshfs-aengus" = {
-      Unit.Description = "SSHFS to dagda's nixos";
+      Unit.Description = "SSHFS to aengus's nixos";
       Install.WantedBy = [ "default.target" ];
       Mount = {
         What    = "root@192.168.1.6:/etc/nixos";
         Where   = "/home/alexey/sshfs/aengus";
+        Type    = "fuse.sshfs";
+        Options = "_netdev,noauto,users,idmap=user,x-systemd-automount";
+      };
+    };
+  };
+  systemd.user.mounts = {
+    "home-alexey-sshfs-oka_control" = {
+      Unit.Description = "SSHFS to OKA slow-control";
+      Install.WantedBy = [ "default.target" ];
+      Mount = {
+        What    = "alexey@192.168.1.6:/opt/oka-control";
+        Where   = "/home/alexey/sshfs/oka_control";
         Type    = "fuse.sshfs";
         Options = "_netdev,noauto,users,idmap=user,x-systemd-automount";
       };
