@@ -85,6 +85,7 @@ myKeys conf = mkKeymap conf
             , ("k", "gitk")
             , ("d", "TODO")
             , ("z", "Zettel")
+            , ("a", "Audio")
             ] >>= makeShiftPair ""
       )
       -- Quit XMonad
@@ -252,6 +253,8 @@ myManageHook = mconcat $ concat
     , className =? "wesnoth"
     , className =? "Steam"
     ] ==> doMedia
+  , [ className =? "Sonata"
+    ] ==> doWorkspace "Audio"
     -- Windows placement hooks
   , [ appName =? "emacs-todo"
     ] ==> doWorkspace "TODO"
@@ -302,7 +305,7 @@ myConfig
   , focusFollowsMouse  = True
   , borderWidth        = 1
   , workspaces         = (map show [1..10]) ++
-                         ["WWW","IM","Torrent","Media","e-Mail","gitk","TODO","Zettel"]
+                         ["WWW","IM","Torrent","Media","e-Mail","gitk","TODO","Zettel","Audio"]
   , normalBorderColor  = "#dddddd"
   , focusedBorderColor = "#ff0000"
     -- key bindings

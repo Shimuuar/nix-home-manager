@@ -33,6 +33,7 @@ in
   extra-param.extraXSession = ''
     # Turn on num lock
     ${pkgs.numlockx}/bin/numlockx
+    ${pkgs.sonata}/bin/sonata     &
     '';
   # ----------------------------------------------------------------
   # SSH tunnels
