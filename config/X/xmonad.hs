@@ -227,7 +227,8 @@ myManageHook :: ManageHook
 myManageHook = mconcat $ concat
   [ -- Specific hooks
     [ isDialog --> doFloat
-    , scratchpadManageHook $ W.RationalRect (1%8) (1%6) (6%8) (2%3)
+    -- Builtin hook stopped working. See https://github.com/xmonad/xmonad-contrib/issues/756
+    , appName =? "scratchpad" --> doRectFloat (W.RationalRect (1%8) (1%6) (6%8) (2%3))
     , (do dialog <- isDialog
           kdiff  <- className =? "kdiff3"
           return $! kdiff
