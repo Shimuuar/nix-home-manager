@@ -131,11 +131,14 @@ in
           ShowAllDesks="0";
         };
       }
-      { type = "batt";
-        config = {
-          HideIfNoBattery = "1";
-        };
-      }
+      (if config.extra-param.has-battery
+       then
+         { type   = "batt";
+           config = { HideIfNoBattery = "1"; };
+         }
+       else
+         null
+      )
       { type = "cpufreq"; }
       { type = "thermal"; }
       { type = "tray";    }

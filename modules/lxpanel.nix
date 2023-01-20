@@ -48,7 +48,7 @@ in
       Global {
         edge = ${cfg.edge}
       }
-      ${builtins.concatStringsSep "\n" (builtins.map renderPlugin cfg.plugins)}
+      ${builtins.concatStringsSep "\n" (builtins.map renderPlugin (builtins.filter (x: (x!=null)) cfg.plugins))}
       '';
   };
 

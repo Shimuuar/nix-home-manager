@@ -19,9 +19,12 @@ in
   #
   fonts.fontconfig.enable = true;
   #
-  extra-param.composeKey    = "menu";
-  extra-param.extraXSession = ''
-    # Programs
-    xfce4-power-manager &
-    '';
+  extra-param = {
+    has-battery = true;
+    composeKey  = "menu";
+    extra-param.extraXSession = ''
+      # Programs
+      xfce4-power-manager &
+      '';
+  };
 }

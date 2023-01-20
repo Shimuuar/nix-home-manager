@@ -29,12 +29,14 @@ in
   #
   fonts.fontconfig.enable = true;
   #
-  extra-param.composeKey    = "ralt";
-  extra-param.extraXSession = ''
-    # Turn on num lock
-    ${pkgs.numlockx}/bin/numlockx
-    ${pkgs.sonata}/bin/sonata     &
-    '';
+  extra-param = {
+    composeKey    = "menu";
+    extraXSession = ''
+      # Turn on num lock
+      ${pkgs.numlockx}/bin/numlockx
+      ${pkgs.sonata}/bin/sonata     &
+      '';
+  };
   # ----------------------------------------------------------------
   # SSH tunnels
   systemd.user.services = {

@@ -7,6 +7,12 @@ in
 {
   options = {
     extra-param = {
+      has-battery = mkOption {
+        type        = types.bool;
+        default     = false;
+        description = "Whether computer has battery (used for GUI)";
+      };
+
       composeKey = mkOption {
         type        = types.str;
         default     = "ralt";
