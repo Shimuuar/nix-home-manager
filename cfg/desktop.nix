@@ -42,6 +42,7 @@ in
       gwenview
       libreoffice
       sonata
+      kid3
       telegram-wrapped
       thunderbird
       wireshark
