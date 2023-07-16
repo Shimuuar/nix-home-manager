@@ -9,7 +9,7 @@ import random
 
 def get_screens() :
     "Obtain list of screen resolutions"
-    for row in subprocess.check_output(["xrandr"]).split("\n") :
+    for row in subprocess.check_output(["xrandr"]).decode().split("\n") :
         m = re.match(r'^ +(\d+x\d+) +\d+\.\d+\*\+', row)
         if m is not None :
             yield m.group(1)
