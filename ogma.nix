@@ -21,7 +21,7 @@ in
     ./cfg/extra-cli.nix
     ./cfg/desktop.nix
     ./cfg/haskell.nix
-    #./cfg/idea.nix
+    ./cfg/idea.nix
   ];
   home.stateVersion  = "22.11";
   home.username      = "alexey";
