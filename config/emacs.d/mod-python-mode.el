@@ -21,10 +21,14 @@
     ; import clause
     ("imp"   "import" nil 0)
     ("impa"  ""       my/skel-python-import-list 0)
-    ("ra"    ""       my/skel-python-range       0)
     ; Return
     ("ret"   "return" nil 0)
     ))
 
+
+;; Delete traling whitespace on save
+(add-hook 'python-mode-hook
+	  (lambda () (add-hook 'before-save-hook
+			       (lambda () (save-excursion (delete-trailing-whitespace))) nil t)))
 
 (provide 'mod-python-mode)
