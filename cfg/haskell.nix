@@ -14,8 +14,8 @@
     # nix-overlay
     (haskellPackages.callCabal2nix "nix-pkgs-generator" (builtins.fetchGit
       { url = "https://github.com/Shimuuar/nix-pkgs-generator.git";
-        ref = "cabalize";
-        rev = "2a1e8dcc07c5b6b8c998e4da46e2c1b1642eb4f9";
+        ref = "split-config";
+        rev = "fb758f409cd4c6815dbcafdbda967b41ce2e73dd";
       }) {})
   ];
 }
