@@ -64,6 +64,8 @@
   (global-set-key (kbd "C-c q") 'org-roam-node-find)
   ;; Render tags too
   (setq org-roam-node-display-template "${title:*} ${tags:50}")
+  ;; Enable DB autosync
+  (org-roam-db-autosync-enable)
   )
 ;(setq reftex-default-bibliography	;
  ;/zettel/bib/hep.bib"))
