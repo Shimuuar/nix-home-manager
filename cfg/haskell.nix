@@ -15,7 +15,7 @@
     (haskellPackages.callCabal2nix "nix-pkgs-generator" (builtins.fetchGit
       { url = "https://github.com/Shimuuar/nix-pkgs-generator.git";
         ref = "split-config";
-        rev = "fb758f409cd4c6815dbcafdbda967b41ce2e73dd";
+        rev = "691aea2823dcb7c8d255532f79a57dc8daf499f2";
       }) {})
   ];
 }
