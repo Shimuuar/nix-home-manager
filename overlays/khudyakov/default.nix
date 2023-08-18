@@ -27,6 +27,7 @@ in
   root-plot      = self.callPackage ./pkgs/root-plot {};
   sdist-release  = self.callPackage ./pkgs/sdist-release {};
   arxiv-get      = self.haskellPackages.callPackage ./pkgs/arxiv-get {};
+  bibtexer       = self.haskellPackages.callPackage ./pkgs/bibtexer  {};
   gittery        = self.haskellPackages.callPackage ./pkgs/gittery   {};
   plotly-server  = self.haskellPackages.callPackage ./pkgs/plotly-server {};
   # colcalc        = self.callPackage ./pkgs/colcalc {};

@@ -4,6 +4,7 @@
     # ----------------
     # My utils
     arxiv-get
+    bibtexer
 #    gittery
     mdo
     # colcalc
