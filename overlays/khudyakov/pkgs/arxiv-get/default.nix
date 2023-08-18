@@ -4,7 +4,7 @@ mkDerivation {
   version = "0.1";
   src = builtins.fetchGit {
     url = "https://github.com/Shimuuar/arxiv-get.git";
-    rev = "e379a18e25c675fef20494539a530041076804c6";
+    rev = "e3e25507edeaf99576b0519ac385afe28ae026df";
     ref = "master";
   };
   isLibrary    = false;
