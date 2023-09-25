@@ -40,6 +40,7 @@ in
     zip
     curl
     wget
+    djvu2pdf
     # ----------------
     # Devtools
     gcc
