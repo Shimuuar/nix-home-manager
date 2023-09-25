@@ -107,6 +107,7 @@ in
       helm
       magit
       deft
+      openwith
     ];
   };
   programs.emacsPkg = {
