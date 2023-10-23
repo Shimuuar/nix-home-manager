@@ -244,6 +244,7 @@ myManageHook = mconcat $ concat
     ] ==> doIgnore
     -- Floating windows
   , [ className =? "feh"
+    , className =? "spectacle"
     , resource  =? "terminal-float"
     ] ==> doCenterFloat
     -- Media programs
