@@ -54,7 +54,6 @@ in
        sysstat
        usbutils
        # Devtools
-       pypi2nix
        rr
      ]
   );
