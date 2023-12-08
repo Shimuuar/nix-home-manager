@@ -22,6 +22,7 @@ in
     inetutils
     mc
     lz4
+    lzip
     jq
     yq
     mercurial
