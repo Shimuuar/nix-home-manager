@@ -84,6 +84,7 @@ in
   # ----
   programs.emacs = {
     enable = true;
+    package = pkgs.emacs-gtk;
     extraPackages = epkg : with epkg; [
       undo-tree
       browse-kill-ring
