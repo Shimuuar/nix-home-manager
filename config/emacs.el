@@ -33,3 +33,13 @@
 ; Require local modification (if any)
 (require 'my-local "my-local.el" t)
 (require 'my-extra "my-extra.el" t)
+
+
+;; Compatibility shim for emacs 28
+;;
+;; Magit uses it but it's only provided in emasc 29
+(when (not (fboundp 'seq-keep))
+  (defun seq-keep (function sequence)
+    "Apply FUNCTION to SEQUENCE and return the list of all the non-nil results."
+    (delq nil (seq-map function sequence)))
+  )
