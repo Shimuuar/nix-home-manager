@@ -22,7 +22,7 @@ in
   extra-param = {
     has-battery = true;
     composeKey  = "menu";
-    extra-param.extraXSession = ''
+    extraXSession = ''
       # Programs
       xfce4-power-manager &
       '';
