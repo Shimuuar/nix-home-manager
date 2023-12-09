@@ -2,6 +2,16 @@
 let
   # Repository with config files
   cfg = ../config;
+  # We want to package mercurial as python library not as application.
+  # This allows hg to import extensions
+  #
+  # See https://github.com/NixOS/nixpkgs/issues/78509
+  py_pkg = pkgs.python3.withPackages (ps: with ps;
+    [ ipython
+      hg-git
+      mercurial
+    ]);
+  mercurial = pkgs.python3Packages.mercurial;
 in
 {
   # Generic list of programs
@@ -25,13 +35,11 @@ in
     lzip
     jq
     yq
-    mercurial
     p7zip
     pdfgrep
     pdftk
     parallel
     postgresql_12
-    python3Packages.ipython
     sdist-release
     rlwrap
     rustup
@@ -41,10 +49,12 @@ in
     zip
     curl
     wget
+    djvu2pdf
     # ----------------
     # Devtools
     gcc
     julia-bin
+    py_pkg
   ] ++
   (if config.extra-param.isMac
    then
@@ -107,6 +117,7 @@ in
       helm
       magit
       deft
+      openwith
     ];
   };
   programs.emacsPkg = {
@@ -195,16 +206,18 @@ in
   # ----
   programs.mercurial = {
     enable      = true;
+    package     = py_pkg;
     userName    = "Alexey Khudyakov";
     userEmail   = "alexey.skladnoy@gmail.com";
-    extraConfig = ''
-    [extensions]
-    record   =
-    hgk      =
-    hggit    =
-    color    =
-    pager    =
-    '';
+    extraConfig = {
+      extensions = {
+        record = "";
+        hgk    = "";
+        hggit  = "";
+        color  = "";
+        pager  = "";
+      };
+    };
   };
   # ----
   programs.haskeline = {

@@ -135,34 +135,11 @@
             (lambda ()
               (deactivate-input-method)))
   )
-;; (require 'ido)
-;; (ido-mode 1)
-;; ;; Ignores following buffers
-;; (setq ido-ignore-buffers
-;;   (append '("*Buffer"    "*Completions" "*ESS"
-;; 	    "*Apropos"    "*Warnings"  "*Quail"
-;; 	    "*Flycheck error messages*"
-;; 	    )
-;; 	   ido-ignore-buffers
-;; 	  ))
-;; ;; Ensure case sensitivity
-;; (when ido-case-fold (ido-toggle-case))
-;; ;; Tweak appearance
-;; (setq ido-decorations
-;;       '("\n{" "}" " | " " | ..."
-;; 	"[" "]"
-;; 	" [No match]"
-;; 	" [Matched]"
-;; 	" [Not readable]"
-;; 	" [Too big]"
-;; 	" [Confirm]"))
-;; ;; 
-;; (add-hook 'ido-setup-hook (lambda ()
-;;   (define-key ido-completion-map (kbd "C-w")    'backward-kill-word)
-;;   (define-key ido-completion-map (kbd "<up>")   'ido-prev-work-file)
-;;   (define-key ido-completion-map (kbd "<down>") 'ido-next-work-file)
-;;   ))
 
+(when (require 'openwith nil t)
+  (openwith-mode t)
+  (setq openwith-associations '(("\\.pdf\\'" "okular" (file))))
+  )
 
 ;; =========================================================
 ;; Miscelanneous
