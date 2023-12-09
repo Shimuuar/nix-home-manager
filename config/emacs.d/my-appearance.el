@@ -21,6 +21,10 @@
 			   :width normal
 			   :foundry "CTDB" :family "Fira Code")))))
   )
+(when (string-equal system-name "lug")
+  (custom-set-faces
+   '(default ((t (:family "Liberation Mono" :foundry "1ASC" :slant normal :weight normal
+			  :height 128 :width normal))))))
 
 ;; No startup message
 (setq inhibit-startup-message t)
