@@ -21,7 +21,6 @@ in
   # Fetchall package
   inherit emacsPkg;
   # Additional programs & tools
-  drone-cli-110  = self.callPackage ./pkgs/drone-cli {};
   fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate {};
   mdo            = self.callPackage ./pkgs/mdo {};
   root-plot      = self.callPackage ./pkgs/root-plot {};
