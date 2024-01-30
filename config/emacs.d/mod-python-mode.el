@@ -6,6 +6,10 @@
 ;; =========================================================
 ;; Python abbreviations
 ;; =========================================================
+
+; Use python-mode from MELPA. Builtin doesn't have support for match
+(require 'python-mode () t)
+
 (define-skeleton my/skel-python-import-list
   "``Import all'' clause"
   "Import from: "

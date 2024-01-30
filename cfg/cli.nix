@@ -102,6 +102,7 @@ in
       go-mode
       rust-mode
       haskell-mode
+      python-mode
       hledger-mode
       julia-mode
       kotlin-mode
