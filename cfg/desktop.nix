@@ -30,6 +30,7 @@ in
       arandr
       chromium
       chromium-temp
+      chromium-ru
       darktable
       djview
       deluge

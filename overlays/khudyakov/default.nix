@@ -46,4 +46,5 @@ in
     checkPhase = "echo NO_TESTS"; # For some reason setting empty string doesn't work
   });
   chromium-temp  = import ./pkgs/chromium-temp self;
+  chromium-ru    = import ./pkgs/chromium-ru   self;
 }
