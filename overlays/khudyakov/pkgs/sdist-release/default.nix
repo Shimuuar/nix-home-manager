@@ -4,8 +4,8 @@ stdenv.mkDerivation {
   version = 0.1;
   src     = fetchgit {
     url    = "https://github.com/Shimuuar/sdist-release.git";
-    rev    = "2c1e6ea8fa4a5cddc307f72511f81084b97313a0";
-    sha256 = "sha256:0h3ggbprwgyghcc2aypglnr6xcs00nk0m6nzvyk3hw0cq6jraqnk";
+    rev    = "14d9fd9f8e8703acaf39a0a2076452fa0ae67fe3";
+    sha256 = "sha256-zU+PJQ4v7O156zGw3VW0g2RIYQSKDB8pwOesFnFSvMQ=";
   };
   buildPhase = "";
   installPhase = ''
