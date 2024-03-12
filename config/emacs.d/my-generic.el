@@ -84,9 +84,8 @@
    ;; SCons
    '(("SConstruct" . python-mode)
      ("SConscript" . python-mode)
-   ;; ReST mode
-     ("\\.rst$"  . rst-mode)
-     ("\\.rest$" . rst-mode)
+   ;; Vyper lang
+     ("\\.vy" . python-mode)
    ;; Markdown mode
      ("\\.md$"       . markdown-mode)
      ("\\.mark$"     . markdown-mode)
