@@ -209,11 +209,11 @@ in
     package     = py_pkg;
     userName    = "Alexey Khudyakov";
     userEmail   = "alexey.skladnoy@gmail.com";
+    # Note: hggit is broken! Use hg-fast-export
     extraConfig = {
       extensions = {
         record = "";
         hgk    = "";
-        hggit  = "";
         color  = "";
         pager  = "";
       };
