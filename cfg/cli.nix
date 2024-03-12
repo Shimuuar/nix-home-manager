@@ -186,6 +186,7 @@ in
       # Kdiff3 doesn't work on macs
       merge             = {
         tool = if config.extra-param.isMac then "meld" else "kdiff3";
+        conflictstyle = "zdiff3";
       };
       mergetool =
         if config.extra-param.isMac then
@@ -196,6 +197,10 @@ in
             kdiff3 = { path = "${pkgs.kdiff3}/bin/kdiff3"; };
           };
       init.defaultBranch = "master";
+      # Check objects eagerly
+      transfer.fsckobjects = true;
+      fetch.fsckobjects    = true;
+      receive.fsckobjects  = true;
       #
       filter.nbstripout = {
         clean    = "${pkgs.nbstripout}/bin/nbstripout";
