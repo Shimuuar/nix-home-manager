@@ -10,18 +10,10 @@ let
   haskOverrides = self: super: {
     spiderment    = self.callPackage ./pkgs/haskell/spiderment.nix {};
     comic-scraper = self.callPackage ./pkgs/haskell/comic-scraper  {};
-    #
-    ghc-prof-flamegraph = self.callPackage ./pkgs/haskell/ghc-prof-flamegraph.nix {};
-  };
-  # Extra emacs packages
-  emacsPkg = {
   };
 in
 {
-  # Fetchall package
-  inherit emacsPkg;
   # Additional programs & tools
-  drone-cli-110  = self.callPackage ./pkgs/drone-cli {};
   fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate {};
   mdo            = self.callPackage ./pkgs/mdo {};
   root-plot      = self.callPackage ./pkgs/root-plot {};
@@ -36,7 +28,6 @@ in
     ipython = import ./pkgs/nixtools/ipython.nix self;
   };
   # Override haskell stuff
-  python27       = previous.python27.override { packageOverrides = pyOverrides; };
   haskell        = previous.haskell // {
     packageOverrides = self: super:
       previous.haskell.packageOverrides self super //
@@ -47,4 +38,5 @@ in
     checkPhase = "echo NO_TESTS"; # For some reason setting empty string doesn't work
   });
   chromium-temp  = import ./pkgs/chromium-temp self;
+  chromium-ru    = import ./pkgs/chromium-ru   self;
 }

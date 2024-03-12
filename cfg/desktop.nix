@@ -30,6 +30,7 @@ in
       arandr
       chromium
       chromium-temp
+      chromium-ru
       darktable
       djview
       deluge
@@ -52,6 +53,8 @@ in
       xterm
       freecad
       cura
+
+      framesh
       # ----------------
       # KDE
       breeze-icons
