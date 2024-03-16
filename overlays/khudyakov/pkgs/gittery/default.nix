@@ -1,22 +1,23 @@
-{ mkDerivation, lib
-, aeson, base, directory, filepath, hostname, containers
-, optparse-applicative, process, text, transformers
-, unordered-containers, yaml
+{ mkDerivation, aeson, ansi-terminal, base, containers, directory
+, filepath, hostname, lib, optparse-applicative, text, transformers
+, typed-process, unordered-containers, yaml
 }:
 mkDerivation {
   pname = "gittery";
   version = "0.1";
   src = builtins.fetchGit {
-    url    = "git@bitbucket.org:Shimuuar/gittery.git";
-    rev    = "5e23356110ddda5cf2dcfa1893a0ed27e4fdf4aa";
+    url    = "ssh://git@sepulcarium.org/home/git/GIT/private-projects/gittery";
+    rev    = "14c4eed552a98f4c9e5623dabf036de8e5d8564f";
     ref    = "master";
   };
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [
-    aeson base directory filepath hostname optparse-applicative process
-    text transformers unordered-containers yaml containers
+    aeson ansi-terminal base containers directory filepath hostname
+    optparse-applicative text transformers typed-process
+    unordered-containers yaml
   ];
   description = "Tool for managing multiple repositories";
   license = lib.licenses.bsd3;
+  mainProgram = "gittery";
 }

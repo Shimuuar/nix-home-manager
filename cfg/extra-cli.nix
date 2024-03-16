@@ -5,7 +5,7 @@
     # My utils
     arxiv-get
     bibtexer
-#    gittery
+    gittery
     mdo
     # colcalc
     root-plot
