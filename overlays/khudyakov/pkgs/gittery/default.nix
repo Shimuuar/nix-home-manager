@@ -7,7 +7,7 @@ mkDerivation {
   version = "0.1";
   src = builtins.fetchGit {
     url    = "ssh://git@sepulcarium.org/home/git/GIT/private-projects/gittery";
-    rev    = "14c4eed552a98f4c9e5623dabf036de8e5d8564f";
+    rev    = "fdc3f52c1e8b767103b7795eee0db3d5777a0ec9";
     ref    = "master";
   };
   isLibrary = false;
