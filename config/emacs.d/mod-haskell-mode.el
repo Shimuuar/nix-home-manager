@@ -146,8 +146,10 @@ line."
   ;; Constants definition
   (defcustom my/haskell-language-pragmas
     (seq-filter
-     (lambda (s) (or (equal "NoFieldSelectors" s)
-		     (not (string-match-p "^No" s))))
+     (lambda (s) (pcase s
+		   ("NoFieldSelectors" t)
+		   ("Rank2Types"       nil)
+		   (_                  (not (string-match-p "^No" s)))))
      (split-string (shell-command-to-string "ghc --supported-extensions")))
     "List of language pragmas supported by the installed version of GHC."
     :group 'my/haskell
