@@ -53,8 +53,6 @@ in
       xterm
       freecad
       cura
-
-      framesh
       # ----------------
       # KDE
       breeze-icons
