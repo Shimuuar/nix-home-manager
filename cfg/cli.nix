@@ -45,7 +45,7 @@ in
     rustup
     sqlite-interactive
     sshfs
-    youtube-dl
+    yt-dlp
     zip
     curl
     wget
