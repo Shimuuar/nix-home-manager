@@ -13,6 +13,11 @@ let
   };
 in
 {
+  # Python
+  python39       = previous.python39.override  { packageOverrides = pyOverrides; };
+  python310      = previous.python310.override { packageOverrides = pyOverrides; };
+  python311      = previous.python311.override { packageOverrides = pyOverrides; };
+  python312      = previous.python312.override { packageOverrides = pyOverrides; };
   # Additional programs & tools
   fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate {};
   mdo            = self.callPackage ./pkgs/mdo {};
