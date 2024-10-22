@@ -25,6 +25,7 @@ in
       wmctrl
       spectacle
       libnotify
+      xclip
       # ----------------
       # GUI programs
       arandr
