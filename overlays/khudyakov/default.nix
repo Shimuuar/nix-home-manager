@@ -13,6 +13,11 @@ let
   };
 in
 {
+  # Python
+  python39       = previous.python39.override  { packageOverrides = pyOverrides; };
+  python310      = previous.python310.override { packageOverrides = pyOverrides; };
+  python311      = previous.python311.override { packageOverrides = pyOverrides; };
+  python312      = previous.python312.override { packageOverrides = pyOverrides; };
   # Additional programs & tools
   fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate {};
   mdo            = self.callPackage ./pkgs/mdo {};
@@ -38,5 +43,4 @@ in
     checkPhase = "echo NO_TESTS"; # For some reason setting empty string doesn't work
   });
   chromium-temp  = import ./pkgs/chromium-temp self;
-  chromium-ru    = import ./pkgs/chromium-ru   self;
 }

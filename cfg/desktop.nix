@@ -2,7 +2,7 @@
 let
   # Repository with config files
   cfg = ../config;
-  # Wrapped telegram. It oesn;t like XDG_CURRENT_DESKTOP set
+  # Wrapped telegram. It doesn't like XDG_CURRENT_DESKTOP set
   telegram-wrapped = pkgs.stdenv.mkDerivation {
     name    = "telegram-desktop";
     builder = pkgs.writeScript "telegram-builder" ''
@@ -15,6 +15,11 @@ let
       ${pkgs.coreutils}/bin/chmod +x $out/bin/telegram-wrapped
       '';
   };
+  # Make chromium browser with custom config
+  makeChromium = name: pkgs.writeShellScriptBin ("chromium-" + name) ''
+    CFGDIR=''${XDG_CONFIG_HOME-''${HOME}/.config}
+    exec ${pkgs.chromium}/bin/chromium --user-data-dir="$CFGDIR"/chromium-${name} "$@"
+    '';
 in
 {
     home.packages = with pkgs; [
@@ -31,7 +36,9 @@ in
       arandr
       chromium
       chromium-temp
-      chromium-ru
+      (makeChromium "ru")
+      (makeChromium "alfa")
+      (makeChromium "metamask")
       darktable
       djview
       deluge
@@ -54,8 +61,6 @@ in
       xterm
       freecad
       cura
-
-      framesh
       # ----------------
       # KDE
       breeze-icons

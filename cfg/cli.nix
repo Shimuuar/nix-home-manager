@@ -45,7 +45,7 @@ in
     rustup
     sqlite-interactive
     sshfs
-    youtube-dl
+    yt-dlp
     zip
     curl
     wget
@@ -203,6 +203,7 @@ in
       receive.fsckobjects  = true;
       #
       filter.nbstripout = {
+        # Using nbcovert works in principle. In practice it's unacceptably slow
         clean    = "${pkgs.nbstripout}/bin/nbstripout";
         smudge   = "cat";
         required = true;
