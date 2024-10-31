@@ -163,6 +163,12 @@
 ;; Disable abbreviation saving
 (setq save-abbrevs nil)
 
+;; ================================================================
+;; GPG support
+;; ================================================================
 
+;; Set pinentry to loopback in order to enter password directly into
+;; emacs
+(setq epg-pinentry-mode 'loopback)
 
 (provide 'my-generic)
