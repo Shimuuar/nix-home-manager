@@ -10,21 +10,36 @@
 ; Font faces
 (if (intern-soft "font-lock-comment-face")
     (set-face-foreground (symbol-value (intern-soft "font-lock-comment-face")) "red3"))
-;; OGMA custimizations
-(when (string-equal system-name "ogma")
-  (custom-set-faces
-   '(default ((t (:inherit nil :extend nil :stipple nil
-			   :background "black" :foreground "white"
-			   :inverse-video nil :box nil :strike-through nil
-			   :overline nil :underline nil
-			   :slant normal :weight normal :height 90
-			   :width normal
-			   :foundry "CTDB" :family "Fira Code")))))
+;; Host specific choices
+(pcase system-name
+  ("ogma"
+   (custom-set-faces
+    '(default ((t (:inherit nil :extend nil :stipple nil
+			    :background "black" :foreground "white"
+			    :inverse-video nil :box nil :strike-through nil
+			    :overline nil :underline nil
+			    :slant normal :weight normal :height 90
+			    :width normal
+			    :foundry "CTDB" :family "Fira Code")))))
   )
-(when (string-equal system-name "lug")
-  (custom-set-faces
-   '(default ((t (:family "Liberation Mono" :foundry "1ASC" :slant normal :weight normal
-			  :height 128 :width normal))))))
+  ("lug"
+   ;; For some mysterious reason emacs refuses to set font to terminus
+   ;; if it isn't changed to something else before
+   (progn
+     (custom-set-faces
+      '(default ((t (:inherit nil :extend nil :stipple nil
+			      :background "black" :foreground "white"
+			      :inverse-video nil :box nil :strike-through nil
+			      :overline nil :underline nil
+			      :slant normal :weight normal :height 90
+			      :width normal
+			      :foundry "CTDB" :family "Fira Code")))))
+     (custom-set-faces
+      '(default ((t (:family "Terminus" :foundry "Xos4" :slant normal
+			     :weight regular :height 135 :width normal))))))
+   )
+  )
+
 
 ;; No startup message
 (setq inhibit-startup-message t)
