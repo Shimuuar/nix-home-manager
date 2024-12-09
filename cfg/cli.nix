@@ -39,7 +39,7 @@ in
     pdfgrep
     pdftk
     parallel
-    postgresql_12
+    postgresql_14
     sdist-release
     rlwrap
     rustup
@@ -175,27 +175,20 @@ in
   programs.git = {
     enable      = true;
     userName    = "Alexey Khudyakov";
-    userEmail   = if config.extra-param.isMac
-                  then "khudyakov@sirius.online"
-                  else "alexey.skladnoy@gmail.com";
+    userEmail   = "alexey.skladnoy@gmail.com";
     package     = pkgs.gitAndTools.gitFull;
     extraConfig = {
       safe = { directory = "/etc/nixos"; };
       core = { quotePath = false; };
       pull = { ff = "only"; };
-      # Kdiff3 doesn't work on macs
       merge             = {
-        tool = if config.extra-param.isMac then "meld" else "kdiff3";
+        tool          = "kdiff3";
         conflictstyle = "zdiff3";
       };
-      mergetool =
-        if config.extra-param.isMac then
-          { meld = { path = "${pkgs.meld}/bin/meld"; };
-          }
-        else
-          { meld   = { path = "${pkgs.meld}/bin/meld";     };
-            kdiff3 = { path = "${pkgs.kdiff3}/bin/kdiff3"; };
-          };
+      mergetool = {
+        meld   = { path = "${pkgs.meld}/bin/meld";     };
+        kdiff3 = { path = "${pkgs.kdiff3}/bin/kdiff3"; };
+      };
       init.defaultBranch = "master";
       # Check objects eagerly
       transfer.fsckobjects = true;
@@ -204,7 +197,7 @@ in
       #
       filter.nbstripout = {
         # Using nbcovert works in principle. In practice it's unacceptably slow
-        clean    = "${pkgs.nbstripout}/bin/nbstripout";
+        clean    = "${pkgs.nbstripout311}/bin/nbstripout";
         smudge   = "cat";
         required = true;
       };

@@ -60,7 +60,8 @@ in
       xorg.xdpyinfo
       xterm
       freecad
-      cura
+      # Cannot be built with python3.12
+      #cura
       # ----------------
       # KDE
       breeze-icons
