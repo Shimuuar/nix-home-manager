@@ -18,6 +18,8 @@ in
   python310      = previous.python310.override { packageOverrides = pyOverrides; };
   python311      = previous.python311.override { packageOverrides = pyOverrides; };
   python312      = previous.python312.override { packageOverrides = pyOverrides; };
+  # nbstripout depends on pytest-cram which is not buildable with python 3.12
+  nbstripout311  = self.callPackage ./nbstripout311.nix {};
   # Additional programs & tools
   fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate {};
   mdo            = self.callPackage ./pkgs/mdo {};
