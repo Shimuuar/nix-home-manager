@@ -8,8 +8,6 @@ let
   };
   # Extra haskell packages
   haskOverrides = self: super: {
-    spiderment    = self.callPackage ./pkgs/haskell/spiderment.nix {};
-    comic-scraper = self.callPackage ./pkgs/haskell/comic-scraper  {};
   };
 in
 {
@@ -20,6 +18,9 @@ in
   python312      = previous.python312.override { packageOverrides = pyOverrides; };
   # nbstripout depends on pytest-cram which is not buildable with python 3.12
   nbstripout311  = self.callPackage ./nbstripout311.nix {};
+  nbstripout     = previous.nbstripout.overridePythonAttrs (_: {
+    checkPhase = "echo NO_TESTS"; # For some reason setting empty string doesn't work
+  });
   # Additional programs & tools
   fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate {};
   mdo            = self.callPackage ./pkgs/mdo {};
@@ -35,14 +36,11 @@ in
     ipython = import ./pkgs/nixtools/ipython.nix self;
   };
   # Override haskell stuff
-  haskell        = previous.haskell // {
+  haskell = previous.haskell // {
     packageOverrides = self: super:
       previous.haskell.packageOverrides self super //
       haskOverrides self super;
   };
   # nbstripout fails
-  nbstripout     = previous.nbstripout.overridePythonAttrs (_: {
-    checkPhase = "echo NO_TESTS"; # For some reason setting empty string doesn't work
-  });
   chromium-temp  = import ./pkgs/chromium-temp self;
 }
