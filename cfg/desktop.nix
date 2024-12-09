@@ -20,6 +20,14 @@ let
     CFGDIR=''${XDG_CONFIG_HOME-''${HOME}/.config}
     exec ${pkgs.chromium}/bin/chromium --user-data-dir="$CFGDIR"/chromium-${name} "$@"
     '';
+  chromium-temp = pkgs.writeScriptBin "chromium-temp" ''
+    #!/bin/sh
+    CFGDIR=$(${pkgs.coreutils}/bin/mktemp -d ''${XDG_RUNTIME_DIR-/tmp}/chromium-XXXXXXXX)
+    CLEANUP="rm -rf $CFGDIR"
+    trap "$CLEANUP" SIGINT SIGTERM
+    ${pkgs.chromium}/bin/chromium --user-data-dir=$CFGDIR $@
+    $CLEANUP
+    '';
 in
 {
     home.packages = with pkgs; [

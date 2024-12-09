@@ -40,6 +40,4 @@ in
       previous.haskell.packageOverrides self super //
       haskOverrides self super;
   };
-  # nbstripout fails
-  chromium-temp  = import ./pkgs/chromium-temp self;
 }
