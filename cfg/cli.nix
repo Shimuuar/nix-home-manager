@@ -128,7 +128,7 @@ in
   };
   # ----
   programs.ssh = {
-    enable = true;
+    enable      = true;
     matchBlocks = {
       "oka01.ihep.su" = {
         user         = "khudyakov";
@@ -165,10 +165,9 @@ in
       "istra.ihep.su" = {
         proxyJump = "oka01.ihep.su";
       };
-      # istrad is mostly off
-#      "istrad.ihep.su" = {
-#        proxyJump = "oka01.ihep.su";
-#      };
+      "istrad.ihep.su" = {
+        proxyJump = "oka01.ihep.su";
+      };
     };
   };
   # ----
