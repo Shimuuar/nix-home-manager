@@ -30,10 +30,6 @@ in
   bibtexer       = self.haskellPackages.callPackage ./pkgs/bibtexer  {};
   gittery        = self.haskellPackages.callPackage ./pkgs/gittery   {};
   # colcalc        = self.callPackage ./pkgs/colcalc {};
-  nixtools = {
-    ghc     = import ./pkgs/nixtools/ghc.nix     self;
-    ipython = import ./pkgs/nixtools/ipython.nix self;
-  };
   # Override haskell stuff
   haskell = previous.haskell // {
     packageOverrides = self: super:
