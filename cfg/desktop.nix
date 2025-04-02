@@ -61,6 +61,7 @@ in
       sonata
       kid3
       telegram-wrapped
+      element-desktop
       thunderbird
       wireshark
       xournal
@@ -214,6 +215,7 @@ in
       ${pkgs.firefox}/bin/firefox                                         &
       ${pkgs.thunderbird}/bin/thunderbird                                 &
       telegram-wrapped                                                    &
+      element-desktop                                                     &
       ${pkgs.udiskie}/bin/udiskie --tray                                  &
       emacs --name emacs-todo --eval '(load-file "${cfg}/emacs-todo.el")' &
       nix-shell -p 'texlive.combine {inherit (texlive) scheme-medium;}'   \
