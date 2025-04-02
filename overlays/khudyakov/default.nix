@@ -7,7 +7,8 @@ let
     });
   };
   # Extra haskell packages
-  haskOverrides = self: super: {
+  haskOverrides = hsself: hssuper: {
+    sbv = self.haskell.lib.dontCheck hssuper.sbv;
   };
 in
 {
