@@ -33,7 +33,7 @@ import XMonad.Layout.Grid
 import XMonad.Util.Scratchpad
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
-
+-- import XMonad.Util.Hacks (fixSteamFlicker)
 import XMonad.Prompt
 
 ----------------------------------------------------------------
@@ -316,6 +316,8 @@ myConfig
   , layoutHook         = myLayout
   , manageHook         = myManageHook
                       <> manageDocks
+    -- Steam
+  -- , handleEventHook    = fixSteamFlicker
   }
 
 
