@@ -168,6 +168,10 @@ in
       "istrad.ihep.su" = {
         proxyJump = "oka01.ihep.su";
       };
+      "sphinxa.ihep.su" = {
+        user      = "control";
+        proxyJump = "oka01.ihep.su";
+      };
     };
   };
   # ----
