@@ -9,6 +9,8 @@ let
   # Extra haskell packages
   haskOverrides = hsself: hssuper: {
     sbv = self.haskell.lib.dontCheck hssuper.sbv;
+    xmonad-contrib = hsself.callPackage ./pkgs/xmonad-contrib.nix {};
+    xmonad         = hsself.callPackage ./pkgs/xmonad.nix {};
   };
 in
 {

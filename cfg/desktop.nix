@@ -232,8 +232,8 @@ in
     windowManager.xmonad = {
       enable                 = true;
       enableContribAndExtras = true;
-      config               = null; # Used for debugging configuration
-      # config                 = "${cfg}/X/xmonad.hs";
+      #config               = null; # Used for debugging configuration
+      config                 = "${cfg}/X/xmonad.hs";
     };
   };
 }
