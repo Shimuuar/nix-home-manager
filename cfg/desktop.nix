@@ -36,7 +36,7 @@ in
       dmenu
       xdotool
       wmctrl
-      spectacle
+      kdePackages.spectacle
       libnotify
       xclip
       # ----------------
@@ -56,7 +56,7 @@ in
       krusader
       gimp
       nomacs
-      gwenview
+      kdePackages.gwenview
       libreoffice
       sonata
       kid3
@@ -64,31 +64,32 @@ in
       element-desktop
       thunderbird
       wireshark
-      xournal
+      xournalpp
       xorg.xkill
       xorg.xdpyinfo
       xterm
       freecad
+      keepassxc
       # Cannot be built with python3.12
       #cura
       # ----------------
       # KDE
-      breeze-icons
+      kdePackages.breeze-icons
       hicolor-icon-theme
-      kcharselect
-      plasma5Packages.dolphin
-      plasma5Packages.dolphin-plugins
-      plasma5Packages.kate
-      plasma5Packages.konsole
-      plasma5Packages.okular
-      plasma5Packages.systemsettings
-      plasma5Packages.breeze-gtk
-      plasma5Packages.breeze-qt5
-      plasma5Packages.breeze-grub
-      plasma5Packages.breeze-plymouth
-      plasma5Packages.oxygen
-      plasma5Packages.plasma-integration
-      plasma5Packages.oxygen
+      kdePackages.kcharselect
+      kdePackages.dolphin
+      kdePackages.dolphin-plugins
+      kdePackages.kate
+      kdePackages.konsole
+      kdePackages.okular
+      kdePackages.systemsettings
+      kdePackages.breeze-gtk
+      kdePackages.breeze-icons
+      kdePackages.breeze-grub
+      kdePackages.breeze-plymouth
+      kdePackages.oxygen
+      kdePackages.plasma-integration
+      kdePackages.oxygen
       # ----------------
       # media
       feh
@@ -136,7 +137,7 @@ in
     enable = true;
     style  = {
       name    = "Breeze-Dark";
-      package = pkgs.breeze-qt5;
+      package = pkgs.kdePackages.breeze-plymouth;
     };
   };
   # ----
@@ -232,8 +233,8 @@ in
     windowManager.xmonad = {
       enable                 = true;
       enableContribAndExtras = true;
-      #config               = null; # Used for debugging configuration
-      config                 = "${cfg}/X/xmonad.hs";
+      config               = null; # Used for debugging configuration
+      #config                 = "${cfg}/X/xmonad.hs";
     };
   };
 }
