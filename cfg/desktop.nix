@@ -49,6 +49,7 @@ in
       (makeChromium "metamask")
       darktable
       djview
+      djvulibre
       deluge
       evince
       firefox
@@ -89,6 +90,7 @@ in
       kdePackages.breeze-plymouth
       kdePackages.oxygen
       kdePackages.plasma-integration
+      kdePackages.plasma-workspace
       kdePackages.oxygen
       # ----------------
       # media
@@ -136,7 +138,7 @@ in
   qt = {
     enable = true;
     style  = {
-      name    = "Breeze-Dark";
+      name    = "Breeze";
       package = pkgs.kdePackages.breeze-plymouth;
     };
   };
