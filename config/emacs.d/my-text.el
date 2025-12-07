@@ -10,28 +10,26 @@
   (ispell-change-dictionary (if (string= "ru" ispell-dictionary)
                                 "en" "ru")))
 
-(defun my/format-for-telegram()
-  "Format text for pasting to telegram/any other messenger"
-  (interactive)
-  (if (use-region-p)
-      (let ((oldbuf (current-buffer))
-	    (buf    (generate-new-buffer " clean-org"))
-	    )
-	(save-current-buffer
-	  (copy-to-buffer buf (region-beginning) (region-end))
-	  (set-buffer buf)
- 	  ;; Clean up spaces
-	  (replace-regexp "^ *" "" nil (point-min) (point-max))
-	  (replace-regexp " *$" "" nil (point-min) (point-max))
-	  ;; Make paragraphs 1-lines. Hack arguably
-	  (set-fill-column 10000)
-	  (fill-region (point-min) (point-max))
- 	  ;; Copy to kill-ring
-	  (kill-ring-save (point-min) (point-max))
-	  (kill-buffer buf)
-	  ))
-    (message "foofoo: No selection")
+
+(defun my/prepare-for-telegram(str)
+  "Reformat text for inserion to telegram/any other messenger"
+  (let* ((trim   (lambda (s) (replace-regexp-in-string  "\n" " "
+  			     (replace-regexp-in-string "^[ \\t]+" "" s))))
+	 (para    (split-string str "\n\\([ \t]*\n\\)+"))
+	 (trimmed (mapcar trim para))
+	 )
+    (mapconcat 'identity trimmed "\n\n")
     ))
+
+(defun my/to-telegram(start end)
+  "Reformat text and insert it into kill ring"
+  (interactive "r")
+  (if (use-region-p)
+      (kill-new
+       (my/prepare-for-telegram
+	(buffer-substring-no-properties start end))))
+  )
+
 
 
 ;; ================================================================
