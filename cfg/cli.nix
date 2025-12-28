@@ -129,6 +129,7 @@ in
   # ----
   programs.ssh = {
     enable      = true;
+    enableDefaultConfig = false;
     matchBlocks = {
       "oka01.ihep.su" = {
         user         = "khudyakov";
@@ -176,11 +177,13 @@ in
   };
   # ----
   programs.git = {
-    enable      = true;
-    userName    = "Alexey Khudyakov";
-    userEmail   = "alexey.skladnoy@gmail.com";
-    package     = pkgs.gitAndTools.gitFull;
-    extraConfig = {
+    enable   = true;
+    package  = pkgs.gitFull;
+    settings = {
+      user = {
+        name  = "Alexey Khudyakov";
+        email = "alexey.skladnoy@gmail.com";
+      };
       safe = { directory = "/etc/nixos"; };
       core = { quotePath = false; };
       pull = { ff = "only"; };
@@ -200,7 +203,7 @@ in
       #
       filter.nbstripout = {
         # Using nbcovert works in principle. In practice it's unacceptably slow
-        clean    = "${pkgs.nbstripout311}/bin/nbstripout";
+        clean    = "${pkgs.nbstripout}/bin/nbstripout";
         smudge   = "cat";
         required = true;
       };

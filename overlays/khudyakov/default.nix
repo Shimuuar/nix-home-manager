@@ -20,10 +20,10 @@ in
   python311      = previous.python311.override { packageOverrides = pyOverrides; };
   python312      = previous.python312.override { packageOverrides = pyOverrides; };
   # nbstripout depends on pytest-cram which is not buildable with python 3.12
-  nbstripout311  = self.callPackage ./nbstripout311.nix {};
-  nbstripout     = previous.nbstripout.overridePythonAttrs (_: {
-    checkPhase = "echo NO_TESTS"; # For some reason setting empty string doesn't work
-  });
+#  nbstripout311  = self.callPackage ./nbstripout311.nix {};
+#  nbstripout     = previous.nbstripout.overridePythonAttrs (_: {
+#    checkPhase = "echo NO_TESTS"; # For some reason setting empty string doesn't work
+#  });
   # Additional programs & tools
   fetchhgPrivate = self.callPackage ./pkgs/fetchhgPrivate {};
   mdo            = self.callPackage ./pkgs/mdo {};

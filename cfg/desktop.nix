@@ -4,13 +4,13 @@ let
   cfg = ../config;
   # Wrapped telegram. It doesn't like XDG_CURRENT_DESKTOP set
   telegram-wrapped = pkgs.stdenv.mkDerivation {
-    name    = "telegram-desktop";
+    name    = "telegram-wrapped";
     builder = pkgs.writeScript "telegram-builder" ''
       ${pkgs.coreutils}/bin/mkdir -p $out/bin
       ${pkgs.coreutils}/bin/cat > $out/bin/telegram-wrapped <<EOF
       #!${pkgs.stdenv.shell}
       unset XDG_CURRENT_DESKTOP
-      ${pkgs.tdesktop}/bin/telegram-desktop "\$@"
+      ${pkgs.telegram-desktop}/bin/Telegram "\$@"
       EOF
       ${pkgs.coreutils}/bin/chmod +x $out/bin/telegram-wrapped
       '';
@@ -97,7 +97,7 @@ in
       feh
       mpv
       pavucontrol
-      mpc-cli
+      mpc
       # ----------------
       # Fonts
       unifont
