@@ -211,6 +211,8 @@ in
       export XCOMPOSEFILE=${cfg}/X/XCompose
       export XDG_CURRENT_DESKTOP=kde
       xset +fp ${pkgs.terminus_font}/share/fonts/terminus
+      # Some hack to make krusader & dolphin file associations work
+      export XDG_MENU_PREFIX=plasma-
       # Machine-specific programs
       lxpanel &
       ${config.extra-param.extraXSession}
