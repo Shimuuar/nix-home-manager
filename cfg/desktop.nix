@@ -39,6 +39,7 @@ in
       kdePackages.spectacle
       libnotify
       xclip
+      xlockmore
       # ----------------
       # GUI programs
       arandr
