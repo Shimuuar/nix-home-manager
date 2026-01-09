@@ -60,7 +60,7 @@ in
       nomacs
       kdePackages.gwenview
       libreoffice
-      sonata
+      cantata
       kid3
       telegram-wrapped
       element-desktop

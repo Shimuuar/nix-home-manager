@@ -34,7 +34,7 @@ in
     extraXSession = ''
       # Turn on num lock
       ${pkgs.numlockx}/bin/numlockx
-      ${pkgs.sonata}/bin/sonata     &
+      ${pkgs.cantata}/bin/cantata     &
       '';
   };
   # ----------------------------------------------------------------
