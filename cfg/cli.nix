@@ -81,7 +81,7 @@ in
     bashrcExtra  = builtins.readFile "${cfg}/bashrc.sh";
   };
   # ----
-  programs.screen = {
+  programs.screen2 = {
     enable   = true;
     settings = builtins.readFile "${cfg}/screenrc";
   };
@@ -128,8 +128,9 @@ in
   };
   # ----
   programs.ssh = {
-    enable      = true;
-    matchBlocks = {
+    enable              = true;
+    enableDefaultConfig = false;
+    settings = {
       "oka01.ihep.su" = {
         user         = "khudyakov";
         proxyJump    = "sepulcarium.org";
@@ -146,20 +147,16 @@ in
       "oka03.ihep.su" = {
         user         = "khudyakov";
         proxyJump    = "sepulcarium.org";
-        extraOptions = {
-          "HostKeyAlgorithms"      = "+ssh-rsa";
-          "PubkeyAcceptedKeyTypes" = "+ssh-rsa";
-          "KexAlgorithms"          = "+diffie-hellman-group1-sha1";
-        };
+        "HostKeyAlgorithms"      = "+ssh-rsa";
+        "PubkeyAcceptedKeyTypes" = "+ssh-rsa";
+        "KexAlgorithms"          = "+diffie-hellman-group1-sha1";
       };
       "oka04.ihep.su" = {
         user         = "khudyakov";
         proxyJump    = "oka01.ihep.su";
-        extraOptions = {
-          "HostKeyAlgorithms"      = "+ssh-rsa";
-          "PubkeyAcceptedKeyTypes" = "+ssh-rsa";
-          "KexAlgorithms"          = "+diffie-hellman-group1-sha1";
-        };
+        "HostKeyAlgorithms"      = "+ssh-rsa";
+        "PubkeyAcceptedKeyTypes" = "+ssh-rsa";
+        "KexAlgorithms"          = "+diffie-hellman-group1-sha1";
       };
       # istra & istrad are no longer accessible from outside
       "istra.ihep.su" = {
@@ -177,10 +174,10 @@ in
   # ----
   programs.git = {
     enable      = true;
-    userName    = "Alexey Khudyakov";
-    userEmail   = "alexey.skladnoy@gmail.com";
-    package     = pkgs.gitAndTools.gitFull;
-    extraConfig = {
+    package     = pkgs.gitFull;
+    settings    = {
+      user.name    = "Alexey Khudyakov";
+      user.email   = "alexey.skladnoy@gmail.com";
       safe = { directory = "/etc/nixos"; };
       core = { quotePath = false; };
       pull = { ff = "only"; };
@@ -200,7 +197,7 @@ in
       #
       filter.nbstripout = {
         # Using nbcovert works in principle. In practice it's unacceptably slow
-        clean    = "${pkgs.nbstripout311}/bin/nbstripout";
+        clean    = "${pkgs.nbstripout}/bin/nbstripout";
         smudge   = "cat";
         required = true;
       };

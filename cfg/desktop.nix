@@ -10,7 +10,7 @@ let
       ${pkgs.coreutils}/bin/cat > $out/bin/telegram-wrapped <<EOF
       #!${pkgs.stdenv.shell}
       unset XDG_CURRENT_DESKTOP
-      ${pkgs.tdesktop}/bin/telegram-desktop "\$@"
+      ${pkgs.telegram-desktop}/bin/Telegram "\$@"
       EOF
       ${pkgs.coreutils}/bin/chmod +x $out/bin/telegram-wrapped
       '';
@@ -67,8 +67,8 @@ in
       thunderbird
       wireshark
       xournalpp
-      xorg.xkill
-      xorg.xdpyinfo
+      xkill
+      xdpyinfo
       xterm
       freecad
       keepassxc
@@ -98,7 +98,7 @@ in
       feh
       mpv
       pavucontrol
-      mpc-cli
+      mpc
       # ----------------
       # Fonts
       unifont
@@ -108,7 +108,7 @@ in
       stalonetray
       xmobar
       networkmanagerapplet
-      xfce.xfce4-power-manager
+      xfce4-power-manager
     ];
   # ----
   xdgUserDirs = {

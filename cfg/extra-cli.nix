@@ -8,7 +8,7 @@
     gittery
     mdo
     # colcalc
-    root-plot
+    # root-plot
     # CLI
     haskellPackages.git-annex
     hledger

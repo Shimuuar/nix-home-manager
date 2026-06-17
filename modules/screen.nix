@@ -2,12 +2,11 @@
 
 with lib;
 let
-  cfg = config.programs.screen;
-
+  cfg = config.programs.screen2;
 in
 {
   options = {
-    programs.screen = {
+    programs.screen2 = {
       enable = mkOption {
         type = types.bool;
         default = false;
@@ -30,6 +29,6 @@ in
 
   config = mkIf cfg.enable {
     home.packages = [ pkgs.screen ];
-    home.file.".screenrc".text = config.programs.screen.settings;
+    home.file.".screenrc".text = config.programs.screen2.settings;
   };
 }
