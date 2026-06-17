@@ -122,6 +122,8 @@
 			  (append '("\\.dyn_o$" "\\.dyn_hi$" "^TAGS$")
 				  helm-boring-file-regexp-list))
   (setq helm-ff-skip-boring-files t)
+  ;; Increase size of file buffer
+  (setq helm-buffer-max-length 60)
   ;; Bound helm-based functions
   (global-set-key (kbd "M-x") 'helm-M-x)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
