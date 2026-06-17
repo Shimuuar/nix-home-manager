@@ -55,6 +55,9 @@ in
     gcc
     julia-bin
     py_pkg
+    # ----------------
+    # Lifeline
+    sshuttle
   ] ++
   (if config.extra-param.isMac
    then
