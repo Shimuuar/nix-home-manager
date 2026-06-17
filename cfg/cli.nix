@@ -55,6 +55,9 @@ in
     gcc
     julia-bin
     py_pkg
+    # ----------------
+    # Lifeline
+    sshuttle
   ] ++
   (if config.extra-param.isMac
    then
@@ -173,11 +176,13 @@ in
   };
   # ----
   programs.git = {
-    enable      = true;
-    package     = pkgs.gitFull;
-    settings    = {
-      user.name    = "Alexey Khudyakov";
-      user.email   = "alexey.skladnoy@gmail.com";
+    enable   = true;
+    package  = pkgs.gitFull;
+    settings = {
+      user = {
+        name  = "Alexey Khudyakov";
+        email = "alexey.skladnoy@gmail.com";
+      };
       safe = { directory = "/etc/nixos"; };
       core = { quotePath = false; };
       pull = { ff = "only"; };

@@ -4,7 +4,7 @@ let
   cfg = ../config;
   # Wrapped telegram. It doesn't like XDG_CURRENT_DESKTOP set
   telegram-wrapped = pkgs.stdenv.mkDerivation {
-    name    = "telegram-desktop";
+    name    = "telegram-wrapped";
     builder = pkgs.writeScript "telegram-builder" ''
       ${pkgs.coreutils}/bin/mkdir -p $out/bin
       ${pkgs.coreutils}/bin/cat > $out/bin/telegram-wrapped <<EOF
@@ -60,7 +60,7 @@ in
       nomacs
       kdePackages.gwenview
       libreoffice
-      sonata
+      cantata
       kid3
       telegram-wrapped
       element-desktop
@@ -212,6 +212,8 @@ in
       export XCOMPOSEFILE=${cfg}/X/XCompose
       export XDG_CURRENT_DESKTOP=kde
       xset +fp ${pkgs.terminus_font}/share/fonts/terminus
+      # Some hack to make krusader & dolphin file associations work
+      export XDG_MENU_PREFIX=plasma-
       # Machine-specific programs
       lxpanel &
       ${config.extra-param.extraXSession}
