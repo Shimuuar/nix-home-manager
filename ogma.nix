@@ -32,6 +32,8 @@ in
   extra-param = {
     composeKey    = "menu";
     extraXSession = ''
+      # HiDPI
+      export QT_SCALE_FACTOR=2
       # Turn on num lock
       ${pkgs.numlockx}/bin/numlockx
       ${pkgs.cantata}/bin/cantata     &

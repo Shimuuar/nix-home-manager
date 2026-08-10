@@ -198,6 +198,9 @@ in
       };
     };
   };
+
+  # NOTE: there's some newfanged xsettingsd for keeping seom settings.
+
   xsession = {
     enable    = true;
     # Gtk & Qt needed handholding to make use of XCompose and Qt5
@@ -215,9 +218,9 @@ in
       # Some hack to make krusader & dolphin file associations work
       export XDG_MENU_PREFIX=plasma-
       # Machine-specific programs
-      lxpanel &
       ${config.extra-param.extraXSession}
       # Programs
+      lxpanel &
       ${pkgs.firefox}/bin/firefox                                         &
       ${pkgs.thunderbird}/bin/thunderbird                                 &
       telegram-wrapped                                                    &
