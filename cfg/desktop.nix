@@ -226,9 +226,6 @@ in
       emacs --name emacs-todo --eval '(load-file "${cfg}/emacs-todo.el")' &
       nix-shell -p 'texlive.combine {inherit (texlive) scheme-medium;}'   \
         --run "emacs --name emacs-zettel" &
-      if which spotify &> /dev/null; then
-         (sleep 4 && spotify) &
-      fi
       # Wallpapers
       while : ; do
         python ${cfg}/util/set-random-wallpaper
