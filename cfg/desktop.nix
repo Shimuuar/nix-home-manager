@@ -15,11 +15,12 @@ let
       ${pkgs.coreutils}/bin/chmod +x $out/bin/telegram-wrapped
       '';
   };
-  # Make chromium browser with custom config
+  # Chromium with fixed non-default profile
   makeChromium = name: pkgs.writeShellScriptBin ("chromium-" + name) ''
     CFGDIR=''${XDG_CONFIG_HOME-''${HOME}/.config}
     exec ${pkgs.chromium}/bin/chromium --user-data-dir="$CFGDIR"/chromium-${name} "$@"
     '';
+  # Chromium with temporary profile
   chromium-temp = pkgs.writeScriptBin "chromium-temp" ''
     #!/bin/sh
     CFGDIR=$(${pkgs.coreutils}/bin/mktemp -d ''${XDG_RUNTIME_DIR-/tmp}/chromium-XXXXXXXX)
@@ -45,8 +46,6 @@ in
       arandr
       chromium
       chromium-temp
-      (makeChromium "ru")
-      (makeChromium "alfa")
       (makeChromium "metamask")
       darktable
       djview
