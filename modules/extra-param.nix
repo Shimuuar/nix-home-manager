@@ -24,6 +24,11 @@ in
         default     = "";
         description = "Extra bits to insert into .xsession file";
       };
+      extraXresources = mkOption {
+        type        = types.str;
+        default     = "";
+        description = "Extra X resources to read using xrdb";
+      };
 
       isMac = mkOption {
         type        = types.bool;

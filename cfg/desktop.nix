@@ -209,6 +209,7 @@ in
     initExtra = ''
       # X
       xrdb ${cfg}/X/Xresources
+      xrdb -merge ${pkgs.writeText "Xresources-extra" config.extra-param.extraXresources};
       bash ${cfg}/util/x-set-keyboard ${config.extra-param.composeKey}
       export GTK_IM_MODULE=xim
       export QT_IM_MODULE=xim
