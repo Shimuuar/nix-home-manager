@@ -15,11 +15,12 @@ let
       ${pkgs.coreutils}/bin/chmod +x $out/bin/telegram-wrapped
       '';
   };
-  # Make chromium browser with custom config
+  # Chromium with fixed non-default profile
   makeChromium = name: pkgs.writeShellScriptBin ("chromium-" + name) ''
     CFGDIR=''${XDG_CONFIG_HOME-''${HOME}/.config}
     exec ${pkgs.chromium}/bin/chromium --user-data-dir="$CFGDIR"/chromium-${name} "$@"
     '';
+  # Chromium with temporary profile
   chromium-temp = pkgs.writeScriptBin "chromium-temp" ''
     #!/bin/sh
     CFGDIR=$(${pkgs.coreutils}/bin/mktemp -d ''${XDG_RUNTIME_DIR-/tmp}/chromium-XXXXXXXX)
@@ -45,8 +46,6 @@ in
       arandr
       chromium
       chromium-temp
-      (makeChromium "ru")
-      (makeChromium "alfa")
       (makeChromium "metamask")
       darktable
       djview
@@ -198,6 +197,9 @@ in
       };
     };
   };
+
+  # NOTE: there's some newfanged xsettingsd for keeping seom settings.
+
   xsession = {
     enable    = true;
     # Gtk & Qt needed handholding to make use of XCompose and Qt5
@@ -206,6 +208,7 @@ in
     initExtra = ''
       # X
       xrdb ${cfg}/X/Xresources
+      xrdb -merge ${pkgs.writeText "Xresources-extra" config.extra-param.extraXresources};
       bash ${cfg}/util/x-set-keyboard ${config.extra-param.composeKey}
       export GTK_IM_MODULE=xim
       export QT_IM_MODULE=xim
@@ -215,9 +218,9 @@ in
       # Some hack to make krusader & dolphin file associations work
       export XDG_MENU_PREFIX=plasma-
       # Machine-specific programs
-      lxpanel &
       ${config.extra-param.extraXSession}
       # Programs
+      lxpanel &
       ${pkgs.firefox}/bin/firefox                                         &
       ${pkgs.thunderbird}/bin/thunderbird                                 &
       telegram-wrapped                                                    &
@@ -226,9 +229,6 @@ in
       emacs --name emacs-todo --eval '(load-file "${cfg}/emacs-todo.el")' &
       nix-shell -p 'texlive.combine {inherit (texlive) scheme-medium;}'   \
         --run "emacs --name emacs-zettel" &
-      if which spotify &> /dev/null; then
-         (sleep 4 && spotify) &
-      fi
       # Wallpapers
       while : ; do
         python ${cfg}/util/set-random-wallpaper

@@ -255,6 +255,7 @@ myManageHook = mconcat $ concat
     , className =? "Steam"
     ] ==> doMedia
   , [ className =? "Sonata"
+    , className =? "Cantata"
     ] ==> doWorkspace "Audio"
     -- Windows placement hooks
   , [ appName =? "emacs-todo"

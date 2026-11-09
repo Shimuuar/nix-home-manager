@@ -30,7 +30,10 @@ in
   fonts.fontconfig.enable = true;
   #
   extra-param = {
-    composeKey    = "menu";
+    composeKey      = "menu";
+    extraXresources = ''
+      Xft.dpi: 192
+      '';
     extraXSession = ''
       # Turn on num lock
       ${pkgs.numlockx}/bin/numlockx
